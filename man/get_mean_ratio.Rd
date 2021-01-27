@@ -17,3 +17,9 @@ Table of mean ratio for each x cell type
 \description{
 Get Mean Ratio for Each Gene x Cell Type
 }
+\examples{
+set.seed(127)
+test_sce <- make_test_sce()
+get_mean_ratio(test_sce)
+
+}
