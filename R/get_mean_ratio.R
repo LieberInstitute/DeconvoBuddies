@@ -1,4 +1,13 @@
 
+#' Get Mean Ratio for Each Gene x Cell Type
+#'
+#' @param sce Single cell experiment object
+#' @param cellType_col Column name on colData of the sce that denotes the celltype
+#'
+#' @return Table of mean ratio for each x cell type
+#' @export
+#'
+#' @examples
 get_mean_ratio <- function(sce, cellType_col =  "cellType"){
 
   sce_celltypes <- as.data.frame(colData(sce)) %>%
