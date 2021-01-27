@@ -19,7 +19,7 @@ make_test_sce <- function(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 
   sce <- SingleCellExperiment::SingleCellExperiment(list(counts=counts))
 
   donors <- paste0("D",1:n_donor)
-  cells <- paste0("C",1:n_cellType)
+  cells <- paste0("Cell",1:n_cellType)
 
   pd <- DataFrame(donor = sample(donors, n_cell, replace = TRUE),
                    cellType = sample(cells, n_cell, replace = TRUE))
