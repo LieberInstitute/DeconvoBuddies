@@ -16,7 +16,7 @@
 make_test_sce <- function(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 2){
 
   counts <- matrix(rpois(n_cell*n_gene, lambda = 10), ncol= n_cell, nrow = n_gene)
-  sce <- SingleCellExperiment(list(counts=counts))
+  sce <- SingleCellExperiment::SingleCellExperiment(list(counts=counts))
 
   donors <- paste0("D",1:n_donor)
   cells <- paste0("C",1:n_cellType)
@@ -25,7 +25,7 @@ make_test_sce <- function(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 
                    cellType = sample(cells, n_cell, replace = TRUE))
 
   width <- nchar(as.character(n_cell))
-  rownames(pd) <- paste0("S",str_pad(1:n_cell, width = width, pad = "0"))
+  rownames(pd) <- paste0("S",stringr::str_pad(1:n_cell, width = width, pad = "0"))
   colData(sce) <- pd
 
   rownames(sce) <- paste0("G",1:n_gene)

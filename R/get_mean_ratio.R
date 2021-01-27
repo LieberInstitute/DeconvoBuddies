@@ -12,6 +12,7 @@
 #' test_sce <- make_test_sce()
 #' get_mean_ratio(test_sce)
 #'
+#'@importFrom dplyr mutate
 get_mean_ratio <- function(sce, cellType_col =  "cellType", assay = "counts", add_symbol = FALSE){
 
   sce_celltypes <- as.data.frame(colData(sce)) %>%

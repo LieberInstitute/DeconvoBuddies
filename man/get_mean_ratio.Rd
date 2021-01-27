@@ -4,7 +4,12 @@
 \alias{get_mean_ratio}
 \title{Get Mean Ratio for Each Gene x Cell Type}
 \usage{
-get_mean_ratio(sce, cellType_col = "cellType")
+get_mean_ratio(
+  sce,
+  cellType_col = "cellType",
+  assay = "counts",
+  add_symbol = FALSE
+)
 }
 \arguments{
 \item{sce}{Single cell experiment object}
