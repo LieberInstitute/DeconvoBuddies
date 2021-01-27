@@ -8,7 +8,11 @@
 #' @export
 #'
 #' @examples
-get_mean_ratio <- function(sce, cellType_col =  "cellType"){
+#' set.seed(127)
+#' test_sce <- make_test_sce()
+#' get_mean_ratio(test_sce)
+#'
+get_mean_ratio <- function(sce, cellType_col =  "cellType", assay = "counts", add_symbol = FALSE){
 
   sce_celltypes <- as.data.frame(colData(sce)) %>%
     select(cellType = !!sym(cellType_col)) %>%
@@ -17,8 +21,8 @@ get_mean_ratio <- function(sce, cellType_col =  "cellType"){
 
   message("nrow cellType: ", nrow(sce_celltypes))
 
-   gene_stat <- as.matrix(assays(sce)$logcounts) %>%
-     melt() %>%
+   gene_stat <- as.matrix(assays(sce)[[assay]]) %>%
+     reshape2::melt() %>%
      rename(gene = Var1, id = Var2, logcounts = value) %>%
      mutate(id = as.character(id)) %>%
      left_join(sce_celltypes, by = "id")  %>%
@@ -48,11 +52,13 @@ get_mean_ratio <- function(sce, cellType_col =  "cellType"){
      mutate(rank_ratio = row_number(),
             anno_ratio = paste0(cellType.target,"/",cellType," = ",round(ratio, 3)))
 
-   mean_ratio$Symbol <- rowData(sce)[mean_ratio$gene,]$Symbol
+   if(add_symbol){
+      mean_ratio$Symbol <- rowData(sce)[mean_ratio$gene,]$Symbol
 
-   mean_ratio <- mean_ratio %>%
-      select(-median_logcount) %>%
-      mutate(feature_ratio = paste0(str_pad(rank_ratio, 4, "left"),": ",Symbol))
+      mean_ratio <- mean_ratio %>%
+         select(-median_logcount) %>%
+         mutate(feature_ratio = paste0(str_pad(rank_ratio, 4, "left"),": ",Symbol))
+   }
 
    return(mean_ratio)
 }
