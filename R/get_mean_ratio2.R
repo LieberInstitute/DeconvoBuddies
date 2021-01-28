@@ -20,11 +20,10 @@ get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "count
 
    celltypes <- unique(sce[[cellType_col]])
    names(celltypes) <- celltypes
-   print(celltypes)
 
-   sce_assay <- assays(sce)[[assay_name]]
+   sce_assay <- as.matrix(assays(sce)[[assay_name]])
 
-   cell_means <- map(celltypes, ~as.data.frame(Matrix::rowMeans(sce_assay[,sce[[cellType_col]] == .x])))
+   cell_means <- map(celltypes, ~as.data.frame(rowMeans(sce_assay[,sce[[cellType_col]] == .x])))
    # edit cell means table
    cell_means <- do.call("rbind", cell_means)
    colnames(cell_means) <- "mean"
@@ -34,7 +33,7 @@ get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "count
 
    ratio_tables <- map(celltypes, function(x){
       #filter target median != 0
-      median_index <- rowMedians(as.matrix(sce_assay[,sce[[cellType_col]] == x])) != 0
+      median_index <- rowMedians(sce_assay[,sce[[cellType_col]] == x]) != 0
       # message("Median == 0: ", sum(!median_index))
       #filter for target means
       target_mean <- cell_means[cell_means$cellType == x,]
