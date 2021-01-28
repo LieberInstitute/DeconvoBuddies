@@ -14,6 +14,7 @@
 #' mrt <- get_mean_ratio2(test_sce)
 #'
 #'@importFrom dplyr mutate
+#'@importFrom dplyr arrange
 #'@importFrom purrr map
 #'@importFrom purrr map2
 #'@importFrom jaffelab ss
@@ -51,8 +52,8 @@ get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "count
          mutate(ratio = mean.target/mean) %>%
          dplyr::group_by(gene) %>%
          arrange(ratio) %>%
-         slice(1) %>%
-         select(gene, cellType.target, mean.target, cellType, mean, ratio) %>%
+         dplyr::slice(1) %>%
+         dplyr::select(gene, cellType.target, mean.target, cellType, mean, ratio) %>%
          arrange(-ratio) %>%
          dplyr::ungroup() %>%
          mutate(rank_ratio = dplyr::row_number())
