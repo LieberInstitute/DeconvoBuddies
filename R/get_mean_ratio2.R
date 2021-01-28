@@ -13,8 +13,8 @@
 #' test_sce <- make_test_sce()
 #' mrt <- get_mean_ratio2(test_sce)
 #'
-#'@importFrom dplyr mutate, left_join, group_by, arrange, slice
-#'@importFrom purrr map, map2, pluck
+#'@importFrom dplyr mutate
+#'@importFrom purrr map
 #'@importFrom jaffelab ss
 get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "counts", add_symbol = FALSE){
 
@@ -31,21 +31,30 @@ get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "count
 
 
    ratio_tables <- map(celltypes, function(x){
-      # median_index <- rowMedians(as.matrix(sce_assay[,sce[[cellType_col]] == .x])) != 0
-      # temp_cell_means <- cell_means[median_index,]
+      #filter target median != 0
+      median_index <- rowMedians(as.matrix(sce_assay[,sce[[cellType_col]] == x])) != 0
+      message("Median == 0: ", sum(!median_index))
+      #filter for target means
       target_mean <- cell_means[cell_means$cellType == x,]
+      target_mean <- target_mean[median_index,]
       colnames(target_mean) <- c("target_mean","target_cellType","gene")
 
       nontarget_mean <- cell_means[cell_means$cellType != x,]
 
 
-      left_join(target_mean, nontarget_mean, by = "gene") %>%
+      dplyr::left_join(target_mean, nontarget_mean, by = "gene") %>%
          mutate(ratio = target_mean/mean) %>%
-         group_by(gene) %>%
+         dplyr::group_by(gene) %>%
          arrange(ratio) %>%
-         slice(1)
+         slice(1) %>%
+         select(gene, target_cellType, target_mean, cellType, mean, ratio) %>%
+         arrange(-ratio) %>%
+         dplyr::ungroup() %>%
+         mutate(ratio_rank = dplyr::row_number())
 
    })
+
+   ratio_tables <- do.call("rbind", ratio_tables)
 
    return(ratio_tables)
 }
