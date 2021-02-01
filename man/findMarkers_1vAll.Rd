@@ -4,18 +4,26 @@
 \alias{findMarkers_1vAll}
 \title{Calculate 1 vs. All standard fold change for each gene x cell type}
 \usage{
-findMarkers_1vAll(sce, assay = "logcounts", cellType_col = "cellType")
+findMarkers_1vAll(
+  sce,
+  assay_name = "counts",
+  cellType_col = "cellType",
+  add_symbol = FALSE
+)
 }
 \arguments{
 \item{sce}{single cell experiment object}
 
-\item{assay}{Name of the assay to use for calculation}
-
 \item{cellType_col}{Column name on colData of the sce that denotes the celltype}
+
+\item{assay}{Name of the assay to use for calculation}
 }
 \value{
 Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 }
 \description{
 Calculate 1 vs. All standard fold change for each gene x cell type
+}
+\examples{
+
 }

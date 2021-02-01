@@ -18,6 +18,7 @@
 #'@importFrom purrr map
 #'@importFrom purrr map2
 #'@importFrom jaffelab ss
+#'@importFrom magrittr,"%>%"
 get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "counts", add_symbol = FALSE){
 
    cell_types <- unique(sce[[cellType_col]])

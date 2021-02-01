@@ -13,11 +13,12 @@
 #' get_mean_ratio(test_sce)
 #'
 #'@importFrom dplyr mutate
+#'@importFrom magrittr,"%>%"
 get_mean_ratio <- function(sce, cellType_col =  "cellType", assay = "counts", add_symbol = FALSE){
 
   sce_celltypes <- as.data.frame(colData(sce)) %>%
     select(cellType = !!sym(cellType_col)) %>%
-    rownames_to_column(var = "id") %>%
+    tibble::rownames_to_column(var = "id") %>%
     mutate(id = as.character(id))
 
   message("nrow cellType: ", nrow(sce_celltypes))
