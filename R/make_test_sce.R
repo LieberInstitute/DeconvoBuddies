@@ -21,12 +21,12 @@ make_test_sce <- function(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 
   donors <- paste0("D",1:n_donor)
   cells <- paste0("Cell",1:n_cellType)
 
-  pd <- DataFrame(donor = sample(donors, n_cell, replace = TRUE),
+  pd <- S4Vectors::DataFrame(donor = sample(donors, n_cell, replace = TRUE),
                    cellType = sample(cells, n_cell, replace = TRUE))
 
   width <- nchar(as.character(n_cell))
   rownames(pd) <- paste0("S",stringr::str_pad(1:n_cell, width = width, pad = "0"))
-  colData(sce) <- pd
+  SummarizedExperiment::colData(sce) <- pd
 
   rownames(sce) <- paste0("G",1:n_gene)
 

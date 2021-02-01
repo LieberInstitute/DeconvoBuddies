@@ -18,13 +18,12 @@
 #'@importFrom purrr map
 #'@importFrom purrr map2
 #'@importFrom jaffelab ss
-#'@importFrom magrittr,"%>%"
 get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "counts", add_symbol = FALSE){
 
    cell_types <- unique(sce[[cellType_col]])
    names(cell_types) <- cell_types
 
-   sce_assay <- as.matrix(assays(sce)[[assay_name]])
+   sce_assay <- as.matrix(SummarizedExperiment::assays(sce)[[assay_name]])
 
    ## Get mean expression for each gene for each cellType
    cell_means <- map(cell_types, ~as.data.frame(base::rowMeans(sce_assay[,sce[[cellType_col]] == .x])))

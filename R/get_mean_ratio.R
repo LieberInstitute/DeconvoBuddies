@@ -13,7 +13,6 @@
 #' get_mean_ratio(test_sce)
 #'
 #'@importFrom dplyr mutate
-#'@importFrom magrittr,"%>%"
 get_mean_ratio <- function(sce, cellType_col =  "cellType", assay = "counts", add_symbol = FALSE){
 
   sce_celltypes <- as.data.frame(colData(sce)) %>%
