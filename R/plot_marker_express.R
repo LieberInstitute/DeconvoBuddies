@@ -27,9 +27,9 @@ plot_marker_express <- function(sce, stats, cell_type ,n_genes, rank_col, anno_c
   marker_sce <- sce[cell_stats$gene,]
   rownames(marker_sce) <- cell_stats$Feature
 
-  pe <- scater::plotExpression(marker_sce, exprs_values = "logcounts", features = cell_stats$Feature,
+  pe <- suppressWarnings(scater::plotExpression(marker_sce, exprs_values = "logcounts", features = cell_stats$Feature,
                        x= cellType_col, colour_by= cellType_col, point_alpha=0.5, point_size=.2, ncol=5,
-                       add_legend=F) +
+                       add_legend=F)) +
     # scale_color_manual(values = cell_colors)+
     ggplot2::stat_summary(fun = mean, fun.min = mean, fun.max = mean,
                  geom = "crossbar", width = 0.3) +
