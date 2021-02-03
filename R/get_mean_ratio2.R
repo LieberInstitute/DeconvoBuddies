@@ -61,5 +61,16 @@ get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "count
    })
 
    ratio_tables <- do.call("rbind", ratio_tables)
+
+   # max_digits <- nchar(max(ratio_tables$ratio_tables))
+
+   if(add_symbol){
+      ratio_tables$Symbol <- rowData(sce)[ratio_tables$gene,]$Symbol
+      # ratio_tables <- ratio_tables %>%
+      #    mutate(ratio_anno = paste0(stringr::str_pad(rank_ratio, max_digits, "left"),": ",Symbol))
+   }
+   ratio_tables <- ratio_tables %>%
+      mutate(ratio_anno = paste0(cellType.target,"/",cellType,"= " ,round(ratio, 3)))
+
    return(ratio_tables)
 }
