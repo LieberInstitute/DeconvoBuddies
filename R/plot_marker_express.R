@@ -13,6 +13,8 @@
 #' @export
 #'
 #' @examples
+#'
+#' @importFrom magrittr %>%
 plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_col, cellType_col =  "cellType"){
   title = paste(cell_type, "Top", n_genes ,"markers")
   # message(title)

@@ -16,7 +16,7 @@
 get_mean_ratio <- function(sce, cellType_col =  "cellType", assay = "counts", add_symbol = FALSE){
 
   sce_celltypes <- as.data.frame(colData(sce)) %>%
-    select(cellType = !!sym(cellType_col)) %>%
+    dplyr::select(cellType = !!sym(cellType_col)) %>%
     tibble::rownames_to_column(var = "id") %>%
     mutate(id = as.character(id))
 

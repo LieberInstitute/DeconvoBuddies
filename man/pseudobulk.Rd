@@ -4,7 +4,7 @@
 \alias{pseudobulk}
 \title{Pseudobulks sce data over donor x cell type}
 \usage{
-pseudobulk(sce, cellType_col)
+pseudobulk(sce, cellType_col = "cellType")
 }
 \arguments{
 \item{sce}{Single cell experiment object}

@@ -31,36 +31,111 @@ BiocManager::install("lahuuki/DeconvoBuddies")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Get mean ratios for each gene x cell type
 
 ``` r
 library("DeconvoBuddies")
+library("dplyr")
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 ## basic example code
+
+ratios <- get_mean_ratio2(sce.test)
+#> Loading required package: SingleCellExperiment
+#> Loading required package: SummarizedExperiment
+#> Loading required package: GenomicRanges
+#> Loading required package: stats4
+#> Loading required package: BiocGenerics
+#> Loading required package: parallel
+#> 
+#> Attaching package: 'BiocGenerics'
+#> The following objects are masked from 'package:parallel':
+#> 
+#>     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+#>     clusterExport, clusterMap, parApply, parCapply, parLapply,
+#>     parLapplyLB, parRapply, parSapply, parSapplyLB
+#> The following objects are masked from 'package:dplyr':
+#> 
+#>     combine, intersect, setdiff, union
+#> The following objects are masked from 'package:stats':
+#> 
+#>     IQR, mad, sd, var, xtabs
+#> The following objects are masked from 'package:base':
+#> 
+#>     anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+#>     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+#>     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+#>     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+#>     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+#>     union, unique, unsplit, which, which.max, which.min
+#> Loading required package: S4Vectors
+#> 
+#> Attaching package: 'S4Vectors'
+#> The following objects are masked from 'package:dplyr':
+#> 
+#>     first, rename
+#> The following object is masked from 'package:base':
+#> 
+#>     expand.grid
+#> Loading required package: IRanges
+#> 
+#> Attaching package: 'IRanges'
+#> The following objects are masked from 'package:dplyr':
+#> 
+#>     collapse, desc, slice
+#> Loading required package: GenomeInfoDb
+#> Loading required package: Biobase
+#> Welcome to Bioconductor
+#> 
+#>     Vignettes contain introductory material; view with
+#>     'browseVignettes()'. To cite Bioconductor, see
+#>     'citation("Biobase")', and for packages 'citation("pkgname")'.
+#> Loading required package: DelayedArray
+#> Loading required package: matrixStats
+#> 
+#> Attaching package: 'matrixStats'
+#> The following objects are masked from 'package:Biobase':
+#> 
+#>     anyMissing, rowMedians
+#> The following object is masked from 'package:dplyr':
+#> 
+#>     count
+#> 
+#> Attaching package: 'DelayedArray'
+#> The following objects are masked from 'package:matrixStats':
+#> 
+#>     colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges
+#> The following objects are masked from 'package:base':
+#> 
+#>     aperm, apply, rowsum
+fc <- findMarkers_1vAll(sce.test)
+
+(marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
+#> # A tibble: 2,504 x 15
+#>    gene  cellType.target mean.target cellType  mean ratio rank_ratio Symbol
+#>    <chr> <fct>                 <dbl> <fct>    <dbl> <dbl>      <int> <chr> 
+#>  1 ENSG… Oligo                  5.98 Astro    1.29   4.62          1 RNF220
+#>  2 ENSG… Oligo                  2.19 OPC      0.737  2.98          2 CLIC4 
+#>  3 ENSG… Oligo                  2.73 Micro    1.35   2.02          3 ATG4C 
+#>  4 ENSG… Oligo                  3.36 Excit.3  1.70   1.98          4 SORT1 
+#>  5 ENSG… Oligo                  2.83 Excit.4  1.50   1.88          5 SLC22…
+#>  6 ENSG… Oligo                  5.16 Excit.1  2.90   1.78          6 TTLL7 
+#>  7 ENSG… Oligo                  3.68 OPC      2.26   1.63          7 PTBP2 
+#>  8 ENSG… Oligo                  1.52 Astro    0.944  1.61          8 PADI2 
+#>  9 ENSG… Oligo                  1.57 Micro    1.01   1.55          9 SRRM1 
+#> 10 ENSG… Oligo                  4.11 Excit.2  2.67   1.54         10 DNAJC6
+#> # … with 2,494 more rows, and 7 more variables: ratio_anno <chr>, logFC <dbl>,
+#> #   log.p.value <dbl>, log.FDR <dbl>, std.logFC <dbl>, rank_marker <int>,
+#> #   anno_logFC <chr>
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub!
+<img src="man/figures/README-plot_marker_expression-1.png" width="100%" />
 
 ## Citation
 

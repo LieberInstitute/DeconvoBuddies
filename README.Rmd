@@ -39,28 +39,23 @@ BiocManager::install("lahuuki/DeconvoBuddies")
 ```
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
+Get mean ratios for each gene x cell type
 ```{r example, eval = requireNamespace('DeconvoBuddies')}
 library("DeconvoBuddies")
+library("dplyr")
 ## basic example code
+
+ratios <- get_mean_ratio2(sce.test)
+fc <- findMarkers_1vAll(sce.test)
+
+(marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
-summary(cars)
+```{r plot_marker_expression, echo = FALSE}
+plot_marker_express(sce.test, marker_stats, "Astro",n_genes = 5,rank_col = "rank_ratio", anno_col = "ratio_anno")
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
 
 ## Citation
 
