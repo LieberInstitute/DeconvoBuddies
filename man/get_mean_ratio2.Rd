@@ -7,8 +7,8 @@
 get_mean_ratio2(
   sce,
   cellType_col = "cellType",
-  assay_name = "counts",
-  add_symbol = FALSE
+  assay_name = "logcounts",
+  add_symbol = TRUE
 )
 }
 \arguments{
