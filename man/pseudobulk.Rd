@@ -4,16 +4,22 @@
 \alias{pseudobulk}
 \title{Pseudobulks sce data over donor x cell type}
 \usage{
-pseudobulk(sce, cellType_col = "cellType")
+pseudobulk(sce, cellType_col = "cellType", add_symbol = FALSE)
 }
 \arguments{
 \item{sce}{Single cell experiment object}
 
 \item{cellType_col}{Column name on colData of the sce that denotes the celltype}
+
+\item{add_symbol}{Use Symbol from rowData as rownames}
 }
 \value{
 
 }
 \description{
 Pseudobulks sce data over donor x cell type
+}
+\examples{
+pb_ab <- pseudobulk(sce_ab)
+pb_test <- pseudobulk(sce.test, cellType_col = "cellType.Broad")
 }
