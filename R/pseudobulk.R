@@ -27,6 +27,7 @@ pseudobulk <- function(sce, cellType_col = "cellType", add_symbol = FALSE){
   # Compute LSFs at this level
   # sizeFactors.PB.all <- scuttle::librarySizeFactors(pbcounts)
   sizeFactors.PB.all <- colSums(pbcounts)
+  sizeFactors.PB.all <- sizeFactors.PB.all/mean(sizeFactors.PB.all)
   # Normalize with these LSFs
   geneExprs.temp <- t(apply(pbcounts, 1, function(x) {log2(x/sizeFactors.PB.all + 1)}))
 
