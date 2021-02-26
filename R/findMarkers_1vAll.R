@@ -59,3 +59,4 @@ findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellTy
 
   return(markers.t.1vAll.table)
 }
+
