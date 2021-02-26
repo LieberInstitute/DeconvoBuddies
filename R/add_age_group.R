@@ -12,11 +12,11 @@
 #'
 #'library(SummarizedExperiment)
 #'pd_test <- colData(rse_bulk_test)
-#'pd_test2 <- add_age_groups(pd_test)
+#'pd_test2 <- add_age_group(pd_test)
 #'
 
 
-add_age_groups <- function(pd, age_col = "Age"){
+add_age_group <- function(pd, age_col = "Age"){
 
   # Add age group
   age_mins <- map(age_categories,"min")
