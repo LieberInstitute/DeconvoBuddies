@@ -1,4 +1,6 @@
 ## code to prepare `rse_bulk_test` dataset goes here
+set.seed(1234)
+
 nrows <- 2000
 ncols <- 100
 counts <- matrix(runif(nrows * ncols, 1, 1e4), nrows)
@@ -18,6 +20,7 @@ RNums <- paste0("R",stringr::str_pad(RNums_raw, nchar(max(RNums_raw)), side = "l
 colData <- DataFrame(RNum = RNums,
                      BrNum = BrNums,
                      Sex = sample(c("M","F"), ncols, replace = TRUE),
+                     Dx = sample(c("Case","Control"), ncols, replace = TRUE),
                      Age = runif(ncols, min = -1, max = 100))
 
 rse_bulk_test <- SummarizedExperiment(assays=list(counts=counts),
