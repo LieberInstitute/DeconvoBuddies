@@ -46,7 +46,7 @@ get_mean_ratio2 <- function(sce, cellType_col =  "cellType", assay_name = "logco
       #    mutate(ratio_anno = paste0(stringr::str_pad(rank_ratio, max_digits, "left"),": ",Symbol))
    }
    ratio_tables <- ratio_tables %>%
-      mutate(ratio_anno = paste0(cellType.target,"/",cellType,": ", base::round(ratio, 3)))
+      mutate(anno_ratio = paste0(cellType.target,"/",cellType,": ", base::round(ratio, 3)))
 
    return(ratio_tables)
 }
