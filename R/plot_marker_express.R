@@ -22,21 +22,26 @@ plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_c
   max_digits <- nchar(n_genes)
 
   cell_stats <- stats %>%
-    dplyr::rename(rank = rank_col, anno = anno_col) %>%
+    dplyr::rename(rank_int = rank_col, anno_str = anno_col) %>%
     dplyr::filter(cellType.target == cell_type,
-                  rank <= n_genes) %>%
-    mutate(Feature = paste0(stringr::str_pad(rank, max_digits, "left"), ": ", Symbol))
+                  rank_int <= n_genes) %>%
+    mutate(Feature = paste0(stringr::str_pad(rank_int, max_digits, "left"), ": ", Symbol))
 
   marker_sce <- sce[cell_stats$gene,]
   rownames(marker_sce) <- cell_stats$Feature
 
-  pe <- suppressWarnings(scater::plotExpression(marker_sce, exprs_values = "logcounts", features = cell_stats$Feature,
-                       x= cellType_col, colour_by= cellType_col, point_alpha=0.5, point_size=.2, ncol=5,
-                       add_legend=F)) +
-    # scale_color_manual(values = cell_colors)+
+  pe <- suppressWarnings(scater::plotExpression(marker_sce,
+                                                exprs_values = "logcounts",
+                                                features = cell_stats$Feature,
+                                                x = cellType_col,
+                                                colour_by= cellType_col,
+                                                point_alpha= 0.5,
+                                                point_size= 0.2,
+                                                ncol=5,
+                                                add_legend=F)) +
     ggplot2::stat_summary(fun = mean, fun.min = mean, fun.max = mean,
                  geom = "crossbar", width = 0.3) +
-    ggplot2::geom_text(data = cell_stats, ggplot2::aes(x = -Inf, y = Inf, label = anno),
+    ggplot2::geom_text(data = cell_stats, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
               vjust = "inward", hjust = "inward",size = 2.5)+
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +
     ggplot2::ggtitle(label=title)
