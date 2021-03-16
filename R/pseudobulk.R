@@ -2,24 +2,39 @@
 #' Pseudobulks sce data over donor x cell type
 #'
 #' @param sce Single cell experiment object
-#' @param cellType_col Column name on colData of the sce that denotes the celltype
+#' @param cell_group_cols list of column names that create pseudobulk groups
 #' @param add_symbol Use Symbol from rowData as rownames
 #' @return
 #' @export
 #'
 #' @examples
 #'pb_ab <- pseudobulk(sce_ab)
-#'pb_test <- pseudobulk(sce.test, cellType_col = "cellType.Broad")
+#'head(pb_ab)
+#'
+#'pb_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType","donor", "region"))
+#'head(pb_ab_region)
+#'
+#'pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor","cellType.Broad"))
+#'head(pb_test)
 
-pseudobulk <- function(sce, cellType_col = "cellType", add_symbol = FALSE){
-  sce$pb <- paste0(sce$donor,"_",sce[[cellType_col]])
+pseudobulk <- function(sce, cell_group_cols = c("donor","cellType"), add_symbol = FALSE){
+
+  ## check all columns exist
+  stopifnot(all(cell_group_cols %in% colnames(SummarizedExperiment::colData(sce))))
+
+  ## create pd label col
+  pb <- sce[[cell_group_cols[[1]]]]
+  for(c in cell_group_cols[-1]){
+    pb <- paste0(pb, "_", sce[[c]])
+  }
+  sce$pb <- pb
 
   clusIndex = suppressWarnings(rafalib::splitit(sce$pb))
   # pbcounts <- purrr::map(clusIndex, ~rowSums(assays(sce)$counts[ ,.x]))
 
   pbcounts <- sapply(clusIndex, function(ii){
     rowSums(
-      as.matrix(assays(sce)$counts[ ,ii, drop = FALSE])
+      as.matrix(SummarizedExperiment::assays(sce)$counts[ ,ii, drop = FALSE])
       )
   }
   )
