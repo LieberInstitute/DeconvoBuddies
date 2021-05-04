@@ -4,12 +4,12 @@
 \alias{pseudobulk}
 \title{Pseudobulks sce data over donor x cell type}
 \usage{
-pseudobulk(sce, cellType_col = "cellType", add_symbol = FALSE)
+pseudobulk(sce, cell_group_cols = c("donor", "cellType"), add_symbol = FALSE)
 }
 \arguments{
 \item{sce}{Single cell experiment object}
 
-\item{cellType_col}{Column name on colData of the sce that denotes the celltype}
+\item{cell_group_cols}{list of column names that create pseudobulk groups}
 
 \item{add_symbol}{Use Symbol from rowData as rownames}
 }
@@ -21,5 +21,11 @@ Pseudobulks sce data over donor x cell type
 }
 \examples{
 pb_ab <- pseudobulk(sce_ab)
-pb_test <- pseudobulk(sce.test, cellType_col = "cellType.Broad")
+head(pb_ab)
+
+pb_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType","donor", "region"))
+head(pb_ab_region)
+
+pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor","cellType.Broad"))
+head(pb_test)
 }

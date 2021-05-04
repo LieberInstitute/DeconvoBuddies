@@ -25,6 +25,6 @@ Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 Calculate pw standard fold change for each gene x cell type
 }
 \examples{
-markers.amy.t.design <- findMarkers_pw(sce.test)
-sapply(markers.amy.t.design, function(x){table(x$FDR<0.05)})
+pw <- findMarkers_pw(sce.test)
+
 }
