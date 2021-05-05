@@ -26,6 +26,7 @@ pseudobulk <- function(sce, cell_group_cols = c("donor", "cellType"), add_symbol
     for (c in cell_group_cols[-1]) {
         pb <- paste0(pb, "_", sce[[c]])
     }
+    # message("Unique Groups: ", length(unique(pb)))
     sce$pb <- pb
 
     clusIndex <- suppressWarnings(rafalib::splitit(sce$pb))

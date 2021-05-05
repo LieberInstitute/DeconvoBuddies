@@ -1,6 +1,11 @@
-test_that("rowSums of sce_ab", {
-    pb_ab <- pseudobulk(sce_ab)
-    ones <- rep(1, nrow(pb_ab))
-    names(ones) <- row.names(pb_ab)
-    expect_equal(rowSums(pb_ab), ones)
+pb_ab <- pseudobulk(sce_ab, cell_group_cols = c("donor", "cellType"))
+
+test_that("Correct Dim",{
+  expect_equal(nrow(pb_ab), nrow(sce_ab))
+  expect_equal(ncol(pb_ab), 4)
 })
+
+test_that("rowMedians are Zero",{
+  expect_false(sum(Biobase::rowMedians(pb_ab)))
+})
+
