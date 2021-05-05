@@ -7,7 +7,7 @@
 get_mean_ratio(
   sce,
   cellType_col = "cellType",
-  assay = "counts",
+  assay_name = "logcounts",
   add_symbol = FALSE
 )
 }

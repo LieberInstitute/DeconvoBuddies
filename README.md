@@ -4,6 +4,9 @@
 # DeconvoBuddies
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
 <!-- badges: end -->
 
 The goal of `DeconvoBuddies` is to provide helper functions for the
@@ -49,9 +52,36 @@ library("dplyr")
 ratios <- get_mean_ratio2(sce.test)
 #> Loading required package: SingleCellExperiment
 #> Loading required package: SummarizedExperiment
+#> Loading required package: MatrixGenerics
+#> Loading required package: matrixStats
+#> 
+#> Attaching package: 'matrixStats'
+#> The following object is masked from 'package:dplyr':
+#> 
+#>     count
+#> 
+#> Attaching package: 'MatrixGenerics'
+#> The following objects are masked from 'package:matrixStats':
+#> 
+#>     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+#>     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+#>     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+#>     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+#>     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+#>     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+#>     colWeightedMeans, colWeightedMedians, colWeightedSds,
+#>     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+#>     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+#>     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+#>     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+#>     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+#>     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+#>     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+#>     rowWeightedSds, rowWeightedVars
 #> Loading required package: GenomicRanges
 #> Loading required package: stats4
 #> Loading required package: BiocGenerics
+#> Warning: package 'BiocGenerics' was built under R version 4.0.5
 #> Loading required package: parallel
 #> 
 #> Attaching package: 'BiocGenerics'
@@ -73,7 +103,7 @@ ratios <- get_mean_ratio2(sce.test)
 #>     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
 #>     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
 #>     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
-#>     union, unique, unsplit, which, which.max, which.min
+#>     union, unique, unsplit, which.max, which.min
 #> Loading required package: S4Vectors
 #> 
 #> Attaching package: 'S4Vectors'
@@ -90,46 +120,37 @@ ratios <- get_mean_ratio2(sce.test)
 #> 
 #>     collapse, desc, slice
 #> Loading required package: GenomeInfoDb
+#> Warning: package 'GenomeInfoDb' was built under R version 4.0.5
 #> Loading required package: Biobase
 #> Welcome to Bioconductor
 #> 
 #>     Vignettes contain introductory material; view with
 #>     'browseVignettes()'. To cite Bioconductor, see
 #>     'citation("Biobase")', and for packages 'citation("pkgname")'.
-#> Loading required package: DelayedArray
-#> Loading required package: matrixStats
 #> 
-#> Attaching package: 'matrixStats'
-#> The following objects are masked from 'package:Biobase':
+#> Attaching package: 'Biobase'
+#> The following object is masked from 'package:MatrixGenerics':
 #> 
-#>     anyMissing, rowMedians
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     count
-#> 
-#> Attaching package: 'DelayedArray'
+#>     rowMedians
 #> The following objects are masked from 'package:matrixStats':
 #> 
-#>     colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges
-#> The following objects are masked from 'package:base':
-#> 
-#>     aperm, apply, rowsum
+#>     anyMissing, rowMedians
 fc <- findMarkers_1vAll(sce.test)
 
 (marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
 #> # A tibble: 2,504 x 15
-#>    gene  cellType.target mean.target cellType  mean ratio rank_ratio Symbol
-#>    <chr> <fct>                 <dbl> <fct>    <dbl> <dbl>      <int> <chr> 
-#>  1 ENSG… Oligo                  5.98 Astro    1.29   4.62          1 RNF220
-#>  2 ENSG… Oligo                  2.19 OPC      0.737  2.98          2 CLIC4 
-#>  3 ENSG… Oligo                  2.73 Micro    1.35   2.02          3 ATG4C 
-#>  4 ENSG… Oligo                  3.36 Excit.3  1.70   1.98          4 SORT1 
-#>  5 ENSG… Oligo                  2.83 Excit.4  1.50   1.88          5 SLC22…
-#>  6 ENSG… Oligo                  5.16 Excit.1  2.90   1.78          6 TTLL7 
-#>  7 ENSG… Oligo                  3.68 OPC      2.26   1.63          7 PTBP2 
-#>  8 ENSG… Oligo                  1.52 Astro    0.944  1.61          8 PADI2 
-#>  9 ENSG… Oligo                  1.57 Micro    1.01   1.55          9 SRRM1 
-#> 10 ENSG… Oligo                  4.11 Excit.2  2.67   1.54         10 DNAJC6
+#>    gene       cellType.target mean.target cellType  mean ratio rank_ratio Symbol
+#>    <chr>      <fct>                 <dbl> <fct>    <dbl> <dbl>      <int> <chr> 
+#>  1 ENSG00000… Oligo                  5.98 Astro    1.29   4.62          1 RNF220
+#>  2 ENSG00000… Oligo                  2.19 OPC      0.737  2.98          2 CLIC4 
+#>  3 ENSG00000… Oligo                  2.73 Micro    1.35   2.02          3 ATG4C 
+#>  4 ENSG00000… Oligo                  3.36 Excit.3  1.70   1.98          4 SORT1 
+#>  5 ENSG00000… Oligo                  2.83 Excit.4  1.50   1.88          5 SLC22…
+#>  6 ENSG00000… Oligo                  5.16 Excit.1  2.90   1.78          6 TTLL7 
+#>  7 ENSG00000… Oligo                  3.68 OPC      2.26   1.63          7 PTBP2 
+#>  8 ENSG00000… Oligo                  1.52 Astro    0.944  1.61          8 PADI2 
+#>  9 ENSG00000… Oligo                  1.57 Micro    1.01   1.55          9 SRRM1 
+#> 10 ENSG00000… Oligo                  4.11 Excit.2  2.67   1.54         10 DNAJC6
 #> # … with 2,494 more rows, and 7 more variables: ratio_anno <chr>, logFC <dbl>,
 #> #   log.p.value <dbl>, log.FDR <dbl>, std.logFC <dbl>, rank_marker <int>,
 #> #   anno_logFC <chr>
@@ -183,7 +204,7 @@ By contributing to this project, you agree to abide by its terms.
     *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)*
     customized to use [Bioconductor’s docker
     containers](https://www.bioconductor.org/help/docker/) and
-    *[BiocCheck](https://bioconductor.org/packages/3.11/BiocCheck)*.
+    *[BiocCheck](https://bioconductor.org/packages/3.12/BiocCheck)*.
 -   Code coverage assessment is possible thanks to
     [codecov](https://codecov.io/gh) and
     *[covr](https://CRAN.R-project.org/package=covr)*.
@@ -199,4 +220,4 @@ By contributing to this project, you agree to abide by its terms.
 For more details, check the `dev` directory.
 
 This package was developed using
-*[biocthis](https://bioconductor.org/packages/3.11/biocthis)*.
+*[biocthis](https://bioconductor.org/packages/3.12/biocthis)*.

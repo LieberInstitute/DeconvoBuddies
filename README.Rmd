@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # DeconvoBuddies
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
 <!-- badges: end -->
 
 The goal of `DeconvoBuddies` is to provide helper functions for the deconvolution process
