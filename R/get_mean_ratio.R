@@ -11,59 +11,56 @@
 #' set.seed(127)
 #' test_sce <- make_test_sce()
 #' get_mean_ratio(test_sce)
-#' @importFrom dplyr mutate
-get_mean_ratio <- function(sce, cellType_col = "cellType", assay = "counts", add_symbol = FALSE) {
-    sce_celltypes <- as.data.frame(colData(sce)) %>%
-        dplyr::select(cellType = !!sym(cellType_col)) %>%
+get_mean_ratio <- function(sce, cellType_col = "cellType", assay_name = "logcounts", add_symbol = FALSE) {
+    sce_celltypes <- as.data.frame(SummarizedExperiment::colData(sce)) %>%
+        dplyr::select(cellType = cellType_col) %>%
         tibble::rownames_to_column(var = "id") %>%
         mutate(id = as.character(id))
 
     message("nrow cellType: ", nrow(sce_celltypes))
 
-    gene_stat <- as.matrix(assays(sce)[[assay]]) %>%
+    gene_stat <- as.matrix(SummarizedExperiment::assays(sce)[[assay_name]]) %>%
         reshape2::melt() %>%
-        rename(gene = Var1, id = Var2, logcounts = value) %>%
+        dplyr::rename(gene = Var1, id = Var2, logcounts = value) %>%
         mutate(id = as.character(id)) %>%
-        left_join(sce_celltypes, by = "id") %>%
-        group_by(gene, cellType) %>%
-        summarise(
-            median_logcount = median(logcounts),
-            mean_logcount = mean(logcounts)
+        dplyr::left_join(sce_celltypes, by = "id") %>%
+        dplyr::group_by(gene, cellType) %>%
+        dplyr::summarise(
+            median = median(logcounts),
+            mean = mean(logcounts)
         ) %>%
-        ungroup()
-
-    print(object.size(gene_stat), units = "auto")
+        dplyr::ungroup()
 
     message("build target stat")
     target_stat <- gene_stat %>%
-        filter(median_logcount != 0) %>%
-        rename(
+        dplyr::filter(median != 0) %>%
+        dplyr::rename(
             cellType.target = cellType,
-            mean_logcount.target = mean_logcount,
-            median_logcount.target = median_logcount
+            mean.target = mean,
+            median.target = median
         )
 
     message("build mean ratio")
     mean_ratio <- target_stat %>%
-        right_join(gene_stat, by = "gene") %>%
-        filter(cellType.target != cellType) %>%
-        mutate(ratio = mean_logcount.target / mean_logcount) %>%
+        dplyr::right_join(gene_stat, by = "gene") %>%
+        dplyr::filter(cellType.target != cellType) %>%
+        mutate(ratio = mean.target / mean) %>%
         arrange(gene, cellType.target, ratio) %>%
-        group_by(gene, cellType.target) %>%
-        slice(1) %>%
-        group_by(cellType.target) %>%
+        dplyr::group_by(gene, cellType.target) %>%
+        dplyr::slice(1) %>%
+        dplyr::group_by(cellType.target) %>%
         arrange(-ratio) %>%
         mutate(
-            rank_ratio = row_number(),
+            rank_ratio = dplyr::row_number(),
             anno_ratio = paste0(cellType.target, "/", cellType, " = ", round(ratio, 3))
         )
 
     if (add_symbol) {
-        mean_ratio$Symbol <- rowData(sce)[mean_ratio$gene, ]$Symbol
+        mean_ratio$Symbol <- SummarizedExperiment::rowData(sce)[mean_ratio$gene, ]$Symbol
 
         mean_ratio <- mean_ratio %>%
-            select(-median_logcount) %>%
-            mutate(feature_ratio = paste0(str_pad(rank_ratio, 4, "left"), ": ", Symbol))
+            dplyr::select(-median) %>%
+            mutate(feature_ratio = paste0(stringr::str_pad(rank_ratio, 4, "left"), ": ", Symbol))
     }
 
     return(mean_ratio)
