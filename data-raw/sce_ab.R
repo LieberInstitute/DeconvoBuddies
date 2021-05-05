@@ -1,4 +1,5 @@
 ## code to prepare `sce_ab` dataset goes here
+library(SummarizedExperiment)
 
 pd <- S4Vectors::DataFrame(
     donor = rep(c("D1", "D2"), each = 50),
@@ -12,8 +13,10 @@ tc <- table(combo)
 
 counts <- do.call(rbind, map(names(tc), ~ as.integer(.x == combo)))
 rownames(counts) <- paste0("G-", names(tc))
-sce_ab <- SingleCellExperiment::SingleCellExperiment(list(counts = counts),
+sce_ab <- SingleCellExperiment(list(counts = counts),
     colData = pd
 )
+
+assays(sce_ab)$logcounts <- log(assays(sce_ab)$counts+1)
 
 usethis::use_data(sce_ab, overwrite = TRUE)
