@@ -26,5 +26,4 @@ Calculate pw standard fold change for each gene x cell type
 }
 \examples{
 pw <- findMarkers_pw(sce.test)
-
 }

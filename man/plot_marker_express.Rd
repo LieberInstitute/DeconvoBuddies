@@ -35,6 +35,3 @@ plotExpression style violin plot for selected marker genes
 \description{
 create plotExpression plots for top n genes for each cell type
 }
-\examples{
-
-}

@@ -24,5 +24,4 @@ Title
 \examples{
 test <- make_test_sce()
 table(test$cellType, test$donor)
-
 }

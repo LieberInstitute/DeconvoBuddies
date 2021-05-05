@@ -24,6 +24,3 @@ Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 \description{
 Calculate 1 vs. All standard fold change for each gene x cell type
 }
-\examples{
-
-}

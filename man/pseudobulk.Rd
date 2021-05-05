@@ -23,9 +23,9 @@ Pseudobulks sce data over donor x cell type
 pb_ab <- pseudobulk(sce_ab)
 head(pb_ab)
 
-pb_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType","donor", "region"))
+pb_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType", "donor", "region"))
 head(pb_ab_region)
 
-pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor","cellType.Broad"))
+pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
 head(pb_test)
 }

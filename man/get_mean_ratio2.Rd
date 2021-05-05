@@ -26,5 +26,4 @@ Get Mean Ratio for Each Gene x Cell Type
 }
 \examples{
 get_mean_ratio2(sce.test)
-
 }
