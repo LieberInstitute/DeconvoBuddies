@@ -214,7 +214,7 @@ jobs:
           rcmdcheck::rcmdcheck(
               args = c("--no-build-vignettes", "--no-manual", "--timings"),
               build_args = c("--no-manual", "--no-resave-data"),
-              error_on = "warning",
+              error_on = "never",
               check_dir = "check"
           )
         shell: Rscript {0}
@@ -234,7 +234,7 @@ jobs:
         run: |
           BiocCheck::BiocCheck(
               dir('check', 'tar.gz$', full.names = TRUE),
-              `quit-with-status` = TRUE,
+              `quit-with-status` = FALSE,
               `no-check-R-ver` = TRUE,
               `no-check-bioc-help` = TRUE
           )
