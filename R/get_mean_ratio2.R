@@ -14,7 +14,6 @@
 #' @importFrom dplyr arrange
 #' @importFrom purrr map
 #' @importFrom purrr map2
-#' @importFrom jaffelab ss
 get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcounts", add_symbol = TRUE) {
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
