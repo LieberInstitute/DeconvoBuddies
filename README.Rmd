@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![Codecov test coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
+[![R-CMD-check-bioc](https://github.com/lahuuki/DeconvoBuddies/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/lahuuki/DeconvoBuddies/actions)
 <!-- badges: end -->
 
 The goal of `DeconvoBuddies` is to provide helper functions for the deconvolution process
@@ -54,7 +55,7 @@ fc <- findMarkers_1vAll(sce.test)
 
 
 ```{r plot_marker_expression, echo = FALSE}
-plot_marker_express(sce.test, marker_stats, "Astro",n_genes = 5,rank_col = "rank_ratio", anno_col = "ratio_anno")
+# plot_marker_express(sce.test, marker_stats, "Astro",n_genes = 5,rank_col = "rank_ratio", anno_col = "anno")
 ```
 
 

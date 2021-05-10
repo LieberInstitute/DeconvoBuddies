@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
+[![R-CMD-check-bioc](https://github.com/lahuuki/DeconvoBuddies/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/lahuuki/DeconvoBuddies/actions)
 <!-- badges: end -->
 
 The goal of `DeconvoBuddies` is to provide helper functions for the
@@ -151,12 +152,10 @@ fc <- findMarkers_1vAll(sce.test)
 #>  8 ENSG00000… Oligo                  1.52 Astro    0.944  1.61          8 PADI2 
 #>  9 ENSG00000… Oligo                  1.57 Micro    1.01   1.55          9 SRRM1 
 #> 10 ENSG00000… Oligo                  4.11 Excit.2  2.67   1.54         10 DNAJC6
-#> # … with 2,494 more rows, and 7 more variables: ratio_anno <chr>, logFC <dbl>,
+#> # … with 2,494 more rows, and 7 more variables: anno_ratio <chr>, logFC <dbl>,
 #> #   log.p.value <dbl>, log.FDR <dbl>, std.logFC <dbl>, rank_marker <int>,
 #> #   anno_logFC <chr>
 ```
-
-<img src="man/figures/README-plot_marker_expression-1.png" width="100%" />
 
 ## Citation
 
