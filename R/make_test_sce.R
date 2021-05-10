@@ -12,6 +12,8 @@
 #' @examples
 #' test <- make_test_sce()
 #' table(test$cellType, test$donor)
+#' @importFrom S4Vectors DataFrame
+#' @import SummarizedExperiment
 make_test_sce <- function(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 2) {
     counts <- matrix(rpois(n_cell * n_gene, lambda = 10), ncol = n_cell, nrow = n_gene)
     sce <- SingleCellExperiment::SingleCellExperiment(list(counts = counts))

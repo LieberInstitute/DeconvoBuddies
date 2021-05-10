@@ -19,7 +19,6 @@ Add Age Groups and adjusted ages to pd
 }
 \examples{
 
-library(SummarizedExperiment)
 pd_test <- colData(rse_bulk_test)
 pd_test2 <- add_age_group(pd_test)
 }

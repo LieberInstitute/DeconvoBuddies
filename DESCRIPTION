@@ -24,7 +24,14 @@ Imports:
     purrr,
     stringr,
     dplyr,
-    magrittr
+    magrittr,
+    scran,
+    rafalib,
+    ggplot2,
+    matrixStats,
+    S4Vectors,
+    SummarizedExperiment,
+    tibble
 Suggests: 
     covr,
     testthat (>= 3.0.0)

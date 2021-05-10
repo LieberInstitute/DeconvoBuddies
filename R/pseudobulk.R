@@ -16,6 +16,8 @@
 #'
 #' pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
 #' head(pb_test)
+#' @importFrom rafalib splitit
+#' @import SummarizedExperiment
 pseudobulk <- function(sce, cell_group_cols = c("donor", "cellType"), add_symbol = FALSE) {
 
     ## check all columns exist
