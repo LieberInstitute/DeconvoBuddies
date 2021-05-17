@@ -147,20 +147,20 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>get_mean_ratio2</span><span class='op'>(</span><span class='va'>sce.test</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 2,504 x 9</span><span>
-#&gt;    gene       cellType.target mean.target cellType  mean ratio rank_ratio Symbol
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> 
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> ENSG00000… Oligo                  5.98 Astro    1.29   4.62          1 RNF220
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> ENSG00000… Oligo                  2.19 OPC      0.737  2.98          2 CLIC4 
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ENSG00000… Oligo                  2.73 Micro    1.35   2.02          3 ATG4C 
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> ENSG00000… Oligo                  3.36 Excit.3  1.70   1.98          4 SORT1 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> ENSG00000… Oligo                  2.83 Excit.4  1.50   1.88          5 SLC22…
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> ENSG00000… Oligo                  5.16 Excit.1  2.90   1.78          6 TTLL7 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> ENSG00000… Oligo                  3.68 OPC      2.26   1.63          7 PTBP2 
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> ENSG00000… Oligo                  1.52 Astro    0.944  1.61          8 PADI2 
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> ENSG00000… Oligo                  1.57 Micro    1.01   1.55          9 SRRM1 
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> ENSG00000… Oligo                  4.11 Excit.2  2.67   1.54         10 DNAJC6
-#&gt; </span><span style='color: #949494;'># … with 2,494 more rows, and 1 more variable: ratio_anno &lt;chr&gt;</span><span></div></span></pre>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2,504 x 9</span><span>
+#&gt;    gene  cellType.target mean.target cellType  mean ratio rank_ratio Symbol
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #555555;'> 1</span><span> ENSG… Oligo                  5.98 Astro    1.29   4.62          1 RNF220
+#&gt; </span><span style='color: #555555;'> 2</span><span> ENSG… Oligo                  2.19 OPC      0.737  2.98          2 CLIC4 
+#&gt; </span><span style='color: #555555;'> 3</span><span> ENSG… Oligo                  2.73 Micro    1.35   2.02          3 ATG4C 
+#&gt; </span><span style='color: #555555;'> 4</span><span> ENSG… Oligo                  3.36 Excit.3  1.70   1.98          4 SORT1 
+#&gt; </span><span style='color: #555555;'> 5</span><span> ENSG… Oligo                  2.83 Excit.4  1.50   1.88          5 SLC22…
+#&gt; </span><span style='color: #555555;'> 6</span><span> ENSG… Oligo                  5.16 Excit.1  2.90   1.78          6 TTLL7 
+#&gt; </span><span style='color: #555555;'> 7</span><span> ENSG… Oligo                  3.68 OPC      2.26   1.63          7 PTBP2 
+#&gt; </span><span style='color: #555555;'> 8</span><span> ENSG… Oligo                  1.52 Astro    0.944  1.61          8 PADI2 
+#&gt; </span><span style='color: #555555;'> 9</span><span> ENSG… Oligo                  1.57 Micro    1.01   1.55          9 SRRM1 
+#&gt; </span><span style='color: #555555;'>10</span><span> ENSG… Oligo                  4.11 Excit.2  2.67   1.54         10 DNAJC6
+#&gt; </span><span style='color: #555555;'># … with 2,494 more rows, and 1 more variable: anno_ratio </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
