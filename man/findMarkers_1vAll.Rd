@@ -2,7 +2,8 @@
 % Please edit documentation in R/findMarkers_1vAll.R
 \name{findMarkers_1vAll}
 \alias{findMarkers_1vAll}
-\title{Calculate 1 vs. All standard fold change for each gene x cell type}
+\title{Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
+function for scran::findMarkers}
 \usage{
 findMarkers_1vAll(
   sce,
@@ -22,5 +23,6 @@ findMarkers_1vAll(
 Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 }
 \description{
-Calculate 1 vs. All standard fold change for each gene x cell type
+Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
+function for scran::findMarkers
 }

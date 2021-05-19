@@ -1,5 +1,6 @@
 
-#' Calculate 1 vs. All standard fold change for each gene x cell type
+#' Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
+#' function for scran::findMarkers
 #'
 #' @param sce single cell experiment object
 #' @param assay Name of the assay to use for calculation
