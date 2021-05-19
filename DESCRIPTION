@@ -31,7 +31,9 @@ Imports:
     matrixStats,
     S4Vectors,
     SummarizedExperiment,
-    tibble
+    tibble,
+    RColorBrewer,
+    grDevices
 Suggests: 
     covr,
     testthat (>= 3.0.0)
