@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
-function for scran::findMarkers — findMarkers_1vAll • DeconvoBuddies</title>
+<title>Create a Cell Color Pallet for Deconvolution — create_cell_colors • DeconvoBuddies</title>
 
 
 <!-- jquery -->
@@ -40,10 +39,8 @@ function for scran::findMarkers — findMarkers_1vAll • DeconvoBuddies</title>
 
 
 
-<meta property="og:title" content="Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
-function for scran::findMarkers — findMarkers_1vAll" />
-<meta property="og:description" content="Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
-function for scran::findMarkers" />
+<meta property="og:title" content="Create a Cell Color Pallet for Deconvolution — create_cell_colors" />
+<meta property="og:description" content="Create a Cell Color Pallet for Deconvolution" />
 
 
 
@@ -111,45 +108,59 @@ function for scran::findMarkers" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
-function for scran::findMarkers</h1>
-    <small class="dont-index">Source: <a href='https://github.com/lahuuki/DeconvoBuddies/blob/master/R/findMarkers_1vAll.R'><code>R/findMarkers_1vAll.R</code></a></small>
-    <div class="hidden name"><code>findMarkers_1vAll.Rd</code></div>
+    <h1>Create a Cell Color Pallet for Deconvolution</h1>
+    <small class="dont-index">Source: <a href='https://github.com/lahuuki/DeconvoBuddies/blob/master/R/create_cell_colors.R'><code>R/create_cell_colors.R</code></a></small>
+    <div class="hidden name"><code>create_cell_colors.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
-function for scran::findMarkers</p>
+    <p>Create a Cell Color Pallet for Deconvolution</p>
     </div>
 
-    <pre class="usage"><span class='fu'>findMarkers_1vAll</span><span class='op'>(</span>
-  <span class='va'>sce</span>,
-  assay_name <span class='op'>=</span> <span class='st'>"counts"</span>,
-  cellType_col <span class='op'>=</span> <span class='st'>"cellType"</span>,
-  add_symbol <span class='op'>=</span> <span class='cn'>FALSE</span>
+    <pre class="usage"><span class='fu'>create_cell_colors</span><span class='op'>(</span>
+  cell_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Inhib"</span>, <span class='st'>"Excit"</span>, <span class='st'>"Astro"</span>, <span class='st'>"Micro"</span>, <span class='st'>"Oligo"</span>, <span class='st'>"OPC"</span><span class='op'>)</span>,
+  pallet <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"classic"</span>, <span class='st'>"gg"</span>, <span class='st'>"tableau"</span><span class='op'>)</span>,
+  split <span class='op'>=</span> <span class='cn'>NA</span>,
+  preview <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sce</th>
-      <td><p>single cell experiment object</p></td>
+      <th>cell_types</th>
+      <td><p>list of cell types</p></td>
     </tr>
     <tr>
-      <th>cellType_col</th>
-      <td><p>Column name on colData of the sce that denotes the celltype</p></td>
+      <th>pallet</th>
+      <td><p>Choice of base pallet "classic", "gg", or "tableau"</p></td>
     </tr>
     <tr>
-      <th>assay</th>
-      <td><p>Name of the assay to use for calculation</p></td>
+      <th>split</th>
+      <td><p>delineating character in cell names</p></td>
+    </tr>
+    <tr>
+      <th>preview</th>
+      <td><p>plot preview of colors</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Table of 1 vs. ALL std log fold change + p-values for each gene x cell type</p>
+    
 
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>create_cell_colors</span><span class='op'>(</span>pallet <span class='op'>=</span> <span class='st'>"classic"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;     Inhib     Excit     Astro     Micro     Oligo       OPC 
+#&gt; "#E41A1C" "#377EB8" "#4DAF4A" "#984EA3" "#FF7F00" "#FFFF33" </div><div class='input'><span class='fu'>create_cell_colors</span><span class='op'>(</span>pallet <span class='op'>=</span> <span class='st'>"classic"</span>, preview <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='create_cell_colors-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;     Inhib     Excit     Astro     Micro     Oligo       OPC 
+#&gt; "#E41A1C" "#377EB8" "#4DAF4A" "#984EA3" "#FF7F00" "#FFFF33" </div><div class='input'><span class='fu'>create_cell_colors</span><span class='op'>(</span>pallet <span class='op'>=</span> <span class='st'>"tableau"</span>, preview <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='create_cell_colors-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;     Inhib     Excit     Astro     Micro     Oligo       OPC 
+#&gt; "#1F77B4" "#AEC7E8" "#FF7F0E" "#FFBB78" "#2CA02C" "#98DF8A" </div><div class='input'><span class='fu'>create_cell_colors</span><span class='op'>(</span>cell_types <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A.1"</span>,<span class='st'>"A.2"</span>, <span class='st'>"B.1"</span>, <span class='st'>"C"</span><span class='op'>)</span>, split <span class='op'>=</span> <span class='st'>"\\."</span>, pallet <span class='op'>=</span> <span class='st'>"gg"</span>,preview <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='create_cell_colors-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;         A         B         C       A.1       A.2       B.1 
+#&gt; "#F8766D" "#00BA38" "#619CFF" "#F8766D" "#FBBAB5" "#00BA38" </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
