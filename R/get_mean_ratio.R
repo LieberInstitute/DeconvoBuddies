@@ -11,6 +11,9 @@
 #' set.seed(127)
 #' test_sce <- make_test_sce()
 #' get_mean_ratio(test_sce)
+#' @importFrom stats median
+#' @importFrom dplyr select rename left_join group_by ungroup summarise slice arrange mutate
+#' @importFrom tibble rownames_to_column
 get_mean_ratio <- function(sce, cellType_col = "cellType", assay_name = "logcounts", add_symbol = FALSE) {
     sce_celltypes <- as.data.frame(SummarizedExperiment::colData(sce)) %>%
         dplyr::select(cellType = cellType_col) %>%

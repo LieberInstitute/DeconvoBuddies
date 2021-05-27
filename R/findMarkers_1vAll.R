@@ -15,7 +15,7 @@
 #' @importFrom purrr map
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
-#' @import tibble
+#' @importFrom tibble rownames_to_column as_tibble add_column
 findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellType", add_symbol = FALSE) {
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
