@@ -34,11 +34,11 @@ pseudobulk <- function(sce, cell_group_cols = c("donor", "cellType"), add_symbol
     clusIndex <- suppressWarnings(rafalib::splitit(sce$pb))
     # pbcounts <- purrr::map(clusIndex, ~rowSums(assays(sce)$counts[ ,.x]))
 
-    pbcounts <- sapply(clusIndex, function(ii) {
+    pbcounts <- vapply(clusIndex, function(ii) {
         rowSums(
             as.matrix(SummarizedExperiment::assays(sce)$counts[, ii, drop = FALSE])
         )
-    })
+    }, double(nrow(sce)))
 
     # Compute LSFs at this level
     # sizeFactors.PB.all <- scuttle::librarySizeFactors(pbcounts)
