@@ -69,10 +69,10 @@ create_cell_colors <- function(cell_types = c("Inhib", "Excit","Astro","Micro","
 }
 
 .scale_cell_colors <- function(color, cell_types){
-
+  
   n_ct <- length(cell_types)
   scale_colors <- grDevices::colorRampPalette(c(color, "white"))(n_ct + 1)
-  scale_colors <- head(scale_colors, n_ct)
+  scale_colors <- utils::head(scale_colors, n_ct)
   names(scale_colors)  <- cell_types
 
   return(scale_colors)
