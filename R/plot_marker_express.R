@@ -17,6 +17,11 @@
 #' @importFrom magrittr %>%
 #' @importFrom ggplot2 geom_text
 plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_col, cellType_col = "cellType") {
+    # RCMD fix
+    rank_int <- NULL
+    Symbol <- NULL
+    anno_str <- NULL
+    
     title <- paste(cell_type, "Top", n_genes, "markers")
     # message(title)
 

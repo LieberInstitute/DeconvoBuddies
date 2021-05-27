@@ -15,6 +15,9 @@
 #' @importFrom dplyr select rename left_join group_by ungroup summarise slice arrange mutate
 #' @importFrom tibble rownames_to_column
 get_mean_ratio <- function(sce, cellType_col = "cellType", assay_name = "logcounts", add_symbol = FALSE) {
+    # RCMD fix
+    id <- Var1 <- Var2 <- value <- gene <- cellType <- logcounts <- median <- cellType.target <- cellType <- Symbol <- NULL
+    
     sce_celltypes <- as.data.frame(SummarizedExperiment::colData(sce)) %>%
         dplyr::select(cellType = cellType_col) %>%
         tibble::rownames_to_column(var = "id") %>%

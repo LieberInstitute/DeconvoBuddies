@@ -18,6 +18,11 @@
 #' @importFrom scran findMarkers
 #' @importFrom tibble rownames_to_column as_tibble add_column
 findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellType", add_symbol = FALSE) {
+    #RCMD Fix
+    gene <- NULL
+    rank_marker <- NULL
+    Symbol <- NULL
+    
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
 

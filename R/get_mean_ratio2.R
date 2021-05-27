@@ -16,6 +16,11 @@
 #' @importFrom purrr map2
 #' @importFrom matrixStats rowMedians
 get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcounts", add_symbol = TRUE) {
+    # RCMD fix
+    cellType.target <- NULL
+    cellType <- NULL
+    ratio <- NULL
+    
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
 
