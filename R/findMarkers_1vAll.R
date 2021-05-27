@@ -10,6 +10,8 @@
 #' @export
 #'
 #' @examples
+#' markers_1vAll <- findMarkers_1vAll(sce.test)
+#' head(markers_1vAll)
 #' @importFrom purrr map
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers

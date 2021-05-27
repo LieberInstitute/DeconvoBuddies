@@ -41,21 +41,32 @@ BiocManager::install("lahuuki/DeconvoBuddies")
 ```
 ## Example
 
-Get mean ratios for each gene x cell type
-```{r example, eval = requireNamespace('DeconvoBuddies')}
+```{r 'load packages', echo = FALSE}
 library("DeconvoBuddies")
 library("dplyr")
-## basic example code
+library("ggplot2")
+```
 
+
+Get mean ratios for each gene x cell type
+```{r example, eval = requireNamespace('DeconvoBuddies')}
 ratios <- get_mean_ratio2(sce.test)
 fc <- findMarkers_1vAll(sce.test)
 
 (marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
 ```
 
+### Extablish Color Scheme
+```{r 'establish colors'}
+cell_types <- levels(sce.test$cellType)
+cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", split = "\\.", preview = TRUE)
+```
+
+
 
 ```{r plot_marker_expression, echo = FALSE}
-# plot_marker_express(sce.test, marker_stats, "Astro",n_genes = 5,rank_col = "rank_ratio", anno_col = "anno")
+plot_marker_express(sce.test, marker_stats, "Astro",n_genes = 5,rank_col = "rank_ratio", anno_col = "anno_ratio") +
+    scale_color_manual(values = cell_colors)
 ```
 
 

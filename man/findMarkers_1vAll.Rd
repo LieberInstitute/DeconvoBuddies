@@ -26,3 +26,7 @@ Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
 function for scran::findMarkers
 }
+\examples{
+markers_1vAll <- findMarkers_1vAll(sce.test)
+head(markers_1vAll)
+}

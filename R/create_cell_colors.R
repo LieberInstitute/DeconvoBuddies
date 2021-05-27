@@ -13,6 +13,7 @@
 #' create_cell_colors(pallet = "classic", preview = TRUE)
 #' create_cell_colors(pallet = "tableau", preview = TRUE)
 #' create_cell_colors(cell_types = c("A.1","A.2", "B.1", "C"), split = "\\.", pallet = "gg",preview = TRUE)
+#' create_cell_colors(cell_types = c("A.1","A.2", "B.1", "C","D"), pallet = "gg",preview = TRUE)
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom grDevices colorRampPalette
 #' @importFrom rafalib splitit

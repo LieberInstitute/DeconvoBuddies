@@ -13,6 +13,7 @@
 #' @export
 #'
 #' @examples
+#' plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro" ,n_genes = 5, rank_col = "rank_ratio", anno_col = "anno_ratio")
 #' @importFrom magrittr %>%
 #' @importFrom ggplot2 geom_text
 plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_col, cellType_col = "cellType") {
