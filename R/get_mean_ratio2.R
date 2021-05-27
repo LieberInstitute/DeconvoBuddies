@@ -4,7 +4,7 @@
 #' @param sce Single cell experiment object
 #' @param cellType_col Column name on colData of the sce that denotes the celltype
 #' @param assay_name Name of assay to use for calculation
-#'
+#' @param add_symbol Add the gene symbol column to the marker stats table
 #' @return Table of mean ratio for each x cell type
 #' @export
 #'
@@ -51,6 +51,13 @@ get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcou
 
 
 .get_ratio_table <- function(x, sce, sce_assay, cellType_col, cell_means) {
+    # RCMD Fix
+    mean.target <- NULL
+    gene <- NULL
+    ratio <- NULL
+    cellType.target <- NULL
+    cellType <- NULL
+    
     # filter target median != 0
     median_index <- matrixStats::rowMedians(sce_assay[, sce[[cellType_col]] == x]) != 0
     # message("Median == 0: ", sum(!median_index))

@@ -15,6 +15,10 @@ get_mean_ratio(
 \item{sce}{Single cell experiment object}
 
 \item{cellType_col}{Column name on colData of the sce that denotes the celltype}
+
+\item{assay_name}{Name of the assay to use for calculation}
+
+\item{add_symbol}{Add the gene symbol column to the marker stats table}
 }
 \value{
 Table of mean ratio for each x cell type

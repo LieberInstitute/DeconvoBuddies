@@ -1,9 +1,9 @@
-
 #' Get Mean Ratio for Each Gene x Cell Type
 #'
 #' @param sce Single cell experiment object
 #' @param cellType_col Column name on colData of the sce that denotes the celltype
-#'
+#' @param assay_name Name of the assay to use for calculation
+#' @param add_symbol Add the gene symbol column to the marker stats table
 #' @return Table of mean ratio for each x cell type
 #' @export
 #'
