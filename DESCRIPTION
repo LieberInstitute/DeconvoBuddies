@@ -12,7 +12,7 @@ Description: Funtions helpful for LIBD deconvolution project, ie marker finding.
 License: Artistic-2.0
 URL: https://github.com/lahuuki/DeconvoBuddies
 BugReports: https://support.bioconductor.org/t/DeconvoBuddies
-biocViews: Software
+biocViews: Software, SingleCell, RNASeq, GeneExpression, Transcriptomics
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
