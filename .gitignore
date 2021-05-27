@@ -41,3 +41,7 @@ vignettes/*.pdf
 *.Rproj
 .Rdata
 .DS_Store
+
+# Orignal Data files
+/Data/sce.test.Rdata
+inst/doc
