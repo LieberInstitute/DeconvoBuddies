@@ -37,7 +37,7 @@ create_cell_colors <- function(cell_types = c("Inhib", "Excit","Astro","Micro","
   }else if(pallet == "gg"){
     cell_colors <- gg_color_hue(length(base_cell_types))
   }else if(pallet == "tableau"){
-    cell_colors <- DeconvoBuddies::tableau20[1:length(base_cell_types)]
+    cell_colors <- tableau20[1:length(base_cell_types)]
   }
 
   names(cell_colors) <- base_cell_types

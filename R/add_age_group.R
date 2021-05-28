@@ -15,7 +15,7 @@
 add_age_group <- function(pd, age_col = "Age") {
 
     # Add age group
-    age_mins <- map(DeconvoBuddies::age_categories, "min")
+    age_mins <- map(age_categories, "min")
     pd_ages <- pd[[age_col]]
     pd$ageGroup <- cut(pd_ages, c(age_mins, Inf), labels = names(age_mins))
 
