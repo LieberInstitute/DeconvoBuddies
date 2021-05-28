@@ -3,7 +3,9 @@
 #' @param sce single cell experiment object
 #' @param assay Name of the assay to use for calculation
 #' @param cellType_col Column name on colData of the sce that denotes the celltype
-#'
+#' @param assay_name Name of the assay to use for calculation
+#' @param add_symbol Add the gene symbol column to the marker stats table
+#' 
 #' @return Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 #' @export
 #'

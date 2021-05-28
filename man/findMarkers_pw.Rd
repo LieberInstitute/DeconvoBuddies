@@ -14,7 +14,11 @@ findMarkers_pw(
 \arguments{
 \item{sce}{single cell experiment object}
 
+\item{assay_name}{Name of the assay to use for calculation}
+
 \item{cellType_col}{Column name on colData of the sce that denotes the celltype}
+
+\item{add_symbol}{Add the gene symbol column to the marker stats table}
 
 \item{assay}{Name of the assay to use for calculation}
 }
