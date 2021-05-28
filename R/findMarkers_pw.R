@@ -1,7 +1,6 @@
 #' Calculate pw standard fold change for each gene x cell type
 #'
 #' @param sce single cell experiment object
-#' @param assay Name of the assay to use for calculation
 #' @param cellType_col Column name on colData of the sce that denotes the celltype
 #' @param assay_name Name of the assay to use for calculation
 #' @param add_symbol Add the gene symbol column to the marker stats table
@@ -15,6 +14,7 @@
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
 findMarkers_pw <- function(sce, assay_name = "counts", cellType_col = "cellType", add_symbol = FALSE) {
+
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
 

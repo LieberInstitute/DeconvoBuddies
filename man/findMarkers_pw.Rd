@@ -19,8 +19,6 @@ findMarkers_pw(
 \item{cellType_col}{Column name on colData of the sce that denotes the celltype}
 
 \item{add_symbol}{Add the gene symbol column to the marker stats table}
-
-\item{assay}{Name of the assay to use for calculation}
 }
 \value{
 Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
