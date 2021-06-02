@@ -51,20 +51,20 @@ ratios <- get_mean_ratio2(sce.test)
 fc <- findMarkers_1vAll(sce.test)
 
 (marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
-#> # A tibble: 2,504 x 15
-#>    gene       cellType.target mean.target cellType  mean ratio rank_ratio Symbol
-#>    <chr>      <fct>                 <dbl> <fct>    <dbl> <dbl>      <int> <chr> 
-#>  1 ENSG00000… Oligo                  5.98 Astro    1.29   4.62          1 RNF220
-#>  2 ENSG00000… Oligo                  2.19 OPC      0.737  2.98          2 CLIC4 
-#>  3 ENSG00000… Oligo                  2.73 Micro    1.35   2.02          3 ATG4C 
-#>  4 ENSG00000… Oligo                  3.36 Excit.3  1.70   1.98          4 SORT1 
-#>  5 ENSG00000… Oligo                  2.83 Excit.4  1.50   1.88          5 SLC22…
-#>  6 ENSG00000… Oligo                  5.16 Excit.1  2.90   1.78          6 TTLL7 
-#>  7 ENSG00000… Oligo                  3.68 OPC      2.26   1.63          7 PTBP2 
-#>  8 ENSG00000… Oligo                  1.52 Astro    0.944  1.61          8 PADI2 
-#>  9 ENSG00000… Oligo                  1.57 Micro    1.01   1.55          9 SRRM1 
-#> 10 ENSG00000… Oligo                  4.11 Excit.2  2.67   1.54         10 DNAJC6
-#> # … with 2,494 more rows, and 7 more variables: anno_ratio <chr>, logFC <dbl>,
+#> # A tibble: 1,778 x 15
+#>    gene      cellType.target mean.target cellType  mean ratio rank_ratio Symbol 
+#>    <chr>     <fct>                 <dbl> <fct>    <dbl> <dbl>      <int> <chr>  
+#>  1 ENSG0000… OPC                   1.00  Micro    0.239  4.20          1 AL1392…
+#>  2 ENSG0000… OPC                   1.71  Astro    0.512  3.35          2 SDC3   
+#>  3 ENSG0000… OPC                   0.950 Astro    0.413  2.30          3 IFI44  
+#>  4 ENSG0000… OPC                   3.32  Astro    1.47   2.26          4 COL11A1
+#>  5 ENSG0000… OPC                   3.55  Astro    1.62   2.19          5 NTNG1  
+#>  6 ENSG0000… OPC                   1.22  Inhib.2  0.560  2.18          6 TRIM62 
+#>  7 ENSG0000… OPC                   3.37  Micro    1.96   1.72          7 USP24  
+#>  8 ENSG0000… OPC                   3.42  Oligo    2.44   1.40          8 SPATA6 
+#>  9 ENSG0000… OPC                   1.21  Astro    0.914  1.33          9 ABCD3  
+#> 10 ENSG0000… OPC                   1.21  Astro    0.920  1.32         10 GNG12  
+#> # … with 1,768 more rows, and 7 more variables: anno_ratio <chr>, logFC <dbl>,
 #> #   log.p.value <dbl>, log.FDR <dbl>, std.logFC <dbl>, rank_marker <int>,
 #> #   anno_logFC <chr>
 ```
@@ -76,7 +76,7 @@ cell_types <- levels(sce.test$cellType)
 cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", split = "\\.", preview = TRUE)
 ```
 
-<img src="man/figures/README-establish colors-1.png" width="100%" />
+<img src="man/figures/README-establish_colors-1.png" width="100%" />
 
     #> Scale for 'colour' is already present. Adding another scale for 'colour',
     #> which will replace the existing scale.

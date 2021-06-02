@@ -57,7 +57,7 @@ fc <- findMarkers_1vAll(sce.test)
 ```
 
 ### Extablish Color Scheme
-```{r 'establish colors'}
+```{r establish_colors}
 cell_types <- levels(sce.test$cellType)
 cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", split = "\\.", preview = TRUE)
 ```
