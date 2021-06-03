@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' pw <- findMarkers_pw(sce.test)
+#' TODO
 #' @importFrom purrr map
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
