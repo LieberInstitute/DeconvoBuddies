@@ -8,4 +8,4 @@ age_categories <- list(
     `50+` = list(min = 50, max = 100)
 )
 
-usethis::use_data(age_categories, overwrite = TRUE)
+usethis::use_data(age_categories, overwrite = TRUE, internal = TRUE)

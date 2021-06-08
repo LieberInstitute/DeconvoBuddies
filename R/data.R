@@ -1,13 +1,3 @@
-
-#' List of ages defining life stages
-#'
-#' A named list of the minimum and maximum ages for 6 life stages (Prenatal, 
-#' Infant, Child, Teen, Adult, and 50+). Used in `add_age_group()`.
-#'
-#' @format Named list.
-#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/main/data-raw/age_categories.R>
-"age_categories" 
-
 #' Test Estimated Cell Type Proportions
 #'
 #' A test dataset of estiamted protions for 5 cell types over 100 samples. 
@@ -48,11 +38,4 @@
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce_ab.R>
 "sce_ab" 
 
-#' A 20 color pallet
-#'
-#' Adapted from `scater`
-#'
-#' @format list of 20 hex colors
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/tableau20.R>
-"tableau20" 
 
