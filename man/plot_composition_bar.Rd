@@ -21,16 +21,15 @@ plot_composition_bar(
 
 \item{ct_col}{name of column containing cell type names}
 
-\item{add_text}{Add rounded proption value to bars}
+\item{add_text}{Add rounded proportion value to bars}
 }
 \value{
-
+stacked barplot representing mean proportion of cell types for each group
 }
 \description{
 Create barplot of average cell type composition
 }
 \examples{
-
 pd <- SummarizedExperiment::colData(rse_bulk_test) \%>\%
 as.data.frame()
 

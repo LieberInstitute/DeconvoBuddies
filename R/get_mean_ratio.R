@@ -8,9 +8,8 @@
 #' @export
 #'
 #' @examples
-#' set.seed(127)
-#' test_sce <- make_test_sce()
-#' get_mean_ratio(test_sce)
+#' markers_ratio <- get_mean_ratio(sce.test)
+#' head(markers_ratio)
 #' @importFrom stats median
 #' @importFrom dplyr select rename left_join group_by ungroup summarise slice arrange mutate
 #' @importFrom tibble rownames_to_column

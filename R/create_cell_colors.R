@@ -5,7 +5,7 @@
 #' @param split delineating character in cell names
 #' @param preview plot preview of colors
 #'
-#' @return
+#' @return named list of hex color values
 #' @export
 #'
 #' @examples

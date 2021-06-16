@@ -5,7 +5,7 @@
 \title{Create a Cell Color Pallet for Deconvolution}
 \usage{
 create_cell_colors(
-  cell_types = c("Inhib", "Excit", "Astro", "Micro", "Oligo", "OPC"),
+  cell_types = c("Astro", "Micro", "Oligo", "OPC", "Inhib", "Excit"),
   pallet = c("classic", "gg", "tableau"),
   split = NA,
   preview = FALSE
@@ -21,7 +21,7 @@ create_cell_colors(
 \item{preview}{plot preview of colors}
 }
 \value{
-
+named list of hex color values
 }
 \description{
 Create a Cell Color Pallet for Deconvolution

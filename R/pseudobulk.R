@@ -4,7 +4,7 @@
 #' @param sce Single cell experiment object
 #' @param cell_group_cols list of column names that create pseudobulk groups
 #' @param add_symbol Use Symbol from rowData as rownames
-#' @return
+#' @return Matrix of pseudobukled logcounts
 #' @export
 #'
 #' @examples

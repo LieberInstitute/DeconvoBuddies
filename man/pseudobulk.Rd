@@ -14,7 +14,7 @@ pseudobulk(sce, cell_group_cols = c("donor", "cellType"), add_symbol = FALSE)
 \item{add_symbol}{Use Symbol from rowData as rownames}
 }
 \value{
-
+Matrix of pseudobukled logcounts
 }
 \description{
 Pseudobulks sce data over donor x cell type

@@ -5,13 +5,12 @@
 #' @param x_col category to divide samples by
 #' @param prop_col name of column containing proportion values
 #' @param ct_col name of column containing cell type names
-#' @param add_text Add rounded proption value to bars
+#' @param add_text Add rounded proportion value to bars
 #'
-#' @return
+#' @return stacked barplot representing mean proportion of cell types for each group
 #' @export
 #'
 #' @examples
-#' 
 #' pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
 #' as.data.frame()
 #' 
