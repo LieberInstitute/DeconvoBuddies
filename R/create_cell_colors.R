@@ -21,7 +21,7 @@
 #' @importFrom graphics barplot par
 #' @importFrom grDevices hcl
 #' @importFrom utils head
-create_cell_colors <- function(cell_types = c("Inhib", "Excit","Astro","Micro","Oligo","OPC"),
+create_cell_colors <- function(cell_types = c("Astro","Micro","Oligo","OPC","Inhib", "Excit"),
                                pallet = c("classic", "gg", "tableau"),
                                split = NA,
                                preview = FALSE) {
@@ -29,15 +29,18 @@ create_cell_colors <- function(cell_types = c("Inhib", "Excit","Astro","Micro","
   pallet <- match.arg(pallet)
 
   base_cell_types <- unique(ss(cell_types, pattern = split))
-
+  nct <- length(base_cell_types)
+  if(nct < 3) stop("Need 3 or more base cell types")
+  
   cell_colors <- list()
 
   if(pallet == "classic"){
-    cell_colors <- RColorBrewer::brewer.pal(n = length(base_cell_types), name = "Set1")
+    cell_colors <- RColorBrewer::brewer.pal(n = nct, name = "Set1")
+    cell_colors <- c(cell_colors[3:nct], cell_colors[1:2])
   }else if(pallet == "gg"){
-    cell_colors <- gg_color_hue(length(base_cell_types))
+    cell_colors <- gg_color_hue(nct)
   }else if(pallet == "tableau"){
-    cell_colors <- tableau20[1:length(base_cell_types)]
+    cell_colors <- tableau20[1:nct]
   }
 
   names(cell_colors) <- base_cell_types
