@@ -54,16 +54,16 @@ fc <- findMarkers_1vAll(sce.test)
 #> # A tibble: 1,778 x 15
 #>    gene      cellType.target mean.target cellType  mean ratio rank_ratio Symbol 
 #>    <chr>     <fct>                 <dbl> <fct>    <dbl> <dbl>      <int> <chr>  
-#>  1 ENSG0000… OPC                   1.00  Micro    0.239  4.20          1 AL1392…
-#>  2 ENSG0000… OPC                   1.71  Astro    0.512  3.35          2 SDC3   
-#>  3 ENSG0000… OPC                   0.950 Astro    0.413  2.30          3 IFI44  
-#>  4 ENSG0000… OPC                   3.32  Astro    1.47   2.26          4 COL11A1
-#>  5 ENSG0000… OPC                   3.55  Astro    1.62   2.19          5 NTNG1  
-#>  6 ENSG0000… OPC                   1.22  Inhib.2  0.560  2.18          6 TRIM62 
-#>  7 ENSG0000… OPC                   3.37  Micro    1.96   1.72          7 USP24  
-#>  8 ENSG0000… OPC                   3.42  Oligo    2.44   1.40          8 SPATA6 
-#>  9 ENSG0000… OPC                   1.21  Astro    0.914  1.33          9 ABCD3  
-#> 10 ENSG0000… OPC                   1.21  Astro    0.920  1.32         10 GNG12  
+#>  1 ENSG0000… Inhib.2               1.00  Excit.2  0.239  4.20          1 AL1392…
+#>  2 ENSG0000… Inhib.2               1.71  Astro    0.512  3.35          2 SDC3   
+#>  3 ENSG0000… Inhib.2               0.950 Astro    0.413  2.30          3 IFI44  
+#>  4 ENSG0000… Inhib.2               3.32  Astro    1.47   2.26          4 COL11A1
+#>  5 ENSG0000… Inhib.2               3.55  Astro    1.62   2.19          5 NTNG1  
+#>  6 ENSG0000… Inhib.2               1.22  Excit.1  0.560  2.18          6 TRIM62 
+#>  7 ENSG0000… Inhib.2               3.37  Excit.2  1.96   1.72          7 USP24  
+#>  8 ENSG0000… Inhib.2               3.42  Inhib.1  2.44   1.40          8 SPATA6 
+#>  9 ENSG0000… Inhib.2               1.21  Astro    0.914  1.33          9 ABCD3  
+#> 10 ENSG0000… Inhib.2               1.21  Astro    0.920  1.32         10 GNG12  
 #> # … with 1,768 more rows, and 7 more variables: anno_ratio <chr>, logFC <dbl>,
 #> #   log.p.value <dbl>, log.FDR <dbl>, std.logFC <dbl>, rank_marker <int>,
 #> #   anno_logFC <chr>
