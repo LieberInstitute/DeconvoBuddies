@@ -27,5 +27,6 @@ Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 Calculate pw standard fold change for each gene x cell type
 }
 \examples{
-TODO
+markers_pw <- findMarkers_pw(sce.test)
+head(markers_pw)
 }

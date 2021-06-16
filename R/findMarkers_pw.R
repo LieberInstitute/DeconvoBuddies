@@ -9,8 +9,9 @@
 #' @export
 #'
 #' @examples
-#' TODO
-#' @importFrom purrr map
+#' markers_pw <- findMarkers_pw(sce.test)
+#' head(markers_pw)
+#' @importFrom purrr map2
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
 findMarkers_pw <- function(sce, assay_name = "counts", cellType_col = "cellType", add_symbol = FALSE) {
@@ -25,30 +26,24 @@ findMarkers_pw <- function(sce, assay_name = "counts", cellType_col = "cellType"
     mod <- with(pd, stats::model.matrix(~donor))
     mod <- mod[, -1, drop = F] # intercept otherwise automatically dropped by `findMarkers()`
 
-    # fm <- scran::findMarkers(sce, groups = sce[[cellType_col]],
-    #                                  assay.type = assay_name, design=mod, test.type ="t",
-    #                                  direction="up", pval.type="all", full.stats=T)
-    # summary_fm <- fm[,1:3]
-
     fm.std <- scran::findMarkers(sce,
         groups = sce[[cellType_col]],
         assay.type = assay_name, design = mod, test.type = "t",
         std.lfc = TRUE,
-        direction = "up", pval.type = "all", full.stats = T
+        direction = "up", pval.type = "all", full.stats = F
     )
-
-    ct_stats <- map(fm.std, names(fm.std), ~ combine_stats(.y, cell_types, .x))
+    
+    
+    ct_stats <- mapply(.combine_stats,fm.std, names(fm.std))
     all_stats <- do.call(rbind, ct_stats)
-
     return(all_stats)
+
 }
 
-.combine_stats <- function(cellType.target, cell_types, fm) {
-    cell_types.nonTarget <- cell_types[cell_types != cellType.target]
-    cell_types_cols <- paste0("stats.", cell_types.nonTarget)
-
-    stats <- do.call(rbind, as.list(fm[, cell_types_cols]))
+.combine_stats <- function( stats, cellType.target) {
     stats$cellType.target <- cellType.target
-    stats$cellType <- rep(cell_types.nonTarget, each = nrow(fm))
+    stats$Gene <- rownames(stats)
+    rownames(stats) <- NULL
+    stats <- stats[,c("Gene","cellType.target", "summary.logFC", "p.value", "FDR")]
     return(stats)
 }
