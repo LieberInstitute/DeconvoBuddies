@@ -2,6 +2,7 @@
 #' Create barplot of average cell type composition
 #'
 #' @param prop_long data.frame of cell type portions in long form
+#' @param sample_col name of column that identifies samples
 #' @param x_col category to divide samples by
 #' @param prop_col name of column containing proportion values
 #' @param ct_col name of column containing cell type names
@@ -25,27 +26,22 @@
 #' @importFrom dplyr rename group_by summarise mutate arrange
 #' @importFrom ggplot2 ggplot geom_bar geom_text aes theme element_text
 plot_composition_bar <- function(prop_long, 
+                                 sample_col = "RNum",
                                  x_col = "ALL", 
                                  prop_col = "prop", 
                                  ct_col = "cell_type",
                                  add_text = TRUE){
   
   # ct_col <- dplyr::enquo(ct_col)
-  cell_type <- prop <- mean_prop <- x_cat <- anno_y <- NULL
+  mean_prop <- .get_cat_prop(prop_long, sample_col, x_col, prop_col, ct_col) %>%
+    dplyr::ungroup()
   
-  mean_prop <- prop_long %>%
-    dplyr::mutate(ALL = "ALL") %>%
-    dplyr::rename(cell_type = ct_col, prop = prop_col, x_cat = x_col) %>%
-    dplyr::group_by(cell_type, x_cat) %>%
-    dplyr::summarise(mean_prop = mean(prop))  %>%
-    dplyr::arrange(cell_type) %>%
-    dplyr::group_by(x_cat) %>%
-    dplyr::mutate(anno_y = (1 - cumsum(mean_prop)) + (mean_prop *.5))
+  if(x_col == "ALL") x_col <- NULL
   
   comp_barplot <- ggplot2::ggplot(data = mean_prop,
                                   ggplot2::aes(x = x_cat, y = mean_prop, fill = cell_type)) +
     ggplot2::geom_bar(stat = "identity") +
-    ggplot2::labs(x = x_cat, y = "Mean Proportion", fill ='Cell Type') +
+    ggplot2::labs(x = x_col, y = "Mean Proportion", fill ='Cell Type') +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust=1))
   
   if(add_text){
@@ -54,3 +50,34 @@ plot_composition_bar <- function(prop_long,
   
   return(comp_barplot)
 }
+
+
+.get_cat_prop <- function(prop_long, 
+                          sample_col = "RNum",
+                          x_col = "ALL", 
+                          prop_col = "prop", 
+                          ct_col = "cell_type"){
+  
+  cell_type <- prop <- mean_prop <- x_cat <- anno_y <- NULL
+  
+  prop_long <- prop_long %>%
+    dplyr::mutate(ALL = "ALL", sample = !!as.symbol(sample_col)) %>%
+    dplyr::rename(cell_type = ct_col, prop = prop_col, x_cat = x_col) %>%
+    dplyr::select(sample, x_cat, cell_type, prop)
+  
+  n_sample <- prop_long %>%
+    dplyr::group_by(x_cat) %>%
+    dplyr::summarise(n = length(unique(sample)))
+  
+  cat_prop <- prop_long %>%
+    dplyr::group_by(cell_type, x_cat) %>%
+    dplyr::summarise(sum_prop = sum(prop))  %>%
+    dplyr::left_join(n_sample, by = "x_cat") %>%
+    dplyr::mutate(mean_prop = sum_prop/n) %>%
+    dplyr::arrange(cell_type) %>%
+    dplyr::group_by(x_cat) %>%
+    dplyr::mutate(anno_y = (1 - cumsum(mean_prop)) + (mean_prop *.5))
+  
+  return(cat_prop)
+}
+                          

@@ -6,6 +6,7 @@
 \usage{
 plot_composition_bar(
   prop_long,
+  sample_col = "RNum",
   x_col = "ALL",
   prop_col = "prop",
   ct_col = "cell_type",
@@ -14,6 +15,8 @@ plot_composition_bar(
 }
 \arguments{
 \item{prop_long}{data.frame of cell type portions in long form}
+
+\item{sample_col}{name of column that identifies samples}
 
 \item{x_col}{category to divide samples by}
 
