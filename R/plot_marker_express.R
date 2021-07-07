@@ -20,7 +20,7 @@ plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_c
     # RCMD fix
     rank_int <- Symbol <- anno_str <- cellType.target <- NULL
     
-    title <- paste(cell_type, "Top", n_genes, "markers")
+    title <- paste(cell_type, "Top", n_genes, "Markers")
     # message(title)
 
     max_digits <- nchar(n_genes)

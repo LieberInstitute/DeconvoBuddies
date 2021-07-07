@@ -18,7 +18,7 @@
 #' est_prop_long <- est_prop %>% 
 #' tibble::rownames_to_column("RNum") %>%
 #' tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to ="prop") %>%
-#' left_join(pd %>% select(RNum, Dx))
+#' dplyr::left_join(pd %>% select(RNum, Dx))
 #' 
 #' plot_composition_bar(est_prop_long)
 #' plot_composition_bar(est_prop_long, x_col = "Dx")
