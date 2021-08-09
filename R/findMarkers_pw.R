@@ -4,7 +4,7 @@
 #' @param cellType_col Column name on colData of the sce that denotes the celltype
 #' @param assay_name Name of the assay to use for calculation
 #' @param add_symbol Add the gene symbol column to the marker stats table
-#' 
+#'
 #' @return Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 #' @export
 #'
@@ -15,7 +15,6 @@
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
 findMarkers_pw <- function(sce, assay_name = "counts", cellType_col = "cellType", add_symbol = FALSE) {
-
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
 
@@ -32,18 +31,17 @@ findMarkers_pw <- function(sce, assay_name = "counts", cellType_col = "cellType"
         std.lfc = TRUE,
         direction = "up", pval.type = "all", full.stats = F
     )
-    
-    
-    ct_stats <- mapply(.combine_stats,fm.std, names(fm.std))
+
+
+    ct_stats <- mapply(.combine_stats, fm.std, names(fm.std))
     all_stats <- do.call(rbind, ct_stats)
     return(all_stats)
-
 }
 
-.combine_stats <- function( stats, cellType.target) {
+.combine_stats <- function(stats, cellType.target) {
     stats$cellType.target <- cellType.target
     stats$Gene <- rownames(stats)
     rownames(stats) <- NULL
-    stats <- stats[,c("Gene","cellType.target", "summary.logFC", "p.value", "FDR")]
+    stats <- stats[, c("Gene", "cellType.target", "summary.logFC", "p.value", "FDR")]
     return(stats)
 }

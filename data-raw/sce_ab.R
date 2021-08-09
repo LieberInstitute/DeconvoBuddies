@@ -17,6 +17,6 @@ sce_ab <- SingleCellExperiment(list(counts = counts),
     colData = pd
 )
 
-assays(sce_ab)$logcounts <- log(assays(sce_ab)$counts+1)
+assays(sce_ab)$logcounts <- log(assays(sce_ab)$counts + 1)
 
 usethis::use_data(sce_ab, overwrite = TRUE)

@@ -20,7 +20,7 @@ get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcou
     cellType.target <- NULL
     cellType <- NULL
     ratio <- NULL
-    
+
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
 
@@ -62,7 +62,7 @@ get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcou
     ratio <- NULL
     cellType.target <- NULL
     cellType <- NULL
-    
+
     # filter target median != 0
     median_index <- matrixStats::rowMedians(sce_assay[, sce[[cellType_col]] == x]) != 0
     # message("Median == 0: ", sum(!median_index))

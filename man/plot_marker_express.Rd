@@ -36,5 +36,5 @@ plotExpression style violin plot for selected marker genes
 create plotExpression plots for top n genes for each cell type
 }
 \examples{
-plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro" ,n_genes = 5, rank_col = "rank_ratio", anno_col = "anno_ratio")
+plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro", n_genes = 5, rank_col = "rank_ratio", anno_col = "anno_ratio")
 }

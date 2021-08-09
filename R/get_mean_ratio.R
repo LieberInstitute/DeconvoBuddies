@@ -17,7 +17,7 @@ get_mean_ratio <- function(sce, cellType_col = "cellType", assay_name = "logcoun
     # RCMD fix
     id <- Var1 <- Var2 <- value <- gene <- cellType <- logcounts <- median <- NULL
     cellType.target <- cellType <- Symbol <- mean.target <- ratio <- rank_ratio <- NULL
-    
+
     sce_celltypes <- as.data.frame(SummarizedExperiment::colData(sce)) %>%
         dplyr::select(cellType = cellType_col) %>%
         tibble::rownames_to_column(var = "id") %>%
