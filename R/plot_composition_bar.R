@@ -7,6 +7,7 @@
 #' @param prop_col name of column containing proportion values
 #' @param ct_col name of column containing cell type names
 #' @param add_text Add rounded proportion value to bars
+#' @param min_prop_text Minimum proportion to display text
 #'
 #' @return stacked barplot representing mean proportion of cell types for each group
 #' @export
@@ -18,10 +19,13 @@
 #' est_prop_long <- est_prop %>% 
 #' tibble::rownames_to_column("RNum") %>%
 #' tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to ="prop") %>%
-#' dplyr::left_join(pd %>% select(RNum, Dx))
+#' dplyr::left_join(pd %>% select(RNum, Dx)) %>%
+#' mutate(a = "a")
 #' 
+#' .get_cat_prop(est_prop_long)
 #' plot_composition_bar(est_prop_long)
 #' plot_composition_bar(est_prop_long, x_col = "Dx")
+#' plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 #' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE)
 #' @importFrom dplyr rename group_by summarise mutate arrange
 #' @importFrom ggplot2 ggplot geom_bar geom_text aes theme element_text
@@ -30,7 +34,8 @@ plot_composition_bar <- function(prop_long,
                                  x_col = "ALL", 
                                  prop_col = "prop", 
                                  ct_col = "cell_type",
-                                 add_text = TRUE){
+                                 add_text = TRUE,
+                                 min_prop_text = 0){
   
   # ct_col <- dplyr::enquo(ct_col)
   mean_prop <- .get_cat_prop(prop_long, sample_col, x_col, prop_col, ct_col) %>%
@@ -45,7 +50,12 @@ plot_composition_bar <- function(prop_long,
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust=1))
   
   if(add_text){
-    comp_barplot <- comp_barplot + ggplot2::geom_text(ggplot2::aes(y = anno_y, label = format(round(mean_prop,3),3)))
+    comp_barplot <- comp_barplot + ggplot2::geom_text(ggplot2::aes(y = anno_y, 
+                                                                   label = ifelse(mean_prop > min_prop_text, 
+                                                                                  format(round(mean_prop,3),3),
+                                                                                  "")
+                                                                   )
+                                                      )
   }
   
   return(comp_barplot)
@@ -62,8 +72,7 @@ plot_composition_bar <- function(prop_long,
   
   prop_long <- prop_long %>%
     dplyr::mutate(ALL = "ALL", sample = !!as.symbol(sample_col)) %>%
-    dplyr::rename(cell_type = ct_col, prop = prop_col, x_cat = x_col) %>%
-    dplyr::select(sample, x_cat, cell_type, prop)
+    dplyr::rename(cell_type = ct_col, prop = prop_col, x_cat = x_col) 
   
   n_sample <- prop_long %>%
     dplyr::group_by(x_cat) %>%

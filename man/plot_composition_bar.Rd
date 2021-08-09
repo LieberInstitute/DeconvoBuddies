@@ -10,7 +10,8 @@ plot_composition_bar(
   x_col = "ALL",
   prop_col = "prop",
   ct_col = "cell_type",
-  add_text = TRUE
+  add_text = TRUE,
+  min_prop_text = 0
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ plot_composition_bar(
 \item{ct_col}{name of column containing cell type names}
 
 \item{add_text}{Add rounded proportion value to bars}
+
+\item{min_prop_text}{Minimum proportion to display text}
 }
 \value{
 stacked barplot representing mean proportion of cell types for each group
@@ -39,9 +42,12 @@ as.data.frame()
 est_prop_long <- est_prop \%>\% 
 tibble::rownames_to_column("RNum") \%>\%
 tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to ="prop") \%>\%
-dplyr::left_join(pd \%>\% select(RNum, Dx))
+dplyr::left_join(pd \%>\% select(RNum, Dx)) \%>\%
+mutate(a = "a")
 
+.get_cat_prop(est_prop_long)
 plot_composition_bar(est_prop_long)
 plot_composition_bar(est_prop_long, x_col = "Dx")
+plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE)
 }
