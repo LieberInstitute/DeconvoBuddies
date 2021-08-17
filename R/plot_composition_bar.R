@@ -36,6 +36,8 @@ plot_composition_bar <- function(prop_long,
     ct_col = "cell_type",
     add_text = TRUE,
     min_prop_text = 0) {
+    
+    x_cat <- cell_type <- anno_y <- NULL
 
     # ct_col <- dplyr::enquo(ct_col)
     mean_prop <- .get_cat_prop(prop_long, sample_col, x_col, prop_col, ct_col) %>%
@@ -70,7 +72,7 @@ plot_composition_bar <- function(prop_long,
     x_col = "ALL",
     prop_col = "prop",
     ct_col = "cell_type") {
-    cell_type <- prop <- mean_prop <- x_cat <- anno_y <- NULL
+    cell_type <- prop <- mean_prop <- x_cat <- anno_y <- sum_prop <- n  <- NULL
 
     prop_long <- prop_long %>%
         dplyr::mutate(ALL = "ALL", sample = !!as.symbol(sample_col)) %>%
