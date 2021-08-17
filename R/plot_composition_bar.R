@@ -19,7 +19,7 @@
 #' est_prop_long <- est_prop %>%
 #'     tibble::rownames_to_column("RNum") %>%
 #'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
-#'     dplyr::left_join(pd %>% select(RNum, Dx)) %>%
+#'     dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
 #'     dplyr::mutate(a = "a")
 #'
 #' .get_cat_prop(est_prop_long)
