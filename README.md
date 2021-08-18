@@ -78,10 +78,42 @@ cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", s
 
 <img src="man/figures/README-establish_colors-1.png" width="100%" />
 
+### Plot Expression of Marker Genes
+
     #> Scale for 'colour' is already present. Adding another scale for 'colour',
     #> which will replace the existing scale.
 
 <img src="man/figures/README-plot_marker_expression-1.png" width="100%" />
+
+### Create Composition Bar Plot
+
+``` r
+pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
+     as.data.frame()
+
+ est_prop_long <- est_prop %>%
+     tibble::rownames_to_column("RNum") %>%
+     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
+     dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
+     dplyr::mutate(a = "a")
+#> Joining, by = "RNum"
+
+ plot_composition_bar(est_prop_long)
+```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+
+``` r
+ plot_composition_bar(est_prop_long, x_col = "Dx")
+```
+
+<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
+
+``` r
+ plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
+```
+
+<img src="man/figures/README-unnamed-chunk-2-3.png" width="100%" />
 
 ## Citation
 
