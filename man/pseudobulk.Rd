@@ -4,7 +4,12 @@
 \alias{pseudobulk}
 \title{Pseudobulks sce data over donor x cell type}
 \usage{
-pseudobulk(sce, cell_group_cols = c("donor", "cellType"), add_symbol = FALSE)
+pseudobulk(
+  sce,
+  cell_group_cols = c("donor", "cellType"),
+  add_symbol = FALSE,
+  just_counts = FALSE
+)
 }
 \arguments{
 \item{sce}{Single cell experiment object}
@@ -12,20 +17,22 @@ pseudobulk(sce, cell_group_cols = c("donor", "cellType"), add_symbol = FALSE)
 \item{cell_group_cols}{list of column names that create pseudobulk groups}
 
 \item{add_symbol}{Use Symbol from rowData as rownames}
+
+\item{just_counts}{Whether to return just the counts matrix or a SummarizedExperiment object (Default)}
 }
 \value{
-Matrix of pseudobukled logcounts
+Matrix of pseudobukled logcounts or SummarizedExperiment
 }
 \description{
 Pseudobulks sce data over donor x cell type
 }
 \examples{
-pb_ab <- pseudobulk(sce_ab)
+pb_ab <- pseudobulk(sce_ab, just_counts = FALSE)
 head(pb_ab)
 
 pb_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType", "donor", "region"))
 head(pb_ab_region)
 
 pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
-head(pb_test)
+head(assays(pb_test)$counts)
 }

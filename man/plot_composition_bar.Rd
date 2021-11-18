@@ -45,7 +45,6 @@ est_prop_long <- est_prop \%>\%
     dplyr::left_join(pd \%>\% dplyr::select(RNum, Dx)) \%>\%
     dplyr::mutate(a = "a")
 
-.get_cat_prop(est_prop_long)
 plot_composition_bar(est_prop_long)
 plot_composition_bar(est_prop_long, x_col = "Dx")
 plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)

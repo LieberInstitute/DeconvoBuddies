@@ -80,8 +80,12 @@ cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", s
 
 ### Plot Expression of Marker Genes
 
-    #> Scale for 'colour' is already present. Adding another scale for 'colour',
-    #> which will replace the existing scale.
+``` r
+plot_marker_express(sce.test, marker_stats, "Astro",n_genes = 5,rank_col = "rank_ratio", anno_col = "anno_ratio") +
+    scale_color_manual(values = cell_colors)
+#> Scale for 'colour' is already present. Adding another scale for 'colour',
+#> which will replace the existing scale.
+```
 
 <img src="man/figures/README-plot_marker_expression-1.png" width="100%" />
 
@@ -101,19 +105,40 @@ pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
  plot_composition_bar(est_prop_long)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-composition_bar_plot-1.png" width="100%" />
 
 ``` r
  plot_composition_bar(est_prop_long, x_col = "Dx")
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
+<img src="man/figures/README-composition_bar_plot-2.png" width="100%" />
 
 ``` r
  plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-3.png" width="100%" />
+<img src="man/figures/README-composition_bar_plot-3.png" width="100%" />
+
+### Pseudobulk sce data
+
+Pseudobulk sce data across specific groups
+
+``` r
+dim(sce.test)
+#> [1] 1000  500
+pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
+#> Unique Groups: 12
+pb_test
+#> class: SummarizedExperiment 
+#> dim: 1000 12 
+#> metadata(0):
+#> assays(1): counts
+#> rownames(1000): ENSG00000237491 ENSG00000225880 ... ENSG00000184260
+#>   ENSG00000184270
+#> rowData names(3): gene_id bp_length Symbol
+#> colnames(12): Br5161_OPC Br5161_Oligo ... Br5161_Excit Br5212_Oligo
+#> colData names(2): donor cellType.Broad
+```
 
 ## Citation
 
