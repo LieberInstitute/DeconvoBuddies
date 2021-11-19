@@ -6,5 +6,5 @@ test_that("Correct Dim", {
 })
 
 test_that("rowMedians are Zero", {
-    expect_equal(sum(Biobase::rowMedians(pb_ab)), 0)
+    expect_equal(sum(matrixStats::rowMedians(pb_ab)), 0)
 })
