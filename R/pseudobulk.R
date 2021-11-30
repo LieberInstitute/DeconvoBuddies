@@ -9,17 +9,21 @@
 #' @export
 #'
 #' @examples
-#' pb_ab <- pseudobulk(sce_ab, just_counts = FALSE)
-#' head(pb_ab)
-#'
-#' pb_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType", "donor", "region"))
-#' head(pb_ab_region)
-#'
-#' pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
-#' head(pb_test)
+#' ## Default, pseudobulk by cellType and donor
+#' pb_label_ab <- pseudobulk(sce_ab, just_counts = FALSE)
+#' head(pb_label_ab)
 #' 
-#' pb_test_counts <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), just_counts = TRUE)
-#' head(pb_test_counts)
+#' ## Psuedobulk by user defined columns
+#' pb_label_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType", "donor", "region"))
+#' head(pb_label_ab_region)
+#'
+#' ## Use the Gene Symbol as the rownames
+#' pb_label_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), add_symbol = TRUE)
+#' head(pb_label_test)
+#' 
+#' ## Only output the count matrix 
+#' pb_label_test_counts <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), just_counts = TRUE)
+#' head(pb_label_test_counts)
 #' 
 #' @importFrom rafalib splitit
 #' @importFrom SummarizedExperiment SummarizedExperiment colData assays rowData
@@ -29,38 +33,44 @@ pseudobulk <- function(sce, cell_group_cols = c("donor", "cellType"), add_symbol
     stopifnot(all(cell_group_cols %in% colnames(SummarizedExperiment::colData(sce))))
 
     ## create pd label col
-    pb <- sce[[cell_group_cols[[1]]]]
+    pb_label <- sce[[cell_group_cols[[1]]]]
     for (c in cell_group_cols[-1]) {
-        pb <- paste0(pb, "_", sce[[c]])
+        pb_label <- paste0(pb_label, "_", sce[[c]])
     }
-    message("Unique Groups: ", length(unique(pb)))
-    sce$pb <- pb
+    message("Unique Groups: ", length(unique(pb_label)))
+    sce$pb_label <- pb_label
     
     ## create phenotype data
     pd <- colData(sce)[, cell_group_cols]
     pd <- unique(pd)
-    rownames(pd) <- unique(pb)
+    rownames(pd) <- unique(pb_label)
 
-    clusIndex <- suppressWarnings(rafalib::splitit(sce$pb))
+    clusIndex <- suppressWarnings(rafalib::splitit(sce$pb_label))
 
-    pbcounts <- vapply(clusIndex, function(ii) {
+    pb_labelcounts <- vapply(clusIndex, function(ii) {
         rowSums(
             as.matrix(SummarizedExperiment::assays(sce)$counts[, ii, drop = FALSE])
         )
     }, double(nrow(sce)))
 
-    # Compute LSFs at this level
-    # sizeFactors.PB.all <- scuttle::librarySizeFactors(pbcounts)
-    sizeFactors.PB.all <- colSums(pbcounts)
-    sizeFactors.PB.all <- sizeFactors.PB.all / mean(sizeFactors.PB.all)
+    # Compute Library Size Factors at this level
+    sizeFactors.pb_label.all <- colSums(pb_labelcounts)
+    sizeFactors.pb_label.all <- sizeFactors.pb_label.all / mean(sizeFactors.pb_label.all)
+    
     # Normalize with these LSFs
-    geneExprs.temp <- t(apply(pbcounts, 1, function(x) {
-        log2(x / sizeFactors.PB.all + 1)
+    geneExprs.temp <- t(apply(pb_labelcounts, 1, function(x) {
+        log2(x / sizeFactors.pb_label.all + 1)
     }))
-
+    
     if (add_symbol) {
-        rownames(geneExprs.temp) <- rowData(sce)$Symbol
+        stopifnot("Symbol" %in% colnames(SummarizedExperiment::rowData(sce)))
+        message("Using Symbol as rownames")
+        rownames(sce) <- SummarizedExperiment::rowData(sce)$Symbol
     }
+    
+    ## match col and row names
+    colnames(geneExprs.temp) <- rownames(pd)
+    rownames(geneExprs.temp) <- rownames(sce)
     
     if(just_counts){
         return(geneExprs.temp)
