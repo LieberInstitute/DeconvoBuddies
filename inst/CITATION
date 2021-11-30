@@ -7,23 +7,20 @@ pkgVer <- function(pkg) {
 c(
 
     bibentry(bibtype="manual",
-        title = "",
+        title = "DeconvoBuddies: a R/Bioconductor package with deconvolution helper functions",
         author = personList(
-            as.person("LieberInstitute")
+            as.person("Louise A. Huuki-Myers"),
+            as.person("Kristen R. Maynard"),
+            as.person("Stephanie C. Hicks"),
+            as.person("Peter Zandi"),
+            as.person("Jole E. Kleinman"),
+            as.person("Tom M. Hyde"),
+            as.person("Fernando S. Goes"),
+            as.person("Leonardo Collado-Torres")
         ),
         year = format(Sys.Date(), "%Y"),
         url = "http://www.bioconductor.org/packages/DeconvoBuddies",
         note = pkgVer('DeconvoBuddies'),
         doi = '10.18129/B9.bioc.DeconvoBuddies'
-    ),
-    bibentry(bibtype="article",
-        title = "",
-        author = personList(
-            as.person("LieberInstitute")
-        ),
-        year = format(Sys.Date(), "%Y"),
-        journal = "bioRxiv",
-        doi = "10.1101/TODO",
-        url = "https://www.biorxiv.org/content/10.1101/TODO"
     )
 )
