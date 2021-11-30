@@ -1,11 +1,11 @@
-#' Create a Cell Color Pallet for Deconvolution
+#' Create a Cell Color Pallet for Plots
 #'
 #' @param cell_types list of cell types
 #' @param pallet Choice of base pallet "classic", "gg", or "tableau"
 #' @param split delineating character in cell names
 #' @param preview plot preview of colors
 #'
-#' @return named list of hex color values
+#' @return named vector of hex color values compatable with `ggplot2:scale_color_manual()`
 #' @export
 #'
 #' @examples

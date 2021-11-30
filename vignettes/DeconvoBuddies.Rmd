@@ -1,10 +1,10 @@
 ---
 title: "Introduction to DeconvoBuddies"
 author: 
-  - name: Your name
+  - name: Louise Huuki-Myers
     affiliation:
-    - Your institution
-    email: your.email@somewhere.com
+    - &libd Lieber Institute for Brain Development, Johns Hopkins Medical Campus
+    email: lahuuki@gmail.com
 output: 
   BiocStyle::html_document:
     self_contained: yes
@@ -68,7 +68,7 @@ BiocManager::valid()
 
 ## Required knowledge
 
-`r Biocpkg("DeconvoBuddies")` is based on many other packages and in particular in those that have implemented the infrastructure needed for dealing with RNA-seq data (EDIT!). That is, packages like `r Biocpkg("SummarizedExperiment")` (EDIT!).
+`r Biocpkg("DeconvoBuddies")` is based on many other packages and in particular in those that have implemented the infrastructure needed for dealing with snRNA-seq data. That is, packages like `r Biocpkg("SingleCellExperiment")`.
 
 If you are asking yourself the question "Where do I start using Bioconductor?" you might be interested in [this blog post](http://lcolladotor.github.io/2014/10/16/startbioc/#.VkOKbq6rRuU).
 
@@ -85,18 +85,95 @@ We hope that `r Biocpkg("DeconvoBuddies")` will be useful for your research. Ple
 citation("DeconvoBuddies")
 ```
 
-# Quick start to using to `DeconvoBuddies`
+# Quick start to using `DeconvoBuddies`
 
 ```{r "start", message=FALSE}
 library("DeconvoBuddies")
+library("SummarizedExperiment")
+library("tidyverse")
+```
+## Marker Finding  
+### Using MeanRatio to Find Cell Type Markers
+Accurate deconvolution requires highly specific marker genes for each cell type
+to be defined. To select genes specific for each cell type, you can evaluate the
+`mean ratio` for each gene x each cell type, where `mean ratio = mean(Expression 
+of target cell type)/mean(Expression of highest non-target cell type)`. These
+values can be calculated for a single cell RNA-seq dataset using `get_mean_ratio2()`.
+
+```{r `get_mean_ratio2 demo`}
+my_mean_ratios <- get_mean_ratio2(sce.test, cellType_col = "cellType")
+my_mean_ratios 
+```
+## Pseudobulk
+Pseudobulking cells in to samples based on groups from colData
+```{r `pseudobulk demo`}
+pb_label_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), add_symbol = TRUE)
+head(pb_label_test)
 ```
 
-Edit this as you see fit =)
 
-Here is an example of you can cite your package inside the vignette:
+## Plotting Tools  
+### Creating A Cell Type Color Pallet
+As you work with single-cell data and deconovoltion outputs, it is very useful
+to establish a consistent color pallet to use across different plots. The
+function `create_cell_colors()` returns a named vector of hex values, 
+corresponding to the names of cell types. This list is compatible with functions 
+like `ggplot2::scale_color_manual()`.
 
-* `r Biocpkg("DeconvoBuddies")` `r Citep(bib[["DeconvoBuddies"]])`
+There are three pallets to choose from to generate colors:  
+  * "classic" (default): Set1 from `RColorBrewer` - max 9 colors  
+  * "gg": Equi-distant hues, same process for selecting colors as `ggplot` - no maximum number  
+  * "tableau": tableau20 color set (TODO cite this) - max 20 colors  
 
+```{r `create_cell_colors demo 1`}
+test_cell_types = c("cell_A", "cell_B", "cell_C", "cell_D", "cell_E")
+
+test_cell_colors_classic <- create_cell_colors(cell_types = test_cell_types, pallet = "classic", preview = TRUE)
+test_cell_colors_gg <- create_cell_colors(cell_types = test_cell_types, pallet = "gg", preview = TRUE)
+test_cell_colors_tableau <- create_cell_colors(cell_types = test_cell_types, pallet = "tableau", preview = TRUE)
+
+test_cell_colors_tableau
+```
+If there are sub-cell types with consistent delimiters, the `split` argument
+creates a scale of related colors. This helps expand on the maximum number of
+colors and makes your pallet flexible when considering different 'resolutions' of
+cell types. 
+```{r create_cell_colors demo 2`}
+my_cell_types <- levels(sce.test$cellType)
+my_cell_colors <- create_cell_colors(cell_types = my_cell_types, pallet = "classic", preview = TRUE, split = "\\.")
+```
+
+### Plot Expression of Top Markers
+The function `plot_marker_express()` helps quickly visualize expression of top
+marker genes, by ordering and annotating violin plots of expression over cell type.
+```{r `plot_marker_expression demo`}
+plot_marker_express(sce = sce.test,
+                    stats = my_mean_ratios,
+                    cell_type = "Astro",
+                    n_genes = 5,
+                    rank_col = "rank_ratio",
+                    anno_col = "anno_ratio") +
+  ggplot2::scale_color_manual(values = my_cell_colors)
+```
+
+### Plot Composition Bar Plot
+Visualize deconvolution results with a stacked barplot showing the average cell
+type proportion for a group. 
+```{r}
+pd <- colData(rse_bulk_test) %>%
+     as.data.frame()
+
+## need to pivot data to long format
+est_prop_long <- est_prop %>%
+     rownames_to_column("RNum") %>%
+     pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
+     left_join(pd %>% dplyr::select(RNum, Dx))
+
+est_prop_long
+
+plot_composition_bar(est_prop_long, x_col = "Dx")+
+  ggplot2::scale_fill_manual(values = test_cell_colors_classic)
+```
 
 
 # Reproducibility
