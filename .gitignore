@@ -34,3 +34,5 @@ vignettes/*.pdf
 /Data/sce.test.Rdata
 inst/doc
 
+/doc/
+/Meta/
