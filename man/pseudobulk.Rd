@@ -34,5 +34,9 @@ pb_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType", "donor", "reg
 head(pb_ab_region)
 
 pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
-head(assays(pb_test)$counts)
+head(pb_test)
+
+pb_test_counts <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), just_counts = TRUE)
+head(pb_test_counts)
+
 }
