@@ -33,4 +33,4 @@ vignettes/*.pdf
 # Orignal Data files
 /Data/sce.test.Rdata
 inst/doc
-inst
+
