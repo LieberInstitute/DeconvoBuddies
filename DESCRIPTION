@@ -42,7 +42,8 @@ Suggests:
     tidyr,
     BiocStyle,
     RefManageR,
-    sessioninfo
+    sessioninfo,
+    tidyverse
 Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
