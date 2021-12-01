@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_cell_colors.R
 \name{create_cell_colors}
 \alias{create_cell_colors}
-\title{Create a Cell Color Pallet for Deconvolution}
+\title{Create a Cell Color Pallet for Plots}
 \usage{
 create_cell_colors(
   cell_types = c("Astro", "Micro", "Oligo", "OPC", "Inhib", "Excit"),
@@ -21,10 +21,10 @@ create_cell_colors(
 \item{preview}{plot preview of colors}
 }
 \value{
-named list of hex color values
+named vector of hex color values compatable with \code{ggplot2:scale_color_manual()}
 }
 \description{
-Create a Cell Color Pallet for Deconvolution
+Create a Cell Color Pallet for Plots
 }
 \examples{
 create_cell_colors(pallet = "classic")

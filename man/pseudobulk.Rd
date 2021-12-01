@@ -27,16 +27,20 @@ Matrix of pseudobukled logcounts or SummarizedExperiment
 Pseudobulks sce data over donor x cell type
 }
 \examples{
-pb_ab <- pseudobulk(sce_ab, just_counts = FALSE)
-head(pb_ab)
+## Default, pseudobulk by cellType and donor
+pb_label_ab <- pseudobulk(sce_ab, just_counts = FALSE)
+head(pb_label_ab)
 
-pb_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType", "donor", "region"))
-head(pb_ab_region)
+## Psuedobulk by user defined columns
+pb_label_ab_region <- pseudobulk(sce_ab, cell_group_cols = c("cellType", "donor", "region"))
+head(pb_label_ab_region)
 
-pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
-head(pb_test)
+## Use the Gene Symbol as the rownames
+pb_label_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), add_symbol = TRUE)
+head(pb_label_test)
 
-pb_test_counts <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), just_counts = TRUE)
-head(pb_test_counts)
+## Only output the count matrix 
+pb_label_test_counts <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), just_counts = TRUE)
+head(pb_label_test_counts)
 
 }
