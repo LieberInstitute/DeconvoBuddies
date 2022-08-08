@@ -14,9 +14,10 @@
 #'
 #' @examples
 #' plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro", n_genes = 5, rank_col = "rank_ratio", anno_col = "anno_ratio")
+#' plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro", n_genes = 5, rank_col = "rank_ratio", anno_col = "anno_ratio", plot_points = TRUE)
 #' @importFrom magrittr %>%
-#' @importFrom ggplot2 geom_text
-plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_col, cellType_col = "cellType") {
+#' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
+plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_col, cellType_col = "cellType", color_pal = NULL, plot_points = FALSE) {
     # RCMD fix
     rank_int <- Symbol <- anno_str <- cellType.target <- NULL
 
@@ -36,26 +37,109 @@ plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_c
     marker_sce <- sce[cell_stats$gene, ]
     rownames(marker_sce) <- cell_stats$Feature
 
-    pe <- suppressWarnings(scater::plotExpression(marker_sce,
-        exprs_values = "logcounts",
-        features = cell_stats$Feature,
-        x = cellType_col,
-        colour_by = cellType_col,
-        point_alpha = 0.5,
-        point_size = 0.2,
-        ncol = 5,
-        add_legend = F
-    )) +
-        ggplot2::stat_summary(
-            fun = mean, fun.min = mean, fun.max = mean,
-            geom = "crossbar", width = 0.3
-        ) +
-        ggplot2::geom_text(
-            data = cell_stats, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
-            vjust = "inward", hjust = "inward", size = 2.5
-        ) +
-        ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +
-        ggplot2::ggtitle(label = title)
+    ## Use scatter code
+    # pe <- suppressWarnings(scater::plotExpression(marker_sce,
+    #     exprs_values = "logcounts",
+    #     features = cell_stats$Feature,
+    #     x = cellType_col,
+    #     colour_by = cellType_col,
+    #     point_alpha = 0.5,
+    #     point_size = 0.2,
+    #     ncol = 5,
+    #     add_legend = F
+    # )) +
+    #     ggplot2::stat_summary(
+    #         fun = mean, fun.min = mean, fun.max = mean,
+    #         geom = "crossbar", width = 0.3
+    # #     ) +
+    #     ggplot2::geom_text(
+    #         data = cell_stats, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
+    #         vjust = "inward", hjust = "inward", size = 2.5
+    #     ) +
+    #     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1)) +
+    #     ggplot2::ggtitle(label = title)
+    
+    if(plot_points) {
+      pe <- my_plotExpression_points(sce = marker_sce,
+                              genes = cell_stats$Feature,
+                              cat = cellType_col,
+                              color_pal = color_pal,
+                              title = title)
+      
+      
+      return(pe)
+    }
+    pe <- my_plotExpression_fill(sce = marker_sce,
+                            genes = cell_stats$Feature,
+                            cat = cellType_col,
+                            color_pal = color_pal,
+                            title = title)
+    
 
     return(pe)
 }
+
+my_plotExpression_fill <- function(sce, genes, assay = "logcounts", cat = "cellType", color_pal = NULL, title = NULL){
+  
+  cat_df <- as.data.frame(colData(sce))[,cat, drop = FALSE]
+  expression_long <- reshape2::melt(as.matrix(assays(sce)[[assay]][genes,])) 
+  
+  cat <- cat_df[expression_long$Var2,]
+  expression_long <- cbind(expression_long, cat)
+  
+  expression_violin <- ggplot(data = expression_long, aes(x = cat, y = value, fill = cat)) +
+    ggplot2::geom_violin(scale = "width") +
+    ggplot2::facet_wrap(~Var1, ncol = 2)+
+    ggplot2::labs(y = paste0("Expression (", assay,")"),
+         title = title) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(legend.position = "None",axis.title.x=ggplot2::element_blank(),
+          axis.text.x=ggplot2::element_text(angle=90,hjust=1),
+          strip.text.x = ggplot2::element_text(face = "italic")) +
+    ggplot2::stat_summary(fun = median, 
+                 geom = "crossbar", 
+                 width = 0.3) +
+    ggplot2::geom_text(
+      data = cell_stats, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
+      vjust = "inward", hjust = "inward", size = 2.5)
+  
+  if(!is.null(color_pal)) expression_violin <- expression_violin + scale_fill_manual(values = color_pal)
+  
+  # expression_violin
+  return(expression_violin)
+  
+}
+
+my_plotExpression_points <- function(sce, genes, assay = "logcounts", cat = "cellType", color_pal = NULL, title = NULL){
+  
+  cat_df <- as.data.frame(colData(sce))[,cat, drop = FALSE]
+  expression_long <- reshape2::melt(as.matrix(assays(sce)[[assay]][genes,])) 
+  
+  cat <- cat_df[expression_long$Var2,]
+  expression_long <- cbind(expression_long, cat)
+  
+  expression_violin <- ggplot(data = expression_long, aes(x = cat, y = value)) +
+    ggplot2::geom_violin(scale = "width") +
+    ggplot2::geom_jitter(aes(color = cat), position = ggplot2::position_jitter(seed = 1, width = 0.2), size = .5) +
+    ggplot2::facet_wrap(~Var1, ncol = 2)+
+    ggplot2::labs(y = paste0("Expression (", assay,")"),
+                  title = title) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(legend.position = "None",axis.title.x=ggplot2::element_blank(),
+                   axis.text.x=ggplot2::element_text(angle=90,hjust=1),
+                   strip.text.x = ggplot2::element_text(face = "italic")) +
+    ggplot2::stat_summary(fun = median, 
+                          geom = "crossbar", 
+                          width = 0.3) +
+    ggplot2::geom_text(
+      data = cell_stats, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
+      vjust = "inward", hjust = "inward", size = 2.5)
+  
+  if(!is.null(color_pal)) expression_violin <- expression_violin + scale_fill_manual(values = color_pal)
+  
+  # expression_violin
+  return(expression_violin)
+  
+}
+
+
