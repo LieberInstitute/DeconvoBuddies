@@ -6,6 +6,7 @@
 #' @param assay_name Name of the assay to use for calculation
 #' @param cellType_col Column name on colData of the sce that denotes the celltype
 #' @param add_symbol Add the gene symbol column to the marker stats table
+#' @param mod String specifying the model used as design in findMarkers
 #'
 #' @return Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
 #' @export
@@ -13,11 +14,12 @@
 #' @examples
 #' markers_1vAll <- findMarkers_1vAll(sce.test)
 #' head(markers_1vAll)
+#' 
 #' @importFrom purrr map
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
 #' @importFrom tibble rownames_to_column as_tibble add_column
-findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellType", add_symbol = FALSE) {
+findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellType", add_symbol = FALSE, mod="~donor") {
     # RCMD Fix
     gene <- rank_marker <- cellType.target <- std.logFC <- rowData <- Symbol <- NULL
 
@@ -28,7 +30,7 @@ findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellTy
     pd <- as.data.frame(SummarizedExperiment::colData(sce))
     # message("donor" %in% colnames(pd))
 
-    mod <- with(pd, stats::model.matrix(~donor))
+    mod <- with(pd, stats::model.matrix(as.formula(mod)))
     mod <- mod[, -1, drop = F] # intercept otherwise automatically dropped by `findMarkers()`
 
     markers.t.1vAll <- map(cell_types, function(x) {
