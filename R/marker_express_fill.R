@@ -1,0 +1,54 @@
+
+
+#' Plot the gene expression of a list of genes in a SCE object 
+#'
+#' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
+#' @param genes  A `list()` of `character(1)` specifying the names of genes to plot, 
+#' @param assay A `character(1)` specifying the name of the
+#' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
+#' `sce` object to use to rank expression values. Defaults to `logcounts` since
+#' it typically contains the normalized expression values.
+#' 
+#' @param cat  A `character(1)` specifying the name of the categorical variable 
+#' to group the cells or nuclei by. Defaults to `cellType`.
+#' @param color_pal  A named `character(1)` vector that contains a color pallet matching the `cat` values
+#' @param title A `character(1)` to title the plot 
+#'
+#' @return A `ggplot()` violin plot for selected genes
+#' @export
+#'
+#' @examples
+#' rownames(sce.test) <- rowData(sce.test)$Symbol
+#' gene_express_fill(sce = sce.test, genes = c("MBP","SNAP25"))
+#' gene_express_fill(sce = sce.test, genes = c("RNF220","CSF3R","PRDM16","MORN1"))
+#' gene_express_fill(sce = sce.test, genes = c("RNF220"))
+#' 
+gene_express_fill <- function(sce, genes, assay = "logcounts", cat = "cellType", color_pal = NULL, title = NULL){
+  
+  stopifnot(any(genes %in% rownames(sce)))
+  
+  cat_df <- as.data.frame(colData(sce))[,cat, drop = FALSE]
+  expression_long <- reshape2::melt(as.matrix(assays(sce)[[assay]][genes,,drop=FALSE])) 
+  
+  cat <- cat_df[expression_long$Var2,]
+  expression_long <- cbind(expression_long, cat)
+  
+  expression_violin <- ggplot(data = expression_long, aes(x = cat, y = value, fill = cat)) +
+    ggplot2::geom_violin(scale = "width") +
+    ggplot2::facet_wrap(~Var1, ncol = 2)+
+    ggplot2::labs(y = paste0("Expression (", assay,")"),
+                  title = title) +
+    ggplot2::theme_bw() +
+    ggplot2::theme(legend.position = "None",axis.title.x=ggplot2::element_blank(),
+                   axis.text.x=ggplot2::element_text(angle=90,hjust=1),
+                   strip.text.x = ggplot2::element_text(face = "italic")) +
+    ggplot2::stat_summary(fun = median, 
+                          geom = "crossbar", 
+                          width = 0.3)
+  
+  if(!is.null(color_pal)) expression_violin <- expression_violin + scale_fill_manual(values = color_pal)
+  
+  # expression_violin
+  return(expression_violin)
+  
+}
