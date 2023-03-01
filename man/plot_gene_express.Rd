@@ -10,7 +10,8 @@ plot_gene_express(
   assay = "logcounts",
   cat = "cellType",
   color_pal = NULL,
-  title = NULL
+  title = NULL,
+  points = FALSE
 )
 }
 \arguments{
@@ -26,9 +27,12 @@ it typically contains the normalized expression values.}
 \item{cat}{A \code{character(1)} specifying the name of the categorical variable
 to group the cells or nuclei by. Defaults to \code{cellType}.}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{cat} values}
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{cat} values.}
 
 \item{title}{A \code{character(1)} to title the plot}
+
+\item{points}{A logical indicating whether to plot points over the violin,
+defaults to \code{FALSE} as these often become overplotted and quite large (especially when saved as PDF)}
 }
 \value{
 A \code{ggplot()} violin plot for selected genes
@@ -39,7 +43,10 @@ Plot the gene expression of a list of genes in a SCE object
 \examples{
 ## Using Symbol as rownames makes this more human readable
 rownames(sce.test) <- rowData(sce.test)$Symbol
+plot_gene_express(sce = sce.test, genes = c("F3"))
 plot_gene_express(sce = sce.test, genes = c("RNF220","CSF3R"))
+plot_gene_express(sce = sce.test, genes = c("RNF220","CSF3R"), points = TRUE)
 plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"))
+plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"), title = "Inhib Markers")
 
 }
