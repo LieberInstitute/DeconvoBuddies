@@ -18,14 +18,16 @@
 #' @export
 #'
 #' @examples
+#' ## Using Symbol as rownames makes this more human readable
 #' rownames(sce.test) <- rowData(sce.test)$Symbol
-#' gene_express_fill(sce = sce.test, genes = c("MBP","SNAP25"))
-#' gene_express_fill(sce = sce.test, genes = c("RNF220","CSF3R","PRDM16","MORN1"))
-#' gene_express_fill(sce = sce.test, genes = c("RNF220"))
+#' plot_gene_express(sce = sce.test, genes = c("RNF220","CSF3R"))
+#' plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"))
 #' 
-gene_express_fill <- function(sce, genes, assay = "logcounts", cat = "cellType", color_pal = NULL, title = NULL){
+plot_gene_express <- function(sce, genes, assay = "logcounts", cat = "cellType", color_pal = NULL, title = NULL){
   
   stopifnot(any(genes %in% rownames(sce)))
+  stopifnot(cat %in% colnames(colData(sce)))
+  stopifnot(assay %in% assayNames(sce))
   
   cat_df <- as.data.frame(colData(sce))[,cat, drop = FALSE]
   expression_long <- reshape2::melt(as.matrix(assays(sce)[[assay]][genes,,drop=FALSE])) 
