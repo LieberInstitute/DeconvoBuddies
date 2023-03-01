@@ -11,7 +11,7 @@ plot_gene_express(
   cat = "cellType",
   color_pal = NULL,
   title = NULL,
-  points = FALSE
+  plot_points = FALSE
 )
 }
 \arguments{
@@ -31,7 +31,7 @@ to group the cells or nuclei by. Defaults to \code{cellType}.}
 
 \item{title}{A \code{character(1)} to title the plot}
 
-\item{points}{A logical indicating whether to plot points over the violin,
+\item{plot_points}{A logical indicating whether to plot points over the violin,
 defaults to \code{FALSE} as these often become overplotted and quite large (especially when saved as PDF)}
 }
 \value{

@@ -13,7 +13,7 @@
 #' to group the cells or nuclei by. Defaults to `cellType`.
 #' @param color_pal  A named `character(1)` vector that contains a color pallet matching the `cat` values.
 #' @param title A `character(1)` to title the plot 
-#' @param points A logical indicating whether to plot points over the violin,
+#' @param plot_points A logical indicating whether to plot points over the violin,
 #' defaults to `FALSE` as these often become overplotted and quite large (especially when saved as PDF)
 #'
 #' @return A `ggplot()` violin plot for selected genes
@@ -28,7 +28,7 @@
 #' plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"))
 #' plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"), title = "Inhib Markers")
 #' 
-plot_gene_express <- function(sce, genes, assay = "logcounts", cat = "cellType", color_pal = NULL, title = NULL, points = FALSE){
+plot_gene_express <- function(sce, genes, assay = "logcounts", cat = "cellType", color_pal = NULL, title = NULL, plot_points = FALSE){
   
   stopifnot(any(genes %in% rownames(sce)))
   stopifnot(cat %in% colnames(colData(sce)))
@@ -50,7 +50,7 @@ plot_gene_express <- function(sce, genes, assay = "logcounts", cat = "cellType",
                    axis.text.x=ggplot2::element_text(angle=90,hjust=1),
                    strip.text.x = ggplot2::element_text(face = "italic")) 
   
-  if(points){
+  if(plot_points){
     message("plotting points")
     
     expression_violin <- expression_violin +
