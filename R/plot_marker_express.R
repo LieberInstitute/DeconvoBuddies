@@ -37,7 +37,7 @@ plot_marker_express <- function(sce,
 
     max_digits <- nchar(n_genes)
 
-    cell_stats <- stats %>%
+    stats_filter <- stats %>%
         dplyr::rename(any_of(c(rank_int = rank_col, anno_str = anno_col))) %>%
         dplyr::filter(
             cellType.target == cell_type,
@@ -45,20 +45,20 @@ plot_marker_express <- function(sce,
         ) %>%
         mutate(Feature = paste0(stringr::str_pad(rank_int, max_digits, "left"), ": ", Symbol),
                Var1 = Feature,
-               anno_str = paste0("\n ", anno_str))
+               anno_str = paste0(" ", anno_str))
 
-    marker_sce <- sce[cell_stats$gene, ]
-    rownames(marker_sce) <- cell_stats$Feature
+    marker_sce <- sce[stats_filter$gene, ]
+    rownames(marker_sce) <- stats_filter$Feature
 
  
     pe <- plot_gene_express(sce = marker_sce,
-                            genes = cell_stats$Feature,
+                            genes = stats_filter$Feature,
                             cat = cellType_col,
                             color_pal = color_pal,
                             title = title,
                             plot_points = plot_points) +
           ggplot2::geom_text(
-            data = cell_stats, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
+            data = stats_filter, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
             vjust = "inward", hjust = "inward", size = 2.5)
     
 
