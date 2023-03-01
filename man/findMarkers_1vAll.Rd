@@ -9,7 +9,9 @@ findMarkers_1vAll(
   sce,
   assay_name = "counts",
   cellType_col = "cellType",
-  add_symbol = FALSE
+  add_symbol = FALSE,
+  mod = "~donor",
+  verbose = TRUE
 )
 }
 \arguments{
@@ -20,6 +22,10 @@ findMarkers_1vAll(
 \item{cellType_col}{Column name on colData of the sce that denotes the celltype}
 
 \item{add_symbol}{Add the gene symbol column to the marker stats table}
+
+\item{mod}{String specifying the model used as design in findMarkers}
+
+\item{verbose}{Boolean choosing to print progress messages or not}
 }
 \value{
 Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
@@ -31,4 +37,5 @@ function for scran::findMarkers
 \examples{
 markers_1vAll <- findMarkers_1vAll(sce.test)
 head(markers_1vAll)
+
 }
