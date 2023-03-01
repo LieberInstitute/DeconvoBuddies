@@ -45,6 +45,7 @@ BiocManager::install("lahuuki/DeconvoBuddies")
 library("DeconvoBuddies")
 library("dplyr")
 library("ggplot2")
+library("SingleCellExperiment")
 ```
 
 
@@ -62,11 +63,23 @@ cell_types <- levels(sce.test$cellType)
 cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", split = "\\.", preview = TRUE)
 ```
 
+### Plot Expression of Specified Genes
+```{r plot_gene_expression}
+sce_symbol <- sce.test
+rownames(sce_symbol) <- rowData(sce.test)$Symbol
+plot_gene_express(sce = sce_symbol, genes = c("RNF220","CSF3R"))
+
+```
 
 ### Plot Expression of Marker Genes
 ```{r plot_marker_expression}
-plot_marker_express(sce.test, marker_stats, "Astro",n_genes = 5,rank_col = "rank_ratio", anno_col = "anno_ratio") +
-    scale_color_manual(values = cell_colors)
+plot_marker_express(sce.test, 
+                    marker_stats, 
+                    "Astro",
+                    n_genes = 5,
+                    rank_col = "rank_ratio", 
+                    anno_col = "anno_ratio", 
+                    color_pal = cell_colors) 
 ```
 
 ### Create Composition Bar Plot
