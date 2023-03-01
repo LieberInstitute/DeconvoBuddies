@@ -152,8 +152,8 @@ plot_marker_express(sce = sce.test,
                     cell_type = "Astro",
                     n_genes = 5,
                     rank_col = "rank_ratio",
-                    anno_col = "anno_ratio") +
-  ggplot2::scale_color_manual(values = my_cell_colors)
+                    anno_col = "anno_ratio",
+                    color_pal = my_cell_colors) 
 ```
 
 ### Plot Composition Bar Plot
