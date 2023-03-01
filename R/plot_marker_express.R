@@ -27,7 +27,7 @@ plot_marker_express <- function(sce, stats, cell_type, n_genes, rank_col, anno_c
     max_digits <- nchar(n_genes)
 
     cell_stats <- stats %>%
-        dplyr::rename(rank_int = rank_col, anno_str = anno_col) %>%
+        dplyr::rename(any_of(c(rank_int = rank_col, anno_str = anno_col))) %>%
         dplyr::filter(
             cellType.target == cell_type,
             rank_int <= n_genes
