@@ -1,12 +1,15 @@
 
 #' Order Cell Types Glia, then Neurons, then Ambig/drop
 #'
-#' @param cell_types 
+#' @param cell_types A `list()` of `character(1)` specifying the names of cell types
 #'
-#' @return
+#' @return A reordered `list()` with Glia cell types before neurons 
 #' @export
 #'
 #' @examples
+#' 
+#' order_cell_types(c("Astro", "Excit", "Inhib", "Oligo"))
+#' 
 order_cell_types <- function(cell_types) {
   neun_mask <- grepl("Excit|Inhib", cell_types)
   drop_mask <- grepl("Ambiguous|drop", cell_types)

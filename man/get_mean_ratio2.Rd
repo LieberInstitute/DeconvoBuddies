@@ -12,11 +12,11 @@ get_mean_ratio2(
 )
 }
 \arguments{
-\item{sce}{Single cell experiment object}
+\item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
 
-\item{cellType_col}{Column name on colData of the sce that denotes the celltype}
-
-\item{assay_name}{Name of assay to use for calculation}
+\item{cellType_col}{A \code{character(1)} name of the column in the
+\link[SummarizedExperiment:SummarizedExperiment-class]{colData()} of \code{sce} that
+denotes the cell type or group of interest}
 
 \item{add_symbol}{Add the gene symbol column to the marker stats table}
 }

@@ -1,12 +1,15 @@
 
 #' Get Mean Ratio for Each Gene x Cell Type
 #'
-#' @param sce Single cell experiment object
-#' @param cellType_col Column name on colData of the sce that denotes the celltype
-#' @param assay_name Name of assay to use for calculation
+#' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
+#' @param cellType_col A `character(1)` name of the column in the
+#' [colData()][SummarizedExperiment::SummarizedExperiment-class] of `sce` that
+#' denotes the cell type or group of interest
 #' @param add_symbol Add the gene symbol column to the marker stats table
+#' 
 #' @return Table of mean ratio for each x cell type
 #' @export
+#'
 #'
 #' @examples
 #' get_mean_ratio2(sce.test)

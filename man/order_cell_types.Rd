@@ -7,8 +7,16 @@
 order_cell_types(cell_types)
 }
 \arguments{
-\item{cell_types}{}
+\item{cell_types}{A \code{list()} of \code{character(1)} specifying the names of cell types}
+}
+\value{
+A reordered \code{list()} with Glia cell types before neurons
 }
 \description{
 Order Cell Types Glia, then Neurons, then Ambig/drop
+}
+\examples{
+
+order_cell_types(c("Astro", "Excit", "Inhib", "Oligo"))
+
 }
