@@ -7,7 +7,7 @@
 plot_gene_express(
   sce,
   genes,
-  assay = "logcounts",
+  assay_name = "logcounts",
   cat = "cellType",
   color_pal = NULL,
   title = NULL,
@@ -19,7 +19,7 @@ plot_gene_express(
 
 \item{genes}{A \code{list()} of \code{character(1)} specifying the names of genes to plot,}
 
-\item{assay}{A \code{character(1)} specifying the name of the
+\item{assay_name}{A \code{character(1)} specifying the name of the
 \link[SummarizedExperiment:SummarizedExperiment-class]{assay()} in the
 \code{sce} object to use to rank expression values. Defaults to \code{logcounts} since
 it typically contains the normalized expression values.}
@@ -46,7 +46,7 @@ rownames(sce.test) <- rowData(sce.test)$Symbol
 plot_gene_express(sce = sce.test, genes = c("F3"))
 plot_gene_express(sce = sce.test, genes = c("RNF220","CSF3R"))
 plot_gene_express(sce = sce.test, genes = c("RNF220","CSF3R"), points = TRUE)
-plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"))
-plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"), title = "Inhib Markers")
+plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220","CSF3R"))
+plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220","CSF3R"), title = "Inhib Markers")
 
 }

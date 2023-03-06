@@ -4,7 +4,7 @@
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
 #' @param genes  A `list()` of `character(1)` specifying the names of genes to plot, 
-#' @param assay A `character(1)` specifying the name of the
+#' @param assay_name A `character(1)` specifying the name of the
 #' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
 #' `sce` object to use to rank expression values. Defaults to `logcounts` since
 #' it typically contains the normalized expression values.
@@ -25,17 +25,17 @@
 #' plot_gene_express(sce = sce.test, genes = c("F3"))
 #' plot_gene_express(sce = sce.test, genes = c("RNF220","CSF3R"))
 #' plot_gene_express(sce = sce.test, genes = c("RNF220","CSF3R"), points = TRUE)
-#' plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"))
-#' plot_gene_express(sce = sce.test, assay = "counts", genes = c("RNF220","CSF3R"), title = "Inhib Markers")
+#' plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220","CSF3R"))
+#' plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220","CSF3R"), title = "Inhib Markers")
 #' 
-plot_gene_express <- function(sce, genes, assay = "logcounts", cat = "cellType", color_pal = NULL, title = NULL, plot_points = FALSE){
+plot_gene_express <- function(sce, genes, assay_name = "logcounts", cat = "cellType", color_pal = NULL, title = NULL, plot_points = FALSE){
   
   stopifnot(any(genes %in% rownames(sce)))
   stopifnot(cat %in% colnames(colData(sce)))
-  stopifnot(assay %in% SummarizedExperiment::assayNames(sce))
+  stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
   
   cat_df <- as.data.frame(colData(sce))[,cat, drop = FALSE]
-  expression_long <- reshape2::melt(as.matrix(assays(sce)[[assay]][genes,,drop=FALSE])) 
+  expression_long <- reshape2::melt(as.matrix(assays(sce)[[assay_name]][genes,,drop=FALSE])) 
   
   cat <- cat_df[expression_long$Var2,]
   expression_long <- cbind(expression_long, cat)
@@ -43,7 +43,7 @@ plot_gene_express <- function(sce, genes, assay = "logcounts", cat = "cellType",
   expression_violin <- ggplot(data = expression_long, aes(x = cat, y = value)) +
     # ggplot2::geom_violin(aes(fill = cat), scale = "width") +
     ggplot2::facet_wrap(~Var1, ncol = 2)+
-    ggplot2::labs(y = paste0("Expression (", assay,")"),
+    ggplot2::labs(y = paste0("Expression (", assay_name,")"),
                   title = title) +
     ggplot2::theme_bw() +
     ggplot2::theme(legend.position = "None",axis.title.x=ggplot2::element_blank(),
