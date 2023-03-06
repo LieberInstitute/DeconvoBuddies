@@ -37,7 +37,7 @@ BiocManager::install("DeconvoBuddies")
 And the development version from [GitHub](https://github.com/) with:
 
 ```{r 'install_dev', eval = FALSE}
-BiocManager::install("lahuuki/DeconvoBuddies")
+BiocManager::install("LieberInstitute/DeconvoBuddies")
 ```
 ## Example
 

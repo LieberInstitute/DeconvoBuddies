@@ -30,7 +30,7 @@ BiocManager::install("DeconvoBuddies")
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
-BiocManager::install("lahuuki/DeconvoBuddies")
+BiocManager::install("LieberInstitute/DeconvoBuddies")
 ```
 
 ## Example
@@ -43,7 +43,6 @@ BiocManager::install("lahuuki/DeconvoBuddies")
     #> The following objects are masked from 'package:base':
     #> 
     #>     intersect, setdiff, setequal, union
-    #> Warning: package 'SingleCellExperiment' was built under R version 4.2.1
     #> Loading required package: SummarizedExperiment
     #> Loading required package: MatrixGenerics
     #> Loading required package: matrixStats
@@ -100,14 +99,12 @@ BiocManager::install("lahuuki/DeconvoBuddies")
     #> 
     #>     expand.grid, I, unname
     #> Loading required package: IRanges
-    #> Warning: package 'IRanges' was built under R version 4.2.1
     #> 
     #> Attaching package: 'IRanges'
     #> The following objects are masked from 'package:dplyr':
     #> 
     #>     collapse, desc, slice
     #> Loading required package: GenomeInfoDb
-    #> Warning: package 'GenomeInfoDb' was built under R version 4.2.1
     #> Loading required package: Biobase
     #> Welcome to Bioconductor
     #> 
@@ -128,15 +125,15 @@ Get mean ratios for each gene x cell type
 ``` r
 ratios <- get_mean_ratio2(sce.test)
 fc <- findMarkers_1vAll(sce.test)
-#> Inhib.2 - '2023-03-01 15:15:50
-#> Inhib.1 - '2023-03-01 15:15:50
-#> OPC - '2023-03-01 15:15:50
-#> Astro - '2023-03-01 15:15:50
-#> Excit.2 - '2023-03-01 15:15:51
-#> Oligo - '2023-03-01 15:15:51
-#> Micro - '2023-03-01 15:15:51
-#> Excit.1 - '2023-03-01 15:15:51
-#> Building Table - 2023-03-01 15:15:51
+#> Inhib.2 - '2023-03-06 10:01:24
+#> Inhib.1 - '2023-03-06 10:01:24
+#> OPC - '2023-03-06 10:01:25
+#> Astro - '2023-03-06 10:01:25
+#> Excit.2 - '2023-03-06 10:01:25
+#> Oligo - '2023-03-06 10:01:25
+#> Micro - '2023-03-06 10:01:25
+#> Excit.1 - '2023-03-06 10:01:26
+#> Building Table - 2023-03-06 10:01:26
 #> ** Done! **
 
 (marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
