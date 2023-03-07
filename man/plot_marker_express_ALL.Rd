@@ -44,7 +44,7 @@ The gene expression is plotted as violin plot with \code{plot_gene_express} and 
 annotations to each plot.
 }
 \examples{
-plot_marker_express_ALL(sce.test,  stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
+plot_marker_express_ALL(sce.test, stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
 }
 \seealso{
 Other expression plotting functions: 

@@ -67,35 +67,35 @@ cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", s
 ```{r plot_gene_expression}
 sce_symbol <- sce.test
 rownames(sce_symbol) <- rowData(sce.test)$Symbol
-plot_gene_express(sce = sce_symbol, genes = c("RNF220","CSF3R"))
-
+plot_gene_express(sce = sce_symbol, genes = c("RNF220", "CSF3R"))
 ```
 
 ### Plot Expression of Marker Genes
 ```{r plot_marker_expression}
-plot_marker_express(sce.test, 
-                    marker_stats, 
-                    "Astro",
-                    n_genes = 5,
-                    rank_col = "rank_ratio", 
-                    anno_col = "anno_ratio", 
-                    color_pal = cell_colors) 
+plot_marker_express(sce.test,
+    marker_stats,
+    "Astro",
+    n_genes = 5,
+    rank_col = "rank_ratio",
+    anno_col = "anno_ratio",
+    color_pal = cell_colors
+)
 ```
 
 ### Create Composition Bar Plot
 ```{r composition_bar_plot}
 pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
-     as.data.frame()
+    as.data.frame()
 
- est_prop_long <- est_prop %>%
-     tibble::rownames_to_column("RNum") %>%
-     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
-     dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
-     dplyr::mutate(a = "a")
+est_prop_long <- est_prop %>%
+    tibble::rownames_to_column("RNum") %>%
+    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
+    dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
+    dplyr::mutate(a = "a")
 
- plot_composition_bar(est_prop_long)
- plot_composition_bar(est_prop_long, x_col = "Dx")
- plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
+plot_composition_bar(est_prop_long)
+plot_composition_bar(est_prop_long, x_col = "Dx")
+plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 ```
 
 ### Pseudobulk sce data
@@ -112,7 +112,7 @@ Below is the citation output from using `citation('DeconvoBuddies')` in R. Pleas
 run this yourself to check for any updates on how to cite __DeconvoBuddies__.
 
 ```{r 'citation', eval = requireNamespace('DeconvoBuddies')}
-print(citation('DeconvoBuddies'), bibtex = TRUE)
+print(citation("DeconvoBuddies"), bibtex = TRUE)
 ```
 
 Please note that the `DeconvoBuddies` was only made possible thanks to many other R and bioinformatics software authors, which are cited either in the vignettes and/or the paper(s) describing this package.

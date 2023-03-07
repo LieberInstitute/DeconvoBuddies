@@ -39,7 +39,7 @@ head(pb_label_ab_region)
 pb_label_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), add_symbol = TRUE)
 head(pb_label_test)
 
-## Only output the count matrix 
+## Only output the count matrix
 pb_label_test_counts <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), just_counts = TRUE)
 head(pb_label_test_counts)
 

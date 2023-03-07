@@ -1,4 +1,3 @@
-
 #' Title
 #'
 #' @param n_cell Number of cells

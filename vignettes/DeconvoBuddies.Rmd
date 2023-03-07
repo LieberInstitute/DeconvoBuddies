@@ -57,8 +57,8 @@ bib <- c(
 
 ```{r "install", eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-  }
+    install.packages("BiocManager")
+}
 
 BiocManager::install("DeconvoBuddies")
 
@@ -102,7 +102,7 @@ values can be calculated for a single cell RNA-seq dataset using `get_mean_ratio
 
 ```{r `get_mean_ratio2 demo`}
 my_mean_ratios <- get_mean_ratio2(sce.test, cellType_col = "cellType")
-my_mean_ratios 
+my_mean_ratios
 ```
 ## Pseudobulk
 Pseudobulking cells in to samples based on groups from colData
@@ -126,7 +126,7 @@ There are three pallets to choose from to generate colors:
   * "tableau": tableau20 color set (TODO cite this) - max 20 colors  
 
 ```{r `create_cell_colors demo 1`}
-test_cell_types = c("cell_A", "cell_B", "cell_C", "cell_D", "cell_E")
+test_cell_types <- c("cell_A", "cell_B", "cell_C", "cell_D", "cell_E")
 
 test_cell_colors_classic <- create_cell_colors(cell_types = test_cell_types, pallet = "classic", preview = TRUE)
 test_cell_colors_gg <- create_cell_colors(cell_types = test_cell_types, pallet = "gg", preview = TRUE)
@@ -147,13 +147,15 @@ my_cell_colors <- create_cell_colors(cell_types = my_cell_types, pallet = "class
 The function `plot_marker_express()` helps quickly visualize expression of top
 marker genes, by ordering and annotating violin plots of expression over cell type.
 ```{r `plot_marker_expression demo`}
-plot_marker_express(sce = sce.test,
-                    stats = my_mean_ratios,
-                    cell_type = "Astro",
-                    n_genes = 5,
-                    rank_col = "rank_ratio",
-                    anno_col = "anno_ratio",
-                    color_pal = my_cell_colors) 
+plot_marker_express(
+    sce = sce.test,
+    stats = my_mean_ratios,
+    cell_type = "Astro",
+    n_genes = 5,
+    rank_col = "rank_ratio",
+    anno_col = "anno_ratio",
+    color_pal = my_cell_colors
+)
 ```
 
 ### Plot Composition Bar Plot
@@ -161,18 +163,18 @@ Visualize deconvolution results with a stacked barplot showing the average cell
 type proportion for a group. 
 ```{r}
 pd <- colData(rse_bulk_test) %>%
-     as.data.frame()
+    as.data.frame()
 
 ## need to pivot data to long format
 est_prop_long <- est_prop %>%
-     rownames_to_column("RNum") %>%
-     pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
-     left_join(pd %>% dplyr::select(RNum, Dx))
+    rownames_to_column("RNum") %>%
+    pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
+    left_join(pd %>% dplyr::select(RNum, Dx))
 
 est_prop_long
 
-plot_composition_bar(est_prop_long, x_col = "Dx")+
-  ggplot2::scale_fill_manual(values = test_cell_colors_classic)
+plot_composition_bar(est_prop_long, x_col = "Dx") +
+    ggplot2::scale_fill_manual(values = test_cell_colors_classic)
 ```
 
 

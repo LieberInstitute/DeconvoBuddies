@@ -1,9 +1,8 @@
-
 #' Plot gene expression violin plots for top marker genes for one cell type
-#' 
+#'
 #' This function plots the top n marker genes for a specified cell type based off of
 #' the `stats` table from `get_mean_ratio2()`.
-#' The gene expression is plotted as violin plot with `plot_gene_express` and adds 
+#' The gene expression is plotted as violin plot with `plot_gene_express` and adds
 #' annotations to each plot.
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
@@ -26,20 +25,19 @@
 #' @family expression plotting functions
 #' @importFrom magrittr %>%
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
-plot_marker_express <- function(sce, 
-                                stats, 
-                                cell_type, 
-                                n_genes = 4, 
-                                rank_col = "rank_ratio", 
-                                anno_col = "anno_ratio", 
-                                cellType_col = "cellType", 
-                                color_pal = NULL, 
-                                plot_points = FALSE) {
-  
+plot_marker_express <- function(sce,
+    stats,
+    cell_type,
+    n_genes = 4,
+    rank_col = "rank_ratio",
+    anno_col = "anno_ratio",
+    cellType_col = "cellType",
+    color_pal = NULL,
+    plot_points = FALSE) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
     stopifnot(cell_type %in% sce[[cellType_col]])
     stopifnot(cell_type %in% stats$cellType.target)
-  
+
     # RCMD fix
     rank_int <- Symbol <- anno_str <- cellType.target <- NULL
 
@@ -54,24 +52,29 @@ plot_marker_express <- function(sce,
             cellType.target == cell_type,
             rank_int <= n_genes
         ) %>%
-        mutate(Feature = paste0(stringr::str_pad(rank_int, max_digits, "left"), ": ", Symbol),
-               Var1 = Feature,
-               anno_str = paste0("\n ", anno_str))
+        mutate(
+            Feature = paste0(stringr::str_pad(rank_int, max_digits, "left"), ": ", Symbol),
+            Var1 = Feature,
+            anno_str = paste0("\n ", anno_str)
+        )
 
     marker_sce <- sce[stats_filter$gene, ]
     rownames(marker_sce) <- stats_filter$Feature
 
- 
-    pe <- plot_gene_express(sce = marker_sce,
-                            genes = stats_filter$Feature,
-                            cat = cellType_col,
-                            color_pal = color_pal,
-                            title = title,
-                            plot_points = plot_points) +
-          ggplot2::geom_text(
+
+    pe <- plot_gene_express(
+        sce = marker_sce,
+        genes = stats_filter$Feature,
+        cat = cellType_col,
+        color_pal = color_pal,
+        title = title,
+        plot_points = plot_points
+    ) +
+        ggplot2::geom_text(
             data = stats_filter, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
-            vjust = "inward", hjust = "inward", size = 2.5)
-    
+            vjust = "inward", hjust = "inward", size = 2.5
+        )
+
 
     return(pe)
 }

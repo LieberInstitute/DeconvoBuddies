@@ -83,12 +83,12 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
     #>     IQR, mad, sd, var, xtabs
     #> The following objects are masked from 'package:base':
     #> 
-    #>     anyDuplicated, append, as.data.frame, basename, cbind, colnames,
-    #>     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
-    #>     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
-    #>     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
-    #>     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
-    #>     union, unique, unsplit, which.max, which.min
+    #>     anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+    #>     colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+    #>     get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
+    #>     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+    #>     Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,
+    #>     table, tapply, union, unique, unsplit, which.max, which.min
     #> Loading required package: S4Vectors
     #> 
     #> Attaching package: 'S4Vectors'
@@ -125,15 +125,15 @@ Get mean ratios for each gene x cell type
 ``` r
 ratios <- get_mean_ratio2(sce.test)
 fc <- findMarkers_1vAll(sce.test)
-#> Inhib.2 - '2023-03-06 10:01:24
-#> Inhib.1 - '2023-03-06 10:01:24
-#> OPC - '2023-03-06 10:01:25
-#> Astro - '2023-03-06 10:01:25
-#> Excit.2 - '2023-03-06 10:01:25
-#> Oligo - '2023-03-06 10:01:25
-#> Micro - '2023-03-06 10:01:25
-#> Excit.1 - '2023-03-06 10:01:26
-#> Building Table - 2023-03-06 10:01:26
+#> Inhib.2 - '2023-03-07 16:14:03
+#> Inhib.1 - '2023-03-07 16:14:03
+#> OPC - '2023-03-07 16:14:03
+#> Astro - '2023-03-07 16:14:04
+#> Excit.2 - '2023-03-07 16:14:04
+#> Oligo - '2023-03-07 16:14:04
+#> Micro - '2023-03-07 16:14:04
+#> Excit.1 - '2023-03-07 16:14:05
+#> Building Table - 2023-03-07 16:14:05
 #> ** Done! **
 
 (marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
@@ -170,7 +170,7 @@ cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", s
 ``` r
 sce_symbol <- sce.test
 rownames(sce_symbol) <- rowData(sce.test)$Symbol
-plot_gene_express(sce = sce_symbol, genes = c("RNF220","CSF3R"))
+plot_gene_express(sce = sce_symbol, genes = c("RNF220", "CSF3R"))
 ```
 
 <img src="man/figures/README-plot_gene_expression-1.png" width="100%" />
@@ -178,13 +178,14 @@ plot_gene_express(sce = sce_symbol, genes = c("RNF220","CSF3R"))
 ### Plot Expression of Marker Genes
 
 ``` r
-plot_marker_express(sce.test, 
-                    marker_stats, 
-                    "Astro",
-                    n_genes = 5,
-                    rank_col = "rank_ratio", 
-                    anno_col = "anno_ratio", 
-                    color_pal = cell_colors) 
+plot_marker_express(sce.test,
+    marker_stats,
+    "Astro",
+    n_genes = 5,
+    rank_col = "rank_ratio",
+    anno_col = "anno_ratio",
+    color_pal = cell_colors
+)
 ```
 
 <img src="man/figures/README-plot_marker_expression-1.png" width="100%" />
@@ -193,28 +194,28 @@ plot_marker_express(sce.test,
 
 ``` r
 pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
-     as.data.frame()
+    as.data.frame()
 
- est_prop_long <- est_prop %>%
-     tibble::rownames_to_column("RNum") %>%
-     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
-     dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
-     dplyr::mutate(a = "a")
+est_prop_long <- est_prop %>%
+    tibble::rownames_to_column("RNum") %>%
+    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
+    dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
+    dplyr::mutate(a = "a")
 #> Joining with `by = join_by(RNum)`
 
- plot_composition_bar(est_prop_long)
+plot_composition_bar(est_prop_long)
 ```
 
 <img src="man/figures/README-composition_bar_plot-1.png" width="100%" />
 
 ``` r
- plot_composition_bar(est_prop_long, x_col = "Dx")
+plot_composition_bar(est_prop_long, x_col = "Dx")
 ```
 
 <img src="man/figures/README-composition_bar_plot-2.png" width="100%" />
 
 ``` r
- plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
+plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 ```
 
 <img src="man/figures/README-composition_bar_plot-3.png" width="100%" />
@@ -247,7 +248,7 @@ R. Please run this yourself to check for any updates on how to cite
 **DeconvoBuddies**.
 
 ``` r
-print(citation('DeconvoBuddies'), bibtex = TRUE)
+print(citation("DeconvoBuddies"), bibtex = TRUE)
 #> 
 #> To cite package 'DeconvoBuddies' in publications use:
 #> 
@@ -292,7 +293,7 @@ By contributing to this project, you agree to abide by its terms.
   *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)* customized
   to use [Bioconductor’s docker
   containers](https://www.bioconductor.org/help/docker/) and
-  *[BiocCheck](https://bioconductor.org/packages/3.15/BiocCheck)*.
+  *[BiocCheck](https://bioconductor.org/packages/3.16/BiocCheck)*.
 - Code coverage assessment is possible thanks to
   [codecov](https://codecov.io/gh) and
   *[covr](https://CRAN.R-project.org/package=covr)*.
@@ -308,4 +309,4 @@ By contributing to this project, you agree to abide by its terms.
 For more details, check the `dev` directory.
 
 This package was developed using
-*[biocthis](https://bioconductor.org/packages/3.15/biocthis)*.
+*[biocthis](https://bioconductor.org/packages/3.16/biocthis)*.

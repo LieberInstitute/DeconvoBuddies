@@ -1,5 +1,3 @@
-
-
 #' Add Age Groups and adjusted ages to pd
 #'
 #' @param pd colData for rse object
@@ -13,7 +11,6 @@
 #' pd_test <- SummarizedExperiment::colData(rse_bulk_test)
 #' pd_test2 <- add_age_group(pd_test)
 add_age_group <- function(pd, age_col = "Age") {
-
     # Add age group
     age_mins <- map(age_categories, "min")
     pd_ages <- pd[[age_col]]
