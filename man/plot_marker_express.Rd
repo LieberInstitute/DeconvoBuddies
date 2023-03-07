@@ -47,3 +47,9 @@ plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Micro", n_g
 plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Oligo", n_genes = 10, rank_col = "rank_ratio", anno_col = "anno_ratio")
 plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Excit.1", n_genes = 5, rank_col = "rank_ratio", anno_col = "anno_ratio")
 }
+\seealso{
+Other expression plotting functions: 
+\code{\link{plot_gene_express}()},
+\code{\link{plot_marker_express_ALL}()}
+}
+\concept{expression plotting functions}

@@ -1,6 +1,11 @@
 
 #' Get Mean Ratio for Each Gene x Cell Type
 #'
+#' Calculate the mean ratio value and rank for each gene for each cell type in the `sce` 
+#' object, to identify effective marker genes for deconvolution. 
+#'    
+#' Improved efficiency and ability to handle large data sets from `get_mean_ratio()`. 
+#'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
 #' @param cellType_col A `character(1)` name of the column in the
 #' [colData()][SummarizedExperiment::SummarizedExperiment-class] of `sce` that

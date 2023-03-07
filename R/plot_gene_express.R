@@ -31,6 +31,8 @@
 #' plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220","CSF3R"))
 #' plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220","CSF3R"), title = "Inhib Markers")
 #' 
+#' @family expression plotting functions
+#' 
 plot_gene_express <- function(sce, genes, assay_name = "logcounts", cat = "cellType", color_pal = NULL, title = NULL, plot_points = FALSE){
   
   stopifnot(any(genes %in% rownames(sce)))

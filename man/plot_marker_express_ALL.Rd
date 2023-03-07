@@ -46,3 +46,9 @@ annotations to each plot.
 \examples{
 plot_marker_express_ALL(sce.test,  stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
 }
+\seealso{
+Other expression plotting functions: 
+\code{\link{plot_gene_express}()},
+\code{\link{plot_marker_express}()}
+}
+\concept{expression plotting functions}

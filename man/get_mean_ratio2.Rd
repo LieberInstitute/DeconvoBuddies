@@ -24,7 +24,10 @@ denotes the cell type or group of interest}
 Table of mean ratio for each x cell type
 }
 \description{
-Get Mean Ratio for Each Gene x Cell Type
+Calculate the mean ratio value and rank for each gene for each cell type in the \code{sce}
+object, to identify effective marker genes for deconvolution.
+
+Improved efficiency and ability to handle large data sets from \code{get_mean_ratio()}.
 }
 \examples{
 get_mean_ratio2(sce.test)

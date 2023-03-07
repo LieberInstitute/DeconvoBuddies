@@ -51,3 +51,9 @@ plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220","CSF
 plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220","CSF3R"), title = "Inhib Markers")
 
 }
+\seealso{
+Other expression plotting functions: 
+\code{\link{plot_marker_express_ALL}()},
+\code{\link{plot_marker_express}()}
+}
+\concept{expression plotting functions}
