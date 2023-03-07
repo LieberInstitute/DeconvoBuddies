@@ -29,6 +29,11 @@ plot_marker_express <- function(sce,
                                 cellType_col = "cellType", 
                                 color_pal = NULL, 
                                 plot_points = FALSE) {
+  
+    stopifnot(cellType_col %in% colnames(colData(sce)))
+    stopifnot(cell_type %in% sce[[cellType_col]])
+    stopifnot(cell_type %in% stats$cellType.target)
+  
     # RCMD fix
     rank_int <- Symbol <- anno_str <- cellType.target <- NULL
 
@@ -45,7 +50,7 @@ plot_marker_express <- function(sce,
         ) %>%
         mutate(Feature = paste0(stringr::str_pad(rank_int, max_digits, "left"), ": ", Symbol),
                Var1 = Feature,
-               anno_str = paste0(" ", anno_str))
+               anno_str = paste0("\n ", anno_str))
 
     marker_sce <- sce[stats_filter$gene, ]
     rownames(marker_sce) <- stats_filter$Feature
