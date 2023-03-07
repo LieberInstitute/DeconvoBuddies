@@ -1,9 +1,12 @@
 
 
 #' Plot the gene expression of a list of genes in a SCE object 
+#' 
+#' This function plots the expression of one or more genes as a violin plot, 
+#' over a user defined category, typically a cell type annotation.   
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
-#' @param genes  A `list()` of `character(1)` specifying the names of genes to plot, 
+#' @param genes  A `list()` of `character(1)` specifying the genes to plot, this should match the format of `rownames(sce)`
 #' @param assay_name A `character(1)` specifying the name of the
 #' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
 #' `sce` object to use to rank expression values. Defaults to `logcounts` since

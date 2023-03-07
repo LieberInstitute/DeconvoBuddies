@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_marker_express_ALL.R
 \name{plot_marker_express_ALL}
 \alias{plot_marker_express_ALL}
-\title{create a PDF of marker expressionplots for all cell types}
+\title{Plot the top marker genes for ALL cell types}
 \usage{
 plot_marker_express_ALL(
   sce,
@@ -38,8 +38,11 @@ matches \code{cellType.target} in \code{stats}}
 A pdf with violin plots for the expression of top marker genes for all cell types
 }
 \description{
-create a PDF of marker expressionplots for all cell types
+This function plots the top n marker genes for a all cell types based off of
+the \code{stats} table from \code{get_mean_ratio2()} in a multi-page pdf.
+The gene expression is plotted as violin plot with \code{plot_gene_express} and adds
+annotations to each plot.
 }
 \examples{
-plot_marker_express_ALL(sce.test,  stat = marker_test, pdf_fn = "~/Desktop/test_marker_expression.pdf")
+plot_marker_express_ALL(sce.test,  stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
 }

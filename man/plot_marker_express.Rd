@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_marker_express.R
 \name{plot_marker_express}
 \alias{plot_marker_express}
-\title{create plotExpression plots for top n genes for each cell type}
+\title{Plot gene expression violin plots for top marker genes for one cell type}
 \usage{
 plot_marker_express(
   sce,
@@ -36,7 +36,10 @@ matches \code{cellType.target} in \code{stats}}
 plotExpression style violin plot for selected marker genes
 }
 \description{
-create plotExpression plots for top n genes for each cell type
+This function plots the top n marker genes for a specified cell type based off of
+the \code{stats} table from \code{get_mean_ratio2()}.
+The gene expression is plotted as violin plot with \code{plot_gene_express} and adds
+annotations to each plot.
 }
 \examples{
 plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro")

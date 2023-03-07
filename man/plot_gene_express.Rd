@@ -17,7 +17,7 @@ plot_gene_express(
 \arguments{
 \item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
 
-\item{genes}{A \code{list()} of \code{character(1)} specifying the names of genes to plot,}
+\item{genes}{A \code{list()} of \code{character(1)} specifying the genes to plot, this should match the format of \code{rownames(sce)}}
 
 \item{assay_name}{A \code{character(1)} specifying the name of the
 \link[SummarizedExperiment:SummarizedExperiment-class]{assay()} in the
@@ -38,7 +38,8 @@ defaults to \code{FALSE} as these often become overplotted and quite large (espe
 A \code{ggplot()} violin plot for selected genes
 }
 \description{
-Plot the gene expression of a list of genes in a SCE object
+This function plots the expression of one or more genes as a violin plot,
+over a user defined category, typically a cell type annotation.
 }
 \examples{
 ## Using Symbol as rownames makes this more human readable
