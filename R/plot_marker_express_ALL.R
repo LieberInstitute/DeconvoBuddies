@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples 
-#' plot_marker_express_ALL(sce.test,  stat = marker_test, pdf_fn = "~/Desktop/test.pdf")
+#' plot_marker_express_ALL(sce.test,  stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
 plot_marker_express_ALL <- function(sce, 
                                 stats, 
@@ -36,13 +36,13 @@ plot_marker_express_ALL <- function(sce,
   
   if(!all(cell_types %in% stats$cellType.target)){
     # missing <- cell_types[!cell_types %in% stats$cellType.target]
-    stop("Stats is missing cell types, check you're using the correct marker stat data and cellType_col")
+    stop("Stats is missing cell types, check you're using the correct marker stats data and cellType_col")
   }
   
   pdf(pdf_fn)
-  
+  message("Plotting Markers for...")
   for(ct in cell_types){
-    message("plotting: ", ct)
+    message("\t", ct)
     print(plot_marker_express(sce = sce, 
                          stats = stats, 
                          cell_type = ct, 
@@ -53,6 +53,7 @@ plot_marker_express_ALL <- function(sce,
                          color_pal = color_pal, 
                          plot_points = plot_points))
   }
+  message("Done!")
   dev.off()
   
 }

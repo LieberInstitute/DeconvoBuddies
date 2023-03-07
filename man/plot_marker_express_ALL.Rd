@@ -41,5 +41,5 @@ A pdf with violin plots for the expression of top marker genes for all cell type
 create a PDF of marker expressionplots for all cell types
 }
 \examples{
-plot_marker_express_ALL(sce.test,  stat = marker_test, pdf_fn = "~/Desktop/test.pdf")
+plot_marker_express_ALL(sce.test,  stat = marker_test, pdf_fn = "~/Desktop/test_marker_expression.pdf")
 }
