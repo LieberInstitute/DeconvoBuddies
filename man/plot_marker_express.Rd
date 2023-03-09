@@ -50,6 +50,7 @@ plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Excit.1", n
 \seealso{
 Other expression plotting functions: 
 \code{\link{plot_gene_express}()},
-\code{\link{plot_marker_express_ALL}()}
+\code{\link{plot_marker_express_ALL}()},
+\code{\link{plot_marker_express_List}()}
 }
 \concept{expression plotting functions}

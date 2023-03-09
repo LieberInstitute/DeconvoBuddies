@@ -54,6 +54,7 @@ plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220", "CS
 \seealso{
 Other expression plotting functions: 
 \code{\link{plot_marker_express_ALL}()},
+\code{\link{plot_marker_express_List}()},
 \code{\link{plot_marker_express}()}
 }
 \concept{expression plotting functions}

@@ -49,6 +49,7 @@ plot_marker_express_ALL(sce.test, stat = marker_test, pdf_fn = "./plots/test_mar
 \seealso{
 Other expression plotting functions: 
 \code{\link{plot_gene_express}()},
+\code{\link{plot_marker_express_List}()},
 \code{\link{plot_marker_express}()}
 }
 \concept{expression plotting functions}
