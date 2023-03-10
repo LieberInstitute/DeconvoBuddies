@@ -9,7 +9,11 @@
 #' @param cellType_col A `character(1)` name of the column in the
 #' [colData()][SummarizedExperiment::SummarizedExperiment-class] of `sce` that
 #' denotes the cell type or group of interest
-#' @param add_symbol Add the gene symbol column to the marker stats table
+#' @param assay_name A `character(1)` specifying the name of the
+#' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
+#' `sce` object to use to rank expression values. Defaults to `logcounts` since
+#' it typically contains the normalized expression values.
+#' @param add_symbol a logical indicating whether the gene symbol column to the marker stats table
 #'
 #' @return Table of mean ratio for each x cell type
 #' @export

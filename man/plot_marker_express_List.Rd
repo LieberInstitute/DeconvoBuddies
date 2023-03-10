@@ -6,9 +6,8 @@
 \usage{
 plot_marker_express_List(
   sce,
-  stats,
-  pdf_fn = "marker_expression.pdf",
   gene_list,
+  pdf_fn = "marker_expression.pdf",
   cellType_col = "cellType",
   gene_name_col = "Symbol",
   color_pal = NULL,
@@ -18,13 +17,18 @@ plot_marker_express_List(
 \arguments{
 \item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
 
-\item{pdf_fn}{A \code{character()} of the pdf filename to plot to}
-
 \item{gene_list}{A named list contating the names of genes to plot}
+
+\item{pdf_fn}{A \code{character()} of the pdf filename to plot to}
 
 \item{cellType_col}{The \code{character()} name of colData column containing cell type for sce data}
 
 \item{gene_name_col}{The \code{character()} name of rowData matching the gene name from \code{gene_list}}
+
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{cat} values.}
+
+\item{plot_points}{A logical indicating whether to plot points over the violin,
+defaults to \code{FALSE} as these often become overplotted and quite large (especially when saved as PDF)}
 }
 \value{
 A pdf with violin plots for the expression of top marker genes for all cell types

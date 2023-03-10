@@ -13,6 +13,9 @@
 #' @param anno_col The `character()` name of column containing annotation in `stats`
 #' @param cellType_col The `character()` name of colData column containing cell type for sce data,
 #'  matches `cellType.target` in `stats`
+#' @param color_pal A named `character(1)` vector that contains a color pallet matching the `cell_type` values
+#' @param plot_points A logical indicating whether to plot points over the violin,
+#' defaults to `FALSE` as these often become overplotted and quite large (especially when saved as PDF)
 #'
 #' @return plotExpression style violin plot for selected marker genes
 #' @export

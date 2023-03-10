@@ -31,6 +31,11 @@ plot_marker_express(
 
 \item{cellType_col}{The \code{character()} name of colData column containing cell type for sce data,
 matches \code{cellType.target} in \code{stats}}
+
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{cell_type} values}
+
+\item{plot_points}{A logical indicating whether to plot points over the violin,
+defaults to \code{FALSE} as these often become overplotted and quite large (especially when saved as PDF)}
 }
 \value{
 plotExpression style violin plot for selected marker genes

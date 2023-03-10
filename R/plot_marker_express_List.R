@@ -9,7 +9,12 @@
 #' @param pdf_fn A `character()` of the pdf filename to plot to
 #' @param cellType_col The `character()` name of colData column containing cell type for sce data
 #' @param gene_name_col The `character()` name of rowData matching the gene name from `gene_list`
+#' @param color_pal  A named `character(1)` vector that contains a color pallet matching the `cat` values.
+#' @param plot_points A logical indicating whether to plot points over the violin,
+#' defaults to `FALSE` as these often become overplotted and quite large (especially when saved as PDF)
+#'
 #' @return A pdf with violin plots for the expression of top marker genes for all cell types
+#' 
 #' @export
 #'
 #' @examples
@@ -19,9 +24,8 @@
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
 plot_marker_express_List <- function(sce,
-                                    stats,
-                                    pdf_fn = "marker_expression.pdf",
                                     gene_list,
+                                    pdf_fn = "marker_expression.pdf",
                                     cellType_col = "cellType",
                                     gene_name_col = "Symbol",
                                     color_pal = NULL,
