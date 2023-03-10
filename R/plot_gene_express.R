@@ -35,6 +35,8 @@ plot_gene_express <- function(sce, genes, assay_name = "logcounts", cat = "cellT
     stopifnot(any(genes %in% rownames(sce)))
     stopifnot(cat %in% colnames(colData(sce)))
     stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
+    
+    value <- NULL
 
     cat_df <- as.data.frame(colData(sce))[, cat, drop = FALSE]
     expression_long <- reshape2::melt(as.matrix(assays(sce)[[assay_name]][genes, , drop = FALSE]))
