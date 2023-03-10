@@ -19,9 +19,9 @@
 #'
 #' @examples
 #' marker_list <- list(Oligo = c("RNF220", "CLIC4"), Astro = c("PRDM16", "F3"))
-#' plot_marker_express_List(sce.test, gene_list = marker_list, pdf_fn = "./plots/test_marker_expression_List.pdf")
-#' plot_marker_express_List(sce.test, gene_list = marker_list, cellType_col = "cellType.Broad", pdf_fn = "./plots/test_marker_expression_List.pdf")
-#' plot_marker_express_List(sce.test, gene_list = marker_list, pdf_fn = "./plots/test_marker_expression_List.pdf", plot_points = TRUE)
+#' # plot_marker_express_List(sce.test, gene_list = marker_list, pdf_fn = "./plots/test_marker_expression_List.pdf")
+#' # plot_marker_express_List(sce.test, gene_list = marker_list, cellType_col = "cellType.Broad", pdf_fn = "./plots/test_marker_expression_List.pdf")
+#' # plot_marker_express_List(sce.test, gene_list = marker_list, pdf_fn = "./plots/test_marker_expression_List.pdf", plot_points = TRUE)
 #'
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary

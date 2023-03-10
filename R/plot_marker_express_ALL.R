@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#' plot_marker_express_ALL(sce.test, stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
+#' # plot_marker_express_ALL(sce.test, stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
 plot_marker_express_ALL <- function(
