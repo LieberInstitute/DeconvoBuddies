@@ -50,10 +50,9 @@ plot_marker_express_List <- function(sce,
                             genes = gene_list[[i]],
                             cat = cellType_col,
                             color_pal = color_pal,
-                            plot_points = plot_points
-                            ) +
-            ggplot2::labs(title = n))
-  }
+                            plot_points = plot_points,
+                            title = n))
+    }
   
   message("Done!")
   grDevices::dev.off()
