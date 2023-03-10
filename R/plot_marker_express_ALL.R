@@ -24,15 +24,16 @@
 #' plot_marker_express_ALL(sce.test, stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
-plot_marker_express_ALL <- function(sce,
-    stats,
-    pdf_fn = "marker_expression.pdf",
-    n_genes = 10,
-    rank_col = "rank_ratio",
-    anno_col = "anno_ratio",
-    cellType_col = "cellType",
-    color_pal = NULL,
-    plot_points = FALSE) {
+plot_marker_express_ALL <- function(
+        sce,
+        stats,
+        pdf_fn = "marker_expression.pdf",
+        n_genes = 10,
+        rank_col = "rank_ratio",
+        anno_col = "anno_ratio",
+        cellType_col = "cellType",
+        color_pal = NULL,
+        plot_points = FALSE) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
 
     if (is.factor(sce[[cellType_col]])) {

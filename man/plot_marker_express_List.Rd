@@ -39,7 +39,7 @@ A use case is plotting known marker genes for multiple cell types over cell type
 clusters with unknown identities.
 }
 \examples{
-marker_list <- list(Oligo = c("RNF220","CLIC4"), Astro = c("PRDM16","F3"))
+marker_list <- list(Oligo = c("RNF220", "CLIC4"), Astro = c("PRDM16", "F3"))
 plot_marker_express_List(sce.test, gene_list = marker_list, pdf_fn = "./plots/test_marker_expression_List.pdf")
 plot_marker_express_List(sce.test, gene_list = marker_list, cellType_col = "cellType.Broad", pdf_fn = "./plots/test_marker_expression_List.pdf")
 plot_marker_express_List(sce.test, gene_list = marker_list, pdf_fn = "./plots/test_marker_expression_List.pdf", plot_points = TRUE)
