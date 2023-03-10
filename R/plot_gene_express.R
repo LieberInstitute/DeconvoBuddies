@@ -70,7 +70,7 @@ plot_gene_express <- function(sce, genes, assay_name = "logcounts", cat = "cellT
                 width = 0.3
             )
 
-        if (!is.null(color_pal)) expression_violin <- expression_violin + scale_color_manual(values = color_pal)
+        if (!is.null(color_pal)) expression_violin <- expression_violin + ggplot2::scale_color_manual(values = color_pal)
 
         return(expression_violin)
     }
@@ -83,7 +83,7 @@ plot_gene_express <- function(sce, genes, assay_name = "logcounts", cat = "cellT
             width = 0.3
         )
 
-    if (!is.null(color_pal)) expression_violin <- expression_violin + scale_fill_manual(values = color_pal)
+    if (!is.null(color_pal)) expression_violin <- expression_violin + ggplot2::scale_fill_manual(values = color_pal)
 
     # expression_violin
     return(expression_violin)
