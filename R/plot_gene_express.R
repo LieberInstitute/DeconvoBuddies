@@ -22,7 +22,7 @@
 #'
 #' @examples
 #' ## Using Symbol as rownames makes this more human readable
-#' rownames(sce.test) <- rowData(sce.test)$Symbol
+#' rownames(sce.test) <- SummarizedExperiment::rowData(sce.test)$Symbol
 #' plot_gene_express(sce = sce.test, genes = c("F3"))
 #' plot_gene_express(sce = sce.test, genes = c("RNF220", "CSF3R"))
 #' plot_gene_express(sce = sce.test, genes = c("RNF220", "CSF3R"), points = TRUE)

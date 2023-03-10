@@ -32,7 +32,10 @@ plot_marker_express_ALL(
 \item{cellType_col}{The \code{character()} name of colData column containing cell type for sce data,
 matches \code{cellType.target} in \code{stats}}
 
-\item{cell_type}{A \code{character()} target cell type to plot markers for}
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the values in \code{cellType_col}.}
+
+\item{plot_points}{A logical indicating whether to plot points over the violin,
+defaults to \code{FALSE} as these often become over plotted and quite large (especially when saved as PDF)}
 }
 \value{
 A pdf with violin plots for the expression of top marker genes for all cell types
