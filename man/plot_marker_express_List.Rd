@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_marker_express_List.R
 \name{plot_marker_express_List}
 \alias{plot_marker_express_List}
-\title{Plot the nested-listed genes as a multi-page pdf}
+\title{Plot a nested list of genes as a multi-page pdf}
 \usage{
 plot_marker_express_List(
   sce,
@@ -17,31 +17,33 @@ plot_marker_express_List(
 \arguments{
 \item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
 
-\item{gene_list}{A named list contating the names of genes to plot}
+\item{gene_list}{A named list containing the names of genes to plot}
 
-\item{pdf_fn}{A \code{character()} of the pdf filename to plot to}
+\item{pdf_fn}{A \code{character()} of the pdf file name to plot to}
 
-\item{cellType_col}{The \code{character()} name of colData column containing cell type for sce data}
+\item{cellType_col}{The \code{character()} name of \code{colData} column containing cell type for \code{sce} data}
 
-\item{gene_name_col}{The \code{character()} name of rowData matching the gene name from \code{gene_list}}
+\item{gene_name_col}{The \code{character()} name of \code{rowData} matching the gene name from \code{gene_list}}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{cat} values.}
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the values in \code{cellType_col}.}
 
 \item{plot_points}{A logical indicating whether to plot points over the violin,
-defaults to \code{FALSE} as these often become overplotted and quite large (especially when saved as PDF)}
+defaults to \code{FALSE} as these often become over plotted and quite large (especially when saved as PDF)}
 }
 \value{
 A pdf with violin plots for the expression of top marker genes for all cell types
 }
 \description{
-This function plots a nested list of genes as a multipage PDF, one for each sub list.
+This function plots a nested list of genes as a multi-page PDF, one for each sub list.
 A use case is plotting known marker genes for multiple cell types over cell type
 clusters with unknown identities.
 }
 \examples{
 marker_list <- list(Oligo = c("RNF220","CLIC4"), Astro = c("PRDM16","F3"))
-
 plot_marker_express_List(sce.test, gene_list = marker_list, pdf_fn = "./plots/test_marker_expression_List.pdf")
+plot_marker_express_List(sce.test, gene_list = marker_list, cellType_col = "cellType.Broad", pdf_fn = "./plots/test_marker_expression_List.pdf")
+plot_marker_express_List(sce.test, gene_list = marker_list, pdf_fn = "./plots/test_marker_expression_List.pdf", plot_points = TRUE)
+
 }
 \seealso{
 Other expression plotting functions: 

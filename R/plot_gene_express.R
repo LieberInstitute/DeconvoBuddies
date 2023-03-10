@@ -59,8 +59,6 @@ plot_gene_express <- function(sce, genes, assay_name = "logcounts", cat = "cellT
         )
 
     if (plot_points) {
-        message("plotting points")
-
         expression_violin <- expression_violin +
             ggplot2::geom_violin(aes(color = cat), scale = "width") +
             ggplot2::geom_jitter(aes(color = cat),
