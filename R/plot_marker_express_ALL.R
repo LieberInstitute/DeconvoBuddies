@@ -44,7 +44,7 @@ plot_marker_express_ALL <- function(sce,
         stop("Stats is missing cell types, check you're using the correct marker stats data and cellType_col")
     }
 
-    pdf(pdf_fn)
+    grDevices::pdf(pdf_fn)
     message("Plotting Markers for...")
     for (ct in cell_types) {
         message("\t", ct)
@@ -61,5 +61,5 @@ plot_marker_express_ALL <- function(sce,
         ))
     }
     message("Done!")
-    dev.off()
+    grDevices::dev.off()
 }

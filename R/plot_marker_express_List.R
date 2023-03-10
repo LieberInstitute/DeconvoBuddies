@@ -35,12 +35,12 @@ plot_marker_express_List <- function(sce,
   }
   
   
-  pdf(pdf_fn)
+  grDevices::pdf(pdf_fn)
   message("Plotting Genes for...")
   for (ml in gene_list) {
     message("\t", ml)
     print(plot_gene_express(sce = sce, genes = ml))
   }
   message("Done!")
-  dev.off()
+  grDevices::dev.off()
 }
