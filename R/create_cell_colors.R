@@ -36,11 +36,11 @@ create_cell_colors <- function(
 
     if (pallet == "classic") {
         cell_colors <- RColorBrewer::brewer.pal(n = nct, name = "Set1")
-        cell_colors <- c(cell_colors[3:nct], cell_colors[1:2])
+        cell_colors <- c(seq(3, nct), cell_colors[c(1,2)])
     } else if (pallet == "gg") {
         cell_colors <- gg_color_hue(nct)
     } else if (pallet == "tableau") {
-        cell_colors <- tableau20[1:nct]
+        cell_colors <- tableau20[seq(nct)]
     }
 
     names(cell_colors) <- base_cell_types
