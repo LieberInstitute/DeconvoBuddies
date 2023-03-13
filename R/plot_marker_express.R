@@ -28,16 +28,15 @@
 #' @family expression plotting functions
 #' @importFrom magrittr %>%
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
-plot_marker_express <- function(
-        sce,
-        stats,
-        cell_type,
-        n_genes = 4,
-        rank_col = "rank_ratio",
-        anno_col = "anno_ratio",
-        cellType_col = "cellType",
-        color_pal = NULL,
-        plot_points = FALSE) {
+plot_marker_express <- function(sce,
+    stats,
+    cell_type,
+    n_genes = 4,
+    rank_col = "rank_ratio",
+    anno_col = "anno_ratio",
+    cellType_col = "cellType",
+    color_pal = NULL,
+    plot_points = FALSE) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
     stopifnot(cell_type %in% sce[[cellType_col]])
     stopifnot(cell_type %in% stats$cellType.target)
