@@ -58,23 +58,13 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
       install.packages("BiocManager")
   }
 
-BiocManager::install("DeconvoBuddies", "spatialLIBD")
+BiocManager::install("DeconvoBuddies")
 
 ## Check that you have a valid Bioconductor installation
 BiocManager::valid()
 
 ## install Bisque from cran
 install.packages("BisqueRNA")
-
-```
-
-```{r "load_packages"}
-
-library("DeconvoBuddies")
-library("spatialLIBD")
-library("SummarizedExperiment")
-library("SingleCellExperiment")
-library("BisqueRNA")
 
 ```
 
@@ -85,16 +75,94 @@ library("BisqueRNA")
 
 We will be be demoning how to use DeconvoBuddies tools when applying deconvolution with the bisque package.
 
-# Access snRNA-seq refrence Dataset
+## Load Packages
 
-```{r "access_snRNAseq"}
-sce_dlpfc <-  spatialLIBD::fetch_data("spatialDLPFC_snRNAseq", type = "sce")
-colnames(colData(sce_dlpfc))
-dim(sce_dlpfc)
+```{r "load_packages", message=FALSE, warning=FALSE}
+
+## when data is fixed
+# library("spatialLIBD")
+
+library("DeconvoBuddies")
+library("SummarizedExperiment")
+library("SingleCellExperiment")
+library("BisqueRNA")
+
 ```
 
 
+# Load Datasets
 
+## Download snRNA-seq data set
+Here we download a public single nucleus RNA-seq (snRNA-seq) data from `r Citep(bib[['tran2021']])`
+that we'll use as our example. This data can be accessed on [github](https://github.com/LieberInstitute/10xPilot_snRNAseq-human#processed-data).
+This data is from postmortem human brain in the dorsolateral prefrontal 
+cortex (DLPFC) region, and contains gene expression data for 11k nuclei.
+
+We will use `BiocFileCache()` to cache this data. It is stored as a `SingleCellExperiment` 
+object named `sce.dlpfc.tran`, and takes 1.01 GB of RAM memory to load.  
+
+```{r "download_snDLPFC_data"}
+# Download and save a local cache of the data available at:
+# https://github.com/LieberInstitute/10xPilot_snRNAseq-human#processed-data
+bfc <- BiocFileCache::BiocFileCache()
+url <- paste0(
+    "https://libd-snrnaseq-pilot.s3.us-east-2.amazonaws.com/",
+    "SCE_DLPFC-n3_tran-etal.rda"
+)
+local_data <- BiocFileCache::bfcrpath(url, x = bfc)
+# load sce.dlpfc.tran
+load(local_data, verbose = TRUE)
+```
+
+What cell types are in singel cell data?
+```{r explore_sce}
+## check out the colData of the sce
+colData(sce.dlpfc.tran)
+
+## what is the cell type breakdown?
+table(sce.dlpfc.tran$cellType)
+
+```
+
+
+## Dowload Bulk DLPFC Dataset
+Here we download a public bulk RNA-seq dataset from TODO cite BSP2
+
+This data is from postmortem human brain in the DLPFC Hippocampus (HIPPO), 
+and contains gene expression data for 900 samples. We will only use the DLPFC
+data in this example. 
+
+We will use `BiocFileCache()` to cache this data. It is stored as a `RangedSummarizedExperiment` 
+object named `rse_gene``, and takes 872.12 MB of RAM memory to load.  
+
+```{r "download_bulk_DLPFC_data"}
+# Download and save a local cache of the data available at:
+# https://github.com/LieberInstitute/10xPilot_snRNAseq-human#processed-data
+url <- paste0(
+    "https://s3.us-east-2.amazonaws.com/libd-brainseq2/",
+    "rse_gene_unfiltered.Rdata"
+)
+local_data <- BiocFileCache::bfcrpath(url, x = bfc)
+# load rse_gene
+load(local_data, verbose = TRUE)
+```
+
+```{r "Bulk Data Size Check", echo=FALSE}
+## Using 872.12 MB
+# lobstr::obj_size(rse_gene) 
+```
+
+```{r subset_data}
+## before subset dimensions
+dim(rse_gene)
+table(rse_gene$Region)
+
+## subset columns containing samples from the DLPFC
+rse_gene <- rse_gene[,rse_gene$Region == "DLPFC"]
+
+## post subset dimensions
+dim(rse_gene)
+```
 # Reproducibility
 
 The `r Biocpkg("DeconvoBuddies")` package `r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
