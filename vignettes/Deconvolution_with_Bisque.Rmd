@@ -49,6 +49,26 @@ bib <- c(
 )
 ```
 
+#Introduction
+
+## What is Deconvolution?
+
+**Inferring the composition of different cell types in a bulk RNA-seq data**
+
+`Bisque` is an R package for preforming reference based deconvolution [github.com/cozygene/bisque](https://github.com/cozygene/bisque).
+
+## Goals of this Vignette 
+
+We will be demonstrating how to use `DeconvoBuddies` tools when applying 
+deconvolution with the `Bisque` package.
+
+1. Install and load required packages 
+2. Download and prep example bulk RNA-seq data, and reference snRNA-seq data
+3. Find marker genes with `DeconvoBuddies` tools
+4. Run deconvolution with `BisqueRNA`
+5. Explore deconvolution output and create compostion plots with `DeconvoBuddies` tools
+
+
 # Basics
 
 ## Install `DeconvoBuddies` & other pacakges
@@ -63,21 +83,14 @@ BiocManager::install("DeconvoBuddies")
 ## Check that you have a valid Bioconductor installation
 BiocManager::valid()
 
-## install Bisque from cran
-install.packages("BisqueRNA")
-
 ```
 
-
-## What is Deconvolution?
-
-**Inferring the composition of different cell types in a bulk RNA-seq data**
-
-We will be be demoning how to use DeconvoBuddies tools when applying deconvolution with the bisque package.
 
 ## Load Packages
 
 ```{r "load_packages", message=FALSE, warning=FALSE}
+ ## install Bisque from cran
+install.packages("BisqueRNA")
 
 ## when data is fixed
 # library("spatialLIBD")
