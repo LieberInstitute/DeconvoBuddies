@@ -79,6 +79,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
   }
 
 BiocManager::install("DeconvoBuddies")
+BiocManager::install("DeconvoBuddies")
 
 ## Check that you have a valid Bioconductor installation
 BiocManager::valid()
@@ -93,8 +94,7 @@ BiocManager::valid()
 # install.packages("BisqueRNA")
 
 ## when data is fixed
-# library("spatialLIBD")
-
+library("spatialLIBD")
 library("DeconvoBuddies")
 library("SummarizedExperiment")
 library("SingleCellExperiment")
@@ -115,17 +115,11 @@ We will use `BiocFileCache()` to cache this data. It is stored as a `SingleCellE
 object named `sce.dlpfc.tran`, and takes 1.01 GB of RAM memory to load.  
 
 ```{r "download_snDLPFC_data"}
-# Download and save a local cache of the data available at:
-# https://github.com/LieberInstitute/10xPilot_snRNAseq-human#processed-data
-bfc <- BiocFileCache::BiocFileCache()
-url <- paste0(
-    "https://libd-snrnaseq-pilot.s3.us-east-2.amazonaws.com/",
-    "SCE_DLPFC-n3_tran-etal.rda"
-)
-local_data <- BiocFileCache::bfcrpath(url, x = bfc)
-# load sce.dlpfc.tran
-load(local_data, verbose = TRUE)
+
+sce <- spatialLIBD::fetch_data(type = "spatialDLPFC_snRNAseq")
+
 ```
+
 
 What cell types are in single cell data?
 ```{r explore_sce}
