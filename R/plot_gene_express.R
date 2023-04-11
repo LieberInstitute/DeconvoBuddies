@@ -41,8 +41,13 @@ plot_gene_express <- function(sce,
                               plot_points = FALSE,
                               ncol = 2) {
     stopifnot(any(genes %in% rownames(sce)))
-    stopifnot(cat %in% colnames(colData(sce)))
-    stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
+  
+    if(!cat %in% colnames(colData(sce))){
+      message("ERROR '", cat, "' is not a column name in colData(sce), check that `cat` matches this sce")
+      stop()
+    } 
+  
+      stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
 
     value <- NULL
 
