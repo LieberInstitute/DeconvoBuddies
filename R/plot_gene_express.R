@@ -16,6 +16,7 @@
 #' @param title A `character(1)` to title the plot
 #' @param plot_points A logical indicating whether to plot points over the violin,
 #' defaults to `FALSE` as these often become overplotted and quite large (especially when saved as PDF)
+#' @param ncol = Number of columns for the facet in the final plot. Defaults to 2.
 #'
 #' @return A `ggplot()` violin plot for selected genes
 #' @export
@@ -31,7 +32,14 @@
 #'
 #' @family expression plotting functions
 #'
-plot_gene_express <- function(sce, genes, assay_name = "logcounts", cat = "cellType", color_pal = NULL, title = NULL, plot_points = FALSE) {
+plot_gene_express <- function(sce, 
+                              genes, 
+                              assay_name = "logcounts", 
+                              cat = "cellType", 
+                              color_pal = NULL, 
+                              title = NULL, 
+                              plot_points = FALSE,
+                              ncol = 2) {
     stopifnot(any(genes %in% rownames(sce)))
     stopifnot(cat %in% colnames(colData(sce)))
     stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
@@ -46,7 +54,7 @@ plot_gene_express <- function(sce, genes, assay_name = "logcounts", cat = "cellT
 
     expression_violin <- ggplot(data = expression_long, aes(x = cat, y = value)) +
         # ggplot2::geom_violin(aes(fill = cat), scale = "width") +
-        ggplot2::facet_wrap(~Var1, ncol = 2) +
+        ggplot2::facet_wrap(~Var1, ncol = ncol) +
         ggplot2::labs(
             y = paste0("Expression (", assay_name, ")"),
             title = title

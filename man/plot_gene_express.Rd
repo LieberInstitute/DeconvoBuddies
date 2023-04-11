@@ -11,7 +11,8 @@ plot_gene_express(
   cat = "cellType",
   color_pal = NULL,
   title = NULL,
-  plot_points = FALSE
+  plot_points = FALSE,
+  ncol = 2
 )
 }
 \arguments{
@@ -33,6 +34,8 @@ to group the cells or nuclei by. Defaults to \code{cellType}.}
 
 \item{plot_points}{A logical indicating whether to plot points over the violin,
 defaults to \code{FALSE} as these often become overplotted and quite large (especially when saved as PDF)}
+
+\item{ncol}{= Number of columns for the facet in the final plot. Defaults to 2.}
 }
 \value{
 A \code{ggplot()} violin plot for selected genes

@@ -13,7 +13,8 @@ plot_marker_express(
   anno_col = "anno_ratio",
   cellType_col = "cellType",
   color_pal = NULL,
-  plot_points = FALSE
+  plot_points = FALSE,
+  ncol = 2
 )
 }
 \arguments{
@@ -36,6 +37,8 @@ matches \code{cellType.target} in \code{stats}}
 
 \item{plot_points}{A logical indicating whether to plot points over the violin,
 defaults to \code{FALSE} as these often become overplotted and quite large (especially when saved as PDF)}
+
+\item{ncol}{= Number of columns for the facet in the final plot. Defaults to 2.}
 }
 \value{
 plotExpression style violin plot for selected marker genes

@@ -16,6 +16,7 @@
 #' @param color_pal A named `character(1)` vector that contains a color pallet matching the `cell_type` values
 #' @param plot_points A logical indicating whether to plot points over the violin,
 #' defaults to `FALSE` as these often become overplotted and quite large (especially when saved as PDF)
+#' @param ncol = Number of columns for the facet in the final plot. Defaults to 2.
 #'
 #' @return plotExpression style violin plot for selected marker genes
 #' @export
@@ -36,7 +37,8 @@ plot_marker_express <- function(sce,
     anno_col = "anno_ratio",
     cellType_col = "cellType",
     color_pal = NULL,
-    plot_points = FALSE) {
+    plot_points = FALSE,
+    ncol = 2) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
     stopifnot(cell_type %in% sce[[cellType_col]])
     stopifnot(cell_type %in% stats$cellType.target)
@@ -71,7 +73,8 @@ plot_marker_express <- function(sce,
         cat = cellType_col,
         color_pal = color_pal,
         title = title,
-        plot_points = plot_points
+        plot_points = plot_points,
+        ncol = ncol
     ) +
         ggplot2::geom_text(
             data = stats_filter, ggplot2::aes(x = -Inf, y = Inf, label = anno_str),
