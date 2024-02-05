@@ -4,7 +4,7 @@
 # DeconvoBuddies
 
 <!-- badges: start -->
-
+[![DOI](https://zenodo.org/badge/336310071.svg)](https://zenodo.org/doi/10.5281/zenodo.10616681)
 [![Codecov test
 coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
 [![R-CMD-check-bioc](https://github.com/lahuuki/DeconvoBuddies/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/lahuuki/DeconvoBuddies/actions)
