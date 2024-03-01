@@ -48,7 +48,7 @@ marker_list <- list(Oligo = c("RNF220", "CLIC4"), Astro = c("PRDM16", "F3"))
 \seealso{
 Other expression plotting functions: 
 \code{\link{plot_gene_express}()},
-\code{\link{plot_marker_express_ALL}()},
-\code{\link{plot_marker_express}()}
+\code{\link{plot_marker_express}()},
+\code{\link{plot_marker_express_ALL}()}
 }
 \concept{expression plotting functions}

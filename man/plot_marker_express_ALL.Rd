@@ -52,7 +52,7 @@ annotations to each plot.
 \seealso{
 Other expression plotting functions: 
 \code{\link{plot_gene_express}()},
-\code{\link{plot_marker_express_List}()},
-\code{\link{plot_marker_express}()}
+\code{\link{plot_marker_express}()},
+\code{\link{plot_marker_express_List}()}
 }
 \concept{expression plotting functions}
