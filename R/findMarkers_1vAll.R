@@ -5,7 +5,7 @@
 #' @param assay_name Name of the assay to use for calculation
 #' @param cellType_col Column name on colData of the sce that denotes the celltype
 #' @param add_symbol Add the gene symbol column to the marker stats table
-#' @param mod String specifying the model used as design in findMarkers
+#' @param mod String specifying the model used as design in findMarkers. Can be `NULL` if there are no blocking terms with uninteresting factors as documented at [pairwiseTTests][scran::pairwiseTTests].
 #' @param verbose Boolean choosing to print progress messages or not
 #'
 #' @return Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
@@ -30,8 +30,10 @@ findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellTy
     pd <- as.data.frame(SummarizedExperiment::colData(sce))
     # message("donor" %in% colnames(pd))
 
-    mod <- with(pd, stats::model.matrix(as.formula(mod)))
-    mod <- mod[, -1, drop = F] # intercept otherwise automatically dropped by `findMarkers()`
+    if (!is.null(mod)) {
+        mod <- with(pd, stats::model.matrix(as.formula(mod)))
+        mod <- mod[, -1, drop = F] # intercept otherwise automatically dropped by `findMarkers()`
+    }
 
     markers.t.1vAll <- map(cell_types, function(x) {
         if (verbose) message(x, " - '", Sys.time())

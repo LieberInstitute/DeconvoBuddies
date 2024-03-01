@@ -23,7 +23,7 @@ findMarkers_1vAll(
 
 \item{add_symbol}{Add the gene symbol column to the marker stats table}
 
-\item{mod}{String specifying the model used as design in findMarkers}
+\item{mod}{String specifying the model used as design in findMarkers. Can be \code{NULL} if there are no blocking terms with uninteresting factors as documented at \link[scran:pairwiseTTests]{pairwiseTTests}.}
 
 \item{verbose}{Boolean choosing to print progress messages or not}
 }
