@@ -98,13 +98,6 @@ plot_composition_bar(est_prop_long, x_col = "Dx")
 plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 ```
 
-### Pseudobulk sce data
-Pseudobulk sce data across specific groups
-```{r pseudobulk}
-dim(sce.test)
-pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
-pb_test
-```
 
 ## Citation
 

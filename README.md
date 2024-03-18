@@ -4,7 +4,7 @@
 # DeconvoBuddies
 
 <!-- badges: start -->
-[![DOI](https://zenodo.org/badge/336310071.svg)](https://zenodo.org/doi/10.5281/zenodo.10616681)
+
 [![Codecov test
 coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
 [![R-CMD-check-bioc](https://github.com/lahuuki/DeconvoBuddies/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/lahuuki/DeconvoBuddies/actions)
@@ -95,6 +95,9 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
     #> The following objects are masked from 'package:dplyr':
     #> 
     #>     first, rename
+    #> The following object is masked from 'package:utils':
+    #> 
+    #>     findMatches
     #> The following objects are masked from 'package:base':
     #> 
     #>     expand.grid, I, unname
@@ -125,35 +128,34 @@ Get mean ratios for each gene x cell type
 ``` r
 ratios <- get_mean_ratio2(sce.test)
 fc <- findMarkers_1vAll(sce.test)
-#> Inhib.2 - '2023-03-07 16:14:03
-#> Inhib.1 - '2023-03-07 16:14:03
-#> OPC - '2023-03-07 16:14:03
-#> Astro - '2023-03-07 16:14:04
-#> Excit.2 - '2023-03-07 16:14:04
-#> Oligo - '2023-03-07 16:14:04
-#> Micro - '2023-03-07 16:14:04
-#> Excit.1 - '2023-03-07 16:14:05
-#> Building Table - 2023-03-07 16:14:05
+#> Inhib.2 - '2024-03-18 13:47:35.223962
+#> Inhib.1 - '2024-03-18 13:47:35.60708
+#> OPC - '2024-03-18 13:47:35.781291
+#> Astro - '2024-03-18 13:47:35.990044
+#> Excit.2 - '2024-03-18 13:47:36.226942
+#> Oligo - '2024-03-18 13:47:36.393412
+#> Micro - '2024-03-18 13:47:36.560947
+#> Excit.1 - '2024-03-18 13:47:36.73554
+#> Building Table - 2024-03-18 13:47:36.915751
 #> ** Done! **
 
 (marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
 #> # A tibble: 1,778 × 15
-#>    gene         cellT…¹ mean.…² cellT…³  mean ratio rank_…⁴ Symbol anno_…⁵ logFC
-#>    <chr>        <fct>     <dbl> <fct>   <dbl> <dbl>   <int> <chr>  <chr>   <dbl>
-#>  1 ENSG0000023… Inhib.2   1.00  Excit.2 0.239  4.20       1 AL139… Inhib.… 0.928
-#>  2 ENSG0000016… Inhib.2   1.71  Astro   0.512  3.35       2 SDC3   Inhib.… 1.27 
-#>  3 ENSG0000013… Inhib.2   0.950 Astro   0.413  2.30       3 IFI44  Inhib.… 0.753
-#>  4 ENSG0000006… Inhib.2   3.32  Astro   1.47   2.26       4 COL11… Inhib.… 6.69 
-#>  5 ENSG0000016… Inhib.2   3.55  Astro   1.62   2.19       5 NTNG1  Inhib.… 4.85 
-#>  6 ENSG0000011… Inhib.2   1.22  Excit.1 0.560  2.18       6 TRIM62 Inhib.… 0.910
-#>  7 ENSG0000016… Inhib.2   3.37  Excit.2 1.96   1.72       7 USP24  Inhib.… 3.46 
-#>  8 ENSG0000013… Inhib.2   3.42  Inhib.1 2.44   1.40       8 SPATA6 Inhib.… 5.33 
-#>  9 ENSG0000011… Inhib.2   1.21  Astro   0.914  1.33       9 ABCD3  Inhib.… 0.215
-#> 10 ENSG0000017… Inhib.2   1.21  Astro   0.920  1.32      10 GNG12  Inhib.… 0.994
-#> # … with 1,768 more rows, 5 more variables: log.p.value <dbl>, log.FDR <dbl>,
-#> #   std.logFC <dbl>, rank_marker <int>, anno_logFC <chr>, and abbreviated
-#> #   variable names ¹​cellType.target, ²​mean.target, ³​cellType, ⁴​rank_ratio,
-#> #   ⁵​anno_ratio
+#>    gene       cellType.target mean.target cellType  mean ratio rank_ratio Symbol
+#>    <chr>      <fct>                 <dbl> <fct>    <dbl> <dbl>      <int> <chr> 
+#>  1 ENSG00000… Inhib.2               1.00  Excit.2  0.239  4.20          1 AL139…
+#>  2 ENSG00000… Inhib.2               1.71  Astro    0.512  3.35          2 SDC3  
+#>  3 ENSG00000… Inhib.2               0.950 Astro    0.413  2.30          3 IFI44 
+#>  4 ENSG00000… Inhib.2               3.32  Astro    1.47   2.26          4 COL11…
+#>  5 ENSG00000… Inhib.2               3.55  Astro    1.62   2.19          5 NTNG1 
+#>  6 ENSG00000… Inhib.2               1.22  Excit.1  0.560  2.18          6 TRIM62
+#>  7 ENSG00000… Inhib.2               3.37  Excit.2  1.96   1.72          7 USP24 
+#>  8 ENSG00000… Inhib.2               3.42  Inhib.1  2.44   1.40          8 SPATA6
+#>  9 ENSG00000… Inhib.2               1.21  Astro    0.914  1.33          9 ABCD3 
+#> 10 ENSG00000… Inhib.2               1.21  Astro    0.920  1.32         10 GNG12 
+#> # ℹ 1,768 more rows
+#> # ℹ 7 more variables: anno_ratio <chr>, logFC <dbl>, log.p.value <dbl>,
+#> #   log.FDR <dbl>, std.logFC <dbl>, rank_marker <int>, anno_logFC <chr>
 ```
 
 ### Extablish Color Scheme
@@ -220,27 +222,6 @@ plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 
 <img src="man/figures/README-composition_bar_plot-3.png" width="100%" />
 
-### Pseudobulk sce data
-
-Pseudobulk sce data across specific groups
-
-``` r
-dim(sce.test)
-#> [1] 1000  500
-pb_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"))
-#> Unique Groups: 12
-pb_test
-#> class: SummarizedExperiment 
-#> dim: 1000 12 
-#> metadata(0):
-#> assays(1): counts
-#> rownames(1000): ENSG00000237491 ENSG00000225880 ... ENSG00000184260
-#>   ENSG00000184270
-#> rowData names(3): gene_id bp_length Symbol
-#> colnames(12): Br5161_OPC Br5161_Oligo ... Br5161_Excit Br5212_Oligo
-#> colData names(2): donor cellType.Broad
-```
-
 ## Citation
 
 Below is the citation output from using `citation('DeconvoBuddies')` in
@@ -249,11 +230,10 @@ R. Please run this yourself to check for any updates on how to cite
 
 ``` r
 print(citation("DeconvoBuddies"), bibtex = TRUE)
-#> 
 #> To cite package 'DeconvoBuddies' in publications use:
 #> 
 #>   Huuki-Myers LA, Maynard KR, Hicks SC, Zandi P, Kleinman JE, Hyde TM,
-#>   Goes FS, Collado-Torres L (2023). _DeconvoBuddies: a R/Bioconductor
+#>   Goes FS, Collado-Torres L (2024). _DeconvoBuddies: a R/Bioconductor
 #>   package with deconvolution helper functions_.
 #>   doi:10.18129/B9.bioc.DeconvoBuddies
 #>   <https://doi.org/10.18129/B9.bioc.DeconvoBuddies>,
@@ -266,7 +246,7 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>   @Manual{,
 #>     title = {DeconvoBuddies: a R/Bioconductor package with deconvolution helper functions},
 #>     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Jole E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},
-#>     year = {2023},
+#>     year = {2024},
 #>     url = {http://www.bioconductor.org/packages/DeconvoBuddies},
 #>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.0},
 #>     doi = {10.18129/B9.bioc.DeconvoBuddies},
@@ -293,7 +273,7 @@ By contributing to this project, you agree to abide by its terms.
   *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)* customized
   to use [Bioconductor’s docker
   containers](https://www.bioconductor.org/help/docker/) and
-  *[BiocCheck](https://bioconductor.org/packages/3.16/BiocCheck)*.
+  *[BiocCheck](https://bioconductor.org/packages/3.17/BiocCheck)*.
 - Code coverage assessment is possible thanks to
   [codecov](https://codecov.io/gh) and
   *[covr](https://CRAN.R-project.org/package=covr)*.
@@ -309,4 +289,4 @@ By contributing to this project, you agree to abide by its terms.
 For more details, check the `dev` directory.
 
 This package was developed using
-*[biocthis](https://bioconductor.org/packages/3.16/biocthis)*.
+*[biocthis](https://bioconductor.org/packages/3.17/biocthis)*.
