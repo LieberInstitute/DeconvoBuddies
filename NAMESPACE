@@ -3,7 +3,6 @@
 export("%>%")
 export(create_cell_colors)
 export(findMarkers_1vAll)
-export(findMarkers_pw)
 export(get_mean_ratio)
 export(get_mean_ratio2)
 export(make_test_sce)
