@@ -52,7 +52,7 @@ plot_gene_express <- function(sce,
     value <- NULL
 
     cat_df <- as.data.frame(colData(sce))[, cat, drop = FALSE]
-    expression_long <- reshape2::melt(as.matrix(assays(sce)[[assay_name]][genes, , drop = FALSE]))
+    expression_long <- reshape2::melt(as.matrix(SummarizedExperiment::assays(sce)[[assay_name]][genes, , drop = FALSE]))
 
     cat <- cat_df[expression_long$Var2, ]
     expression_long <- cbind(expression_long, cat)
