@@ -87,10 +87,10 @@ citation("DeconvoBuddies")
 
 # Quick start to using `DeconvoBuddies`
 
-```{r "start", message=FALSE}
+```{r "load packages", message=FALSE}
 library("DeconvoBuddies")
 library("SummarizedExperiment")
-# library("tidyverse")
+library("tidyr")
 # library("ggplot2")
 ```
 ## Marker Finding  
@@ -155,15 +155,15 @@ plot_marker_express(
 ### Plot Composition Bar Plot
 Visualize deconvolution results with a stacked barplot showing the average cell
 type proportion for a group. 
-```{r}
-pd <- colData(rse_bulk_test) %>%
+```{r `demo plot_composition_bar`}
+pd <- colData(rse_bulk_test) |>
     as.data.frame()
 
 ## need to pivot data to long format
-est_prop_long <- est_prop %>%
-    rownames_to_column("RNum") %>%
-    pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
-    left_join(pd %>% dplyr::select(RNum, Dx))
+est_prop_long <- est_prop |>
+    rownames_to_column("RNum") |>
+    pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
+    left_join(pd |> dplyr::select(RNum, Dx))
 
 est_prop_long
 

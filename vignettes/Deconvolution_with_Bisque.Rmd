@@ -91,15 +91,16 @@ BiocManager::valid()
 
 ```{r "load_packages", message=FALSE, warning=FALSE}
  ## install Bisque from cran
-# install.packages("BisqueRNA")
+install.packages("BisqueRNA")
 
-## when data is fixed
 library("spatialLIBD")
 library("DeconvoBuddies")
 library("SummarizedExperiment")
 library("SingleCellExperiment")
-# library("BisqueRNA")
-
+library("BisqueRNA")
+library("dplyr")
+library("tidyr")
+library("tibble")
 ```
 
 
@@ -112,25 +113,32 @@ This data is from postmortem human brain in the dorsolateral prefrontal
 cortex (DLPFC) region, and contains gene expression data for 11k nuclei.
 
 We will use `BiocFileCache()` to cache this data. It is stored as a `SingleCellExperiment` 
-object named `sce.dlpfc.tran`, and takes 1.01 GB of RAM memory to load.  
+object named `sce`, and takes 1.01 GB of RAM memory to load.  
 
-```{r "download_snDLPFC_data"}
-
-sce <- spatialLIBD::fetch_data(type = "spatialDLPFC_snRNAseq")
-
+```{r "download spatialDLPFC snRNA-seq"}
+sce_path_zip <- fetch_data("spatialDLPFC_snRNAseq")
+sce_path <- unzip(sce_path_zip, exdir = tempdir())
+sce <- HDF5Array::loadHDF5SummarizedExperiment(
+    file.path(tempdir(), "sce_DLPFC_annotated")
+)
+sce
 ```
 
 
 What cell types are in single cell data?
-```{r explore_sce}
+```{r "explore sce"}
 ## check out the colData of the sce
-colData(sce.dlpfc.tran)
+colData(sce)
 
 ## what is the cell type breakdown?
-table(sce.dlpfc.tran$cellType)
+table(sce$cellType_broad_hc)
 
 ```
 
+```{r "sn data size check", echo=FALSE}
+## Using 172.28 MB
+# lobstr::obj_size(sce)
+```
 
 ## Dowload Bulk DLPFC Dataset
 Here we download a public bulk RNA-seq dataset from TODO cite BSP2
@@ -142,9 +150,10 @@ data in this example.
 We will use `BiocFileCache()` to cache this data. It is stored as a `RangedSummarizedExperiment` 
 object named `rse_gene``, and takes 872.12 MB of RAM memory to load.  
 
-```{r "download_bulk_DLPFC_data"}
+```{r "download bulk BSP2 data"}
 # Download and save a local cache of the data available at:
 # https://github.com/LieberInstitute/10xPilot_snRNAseq-human#processed-data
+bfc <- BiocFileCache::BiocFileCache()
 url <- paste0(
     "https://s3.us-east-2.amazonaws.com/libd-brainseq2/",
     "rse_gene_unfiltered.Rdata"
@@ -154,12 +163,12 @@ local_data <- BiocFileCache::bfcrpath(url, x = bfc)
 load(local_data, verbose = TRUE)
 ```
 
-```{r "Bulk Data Size Check", echo=FALSE}
+```{r "bulk data size check", echo=FALSE}
 ## Using 872.12 MB
-# lobstr::obj_size(rse_gene) 
+# lobstr::obj_size(rse_gene)
 ```
 
-```{r subset_data}
+```{r "subset bulk data"}
 ## before subset dimensions
 dim(rse_gene)
 table(rse_gene$Region)
@@ -170,6 +179,122 @@ rse_gene <- rse_gene[,rse_gene$Region == "DLPFC"]
 ## post subset dimensions
 dim(rse_gene)
 ```
+
+# Marker Genes
+## Find Marker Genes
+```{r, "find marker genes"}
+# 
+# # rm counts to help mem
+# gene_sums <- rowSums(as.data.frame(logcounts(sce)))
+# top_gene <- gene_sums > median(gene_sums)
+
+## select 1k genes for memory
+rownames(sce) <- rowData(sce)$gene_id
+sce <- sce[1:1000,]
+
+marker_stats <- get_mean_ratio2(sce, cellType_col = "cellType_broad_hc")
+# 
+# marker_stats
+```
+
+## Plot marker genes
+```{r "plot marker genes"}
+
+DeconvoBuddies::plot_marker_express(sce,
+                    stats = marker_stats,
+                    cell_type = 'Astro',
+                    cellType_col = "cellType_broad_hc",
+                    n_genes = 10,
+                    rank_col = "rank_ratio",
+                    anno_col = "anno_ratio",
+                )
+
+
+# DeconvoBuddies::plot_gene_express(sce,
+#                                   cat = "cellType_broad_hc",
+#                                   genes = c("MBP","GFAP"))
+
+
+```
+
+```{r, "pull marker genes"}
+# 
+rownames(rse_gene) <- rowData(rse_gene)$ensemblID
+
+marker_genes <- marker_stats |>
+  filter(rank_ratio <= 25, gene %in% rownames(rse_gene)) |>
+  pull(gene)
+
+marker_genes <- unique(marker_genes)
+
+length(marker_genes)
+
+```
+
+
+
+# Run Bisque
+
+## prep data
+```{r "prep data as ExpressionSet"}
+exp_set_bulk <- Biobase::ExpressionSet(assayData = assays(rse_gene[marker_genes,])$counts,
+                              phenoData=AnnotatedDataFrame(
+                                as.data.frame(colData(rse_gene))[c("SAMPLE_ID")]))
+
+exp_set_sce <- Biobase::ExpressionSet(assayData = as.matrix(assays(sce[marker_genes,])$counts),
+                             phenoData=AnnotatedDataFrame(
+                               as.data.frame(colData(sce))[,c("cellType_broad_hc","BrNum")]))
+
+##check for nuclei with 0 marker expression
+zero_cell_filter <- colSums(exprs(exp_set_sce)) != 0
+message("Exclude ",sum(!zero_cell_filter), " cells")
+
+exp_set_sce <- exp_set_sce[,zero_cell_filter]
+
+```
+
+
+```{r, "run Bisque"}
+
+est_prop <- ReferenceBasedDecomposition(bulk.eset = exp_set_bulk,
+                                        sc.eset = exp_set_sce,
+                                        cell.types = "cellType_broad_hc",
+                                        subject.names = "BrNum",
+                                        use.overlap = FALSE)
+
+```
+
+# Explore Ouput
+```{r, "deconvo output"}
+
+est_prop$bulk.props <- t(est_prop$bulk.props)
+
+head(est_prop$bulk.props)
+
+```
+
+Plot Composition Barplots of Bisque predicted compostions
+```{r, "composition plots"}
+## add Phenotype data to proportion estimates
+pd <- colData(rse_gene) |>
+  as.data.frame() |>
+  select(Sample = RNum, Sex, Dx)
+
+## make proption estimates long so they are ggplot friendly 
+prop_long <- est_prop$bulk.props |>
+  as.data.frame() |>
+  tibble::rownames_to_column("Sample") |>
+  tidyr::pivot_longer(!Sample, names_to = "cell_type", values_to = "prop") |>
+  left_join(pd)
+
+## create composition bar plots
+plot_composition_bar(prop_long = prop_long, sample_col = "Sample", x_col = "Dx")
+
+plot_composition_bar(prop_long = prop_long, sample_col = "Sample", x_col = "Sample", add_text = FALSE)
+
+```
+
+
 # Reproducibility
 
 The `r Biocpkg("DeconvoBuddies")` package `r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
