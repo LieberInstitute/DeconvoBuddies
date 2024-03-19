@@ -91,7 +91,7 @@ BiocManager::valid()
 
 ```{r "load_packages", message=FALSE, warning=FALSE}
  ## install Bisque from cran
-install.packages("BisqueRNA")
+# install.packages("BisqueRNA")
 
 library("spatialLIBD")
 library("DeconvoBuddies")

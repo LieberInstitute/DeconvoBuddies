@@ -90,7 +90,9 @@ citation("DeconvoBuddies")
 ```{r "load packages", message=FALSE}
 library("DeconvoBuddies")
 library("SummarizedExperiment")
+library("dplyr")
 library("tidyr")
+library("tibble")
 # library("ggplot2")
 ```
 ## Marker Finding  
