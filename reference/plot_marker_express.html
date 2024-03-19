@@ -81,7 +81,8 @@ annotations to each plot.</p>
 <span>  anno_col <span class="op">=</span> <span class="st">"anno_ratio"</span>,</span>
 <span>  cellType_col <span class="op">=</span> <span class="st">"cellType"</span>,</span>
 <span>  color_pal <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  plot_points <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  plot_points <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -123,6 +124,10 @@ matches <code>cellType.target</code> in <code>stats</code></p></dd>
 <dt>plot_points</dt>
 <dd><p>A logical indicating whether to plot points over the violin,
 defaults to <code>FALSE</code> as these often become overplotted and quite large (especially when saved as PDF)</p></dd>
+
+
+<dt>ncol</dt>
+<dd><p>= Number of columns for the facet in the final plot. Defaults to 2.</p></dd>
 
 </dl></div>
     <div id="value">

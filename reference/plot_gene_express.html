@@ -75,7 +75,8 @@ over a user defined category, typically a cell type annotation.</p>
 <span>  cat <span class="op">=</span> <span class="st">"cellType"</span>,</span>
 <span>  color_pal <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  plot_points <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  plot_points <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ncol <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -113,6 +114,10 @@ to group the cells or nuclei by. Defaults to <code>cellType</code>.</p></dd>
 <dd><p>A logical indicating whether to plot points over the violin,
 defaults to <code>FALSE</code> as these often become overplotted and quite large (especially when saved as PDF)</p></dd>
 
+
+<dt>ncol</dt>
+<dd><p>= Number of columns for the facet in the final plot. Defaults to 2.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -123,9 +128,9 @@ defaults to <code>FALSE</code> as these often become overplotted and quite large
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other expression plotting functions: 
+<code><a href="plot_marker_express.html">plot_marker_express</a>()</code>,
 <code><a href="plot_marker_express_ALL.html">plot_marker_express_ALL</a>()</code>,
-<code><a href="plot_marker_express_List.html">plot_marker_express_List</a>()</code>,
-<code><a href="plot_marker_express.html">plot_marker_express</a>()</code></p></div>
+<code><a href="plot_marker_express_List.html">plot_marker_express_List</a>()</code></p></div>
     </div>
 
     <div id="ref-examples">
