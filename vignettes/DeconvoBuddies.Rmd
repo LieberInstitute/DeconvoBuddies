@@ -90,7 +90,8 @@ citation("DeconvoBuddies")
 ```{r "start", message=FALSE}
 library("DeconvoBuddies")
 library("SummarizedExperiment")
-library("tidyverse")
+# library("tidyverse")
+# library("ggplot2")
 ```
 ## Marker Finding  
 ### Using MeanRatio to Find Cell Type Markers
@@ -104,13 +105,6 @@ values can be calculated for a single cell RNA-seq dataset using `get_mean_ratio
 my_mean_ratios <- get_mean_ratio2(sce.test, cellType_col = "cellType")
 my_mean_ratios
 ```
-## Pseudobulk
-Pseudobulking cells in to samples based on groups from colData
-```{r `pseudobulk demo`}
-pb_label_test <- pseudobulk(sce.test, cell_group_cols = c("donor", "cellType.Broad"), add_symbol = TRUE)
-head(pb_label_test)
-```
-
 
 ## Plotting Tools  
 ### Creating A Cell Type Color Pallet
