@@ -44,7 +44,8 @@ Suggests:
     sessioninfo,
     tidyverse,
     BiocFileCache,
-    spatialLIBD
+    spatialLIBD,
+    BisqueRNA
 Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
