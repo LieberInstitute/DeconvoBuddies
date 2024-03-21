@@ -43,7 +43,7 @@ findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellTy
         fm <- scran::findMarkers(sce,
             groups = sce$contrast,
             assay.type = assay_name, design = mod, test.type = "t",
-            direction = "up", pval.type = "all", full.stats = T
+            direction = "up", pval.type = "all", full.stats = TRUE
         )
         fm <- fm[[2]]$stats.0
 
@@ -51,7 +51,7 @@ findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellTy
             groups = sce$contrast,
             assay.type = assay_name, design = mod, test.type = "t",
             std.lfc = TRUE,
-            direction = "up", pval.type = "all", full.stats = T
+            direction = "up", pval.type = "all", full.stats = TRUE
         )
         fm.std <- fm.std[[2]]$stats.0
         colnames(fm.std)[[1]] <- "std.logFC"
