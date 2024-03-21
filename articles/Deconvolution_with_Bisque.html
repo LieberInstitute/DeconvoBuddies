@@ -90,7 +90,7 @@ Huuki-Myers</h4>
 Campus<br><a class="author_email" href="mailto:#"></a><a href="mailto:lahuuki@gmail.com" class="email">lahuuki@gmail.com</a>
       </address>
                   
-            <h4 data-toc-skip class="date">19 March 2024</h4>
+            <h4 data-toc-skip class="date">21 March 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lahuuki/DeconvoBuddies/blob/HEAD/vignettes/Deconvolution_with_Bisque.Rmd" class="external-link"><code>vignettes/Deconvolution_with_Bisque.Rmd</code></a></small>
       <div class="hidden name"><code>Deconvolution_with_Bisque.Rmd</code></div>
@@ -132,8 +132,8 @@ data</li>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"DeconvoBuddies"</span><span class="op">)</span></span>
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"DeconvoBuddies"</span><span class="op">)</span></span>
@@ -145,7 +145,7 @@ data</li>
 <h3 id="load-packages">Load Packages<a class="anchor" aria-label="anchor" href="#load-packages"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span> <span class="co">## install Bisque from cran</span></span>
+<code class="sourceCode R"><span><span class="co">## install Bisque from cran</span></span>
 <span><span class="co"># install.packages("BisqueRNA")</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/LieberInstitute/spatialLIBD" class="external-link">"spatialLIBD"</a></span><span class="op">)</span></span>
@@ -174,7 +174,7 @@ stored as a <code>SingleCellExperiment</code> object named
 <code>sce</code>, and takes 1.01 GB of RAM memory to load.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/spatialLIBD/man/fetch_data.html" class="external-link">fetch_data</a></span><span class="op">(</span><span class="st">"spatialDLPFC_snRNAseq"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-03-19 21:52:28.439888 loading file /github/home/.cache/R/BiocFileCache/150a7794bcb5_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2024-03-21 15:49:21.04026 loading file /github/home/.cache/R/BiocFileCache/66a5ae640eb_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">HDF5Array</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDF5Array/man/saveHDF5SummarizedExperiment.html" class="external-link">loadHDF5SummarizedExperiment</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sce_DLPFC_annotated"</span><span class="op">)</span></span>
@@ -355,7 +355,7 @@ stored as a <code>RangedSummarizedExperiment</code> object named
 <span><span class="co">#&gt;   453   447</span></span>
 <span></span>
 <span><span class="co">## subset columns containing samples from the DLPFC</span></span>
-<span><span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="va">rse_gene</span><span class="op">[</span>,<span class="va">rse_gene</span><span class="op">$</span><span class="va">Region</span> <span class="op">==</span> <span class="st">"DLPFC"</span><span class="op">]</span></span>
+<span><span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="va">rse_gene</span><span class="op">[</span>, <span class="va">rse_gene</span><span class="op">$</span><span class="va">Region</span> <span class="op">==</span> <span class="st">"DLPFC"</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co">## post subset dimensions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span></span>
@@ -369,32 +369,31 @@ stored as a <code>RangedSummarizedExperiment</code> object named
 <h3 id="find-marker-genes">Find Marker Genes<a class="anchor" aria-label="anchor" href="#find-marker-genes"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># </span></span>
+<code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="co"># # rm counts to help mem</span></span>
 <span><span class="co"># gene_sums &lt;- rowSums(as.data.frame(logcounts(sce)))</span></span>
 <span><span class="co"># top_gene &lt;- gene_sums &gt; median(gene_sums)</span></span>
 <span></span>
 <span><span class="co">## select 1k genes for memory</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span><span class="op">$</span><span class="va">gene_id</span></span>
-<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="va">sce</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>,<span class="op">]</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="va">sce</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="va">marker_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mean_ratio2.html">get_mean_ratio2</a></span><span class="op">(</span><span class="va">sce</span>, cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span><span class="op">)</span></span>
-<span><span class="co"># </span></span>
+<span><span class="co">#</span></span>
 <span><span class="co"># marker_stats</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plot-marker-genes">Plot marker genes<a class="anchor" aria-label="anchor" href="#plot-marker-genes"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="fu">DeconvoBuddies</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_marker_express.html">plot_marker_express</a></span><span class="op">(</span><span class="va">sce</span>,</span>
-<span>                    stats <span class="op">=</span> <span class="va">marker_stats</span>,</span>
-<span>                    cell_type <span class="op">=</span> <span class="st">'Astro'</span>,</span>
-<span>                    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
-<span>                    n_genes <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>                    rank_col <span class="op">=</span> <span class="st">"rank_ratio"</span>,</span>
-<span>                    anno_col <span class="op">=</span> <span class="st">"anno_ratio"</span>,</span>
-<span>                <span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">DeconvoBuddies</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_marker_express.html">plot_marker_express</a></span><span class="op">(</span><span class="va">sce</span>,</span>
+<span>    stats <span class="op">=</span> <span class="va">marker_stats</span>,</span>
+<span>    cell_type <span class="op">=</span> <span class="st">"Astro"</span>,</span>
+<span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
+<span>    n_genes <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>    rank_col <span class="op">=</span> <span class="st">"rank_ratio"</span>,</span>
+<span>    anno_col <span class="op">=</span> <span class="st">"anno_ratio"</span>,</span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="Deconvolution_with_Bisque_files/figure-html/plot%20marker%20genes-1.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -403,12 +402,12 @@ stored as a <code>RangedSummarizedExperiment</code> object named
 <span><span class="co">#                                   cat = "cellType_broad_hc",</span></span>
 <span><span class="co">#                                   genes = c("MBP","GFAP"))</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># </span></span>
+<code class="sourceCode R"><span><span class="co">#</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span><span class="op">$</span><span class="va">ensemblID</span></span>
 <span></span>
 <span><span class="va">marker_genes</span> <span class="op">&lt;-</span> <span class="va">marker_stats</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">rank_ratio</span> <span class="op">&lt;=</span> <span class="fl">25</span>, <span class="va">gene</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">gene</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">rank_ratio</span> <span class="op">&lt;=</span> <span class="fl">25</span>, <span class="va">gene</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">gene</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">marker_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">marker_genes</span><span class="op">)</span></span>
 <span></span>
@@ -423,27 +422,34 @@ stored as a <code>RangedSummarizedExperiment</code> object named
 <h3 id="prep-data">prep data<a class="anchor" aria-label="anchor" href="#prep-data"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exp_set_bulk</span> <span class="op">&lt;-</span> <span class="fu">Biobase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/class.ExpressionSet.html" class="external-link">ExpressionSet</a></span><span class="op">(</span>assayData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assays</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">[</span><span class="va">marker_genes</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">counts</span>,</span>
-<span>                              phenoData<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/class.AnnotatedDataFrame.html" class="external-link">AnnotatedDataFrame</a></span><span class="op">(</span></span>
-<span>                                <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SAMPLE_ID"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">exp_set_bulk</span> <span class="op">&lt;-</span> <span class="fu">Biobase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/class.ExpressionSet.html" class="external-link">ExpressionSet</a></span><span class="op">(</span></span>
+<span>    assayData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assays</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">[</span><span class="va">marker_genes</span>, <span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">counts</span>,</span>
+<span>    phenoData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/class.AnnotatedDataFrame.html" class="external-link">AnnotatedDataFrame</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SAMPLE_ID"</span><span class="op">)</span><span class="op">]</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">exp_set_sce</span> <span class="op">&lt;-</span> <span class="fu">Biobase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/class.ExpressionSet.html" class="external-link">ExpressionSet</a></span><span class="op">(</span>assayData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assays</a></span><span class="op">(</span><span class="va">sce</span><span class="op">[</span><span class="va">marker_genes</span>,<span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">counts</span><span class="op">)</span>,</span>
-<span>                             phenoData<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/class.AnnotatedDataFrame.html" class="external-link">AnnotatedDataFrame</a></span><span class="op">(</span></span>
-<span>                               <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cellType_broad_hc"</span>,<span class="st">"BrNum"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">exp_set_sce</span> <span class="op">&lt;-</span> <span class="fu">Biobase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/class.ExpressionSet.html" class="external-link">ExpressionSet</a></span><span class="op">(</span></span>
+<span>    assayData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assays</a></span><span class="op">(</span><span class="va">sce</span><span class="op">[</span><span class="va">marker_genes</span>, <span class="op">]</span><span class="op">)</span><span class="op">$</span><span class="va">counts</span><span class="op">)</span>,</span>
+<span>    phenoData <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/class.AnnotatedDataFrame.html" class="external-link">AnnotatedDataFrame</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cellType_broad_hc"</span>, <span class="st">"BrNum"</span><span class="op">)</span><span class="op">]</span></span>
+<span>    <span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">##check for nuclei with 0 marker expression</span></span>
+<span><span class="co">## check for nuclei with 0 marker expression</span></span>
 <span><span class="va">zero_cell_filter</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MatrixGenerics/man/rowSums.html" class="external-link">colSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/exprs.html" class="external-link">exprs</a></span><span class="op">(</span><span class="va">exp_set_sce</span><span class="op">)</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Exclude "</span>,<span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">zero_cell_filter</span><span class="op">)</span>, <span class="st">" cells"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="st">"Exclude "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">!</span><span class="va">zero_cell_filter</span><span class="op">)</span>, <span class="st">" cells"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Exclude 8 cells</span></span>
 <span></span>
-<span><span class="va">exp_set_sce</span> <span class="op">&lt;-</span> <span class="va">exp_set_sce</span><span class="op">[</span>,<span class="va">zero_cell_filter</span><span class="op">]</span></span></code></pre></div>
+<span><span class="va">exp_set_sce</span> <span class="op">&lt;-</span> <span class="va">exp_set_sce</span><span class="op">[</span>, <span class="va">zero_cell_filter</span><span class="op">]</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">est_prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BisqueRNA/man/ReferenceBasedDecomposition.html" class="external-link">ReferenceBasedDecomposition</a></span><span class="op">(</span>bulk.eset <span class="op">=</span> <span class="va">exp_set_bulk</span>,</span>
-<span>                                        sc.eset <span class="op">=</span> <span class="va">exp_set_sce</span>,</span>
-<span>                                        cell.types <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
-<span>                                        subject.names <span class="op">=</span> <span class="st">"BrNum"</span>,</span>
-<span>                                        use.overlap <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">est_prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BisqueRNA/man/ReferenceBasedDecomposition.html" class="external-link">ReferenceBasedDecomposition</a></span><span class="op">(</span></span>
+<span>    bulk.eset <span class="op">=</span> <span class="va">exp_set_bulk</span>,</span>
+<span>    sc.eset <span class="op">=</span> <span class="va">exp_set_sce</span>,</span>
+<span>    cell.types <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
+<span>    subject.names <span class="op">=</span> <span class="st">"BrNum"</span>,</span>
+<span>    use.overlap <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Decomposing into 8 cell types.</span></span>
 <span><span class="co">#&gt; Using 85 genes in both bulk and single-cell expression.</span></span>
 <span><span class="co">#&gt; Converting single-cell counts to CPM and filtering zero variance genes.</span></span>
@@ -459,8 +465,7 @@ stored as a <code>RangedSummarizedExperiment</code> object named
 <h2 id="explore-ouput">Explore Ouput<a class="anchor" aria-label="anchor" href="#explore-ouput"></a>
 </h2>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">est_prop</span><span class="op">$</span><span class="va">bulk.props</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">est_prop</span><span class="op">$</span><span class="va">bulk.props</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">est_prop</span><span class="op">$</span><span class="va">bulk.props</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">est_prop</span><span class="op">$</span><span class="va">bulk.props</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">est_prop</span><span class="op">$</span><span class="va">bulk.props</span><span class="op">)</span></span>
 <span><span class="co">#&gt;             Astro  EndoMural       Micro     Oligo        OPC     Excit</span></span>
@@ -481,15 +486,15 @@ stored as a <code>RangedSummarizedExperiment</code> object named
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## add Phenotype data to proportion estimates</span></span>
 <span><span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Sample <span class="op">=</span> <span class="va">RNum</span>, <span class="va">Sex</span>, <span class="va">Dx</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Sample <span class="op">=</span> <span class="va">RNum</span>, <span class="va">Sex</span>, <span class="va">Dx</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## make proption estimates long so they are ggplot friendly </span></span>
+<span><span class="co">## make proption estimates long so they are ggplot friendly</span></span>
 <span><span class="va">prop_long</span> <span class="op">&lt;-</span> <span class="va">est_prop</span><span class="op">$</span><span class="va">bulk.props</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"Sample"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">Sample</span>, names_to <span class="op">=</span> <span class="st">"cell_type"</span>, values_to <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"Sample"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">Sample</span>, names_to <span class="op">=</span> <span class="st">"cell_type"</span>, values_to <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(Sample)`</span></span>
 <span></span>
 <span><span class="co">## create composition bar plots</span></span>
@@ -539,9 +544,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"Deconvolution_with_Bisque.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-03-19 21:53:08 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-03-21 15:49:58 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 53.422 secs</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 50.367 secs</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
@@ -553,7 +558,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2024-03-19</span></span>
+<span><span class="co">#&gt;  date     2024-03-21</span></span>
 <span><span class="co">#&gt;  pandoc   3.1.1 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -598,8 +603,8 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  curl                     5.2.1       <span style="color: #555555;">2024-03-01</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
 <span><span class="co">#&gt;  data.table               1.15.2      <span style="color: #555555;">2024-02-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
 <span><span class="co">#&gt;  DBI                      1.2.2       <span style="color: #555555;">2024-02-16</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
-<span><span class="co">#&gt;  dbplyr                   2.4.0       <span style="color: #555555;">2023-10-26</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
-<span><span class="co">#&gt;  DeconvoBuddies         * 0.99.0      <span style="color: #555555;">2024-03-19</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
+<span><span class="co">#&gt;  dbplyr                   2.5.0       <span style="color: #555555;">2024-03-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
+<span><span class="co">#&gt;  DeconvoBuddies         * 0.99.0      <span style="color: #555555;">2024-03-21</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  DelayedArray             0.28.0      <span style="color: #555555;">2023-10-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  DelayedMatrixStats       1.24.0      <span style="color: #555555;">2023-10-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  desc                     1.4.3       <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
@@ -649,7 +654,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  knitr                    1.45        <span style="color: #555555;">2023-10-30</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
 <span><span class="co">#&gt;  labeling                 0.4.3       <span style="color: #555555;">2023-08-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
 <span><span class="co">#&gt;  later                    1.3.2       <span style="color: #555555;">2023-12-06</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
-<span><span class="co">#&gt;  lattice                  0.22-5      <span style="color: #555555;">2023-10-24</span> <span style="color: #555555;">[3]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
+<span><span class="co">#&gt;  lattice                  0.22-6      <span style="color: #555555;">2024-03-20</span> <span style="color: #555555;">[3]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
 <span><span class="co">#&gt;  lazyeval                 0.2.2       <span style="color: #555555;">2019-03-15</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
 <span><span class="co">#&gt;  lifecycle                1.0.4       <span style="color: #555555;">2023-11-07</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.3.0)</span></span></span>
 <span><span class="co">#&gt;  limma                    3.58.1      <span style="color: #555555;">2023-10-31</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
