@@ -25,14 +25,13 @@
 #'
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
-plot_marker_express_List <- function(
-        sce,
-        gene_list,
-        pdf_fn = "marker_expression.pdf",
-        cellType_col = "cellType",
-        gene_name_col = "Symbol",
-        color_pal = NULL,
-        plot_points = FALSE) {
+plot_marker_express_List <- function(sce,
+    gene_list,
+    pdf_fn = "marker_expression.pdf",
+    cellType_col = "cellType",
+    gene_name_col = "Symbol",
+    color_pal = NULL,
+    plot_points = FALSE) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
 
     if (!identical(rownames(sce), rowData(sce)[[gene_name_col]])) {

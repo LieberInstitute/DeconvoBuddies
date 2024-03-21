@@ -8,10 +8,10 @@ counts <- matrix(runif(nrows * ncols, 1, 1e4), nrows)
 gene_sym <- paste0("G", stringr::str_pad(seq(nrows), nchar(nrows), side = "left", pad = 0))
 
 rowRanges <- GenomicRanges::GRanges(rep(c("chr1", "chr2"), c(500, nrows - 500)),
-                                    IRanges::IRanges(floor(runif(nrows, 1e5, 1e6)), width = 100),
-                                    strand = sample(c("+", "-"), nrows, TRUE),
-                                    feature_id = sprintf("ID%03d", seq(nrows)),
-                                    Symbol = gene_sym
+    IRanges::IRanges(floor(runif(nrows, 1e5, 1e6)), width = 100),
+    strand = sample(c("+", "-"), nrows, TRUE),
+    feature_id = sprintf("ID%03d", seq(nrows)),
+    Symbol = gene_sym
 )
 
 BrNums <- paste0("Br", stringr::str_pad(1:ncols, nchar(ncols), side = "left", pad = 0))

@@ -32,22 +32,22 @@
 #'
 #' @family expression plotting functions
 #'
-plot_gene_express <- function(sce, 
-                              genes, 
-                              assay_name = "logcounts", 
-                              cat = "cellType", 
-                              color_pal = NULL, 
-                              title = NULL, 
-                              plot_points = FALSE,
-                              ncol = 2) {
+plot_gene_express <- function(sce,
+    genes,
+    assay_name = "logcounts",
+    cat = "cellType",
+    color_pal = NULL,
+    title = NULL,
+    plot_points = FALSE,
+    ncol = 2) {
     stopifnot(any(genes %in% rownames(sce)))
-  
-    if(!cat %in% colnames(colData(sce))){
-      message("ERROR '", cat, "' is not a column name in colData(sce), check that `cat` matches this sce")
-      stop()
-    } 
-  
-      stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
+
+    if (!cat %in% colnames(colData(sce))) {
+        message("ERROR '", cat, "' is not a column name in colData(sce), check that `cat` matches this sce")
+        stop()
+    }
+
+    stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
 
     value <- NULL
 

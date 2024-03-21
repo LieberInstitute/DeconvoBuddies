@@ -75,22 +75,21 @@ deconvolution with the `Bisque` package.
 
 ```{r "install", eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-  }
+    install.packages("BiocManager")
+}
 
 BiocManager::install("DeconvoBuddies")
 BiocManager::install("DeconvoBuddies")
 
 ## Check that you have a valid Bioconductor installation
 BiocManager::valid()
-
 ```
 
 
 ## Load Packages
 
 ```{r "load_packages", message=FALSE, warning=FALSE}
- ## install Bisque from cran
+## install Bisque from cran
 # install.packages("BisqueRNA")
 
 library("spatialLIBD")
@@ -132,7 +131,6 @@ colData(sce)
 
 ## what is the cell type breakdown?
 table(sce$cellType_broad_hc)
-
 ```
 
 ```{r "sn data size check", echo=FALSE}
@@ -174,7 +172,7 @@ dim(rse_gene)
 table(rse_gene$Region)
 
 ## subset columns containing samples from the DLPFC
-rse_gene <- rse_gene[,rse_gene$Region == "DLPFC"]
+rse_gene <- rse_gene[, rse_gene$Region == "DLPFC"]
 
 ## post subset dimensions
 dim(rse_gene)
@@ -183,52 +181,48 @@ dim(rse_gene)
 # Marker Genes
 ## Find Marker Genes
 ```{r, "find marker genes"}
-# 
+#
 # # rm counts to help mem
 # gene_sums <- rowSums(as.data.frame(logcounts(sce)))
 # top_gene <- gene_sums > median(gene_sums)
 
 ## select 1k genes for memory
 rownames(sce) <- rowData(sce)$gene_id
-sce <- sce[1:1000,]
+sce <- sce[1:1000, ]
 
 marker_stats <- get_mean_ratio2(sce, cellType_col = "cellType_broad_hc")
-# 
+#
 # marker_stats
 ```
 
 ## Plot marker genes
 ```{r "plot marker genes"}
-
 DeconvoBuddies::plot_marker_express(sce,
-                    stats = marker_stats,
-                    cell_type = 'Astro',
-                    cellType_col = "cellType_broad_hc",
-                    n_genes = 10,
-                    rank_col = "rank_ratio",
-                    anno_col = "anno_ratio",
-                )
+    stats = marker_stats,
+    cell_type = "Astro",
+    cellType_col = "cellType_broad_hc",
+    n_genes = 10,
+    rank_col = "rank_ratio",
+    anno_col = "anno_ratio",
+)
 
 
 # DeconvoBuddies::plot_gene_express(sce,
 #                                   cat = "cellType_broad_hc",
 #                                   genes = c("MBP","GFAP"))
-
-
 ```
 
 ```{r, "pull marker genes"}
-# 
+#
 rownames(rse_gene) <- rowData(rse_gene)$ensemblID
 
 marker_genes <- marker_stats |>
-  filter(rank_ratio <= 25, gene %in% rownames(rse_gene)) |>
-  pull(gene)
+    filter(rank_ratio <= 25, gene %in% rownames(rse_gene)) |>
+    pull(gene)
 
 marker_genes <- unique(marker_genes)
 
 length(marker_genes)
-
 ```
 
 
@@ -237,61 +231,63 @@ length(marker_genes)
 
 ## prep data
 ```{r "prep data as ExpressionSet"}
-exp_set_bulk <- Biobase::ExpressionSet(assayData = assays(rse_gene[marker_genes,])$counts,
-                              phenoData=AnnotatedDataFrame(
-                                as.data.frame(colData(rse_gene))[c("SAMPLE_ID")]))
+exp_set_bulk <- Biobase::ExpressionSet(
+    assayData = assays(rse_gene[marker_genes, ])$counts,
+    phenoData = AnnotatedDataFrame(
+        as.data.frame(colData(rse_gene))[c("SAMPLE_ID")]
+    )
+)
 
-exp_set_sce <- Biobase::ExpressionSet(assayData = as.matrix(assays(sce[marker_genes,])$counts),
-                             phenoData=AnnotatedDataFrame(
-                               as.data.frame(colData(sce))[,c("cellType_broad_hc","BrNum")]))
+exp_set_sce <- Biobase::ExpressionSet(
+    assayData = as.matrix(assays(sce[marker_genes, ])$counts),
+    phenoData = AnnotatedDataFrame(
+        as.data.frame(colData(sce))[, c("cellType_broad_hc", "BrNum")]
+    )
+)
 
-##check for nuclei with 0 marker expression
+## check for nuclei with 0 marker expression
 zero_cell_filter <- colSums(exprs(exp_set_sce)) != 0
-message("Exclude ",sum(!zero_cell_filter), " cells")
+message("Exclude ", sum(!zero_cell_filter), " cells")
 
-exp_set_sce <- exp_set_sce[,zero_cell_filter]
-
+exp_set_sce <- exp_set_sce[, zero_cell_filter]
 ```
 
 
 ```{r, "run Bisque"}
-
-est_prop <- ReferenceBasedDecomposition(bulk.eset = exp_set_bulk,
-                                        sc.eset = exp_set_sce,
-                                        cell.types = "cellType_broad_hc",
-                                        subject.names = "BrNum",
-                                        use.overlap = FALSE)
-
+est_prop <- ReferenceBasedDecomposition(
+    bulk.eset = exp_set_bulk,
+    sc.eset = exp_set_sce,
+    cell.types = "cellType_broad_hc",
+    subject.names = "BrNum",
+    use.overlap = FALSE
+)
 ```
 
 # Explore Ouput
 ```{r, "deconvo output"}
-
 est_prop$bulk.props <- t(est_prop$bulk.props)
 
 head(est_prop$bulk.props)
-
 ```
 
 Plot Composition Barplots of Bisque predicted compostions
 ```{r, "composition plots"}
 ## add Phenotype data to proportion estimates
 pd <- colData(rse_gene) |>
-  as.data.frame() |>
-  select(Sample = RNum, Sex, Dx)
+    as.data.frame() |>
+    select(Sample = RNum, Sex, Dx)
 
-## make proption estimates long so they are ggplot friendly 
+## make proption estimates long so they are ggplot friendly
 prop_long <- est_prop$bulk.props |>
-  as.data.frame() |>
-  tibble::rownames_to_column("Sample") |>
-  tidyr::pivot_longer(!Sample, names_to = "cell_type", values_to = "prop") |>
-  left_join(pd)
+    as.data.frame() |>
+    tibble::rownames_to_column("Sample") |>
+    tidyr::pivot_longer(!Sample, names_to = "cell_type", values_to = "prop") |>
+    left_join(pd)
 
 ## create composition bar plots
 plot_composition_bar(prop_long = prop_long, sample_col = "Sample", x_col = "Dx")
 
 plot_composition_bar(prop_long = prop_long, sample_col = "Sample", x_col = "Sample", add_text = FALSE)
-
 ```
 
 
