@@ -60,13 +60,13 @@ findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellTy
     })
 
     if (verbose) message("Building Table - ", Sys.time())
-    markers.t.1vAll.table <- do.call("rbind", markers.t.1vAll) %>%
-        as.data.frame() %>%
-        tibble::rownames_to_column("gene") %>%
-        mutate(gene = gsub("\\.\\d+", "", gene)) %>%
-        tibble::as_tibble() %>%
-        tibble::add_column(cellType.target = rep(cell_types, each = nrow(sce))) %>%
-        dplyr::group_by(cellType.target) %>%
+    markers.t.1vAll.table <- do.call("rbind", markers.t.1vAll) |>
+        as.data.frame() |>
+        tibble::rownames_to_column("gene") |>
+        mutate(gene = gsub("\\.\\d+", "", gene)) |>
+        tibble::as_tibble() |>
+        tibble::add_column(cellType.target = rep(cell_types, each = nrow(sce))) |>
+        dplyr::group_by(cellType.target) |>
         mutate(
             rank_marker = dplyr::row_number(),
             anno_logFC = paste0(" std logFC = ", round(std.logFC, 3))
@@ -74,7 +74,7 @@ findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellTy
 
     if (add_symbol) {
         markers.t.1vAll.table$Symbol <- rowData(sce)[markers.t.1vAll.table$gene, ]$Symbol
-        markers.t.1vAll.table <- markers.t.1vAll.table %>%
+        markers.t.1vAll.table <- markers.t.1vAll.table |>
             mutate(feature_marker = paste0(stringr::str_pad(rank_marker, 4, "left"), ": ", Symbol))
     }
 
