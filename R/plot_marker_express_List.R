@@ -34,7 +34,7 @@ plot_marker_express_List <- function(sce,
     plot_points = FALSE) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
 
-    if (!identical(rownames(sce), rowData(sce)[[gene_name_col]])) {
+    if (!identical(rownames(sce), SummarizedExperiment::rowData(sce)[[gene_name_col]])) {
         message("Using ", gene_name_col, " as gene names")
         rownames(sce) <- rowData(sce)[[gene_name_col]]
     }
