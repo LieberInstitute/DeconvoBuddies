@@ -32,7 +32,9 @@ Imports:
     SummarizedExperiment,
     tibble,
     RColorBrewer,
-    grDevices
+    grDevices,
+    BiocFileCache,
+    ExperimentHub
 Suggests: 
     knitr,
     covr,
@@ -43,7 +45,6 @@ Suggests:
     RefManageR,
     sessioninfo,
     tidyverse,
-    BiocFileCache,
     spatialLIBD,
     BisqueRNA,
     HDF5Array
