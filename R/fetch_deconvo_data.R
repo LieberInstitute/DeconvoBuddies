@@ -18,6 +18,7 @@
 #' @export
 #' @import ExperimentHub
 #' @import BiocFileCache
+#' @importFrom AnnotationHub query
 #'
 #' @examples
 #' rse_gene <- fetch_deconvo_data("rse_gene")

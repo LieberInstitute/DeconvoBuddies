@@ -34,7 +34,8 @@ Imports:
     RColorBrewer,
     grDevices,
     BiocFileCache,
-    ExperimentHub
+    ExperimentHub,
+    AnnotationHub
 Suggests: 
     knitr,
     covr,
