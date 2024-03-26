@@ -15,7 +15,7 @@ meta <- data.frame(
   ),
   Description = c(
     "RangedSummarizedExperiment with bulk gene RNA expression data of Human DLPFC, generated at the Lieber Institute for Brain Development (LIBD) and available through the DeconvoBuddies Bioconductor package."
-  ),BiocVersion = "3.18",
+  ),BiocVersion = "3.19",
   Genome = "GRCh38",
   SourceType = "GTF",
   SourceUrl = "https://github.com/LieberInstitute/DeconvoBuddies",
