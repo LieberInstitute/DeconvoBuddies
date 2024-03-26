@@ -45,7 +45,7 @@ plot_marker_express <- function(
     stopifnot(cell_type %in% stats$cellType.target)
 
     # RCMD fix
-    rank_int <- Symbol <- anno_str <- cellType.target <- NULL
+    rank_int <- Symbol <- anno_str <- cellType.target <- Feature <- NULL
 
     title <- paste(cell_type, "Top", n_genes, "Markers")
     # message(title)
