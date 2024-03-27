@@ -36,7 +36,7 @@ plot_marker_express_List <- function(sce,
 
     if (!identical(rownames(sce), SummarizedExperiment::rowData(sce)[[gene_name_col]])) {
         message("Using ", gene_name_col, " as gene names")
-        rownames(sce) <- rowData(sce)[[gene_name_col]]
+        rownames(sce) <- SummarizedExperiment::rowData(sce)[[gene_name_col]]
     }
 
     grDevices::pdf(pdf_fn)
