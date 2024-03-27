@@ -35,7 +35,8 @@ Imports:
     grDevices,
     BiocFileCache,
     ExperimentHub,
-    AnnotationHub
+    AnnotationHub,
+    methods
 Suggests: 
     knitr,
     covr,
