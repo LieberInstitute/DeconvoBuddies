@@ -51,12 +51,10 @@
 
 #' Cell Type Proportions estimated from RNAScope
 #' 
-#' Cell type proportion estimates from high quality images from Deconvolution 
-#' Benchmark bioRxiv 2024.02.09.579665; doi: <https://doi.org/10.1101/2024.02.09.579665> 
-#' 
-#' <https://github.com/LieberInstitute/Human_DLPFC_Deconvolution>
-#' (TODO cite paper)
-#' 
+#' Cell type proportion estimates from high quality images from 
+#' Huuki-Myers et al., bioRxiv, 2024, 
+#' doi: <https://doi.org/10.1101/2024.02.09.579665>.
+#'  
 #' 11.49 kB
 #' 
 #' `SAMPLE_ID` : DLPFC Tissue block + RNAScope combination. 
