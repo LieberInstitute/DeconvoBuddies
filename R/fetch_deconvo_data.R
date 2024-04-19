@@ -8,7 +8,9 @@
 #'  
 #'  Note that ExperimentHub and BiocFileCache will cache the data and 
 #'  automatically detect if you have previously downloaded it, thus making it 
-#'  the preferred way to interact with the data.
+#'  the preferred way to interact with the data. 
+#'  
+#'  Based on spatialLIBD::fetch_data()
 #'
 #' @param type A `character(1)` specifying which file you want to download. 
 #' `rse_gene` {RangedSummarizedExperiment} with 110 bulk RNA-seq samples
@@ -28,6 +30,7 @@
 #' @import BiocFileCache
 #' @importFrom AnnotationHub query
 #' @importFrom methods is
+#' @importFrom spatialLIBD fetch_data
 #'
 #' @examples
 #' ## Download the bulk RNA gene expression data
@@ -37,7 +40,7 @@
 #' 
 #' ## explore data
 #' rse_gene
-#' class: RangedSummarizedExperiment 
+#' # class: RangedSummarizedExperiment 
 #' # dim: 21745 110 
 #' # metadata(1): SPEAQeasy_settings
 #' # assays(2): counts logcounts
@@ -47,7 +50,16 @@
 #' # AN00000906_Br8667_Mid_Nuc
 #' # colData names(78): SAMPLE_ID Sample ... diagnosis qc_class
 #' 
-fetch_deconvo_data <- function(type = c("rse_gene"),
+#' ## load sce
+#' if (!exists("rse-gene")) rse_gene <- fetch_deconvo_data("rse_gene")
+#' \dontrun{
+#' sce_path_zip <- fetch_deconvo_data("sce")
+#' sce_path <- unzip(sce_path_zip, exdir = tempdir())
+#' sce <- HDF5Array::loadHDF5SummarizedExperiment(
+#'     file.path(tempdir(), "sce_DLPFC_annotated")
+#' )
+#' }
+fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_example"),
                              destdir = tempdir(),
                              eh = ExperimentHub::ExperimentHub(),
                              bfc = BiocFileCache::BiocFileCache()){
@@ -61,9 +73,7 @@ fetch_deconvo_data <- function(type = c("rse_gene"),
   stopifnot(methods::is(eh, "ExperimentHub"))
   
   if(type == "rse_gene") {
-    
     tag <- "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
-    
     hub_title <-
       "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
 
@@ -72,8 +82,12 @@ fetch_deconvo_data <- function(type = c("rse_gene"),
       "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
     url <-
       "https://www.dropbox.com/scl/fi/9eyg9e1r98t73wyzsuxhr/rse_gene.Rdata?rlkey=sw2djr71y954yw4o3xrmjv59b&dl=1"
+  } else if(type == "sce"){
     
-  } else {
+    sce_path <- spatialLIBD::fetch_data("spatialDLPFC_snRNAseq") 
+    return(sce_path)
+  }
+  else {
     stop("Datatype Unkown")
   }
   
@@ -105,6 +119,6 @@ fetch_deconvo_data <- function(type = c("rse_gene"),
   
     } else {
     file_path
-  }
+    } 
   
 }

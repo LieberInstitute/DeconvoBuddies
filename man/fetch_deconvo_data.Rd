@@ -5,7 +5,7 @@
 \title{Download Human DLPFC Deconvolution Data}
 \usage{
 fetch_deconvo_data(
-  type = c("rse_gene"),
+  type = c("rse_gene", "sce", "sce_example"),
   destdir = tempdir(),
   eh = ExperimentHub::ExperimentHub(),
   bfc = BiocFileCache::BiocFileCache()
@@ -38,6 +38,8 @@ BiocFileCache::bfcrpath() unless the files are present already at destdir.
 Note that ExperimentHub and BiocFileCache will cache the data and
 automatically detect if you have previously downloaded it, thus making it
 the preferred way to interact with the data.
+
+Based on spatialLIBD::fetch_data()
 }
 \examples{
 ## Download the bulk RNA gene expression data
@@ -47,7 +49,7 @@ if (!exists("rse-gene")) rse_gene <- fetch_deconvo_data("rse_gene")
 
 ## explore data
 rse_gene
-class: RangedSummarizedExperiment 
+# class: RangedSummarizedExperiment 
 # dim: 21745 110 
 # metadata(1): SPEAQeasy_settings
 # assays(2): counts logcounts
@@ -57,4 +59,13 @@ class: RangedSummarizedExperiment
 # AN00000906_Br8667_Mid_Nuc
 # colData names(78): SAMPLE_ID Sample ... diagnosis qc_class
 
+## load sce
+if (!exists("rse-gene")) rse_gene <- fetch_deconvo_data("rse_gene")
+\dontrun{
+sce_path_zip <- fetch_deconvo_data("sce")
+sce_path <- unzip(sce_path_zip, exdir = tempdir())
+sce <- HDF5Array::loadHDF5SummarizedExperiment(
+    file.path(tempdir(), "sce_DLPFC_annotated")
+)
+}
 }
