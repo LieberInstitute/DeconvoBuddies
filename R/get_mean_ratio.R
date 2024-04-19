@@ -13,20 +13,33 @@
 #' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
 #' `sce` object to use to rank expression values. Defaults to `logcounts` since
 #' it typically contains the normalized expression values.
-#' @param add_symbol a logical indicating whether the gene symbol column to the marker stats table
+#' @param gene_ensembl A `character(1)` specifying the `rowData(sce_pseudo)`
+#' column with the ENSEMBL gene IDs. This will be used by `layer_stat_cor()`.
+#' @param gene_name A `character(1)` specifying the `rowData(sce_pseudo)`
+#' column with the gene names (symbols).
 #'
 #' @return Table of mean ratio for each x cell type
 #' @export
 #'
 #'
 #' @examples
-#' get_mean_ratio2(sce.test)
+#' get_mean_ratio(sce.test)
+#' 
+#' #Specify gene_name as the "Symbol" column from rowData
+#' # this will be added to the marker stats output
+#' get_mean_ratio(sce.test, gene_name = "Symbol")
+#' 
 #' @importFrom dplyr mutate
 #' @importFrom dplyr arrange
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom matrixStats rowMedians
-get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcounts", add_symbol = TRUE) {
+get_mean_ratio <- function(sce, 
+                            cellType_col = "cellType", 
+                            assay_name = "logcounts", 
+                            gene_ensembl = NULL,
+                            gene_name = NULL
+                            ) {
     # RCMD fix
     cellType.target <- NULL
     cellType <- NULL
@@ -48,19 +61,25 @@ get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcou
     # print(head(cell_means))
 
     ## Filter and calculate ratio for each celltype
-    ratio_tables <- map(cell_types, ~ .get_ratio_table(.x, sce, sce_assay, cellType_col, cell_means))
+    ratio_tables <- map(cell_types, ~ .get_ratio_table(.x, 
+                                                       sce, 
+                                                       sce_assay, 
+                                                       cellType_col, 
+                                                       cell_means))
 
-    ratio_tables <- do.call("rbind", ratio_tables)
+    ratio_tables <- do.call("rbind", ratio_tables)  |>
+      mutate(anno_ratio = paste0(cellType.target, "/", cellType, ": ", base::round(ratio, 3)))
 
     # max_digits <- nchar(max(ratio_tables$ratio_tables))
 
-    if (add_symbol) {
-        ratio_tables$Symbol <- SummarizedExperiment::rowData(sce)[ratio_tables$gene, ]$Symbol
-        # ratio_tables <- ratio_tables %>%
+    if (!is.null(gene_name)) {
+      
+        ratio_tables$gene_name <- SummarizedExperiment::rowData(sce)[ratio_tables$gene, ][[gene_name]]
+        # ratio_tables <- ratio_tables |>
         #    mutate(ratio_anno = paste0(stringr::str_pad(rank_ratio, max_digits, "left"),": ",Symbol))
     }
-    ratio_tables <- ratio_tables %>%
-        mutate(anno_ratio = paste0(cellType.target, "/", cellType, ": ", base::round(ratio, 3)))
+    
+    ratio_tables <- ratio_tables
 
     return(ratio_tables)
 }
@@ -84,14 +103,14 @@ get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcou
 
     nontarget_mean <- cell_means[cell_means$cellType != x, ]
 
-    ratio_table <- dplyr::left_join(target_mean, nontarget_mean, by = "gene") %>%
-        mutate(ratio = mean.target / mean) %>%
-        dplyr::group_by(gene) %>%
-        arrange(ratio) %>%
-        dplyr::slice(1) %>%
-        dplyr::select(gene, cellType.target, mean.target, cellType, mean, ratio) %>%
-        arrange(-ratio) %>%
-        dplyr::ungroup() %>%
+    ratio_table <- dplyr::left_join(target_mean, nontarget_mean, by = "gene") |>
+        mutate(ratio = mean.target / mean) |>
+        dplyr::group_by(gene) |>
+        arrange(ratio) |>
+        dplyr::slice(1) |>
+        dplyr::select(gene, cellType.target, mean.target, cellType, mean, ratio) |>
+        arrange(-ratio) |>
+        dplyr::ungroup() |>
         mutate(rank_ratio = dplyr::row_number())
 
     return(ratio_table)

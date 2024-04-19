@@ -8,25 +8,43 @@ get_mean_ratio(
   sce,
   cellType_col = "cellType",
   assay_name = "logcounts",
-  add_symbol = FALSE
+  gene_ensembl = NULL,
+  gene_name = NULL
 )
 }
 \arguments{
-\item{sce}{Single cell experiment object}
+\item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
 
-\item{cellType_col}{Column name on colData of the sce that denotes the celltype}
+\item{cellType_col}{A \code{character(1)} name of the column in the
+\link[SummarizedExperiment:SummarizedExperiment-class]{colData()} of \code{sce} that
+denotes the cell type or group of interest}
 
-\item{assay_name}{Name of the assay to use for calculation}
+\item{assay_name}{A \code{character(1)} specifying the name of the
+\link[SummarizedExperiment:SummarizedExperiment-class]{assay()} in the
+\code{sce} object to use to rank expression values. Defaults to \code{logcounts} since
+it typically contains the normalized expression values.}
 
-\item{add_symbol}{Add the gene symbol column to the marker stats table}
+\item{gene_ensembl}{A \code{character(1)} specifying the \code{rowData(sce_pseudo)}
+column with the ENSEMBL gene IDs. This will be used by \code{layer_stat_cor()}.}
+
+\item{gene_name}{A \code{character(1)} specifying the \code{rowData(sce_pseudo)}
+column with the gene names (symbols).}
 }
 \value{
 Table of mean ratio for each x cell type
 }
 \description{
-Get Mean Ratio for Each Gene x Cell Type
+Calculate the mean ratio value and rank for each gene for each cell type in the \code{sce}
+object, to identify effective marker genes for deconvolution.
+}
+\details{
+Improved efficiency and ability to handle large data sets from \code{get_mean_ratio()}.
 }
 \examples{
-markers_ratio <- get_mean_ratio(sce.test)
-head(markers_ratio)
+get_mean_ratio(sce.test)
+
+#Specify gene_name as the "Symbol" column from rowData
+# this will be added to the marker stats output
+get_mean_ratio(sce.test, gene_name = "Symbol")
+
 }
