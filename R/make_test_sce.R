@@ -1,4 +1,4 @@
-#' Title
+#' Simulate a SingleCellExperiment for testing
 #'
 #' @param n_cell Number of cells
 #' @param n_gene Number of genes

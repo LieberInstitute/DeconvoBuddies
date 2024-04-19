@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_test_sce.R
 \name{make_test_sce}
 \alias{make_test_sce}
-\title{Title}
+\title{Simulate a SingleCellExperiment for testing}
 \usage{
 make_test_sce(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 2)
 }
@@ -19,7 +19,7 @@ make_test_sce(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 2)
 SingelCellExperiment object with randomly generated counts and colData
 }
 \description{
-Title
+Simulate a SingleCellExperiment for testing
 }
 \examples{
 test <- make_test_sce()

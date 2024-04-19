@@ -1,6 +1,8 @@
 #' Test Estimated Cell Type Proportions
 #'
 #' A test dataset of estiamted protions for 5 cell types over 100 samples.
+#' 
+#' 11.62 kB
 #'
 #' @format A data.frame object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/est_prop.R>
@@ -9,22 +11,28 @@
 #' Markers stats from sce.test
 #'
 #' A tibble containing the marker stats from `get_mean_ratio2` for `sce.test`.
-#'
+#' 
+#' 402.60 kB
+#' 
 #' @format tibble.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/marker_test.R>
 "marker_test"
 
 #' Test bulk rse dataset
 #'
-#' TODO Description.
-#'
+#' A test rse_gene object, 1000 genes x 100 samples
+#' 
+#' 976.77 kB
 #' @format A SummarizedExperiment object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/genotyped.R>
 "rse_bulk_test"
 
-#' TODO genotyped
+#' Test subset of a real snRNA-seq data
 #'
-#' TODO Description.
+#' A subset of 1000 genes and 500 nuclei from Tran, Maynard et al., Neuron 2021
+#' including 8 cell types. 
+#' 
+#' 4.26 MB
 #'
 #' @format A SingleCellExperiment object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce.test.R>
@@ -32,7 +40,10 @@
 
 #' Toy SCE object for testing
 #'
-#' TODO Description.
+#' An example sce object for testing, with two cell types A and B. 
+#' 
+#' Generated with DeconvoBuddies::make_test_sce()
+#' 38.26 kB
 #'
 #' @format A SingleCellExperiment object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce_ab.R>
@@ -41,7 +52,12 @@
 #' Cell Type Proportions estimated from RNAScope
 #' 
 #' Cell type proportion estimates from high quality images from Deconvolution 
-#' Benchmark (TODO cite paper)
+#' Benchmark bioRxiv 2024.02.09.579665; doi: <https://doi.org/10.1101/2024.02.09.579665> 
+#' 
+#' <https://github.com/LieberInstitute/Human_DLPFC_Deconvolution>
+#' (TODO cite paper)
+#' 
+#' 11.49 kB
 #' 
 #' `SAMPLE_ID` : DLPFC Tissue block + RNAScope combination. 
 #' `Sample` : DLFPC Tissue block (Donor BrNum + DLPFC position).   

@@ -16,4 +16,7 @@ est_prop
 \description{
 A test dataset of estiamted protions for 5 cell types over 100 samples.
 }
+\details{
+11.62 kB
+}
 \keyword{datasets}

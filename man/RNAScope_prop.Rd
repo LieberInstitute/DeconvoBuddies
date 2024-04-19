@@ -15,9 +15,14 @@ RNAScope_prop
 }
 \description{
 Cell type proportion estimates from high quality images from Deconvolution
-Benchmark (TODO cite paper)
+Benchmark bioRxiv 2024.02.09.579665; doi: \url{https://doi.org/10.1101/2024.02.09.579665}
 }
 \details{
+\url{https://github.com/LieberInstitute/Human_DLPFC_Deconvolution}
+(TODO cite paper)
+
+11.49 kB
+
 \code{SAMPLE_ID} : DLPFC Tissue block + RNAScope combination.
 \code{Sample} : DLFPC Tissue block (Donor BrNum + DLPFC position).
 \code{Combo} : RNAScope probe combination, either "Circle" marking cell types Astro

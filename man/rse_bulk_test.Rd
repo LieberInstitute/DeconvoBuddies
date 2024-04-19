@@ -14,6 +14,9 @@ A SummarizedExperiment object.
 rse_bulk_test
 }
 \description{
-TODO Description.
+A test rse_gene object, 1000 genes x 100 samples
+}
+\details{
+976.77 kB
 }
 \keyword{datasets}

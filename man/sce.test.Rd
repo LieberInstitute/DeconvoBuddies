@@ -3,7 +3,7 @@
 \docType{data}
 \name{sce.test}
 \alias{sce.test}
-\title{TODO genotyped}
+\title{Test subset of a real snRNA-seq data}
 \format{
 A SingleCellExperiment object.
 
@@ -16,9 +16,13 @@ sce with 1000 genes
 sce.test
 }
 \description{
-TODO Description.
+A subset of 1000 genes and 500 nuclei from Tran, Maynard et al., Neuron 2021
+including 8 cell types.
 
 Description:
+}
+\details{
+4.26 MB
 }
 \references{
 \enumerate{

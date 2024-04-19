@@ -16,4 +16,7 @@ marker_test
 \description{
 A tibble containing the marker stats from \code{get_mean_ratio2} for \code{sce.test}.
 }
+\details{
+402.60 kB
+}
 \keyword{datasets}
