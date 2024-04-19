@@ -28,12 +28,33 @@ were previously downloaded to avoid re-downloading them.}
 \code{eh} is not available.}
 }
 \value{
-The requested object
+The requested object: \code{rse_gene} that you assign to an object
 }
 \description{
-Download Human DLPFC Deconvolution Data
+This function downloads from ExperimentHub, if ExperimentHub is not
+available, this function will download the files from Dropbox using
+BiocFileCache::bfcrpath() unless the files are present already at destdir.
+
+Note that ExperimentHub and BiocFileCache will cache the data and
+automatically detect if you have previously downloaded it, thus making it
+the preferred way to interact with the data.
 }
 \examples{
-rse_gene <- fetch_deconvo_data("rse_gene")
+## Download the bulk RNA gene expression data
+## A RangedSummarizedExperiment (41.16 MB)
+
+if (!exists("rse-gene")) rse_gene <- fetch_deconvo_data("rse_gene")
+
+## explore data
+rse_gene
+class: RangedSummarizedExperiment 
+# dim: 21745 110 
+# metadata(1): SPEAQeasy_settings
+# assays(2): counts logcounts
+# rownames(21745): ENSG00000227232.5 ENSG00000278267.1 ... ENSG00000210195.2 ENSG00000210196.2
+# rowData names(11): Length gencodeID ... gencodeTx passExprsCut
+# colnames(110): 2107UNHS-0291_Br2720_Mid_Bulk 2107UNHS-0291_Br2720_Mid_Cyto ... AN00000906_Br8667_Mid_Cyto
+# AN00000906_Br8667_Mid_Nuc
+# colData names(78): SAMPLE_ID Sample ... diagnosis qc_class
 
 }
