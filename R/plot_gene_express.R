@@ -49,7 +49,7 @@ plot_gene_express <- function(sce,
 
     stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
 
-    value <- NULL
+    value <- median <- NULL
 
     cat_df <- as.data.frame(colData(sce))[, cat, drop = FALSE]
     expression_long <- reshape2::melt(as.matrix(SummarizedExperiment::assays(sce)[[assay_name]][genes, , drop = FALSE]))
