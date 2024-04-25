@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# DeconvoBuddies
+# DeconvoBuddies <img src="man/figures/logo.png" align="right" height="138" alt="" />
 
 <!-- badges: start -->
 
@@ -128,15 +128,15 @@ Get mean ratios for each gene x cell type
 ``` r
 ratios <- get_mean_ratio2(sce.test)
 fc <- findMarkers_1vAll(sce.test)
-#> Inhib.2 - '2024-03-19 16:13:23.361677
-#> Inhib.1 - '2024-03-19 16:13:23.654662
-#> OPC - '2024-03-19 16:13:23.82545
-#> Astro - '2024-03-19 16:13:24.033885
-#> Excit.2 - '2024-03-19 16:13:24.268223
-#> Oligo - '2024-03-19 16:13:24.432648
-#> Micro - '2024-03-19 16:13:24.600515
-#> Excit.1 - '2024-03-19 16:13:24.768858
-#> Building Table - 2024-03-19 16:13:24.950633
+#> Inhib.2 - '2024-04-25 13:04:18.112684
+#> Inhib.1 - '2024-04-25 13:04:18.658684
+#> OPC - '2024-04-25 13:04:18.863432
+#> Astro - '2024-04-25 13:04:19.091077
+#> Excit.2 - '2024-04-25 13:04:19.313
+#> Oligo - '2024-04-25 13:04:19.496721
+#> Micro - '2024-04-25 13:04:19.681585
+#> Excit.1 - '2024-04-25 13:04:19.866671
+#> Building Table - 2024-04-25 13:04:20.061211
 #> ** Done! **
 
 (marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
@@ -245,7 +245,7 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #> 
 #>   @Manual{,
 #>     title = {DeconvoBuddies: a R/Bioconductor package with deconvolution helper functions},
-#>     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Jole E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},
+#>     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Joel E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},
 #>     year = {2024},
 #>     url = {http://www.bioconductor.org/packages/DeconvoBuddies},
 #>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.0},
@@ -273,7 +273,7 @@ By contributing to this project, you agree to abide by its terms.
   *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)* customized
   to use [Bioconductor’s docker
   containers](https://www.bioconductor.org/help/docker/) and
-  *[BiocCheck](https://bioconductor.org/packages/3.17/BiocCheck)*.
+  *[BiocCheck](https://bioconductor.org/packages/3.18/BiocCheck)*.
 - Code coverage assessment is possible thanks to
   [codecov](https://codecov.io/gh) and
   *[covr](https://CRAN.R-project.org/package=covr)*.
@@ -289,4 +289,4 @@ By contributing to this project, you agree to abide by its terms.
 For more details, check the `dev` directory.
 
 This package was developed using
-*[biocthis](https://bioconductor.org/packages/3.17/biocthis)*.
+*[biocthis](https://bioconductor.org/packages/3.18/biocthis)*.
