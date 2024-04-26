@@ -3,7 +3,7 @@
 #' Calculate the mean ratio value and rank for each gene for each cell type in the `sce`
 #' object, to identify effective marker genes for deconvolution.
 #'
-#' Improved efficiency and ability to handle large data sets from `get_mean_ratio()`.
+#' Improved argument names and documentaion, but same functionalty from `get_mean_ratio2()`.
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
 #' @param cellType_col A `character(1)` name of the column in the
@@ -18,16 +18,42 @@
 #' @param gene_name A `character(1)` specifying the `rowData(sce_pseudo)`
 #' column with the gene names (symbols).
 #'
-#' @return Table of mean ratio for each x cell type
+#' @return A `tibble` with the `MeanRatio` values for each gene x cell type. 
+#' * `gene` is the name of the gene (from rownames(`sce`)). 
+#' * `cellType.target` is the cell type we're finding marker genes for. 
+#' * `mean.target` is the mean expression of `gene` for `cellType.target`. 
+#' * `cellType.2nd` is the second highest non-target cell type. 
+#' * `mean.2nd` is the mean expression of `gene` for `cellType.2nd`.
+#' * `MeanRatio` is the ratio of `mean.target/mean.2nd`. 
+#' * `MeanRatio.rank` is the rank of `MeanRatio` for the cell type. 
+#' * `MeanRatio.anno` is an annotation of the `MeanRatio` calculation helpful for plotting. 
+#' * `gene_ensembl` & `gene_name` optional cols spcified by the user to add gene infomation
+#'  
 #' @export
 #'
 #'
 #' @examples
-#' get_mean_ratio(sce.test)
+#' ## Get the mean ratio for each gene for each cell type defined in `cellType`
+#' get_mean_ratio(sce.test, cellType_col = "cellType")
 #' 
-#' #Specify gene_name as the "Symbol" column from rowData
+#' #   gene            cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno        
+#' #  <chr>           <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>                 
+#' # 1 ENSG00000230615 Inhib.2               1.00  Excit.2         0.239      4.20              1 Inhib.2/Excit.2: 4.197
+#' # 2 ENSG00000162512 Inhib.2               1.71  Astro           0.512      3.35              2 Inhib.2/Astro: 3.346  
+#' # 3 ENSG00000137965 Inhib.2               0.950 Astro           0.413      2.30              3 Inhib.2/Astro: 2.301  
+#' # 4 ENSG00000060718 Inhib.2               3.32  Astro           1.47       2.26              4 Inhib.2/Astro: 2.264  
+#' # 5 ENSG00000162631 Inhib.2               3.55  Astro           1.62       2.19              5 Inhib.2/Astro: 2.19  
+#'
+#' # Option to specify gene_name as the "Symbol" column from rowData
 #' # this will be added to the marker stats output
-#' get_mean_ratio(sce.test, gene_name = "Symbol")
+#' SummarizedExperiment::rowData(sce.test)
+#' get_mean_ratio(sce.test, cellType_col = "cellType", gene_name = "Symbol", gene_ensembl = "gene_id")
+#' # A tibble: 1,778 × 10
+#' # gene            cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno   gene_ensembl gene_name
+#' # <chr>           <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>            <chr>        <chr>    
+#' # 1 ENSG00000230615 Inhib.2               1.00  Excit.2         0.239      4.20              1 Inhib.2/Excit.2… ENSG0000023… AL139220…
+#' # 2 ENSG00000162512 Inhib.2               1.71  Astro           0.512      3.35              2 Inhib.2/Astro: … ENSG0000016… SDC3     
+#' # 3 ENSG00000137965 Inhib.2               0.950 Astro           0.413      2.30              3 Inhib.2/Astro: … ENSG0000013… IFI44    
 #' 
 #' @importFrom dplyr mutate
 #' @importFrom dplyr arrange
@@ -35,7 +61,7 @@
 #' @importFrom purrr map2
 #' @importFrom matrixStats rowMedians
 get_mean_ratio <- function(sce, 
-                            cellType_col = "cellType", 
+                            cellType_col, 
                             assay_name = "logcounts", 
                             gene_ensembl = NULL,
                             gene_name = NULL
@@ -68,19 +94,30 @@ get_mean_ratio <- function(sce,
                                                        cell_means))
 
     ratio_tables <- do.call("rbind", ratio_tables)  |>
-      mutate(anno_ratio = paste0(cellType.target, "/", cellType, ": ", base::round(ratio, 3)))
+      mutate(anno_ratio = paste0(cellType.target, "/", cellType, ": ", base::round(ratio, 3))) |>
+      rename(cellType.2nd = cellType,
+             mean.2nd = mean, 
+             MeanRatio = ratio, 
+             MeanRatio.rank = rank_ratio,
+             MeanRatio.anno = anno_ratio)
 
-    # max_digits <- nchar(max(ratio_tables$ratio_tables))
-
-    if (!is.null(gene_name)) {
-      
-        ratio_tables$gene_name <- SummarizedExperiment::rowData(sce)[ratio_tables$gene, ][[gene_name]]
-        # ratio_tables <- ratio_tables |>
-        #    mutate(ratio_anno = paste0(stringr::str_pad(rank_ratio, max_digits, "left"),": ",Symbol))
+    ## Add gene ensemble and gene_name if specified
+    if (!is.null(gene_ensembl)) {
+      if(gene_ensembl %in% colnames(SummarizedExperiment::rowData(sce))){
+        ratio_tables$gene_ensembl <- SummarizedExperiment::rowData(sce)[ratio_tables$gene, ][[gene_ensembl]]
+      } else {
+        warning("'",gene_ensembl,"' not in col rowData, gene_ensembl not included in output" )
+      }
     }
     
-    ratio_tables <- ratio_tables
-
+    if (!is.null(gene_name)) {
+      if(gene_name %in% colnames(SummarizedExperiment::rowData(sce))){
+        ratio_tables$gene_name <- SummarizedExperiment::rowData(sce)[ratio_tables$gene, ][[gene_name]]
+      } else {
+        warning("'",gene_name,"' not in col rowData, gene_name not included in output" )
+      }
+    }
+    
     return(ratio_tables)
 }
 
