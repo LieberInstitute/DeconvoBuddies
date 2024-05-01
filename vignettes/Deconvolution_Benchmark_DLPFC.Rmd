@@ -117,6 +117,8 @@ with two different `library_types` (polyA and RiboZeroGold), and three different
 ## use fetch deconvon data to load rse_gene
 rse_gene <- fetch_deconvo_data("rse_gene")
 rse_gene
+# lobstr::obj_size(rse_gene)
+# 41.16 MB
 
 ## bulk RNA seq samples were sequenced with different library types, and RNA extractions
 table(rse_gene$library_type, rse_gene$library_prep)
@@ -129,17 +131,28 @@ This dataset can be accessed with `spatialLIBD::fetch_data()`.
 
 ```{r "load snRNA-seq"}
 ## Use spatialLIBD to fetch the snRNA-seq dataset
-sce_path_zip <- spatialLIBD::fetch_data("spatialDLPFC_snRNAseq")
+ sce_path_zip <- fetch_deconvo_data("sce")
+ sce_path <- unzip(sce_path_zip, exdir = tempdir())
+ sce <- HDF5Array::loadHDF5SummarizedExperiment(
+     file.path(tempdir(), "sce_DLPFC_annotated"))
+ 
+ # lobstr::obj_size(sce)
+ # 172.28 MB
 
-# sce_path <- unzip(sce_path_zip, exdir = tempdir())
-# 
-# sce <- HDF5Array::loadHDF5SummarizedExperiment(
-#     file.path(tempdir(), "sce_DLPFC_annotated")
-# )
+ ## Check the broad cell type distribution 
+ table(sce$cellType_broad_hc)
 ```
 
 
 # 3. Find marker genes with `DeconvoBuddies` tools
+
+```{r "Run Mean Ratio"}
+
+marker_stats <- get_mean_ratio(sce, )
+
+```
+
+
 # 4. Run deconvolution with `BisqueRNA`
 # 5. Explore deconvolution output and create compostion plots with `DeconvoBuddies` tools
 # 6. Check proportion against RNAScope estimated proportions
