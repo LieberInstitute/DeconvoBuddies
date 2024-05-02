@@ -123,6 +123,10 @@ library("tibble")
 
 # 2. Download DLPFC RNA-seq data, and reference snRNA-seq data. 
 
+<p align="center">
+![ A. Schematic of DLPFC dissections and DLPFC tissue block position depicting order of assays completed B. Tile plot illustrating which assays and configurations performed on each tissue block and the sample size for that assay before and after quality control (qc) in the format “(n=before:after)”. The tile is blank if an assay configuration was not performed on the tissue block. The tile is blue if the sample passed qc checks and was included in the analysis. Red tiles are not included in the study.](http://research.libd.org/DeconvoBuddies/reference/figures/study_design.png)
+
+
 ## Bulk RNA-seq data
 
 Access the 110 sample Human DLPFC bulk RNA-seq dataset for LIBD. These samples  
@@ -156,21 +160,48 @@ This dataset can be accessed with `spatialLIBD::fetch_data()`.
  # lobstr::obj_size(sce)
  # 172.28 MB
 
+ ## exclude Ambiguous cell type
+ sce <- sce[,sce$cellType_broad_hc != "Ambiguous"]
+ sce$cellType_broad_hc <- droplevels(sce$cellType_broad_hc)
+ 
+ dim(sce)
  ## Check the broad cell type distribution 
  table(sce$cellType_broad_hc)
  
- ## We're going to subset to the first 1k genes to save memory
- sce <- sce[seq_len(1000),]
+ ## We're going to subset to the first 5k genes to save memory
+ sce <- sce[seq_len(5000),]
+```
+
+## Refernce snRNA-seq data
+The cell type proportions from the RNAScope experiment used to evaluate the 
+deconvolution estimations. 
+
+Key columns: 
+* `SAMPLE_ID`: DLPFC Tissue block + RNAScope combination. 
+* `Sample` : DLFPC Tissue block (Donor BrNum + DLPFC position). 
+* `cell_type` : The cell type measured. 
+* `n_cell` : the number of cells counted for the Sample and cell type. 
+* `prop` : the calculated cell type proportion from n_cell
+
+
+
+```{r "access RNAScope proportions"}
+DeconvoBuddies::RNAScope_prop
+
+plot_composition_bar(prop_long = RNAScope_prop,
+                      sample_col = "Sample",
+                      x_col = "Sample") 
+
 ```
 
 
 # 3. Find marker genes with `DeconvoBuddies::get_mean_ratio`
 
+Mean Ratio marker finding 
+
 <p align="center">
 ![Use Mean Ratio to find less noisy marker genes htan 1vALL](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
 </p>
-
-
 
 ```{r "Run Mean Ratio"}
 
@@ -182,8 +213,26 @@ marker_stats <- get_mean_ratio(sce,
 marker_stats |> group_by(cellType.target) |> slice(1)
 ```
 
+## plot the top marker genes
+```{r "plot marker genes"}
 
-# 4. Run deconvolution with `BisqueRNA`
+plot_marker_express(sce, 
+                    stats = marker_stats, 
+                    cell_type = "Excit", 
+                    cellType_col = "cellType_broad_hc",
+                    rank_col = "MeanRatio.rank",
+                    anno_col = "MeanRatio.anno",
+                    gene_col = "gene"
+                      )
+
+```
+
+
+
+# 4. Run deconvolution with `hspe`
+
+
+
 # 5. Explore deconvolution output and create compostion plots with `DeconvoBuddies` tools
 # 6. Check proportion against RNAScope estimated proportions
 
