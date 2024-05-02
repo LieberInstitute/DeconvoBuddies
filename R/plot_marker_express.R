@@ -11,7 +11,7 @@
 #' @param n_genes An `integer()` of number of markers you'd like to plot
 #' @param rank_col The `character()` name of column to rank genes by in `stats`
 #' @param anno_col The `character()` name of column containing annotation in `stats`
-#' @param gene_name The `character()` name of column containing gene name in `stats` should be the same syntax as `rownames(sce)`
+#' @param gene_col The `character()` name of column containing gene name in `stats` should be the same syntax as `rownames(sce)`
 #' @param cellType_col The `character()` name of colData column containing cell type for sce data,
 #'  matches `cellType.target` in `stats`
 #' @param color_pal A named `character(1)` vector that contains a color pallet matching the `cell_type` values
@@ -23,7 +23,7 @@
 #' @export
 #'
 #' @examples
-#' plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro", gene_name = "Symbol")
+#' plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro", gene_col = "Symbol")
 #' plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro")
 #' plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Micro", n_genes = 1, rank_col = "rank_ratio", anno_col = "anno_ratio", plot_points = TRUE)
 #' plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Oligo", n_genes = 10, rank_col = "rank_ratio", anno_col = "anno_ratio")
@@ -38,7 +38,7 @@ plot_marker_express <- function(
         n_genes = 4,
         rank_col = "rank_ratio",
         anno_col = "anno_ratio",
-        gene_name = "gene",
+        gene_col = "gene",
         cellType_col = "cellType",
         color_pal = NULL,
         plot_points = FALSE,
@@ -57,30 +57,31 @@ plot_marker_express <- function(
 
     stopifnot(rank_col %in% colnames(stats))
     stopifnot(anno_col %in% colnames(stats))
-    stopifnot(gene_name %in% colnames(stats))
+    stopifnot(gene_col %in% colnames(stats))
     
     lookup <- c(rank_col = rank_col, 
                 anno_col = anno_col, 
-                gene_name = gene_name)
+                gene_col = gene_col)
     
     stats_filter <- stats |>
         dplyr::rename(dplyr::all_of(lookup)) |>
+        dplyr::select(gene_col, gene_col, rank_col, cellType.target) |>
         dplyr::filter(
             cellType.target == cell_type,
             rank_col <= n_genes
         ) |> mutate(
-            Feature = paste0(stringr::str_pad(rank_col, max_digits, "left"), ": ", gene_name),
+            Feature = paste0(stringr::str_pad(rank_col, max_digits, "left"), ": ", gene_col),
             Var1 = Feature,
             anno_str = paste0("\n ", anno_col)
         )
 
     # return(stats_filter)
     
-    if(!any(stats_filter$gene_name %in% rownames(sce))){
-      warning("genes from gene_name don't match rownames(sce), be sure to supply the correct column from stats")
+    if(!any(stats_filter$gene_col %in% rownames(sce))){
+      warning("genes from gene_col don't match rownames(sce), be sure to supply the correct column from stats")
     }
     
-    marker_sce <- sce[stats_filter$gene_name, ]
+    marker_sce <- sce[stats_filter$gene_col, ]
     rownames(marker_sce) <- stats_filter$Feature
 
 
