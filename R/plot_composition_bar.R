@@ -12,13 +12,13 @@
 #' @export
 #'
 #' @examples
-#' pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
+#' pd <- SummarizedExperiment::colData(rse_bulk_test) |>
 #'     as.data.frame()
 #'
-#' est_prop_long <- est_prop %>%
-#'     tibble::rownames_to_column("RNum") %>%
-#'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
-#'     dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
+#' est_prop_long <- est_prop |>
+#'     tibble::rownames_to_column("RNum") |>
+#'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
+#'     dplyr::left_join(pd |> dplyr::select(RNum, Dx)) |>
 #'     dplyr::mutate(a = "a")
 #'
 #' plot_composition_bar(est_prop_long)
@@ -38,7 +38,7 @@ plot_composition_bar <- function(
     x_cat <- cell_type <- anno_y <- NULL
 
     # ct_col <- dplyr::enquo(ct_col)
-    mean_prop <- .get_cat_prop(prop_long, sample_col, x_col, prop_col, ct_col) %>%
+    mean_prop <- .get_cat_prop(prop_long, sample_col, x_col, prop_col, ct_col) |>
         dplyr::ungroup()
 
     if (x_col == "ALL") x_col <- NULL
@@ -52,13 +52,14 @@ plot_composition_bar <- function(
         ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1))
 
     if (add_text) {
-        comp_barplot <- comp_barplot + ggplot2::geom_text(ggplot2::aes(
-            y = anno_y,
+        comp_barplot <- comp_barplot + 
+          ggplot2::geom_text(ggplot2::aes(
+            y = mean_prop,
             label = ifelse(mean_prop > min_prop_text,
                 format(round(mean_prop, 3), 3),
-                ""
-            )
-        ))
+                "")
+            ),
+            position = ggplot2::position_stack(vjust = 0.5))
     }
 
     return(comp_barplot)
@@ -73,22 +74,21 @@ plot_composition_bar <- function(
         ct_col = "cell_type") {
     cell_type <- prop <- mean_prop <- x_cat <- anno_y <- sum_prop <- n <- NULL
 
-    prop_long <- prop_long %>%
-        dplyr::mutate(ALL = "ALL", sample = !!as.symbol(sample_col)) %>%
+    prop_long <- prop_long |>
+        dplyr::mutate(ALL = "ALL", sample = !!as.symbol(sample_col)) |>
         dplyr::rename(cell_type = ct_col, prop = prop_col, x_cat = x_col)
 
-    n_sample <- prop_long %>%
-        dplyr::group_by(x_cat) %>%
+    n_sample <- prop_long |>
+        dplyr::group_by(x_cat) |>
         dplyr::summarise(n = length(unique(sample)))
 
-    cat_prop <- prop_long %>%
-        dplyr::group_by(cell_type, x_cat) %>%
-        dplyr::summarise(sum_prop = sum(prop)) %>%
-        dplyr::left_join(n_sample, by = "x_cat") %>%
-        dplyr::mutate(mean_prop = sum_prop / n) %>%
-        dplyr::arrange(cell_type) %>%
-        dplyr::group_by(x_cat) %>%
-        dplyr::mutate(anno_y = (1 - cumsum(mean_prop)) + (mean_prop * .5))
+    cat_prop <- prop_long |>
+        dplyr::group_by(cell_type, x_cat) |>
+        dplyr::summarise(sum_prop = sum(prop)) |>
+        dplyr::left_join(n_sample, by = "x_cat") |>
+        dplyr::mutate(mean_prop = sum_prop / n) |>
+        dplyr::arrange(cell_type) |>
+        dplyr::group_by(x_cat) 
 
     return(cat_prop)
 }
