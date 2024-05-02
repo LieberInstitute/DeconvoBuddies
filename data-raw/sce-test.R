@@ -17,5 +17,11 @@ sce.test <- sce.test[, sample(colnames(sce.test), 500)]
 
 levels(sce.test$cellType) <- c("Astro", "Micro", "Oligo", "OPC", "Excit.1", "Excit.2", "Inhib.1", "Inhib.2")
 
-print(object.size(sce.test), units = "auto")
+## Drop Reduced Dims
+reducedDim(sce.test, "PCA") <- NULL
+reducedDim(sce.test, "PCA_opt") <- NULL
+reducedDim(sce.test, "TSNE") <- NULL
+reducedDim(sce.test, "UMAP") <- NULL
+
+print(object.size(sce.test), units = "auto") #3.6 Mb
 usethis::use_data(sce.test, overwrite = TRUE)
