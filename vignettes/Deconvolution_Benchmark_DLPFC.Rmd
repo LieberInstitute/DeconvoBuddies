@@ -55,7 +55,24 @@ bib <- c(
 
 **Inferring the composition of different cell types in a bulk RNA-seq data**
 
-`Bisque` is an R package for preforming reference based deconvolution [github.com/cozygene/bisque](https://github.com/cozygene/bisque).
+Deconvolution is a analysis that aims to calculate the proportion of different
+cell types that make up a sample of bulk RNA-seq, based off of cell type gene
+expression profiles in a single cell/nuclei RNA-seq dataset.
+
+<p align="center">
+![Use single cell data to infer the composition of bulk RNA-seq samples](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution.png){width=50%}
+</p>
+
+### Deconvolution Methods
+| Approach  | Method | Citation | Availability | 
+|  ---------- | -------- | ------- | ----------- |  
+| weighted least squares | DWLS | Tsoucas et al, Nature Comm, 2019 | [R Package Cran](https://cran.r-project.org/web/packages/DWLS/index.html) | 
+| Bias correction: Assay | Bisque | Jew et al, Nature Comm, 2020 | R Package github | 
+| Bias correction: Sourse | MuSiC | Wang et al, Nature Communications, 2019 | R Package github | 
+| Machine Learning | CIBERSORTx | Newman et al., Nature BioTech, 2019 | [Webtool](https://cibersortx.stanford.edu/) | 
+| Bayesian | BayesPrism | Chu et al., Nature Cancer, 2022 | [Webtool/R Package](https://github.com/Danko-Lab/BayesPrism) | 
+| linear | Hspe | Hunt et al., Ann. Appl. Stat, 2021 | [R package github](https://gjhunt.github.io/hspe/) | 
+
 
 ## Goals of this Vignette 
 
@@ -141,15 +158,28 @@ This dataset can be accessed with `spatialLIBD::fetch_data()`.
 
  ## Check the broad cell type distribution 
  table(sce$cellType_broad_hc)
+ 
+ ## We're going to subset to the first 1k genes to save memory
+ sce <- sce[seq_len(1000),]
 ```
 
 
-# 3. Find marker genes with `DeconvoBuddies` tools
+# 3. Find marker genes with `DeconvoBuddies::get_mean_ratio`
+
+<p align="center">
+![Use Mean Ratio to find less noisy marker genes htan 1vALL](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
+</p>
+
+
 
 ```{r "Run Mean Ratio"}
 
-marker_stats <- get_mean_ratio(sce, )
+marker_stats <- get_mean_ratio(sce, 
+                               cellType_col = "cellType_broad_hc",
+                               gene_ensembl = "gene_id",
+                               gene_name = "gene_name")
 
+marker_stats |> group_by(cellType.target) |> slice(1)
 ```
 
 
