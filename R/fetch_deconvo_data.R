@@ -59,7 +59,7 @@
 #'     file.path(tempdir(), "sce_DLPFC_annotated")
 #' )
 #' }
-fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_example"),
+fetch_deconvo_data <- function(type = c("rse_gene", "sce"),
                              destdir = tempdir(),
                              eh = ExperimentHub::ExperimentHub(),
                              bfc = BiocFileCache::BiocFileCache()){

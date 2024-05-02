@@ -5,7 +5,7 @@
 \title{Download Human DLPFC Deconvolution Data}
 \usage{
 fetch_deconvo_data(
-  type = c("rse_gene", "sce", "sce_example"),
+  type = c("rse_gene", "sce"),
   destdir = tempdir(),
   eh = ExperimentHub::ExperimentHub(),
   bfc = BiocFileCache::BiocFileCache()
