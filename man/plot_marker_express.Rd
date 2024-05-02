@@ -11,7 +11,7 @@ plot_marker_express(
   n_genes = 4,
   rank_col = "rank_ratio",
   anno_col = "anno_ratio",
-  gene_name = "gene",
+  gene_col = "gene",
   cellType_col = "cellType",
   color_pal = NULL,
   plot_points = FALSE,
@@ -31,7 +31,7 @@ plot_marker_express(
 
 \item{anno_col}{The \code{character()} name of column containing annotation in \code{stats}}
 
-\item{gene_name}{The \code{character()} name of column containing gene name in \code{stats} should be the same syntax as \code{rownames(sce)}}
+\item{gene_col}{The \code{character()} name of column containing gene name in \code{stats} should be the same syntax as \code{rownames(sce)}}
 
 \item{cellType_col}{The \code{character()} name of colData column containing cell type for sce data,
 matches \code{cellType.target} in \code{stats}}
@@ -53,7 +53,7 @@ The gene expression is plotted as violin plot with \code{plot_gene_express} and 
 annotations to each plot.
 }
 \examples{
-plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro", gene_name = "Symbol")
+plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro", gene_col = "Symbol")
 plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro")
 plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Micro", n_genes = 1, rank_col = "rank_ratio", anno_col = "anno_ratio", plot_points = TRUE)
 plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Oligo", n_genes = 10, rank_col = "rank_ratio", anno_col = "anno_ratio")
