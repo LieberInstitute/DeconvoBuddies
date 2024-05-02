@@ -82,7 +82,7 @@ fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_example"),
                              eh = ExperimentHub::ExperimentHub(),
                              bfc = BiocFileCache::BiocFileCache()){
   
-  rse_gene <- NULL
+  rse_gene <- sce_example <- NULL
   
   ## Choose a type among the valid options
   type <- match.arg(type)

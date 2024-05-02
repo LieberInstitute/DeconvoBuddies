@@ -70,10 +70,12 @@ get_mean_ratio <- function(sce,
     cellType.target <- NULL
     cellType <- NULL
     ratio <- NULL
+    rank_ratio <- NULL
+    anno_ratio <- NULL
     
     ## check inputs are valid
     stopifnot(cellType_col %in% colnames(colData(sce)))
-    stopifnot(assay_name %in% names(SummarizedExperiment::assays(sce.test)))
+    stopifnot(assay_name %in% names(SummarizedExperiment::assays(sce)))
 
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
