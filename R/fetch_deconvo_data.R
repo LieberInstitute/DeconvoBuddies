@@ -50,8 +50,26 @@
 #' # AN00000906_Br8667_Mid_Nuc
 #' # colData names(78): SAMPLE_ID Sample ... diagnosis qc_class
 #' 
-#' ## load sce
-#' if (!exists("rse-gene")) rse_gene <- fetch_deconvo_data("rse_gene")
+#' ## load example snRNA-seq data
+#' \dontrun{ ## TODO fix
+#' ## A SingleCellExperiment (41.16 MB)
+#' if (!exists("sce_example")) sce_example2 <- fetch_deconvo_data("sce_example")
+#' }
+#' 
+#' sce_example
+#' # class: SingleCellExperiment 
+#' #  dim: 557 5000 
+#' # metadata(3): Samples cell_type_colors cell_type_colors_broad
+#' # assays(2): counts logcounts
+#' # rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
+#' # rowData names(7): source type ... gene_type binomial_deviance
+#' # colnames(5000): 17_TTCCAATTCAACGTGT-1 6_CATCGTCGTCGCCACA-1 ... 9_GGATGTTTCTAAACGC-1 3_GAGCTGCAGTAAACAC-1
+#' # colData names(32): Sample Barcode ... cellType_layer layer_annotation
+#' # reducedDimNames(0):
+#' #  mainExpName: NULL
+#' # altExpNames(0):
+#' 
+#' 
 #' \dontrun{
 #' sce_path_zip <- fetch_deconvo_data("sce")
 #' sce_path <- unzip(sce_path_zip, exdir = tempdir())
@@ -59,7 +77,7 @@
 #'     file.path(tempdir(), "sce_DLPFC_annotated")
 #' )
 #' }
-fetch_deconvo_data <- function(type = c("rse_gene", "sce"),
+fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_example"),
                              destdir = tempdir(),
                              eh = ExperimentHub::ExperimentHub(),
                              bfc = BiocFileCache::BiocFileCache()){
@@ -82,6 +100,16 @@ fetch_deconvo_data <- function(type = c("rse_gene", "sce"),
       "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
     url <-
       "https://www.dropbox.com/scl/fi/9eyg9e1r98t73wyzsuxhr/rse_gene.Rdata?rlkey=sw2djr71y954yw4o3xrmjv59b&dl=1"
+  } else if(type == "sce_example") {
+    tag <- "Human_DLPFC_deconvolution_snRNAseq_DeconvoBuddies"
+    hub_title <-
+      "Human_DLPFC_deconvolution_snRNAseq_DeconvoBuddies"
+
+    ## While EH is not set-up
+    file_name <-
+      "Human_DLPFC_deconvolution_example_snRNAseq_DeconvoBuddies"
+    url <-
+      "https://www.dropbox.com/scl/fi/o2lrnvl0zpm96kigmudsy/sce_example.Rdata?rlkey=n8ftm30o6wklpezrmt0m8dq09&st=ze8ns34d&dl=0"
   } else if(type == "sce"){
     
     sce_path <- spatialLIBD::fetch_data("spatialDLPFC_snRNAseq") 
@@ -116,6 +144,11 @@ fetch_deconvo_data <- function(type = c("rse_gene", "sce"),
     
     load(file_path)
     return(rse_gene)
+  
+    }else if (type == "sce_example") {
+    
+    load(file_path)
+    return(sce_example)
   
     } else {
     file_path

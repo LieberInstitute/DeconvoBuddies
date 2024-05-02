@@ -33,14 +33,14 @@ table(sce$cellType_broad_hc)
 markers <- scan(here("data-raw", "markers_MeanRatio_over2.txt" ), what="", sep="\n")
 sce_example <- sce[rowData(sce)$gene_id %in% markers,]
 
-## select 5k random nuc
-sce_example <- sce_example[,sample(colnames(sce_example), 5000)]
+## select 10k random nuc
+sce_example <- sce_example[,sample(colnames(sce_example), 10000)]
 table(sce_example$cellType_broad_hc)
 # Astro EndoMural     Micro     Oligo       OPC     Excit     Inhib 
-# 357       189       120       945       147      2316       926 
+# 738       425       297      1877       344      4411      1908 
 
 lobstr::obj_size(sce_example)
-# 10.78 MB
+# 21.36 MB
 
 class(sce_example)
 # [1] "SingleCellExperiment"

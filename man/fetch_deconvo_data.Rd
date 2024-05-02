@@ -5,7 +5,7 @@
 \title{Download Human DLPFC Deconvolution Data}
 \usage{
 fetch_deconvo_data(
-  type = c("rse_gene", "sce"),
+  type = c("rse_gene", "sce", "sce_example"),
   destdir = tempdir(),
   eh = ExperimentHub::ExperimentHub(),
   bfc = BiocFileCache::BiocFileCache()
@@ -59,8 +59,26 @@ rse_gene
 # AN00000906_Br8667_Mid_Nuc
 # colData names(78): SAMPLE_ID Sample ... diagnosis qc_class
 
-## load sce
-if (!exists("rse-gene")) rse_gene <- fetch_deconvo_data("rse_gene")
+## load example snRNA-seq data
+\dontrun{ ## TODO fix
+## A SingleCellExperiment (41.16 MB)
+if (!exists("sce_example")) sce_example2 <- fetch_deconvo_data("sce_example")
+}
+
+sce_example
+# class: SingleCellExperiment 
+#  dim: 557 5000 
+# metadata(3): Samples cell_type_colors cell_type_colors_broad
+# assays(2): counts logcounts
+# rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
+# rowData names(7): source type ... gene_type binomial_deviance
+# colnames(5000): 17_TTCCAATTCAACGTGT-1 6_CATCGTCGTCGCCACA-1 ... 9_GGATGTTTCTAAACGC-1 3_GAGCTGCAGTAAACAC-1
+# colData names(32): Sample Barcode ... cellType_layer layer_annotation
+# reducedDimNames(0):
+#  mainExpName: NULL
+# altExpNames(0):
+
+
 \dontrun{
 sce_path_zip <- fetch_deconvo_data("sce")
 sce_path <- unzip(sce_path_zip, exdir = tempdir())
