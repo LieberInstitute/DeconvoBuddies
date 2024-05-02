@@ -24,4 +24,6 @@ reducedDim(sce.test, "TSNE") <- NULL
 reducedDim(sce.test, "UMAP") <- NULL
 
 print(object.size(sce.test), units = "auto") #3.6 Mb
+
+rownames(sce.test) <- rowData(sce.test)$Symbol
 usethis::use_data(sce.test, overwrite = TRUE)
