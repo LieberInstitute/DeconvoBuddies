@@ -18,13 +18,13 @@
 #' est_prop_long <- est_prop |>
 #'     tibble::rownames_to_column("RNum") |>
 #'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-#'     dplyr::left_join(pd |> dplyr::select(RNum, Dx)) |>
-#'     dplyr::mutate(a = "a")
+#'     dplyr::inner_join(pd |> dplyr::select(RNum, Dx))  ## TODO fix example data
 #'
 #' plot_composition_bar(est_prop_long)
 #' plot_composition_bar(est_prop_long, x_col = "Dx")
 #' plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
-#' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE)
+#' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) + ggplot2::facet_wrap(~Dx, scales="free_x")
+#' 
 #' @importFrom dplyr rename group_by summarise mutate arrange
 #' @importFrom ggplot2 ggplot geom_bar geom_text aes theme element_text
 plot_composition_bar <- function(
@@ -75,7 +75,8 @@ plot_composition_bar <- function(
     cell_type <- prop <- mean_prop <- x_cat <- anno_y <- sum_prop <- n <- NULL
 
     prop_long <- prop_long |>
-        dplyr::mutate(ALL = "ALL", sample = !!as.symbol(sample_col)) |>
+        dplyr::mutate(ALL = "ALL", 
+                      sample = !!as.symbol(sample_col)) |>
         dplyr::rename(cell_type = ct_col, prop = prop_col, x_cat = x_col)
 
     n_sample <- prop_long |>
@@ -83,12 +84,13 @@ plot_composition_bar <- function(
         dplyr::summarise(n = length(unique(sample)))
 
     cat_prop <- prop_long |>
-        dplyr::group_by(cell_type, x_cat) |>
-        dplyr::summarise(sum_prop = sum(prop)) |>
-        dplyr::left_join(n_sample, by = "x_cat") |>
-        dplyr::mutate(mean_prop = sum_prop / n) |>
-        dplyr::arrange(cell_type) |>
-        dplyr::group_by(x_cat) 
+      dplyr::group_by(cell_type, x_cat) |>
+      dplyr::mutate(sum_prop = sum(prop)) |>
+      dplyr::slice(1) |>
+      dplyr::left_join(n_sample, by = "x_cat") |>
+      dplyr::mutate(mean_prop = sum_prop / n) |>
+      dplyr::arrange(cell_type) |>
+      dplyr::group_by(x_cat) 
 
     return(cat_prop)
 }
