@@ -54,7 +54,7 @@
 #' \dontrun{ ## TODO fix
 #' ## A SingleCellExperiment (41.16 MB)
 #' if (!exists("sce_example")) sce_example2 <- fetch_deconvo_data("sce_example")
-#' }
+#' 
 #' 
 #' sce_example
 #' # class: SingleCellExperiment 
@@ -68,7 +68,7 @@
 #' # reducedDimNames(0):
 #' #  mainExpName: NULL
 #' # altExpNames(0):
-#' 
+#' }
 #' 
 #' \dontrun{
 #' sce_path_zip <- fetch_deconvo_data("sce")
