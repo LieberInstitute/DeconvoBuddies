@@ -188,9 +188,12 @@ Key columns:
 ```{r "access RNAScope proportions"}
 DeconvoBuddies::RNAScope_prop
 
+## plot the RNAScope compositions
 plot_composition_bar(prop_long = RNAScope_prop,
-                      sample_col = "Sample",
-                      x_col = "Sample") 
+                      sample_col = "SAMPLE_ID",
+                      x_col = "SAMPLE_ID",
+                     add_text = FALSE) +
+  facet_wrap(~Combo, nrow = 2, scales = "free_x")
 
 ```
 
@@ -215,7 +218,6 @@ marker_stats |> group_by(cellType.target) |> slice(1)
 
 ## plot the top marker genes
 ```{r "plot marker genes"}
-
 plot_marker_express(sce, 
                     stats = marker_stats, 
                     cell_type = "Excit", 
@@ -226,8 +228,6 @@ plot_marker_express(sce,
                       )
 
 ```
-
-
 
 # 4. Run deconvolution with `hspe`
 

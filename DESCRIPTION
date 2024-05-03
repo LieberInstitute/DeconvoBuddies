@@ -37,7 +37,10 @@ Imports:
     ExperimentHub,
     AnnotationHub,
     methods,
-    spatialLIBD
+    spatialLIBD,
+    stats,
+    graphics,
+    utils
 Suggests: 
     knitr,
     covr,
