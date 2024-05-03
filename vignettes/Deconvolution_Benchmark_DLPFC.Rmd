@@ -123,9 +123,6 @@ library("tibble")
 
 # 2. Download DLPFC RNA-seq data, and reference snRNA-seq data. 
 
-<p align="center">
-![ A. Schematic of DLPFC dissections and DLPFC tissue block position depicting order of assays completed B. Tile plot illustrating which assays and configurations performed on each tissue block and the sample size for that assay before and after quality control (qc) in the format “(n=before:after)”. The tile is blank if an assay configuration was not performed on the tissue block. The tile is blue if the sample passed qc checks and was included in the analysis. Red tiles are not included in the study.](http://research.libd.org/DeconvoBuddies/reference/figures/study_design.png)
-
 
 ## Bulk RNA-seq data
 
