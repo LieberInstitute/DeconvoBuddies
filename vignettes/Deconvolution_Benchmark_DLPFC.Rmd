@@ -178,17 +178,22 @@ This dataset can be accessed with `spatialLIBD::fetch_data()`.
 The cell type proportions from the RNAScope experiment used to evaluate the 
 deconvolution estimations. 
 
-Key columns: 
+Key columns:
+
 * `SAMPLE_ID`: DLPFC Tissue block + RNAScope combination. 
+
 * `Sample` : DLFPC Tissue block (Donor BrNum + DLPFC position). 
+
 * `cell_type` : The cell type measured. 
+
 * `n_cell` : the number of cells counted for the Sample and cell type. 
+
 * `prop` : the calculated cell type proportion from n_cell
 
 
 
 ```{r "access RNAScope proportions"}
-DeconvoBuddies::RNAScope_prop
+head(DeconvoBuddies::RNAScope_prop)
 
 ## plot the RNAScope compositions
 plot_composition_bar(prop_long = RNAScope_prop,
