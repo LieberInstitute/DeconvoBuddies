@@ -22,7 +22,7 @@ including 8 cell types.
 Description:
 }
 \details{
-4.26 MB
+3.44 MB
 }
 \references{
 \enumerate{

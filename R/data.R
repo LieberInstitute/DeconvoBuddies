@@ -32,7 +32,7 @@
 #' A subset of 1000 genes and 500 nuclei from Tran, Maynard et al., Neuron 2021
 #' including 8 cell types. 
 #' 
-#' 4.26 MB
+#' 3.44 MB
 #'
 #' @format A SingleCellExperiment object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce.test.R>
