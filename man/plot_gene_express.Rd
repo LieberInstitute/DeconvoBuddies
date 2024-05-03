@@ -46,12 +46,12 @@ over a user defined category, typically a cell type annotation.
 }
 \examples{
 ## Using Symbol as rownames makes this more human readable
-rownames(sce.test) <- SummarizedExperiment::rowData(sce.test)$Symbol
-plot_gene_express(sce = sce.test, genes = c("F3"))
-plot_gene_express(sce = sce.test, genes = c("RNF220", "CSF3R"))
-plot_gene_express(sce = sce.test, genes = c("RNF220", "CSF3R"), plot_points = TRUE)
-plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220", "CSF3R"))
-plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220", "CSF3R"), title = "Inhib Markers")
+#rownames(sce.test) <- SummarizedExperiment::rowData(sce.test)$Symbol
+plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
+#plot_gene_express(sce = sce.test, genes = c("RNF220", "CSF3R"))
+#plot_gene_express(sce = sce.test, genes = c("RNF220", "CSF3R"), plot_points = TRUE)
+#plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220", "CSF3R"))
+#plot_gene_express(sce = sce.test, assay_name = "counts", genes = c("RNF220", "CSF3R"), title = "Inhib Markers")
 
 }
 \seealso{

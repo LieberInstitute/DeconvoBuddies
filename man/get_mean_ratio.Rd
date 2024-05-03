@@ -53,7 +53,7 @@ Improved argument names and documentaion, but same functionalty from \code{get_m
 }
 \examples{
 ## Get the mean ratio for each gene for each cell type defined in `cellType`
-get_mean_ratio(sce.test, cellType_col = "cellType")
+get_mean_ratio(sce_ab, cellType_col = "cellType")
 
 #   gene            cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno        
 #  <chr>           <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>                 
@@ -65,8 +65,8 @@ get_mean_ratio(sce.test, cellType_col = "cellType")
 
 # Option to specify gene_name as the "Symbol" column from rowData
 # this will be added to the marker stats output
-SummarizedExperiment::rowData(sce.test)
-get_mean_ratio(sce.test, cellType_col = "cellType", gene_name = "Symbol", gene_ensembl = "gene_id")
+SummarizedExperiment::rowData(sce_ab)
+get_mean_ratio(sce_ab, cellType_col = "cellType", gene_name = "Symbol", gene_ensembl = "gene_id")
 # A tibble: 1,778 × 10
 # gene            cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno   gene_ensembl gene_name
 # <chr>           <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>            <chr>        <chr>    
