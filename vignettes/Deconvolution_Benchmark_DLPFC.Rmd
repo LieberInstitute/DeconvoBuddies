@@ -64,7 +64,7 @@ expression profiles in a single cell/nuclei RNA-seq dataset.
 </p>
 
 ### Deconvolution Methods
-| Approach  | Method | Citation | Availability | 
+| Approach | Method | Citation | Availability | 
 |  ---------- | -------- | ------- | ----------- |  
 | weighted least squares | DWLS | Tsoucas et al, Nature Comm, 2019 | [R Package Cran](https://cran.r-project.org/web/packages/DWLS/index.html) | 
 | Bias correction: Assay | Bisque | Jew et al, Nature Comm, 2020 | R Package github | 
@@ -140,6 +140,10 @@ rse_gene <- fetch_deconvo_data("rse_gene")
 rse_gene
 # lobstr::obj_size(rse_gene)
 # 41.16 MB
+
+## Use Symbol as rownames
+
+rownames(rse_gene) <- rowData(rse_gene)$Symbol
 
 ## bulk RNA seq samples were sequenced with different library types, and RNA extractions
 table(rse_gene$library_type, rse_gene$library_prep)
@@ -230,6 +234,34 @@ plot_marker_express(sce,
 ```
 
 # 4. Run deconvolution with `hspe`
+
+## pseudobulk the snRNA-seq data
+```{r "pseudobulk refrence"}
+
+sce_pb <- spatialLIBD::registration_pseudobulk(sce, 
+                                               var_registration = "cellType_broad_hc",
+                                               var_sample_id = "Sample")
+
+sce_pb
+```
+
+
+## prep-input and run hspe
+hspe assumes log2 transformed expressions
+```{r "run hspe"}
+## mixture samples is the gene expression from the bulk rse_gene
+mixture_samples = t(assays(rse_gene)$logcounts)
+mixture_samples[1:5, 1:5]
+
+## pure samples is a vector of indexes of the differnt cell types
+pure_samples = rafalib::splitit(sce_pb$cellType_broad_hc)
+
+## refrence samples is the pseudobulked logcounts
+reference_samples = t(assays(sce_pb)$logcounts)
+reference_samples[1:5, 1:5]
+ 
+ncol(mixture_samples) == ncol(reference_samples)
+```
 
 
 
