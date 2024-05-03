@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' markers_1vAll <- findMarkers_1vAll(sce.test)
+#' markers_1vAll <- findMarkers_1vAll(sce_ab)
 #' head(markers_1vAll)
 #'
 #' @importFrom purrr map
