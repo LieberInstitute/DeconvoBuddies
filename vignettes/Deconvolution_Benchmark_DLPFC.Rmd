@@ -316,6 +316,49 @@ plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "S
 
 
 # 6. Check proportion against RNAScope estimated proportions
+Note to compare the deconvolution results to the RNAScope proportions, Oligo and 
+OPC need to be added together. 
+```{r "compare prop"}
+prop_long_opc <- prop_long |>
+  mutate(cell_type = gsub("Oligo|OPC", "OligoOPC", cell_type)) |>
+  group_by(SAMPLE_ID, Sample, library_combo, cell_type) |>
+  summarize(prop = sum(prop)) |>
+  ungroup()
+
+prop_long_opc |> count(cell_type)
+
+## Join RNAScope and Bisque Proportions
+prop_compare <- prop_long_opc |>
+  inner_join(RNAScope_prop |>
+              select(Sample, cell_type, prop_RNAScope = prop, prop_sn), 
+            by = c("Sample", "cell_type"))
+
+```
+
+Calculate the correlation plot a scatter plot of the proportions
+```{r "proportion scatter"}
+## correlation with RNAScope proportions
+cor(prop_compare$prop, prop_compare$prop_RNAScope)
+
+## Scatter plot with RNAScope proportions
+prop_compare |>
+  ggplot(aes(x = prop_RNAScope, y = prop, color = cell_type, shape = library_combo)) +
+  geom_point() +
+  geom_abline()
+
+
+## correlation with snRNA-seq proportion
+cor(prop_compare$prop, prop_compare$prop_sn)
+
+## Scatter plot with RNAScope proportions
+prop_compare |>
+  ggplot(aes(x = prop_sn, y = prop, color = cell_type, shape = library_combo)) +
+  geom_point() +
+  geom_abline()
+
+
+```
+
 
 
 # 7. How to run deconvolution with `hspe`
