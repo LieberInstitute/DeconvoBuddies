@@ -119,6 +119,7 @@ library("BisqueRNA")
 library("dplyr")
 library("tidyr")
 library("tibble")
+library("ggplot2")
 ```
 
 # 2. Download DLPFC RNA-seq data, and reference snRNA-seq data. 
@@ -229,23 +230,107 @@ plot_marker_express(sce,
                       )
 
 ```
+### Create a List of Marker Genes
+```{r "marker_list"}
 
-# 4. Run deconvolution with `hspe`
+marker_genes <- marker_stats |>
+  filter(MeanRatio.rank <= 25 & gene %in% rownames(rse_gene))
 
-## pseudobulk the snRNA-seq data
-```{r "pseudobulk refrence"}
+marker_genes |> count(cellType.target)
 
-sce_pb <- spatialLIBD::registration_pseudobulk(sce, 
-                                               var_registration = "cellType_broad_hc",
-                                               var_sample_id = "Sample")
+marker_genes <- marker_genes |> pull(gene)
 
-sce_pb
 ```
 
 
-## prep-input and run hspe
-hspe assumes log2 transformed expressions
-```{r "run hspe"}
+# 4. Prep Data and Run Bisque
+
+## prep data
+convert to `ExpressionSet` format, filter for cells with no counts across marker genes
+```{r "prep data as ExpressionSet"}
+exp_set_bulk <- Biobase::ExpressionSet(
+    assayData = assays(rse_gene[marker_genes, ])$counts,
+    phenoData = AnnotatedDataFrame(
+        as.data.frame(colData(rse_gene))[c("SAMPLE_ID")]
+    )
+)
+
+exp_set_sce <- Biobase::ExpressionSet(
+    assayData = as.matrix(assays(sce[marker_genes, ])$counts),
+    phenoData = AnnotatedDataFrame(
+        as.data.frame(colData(sce))[, c("cellType_broad_hc", "BrNum")]
+    )
+)
+
+## check for nuclei with 0 marker expression
+zero_cell_filter <- colSums(exprs(exp_set_sce)) != 0
+message("Exclude ", sum(!zero_cell_filter), " cells")
+
+exp_set_sce <- exp_set_sce[, zero_cell_filter]
+```
+
+## Run Bisque
+```{r, "run Bisque"}
+est_prop <- ReferenceBasedDecomposition(
+    bulk.eset = exp_set_bulk,
+    sc.eset = exp_set_sce,
+    cell.types = "cellType_broad_hc",
+    subject.names = "BrNum",
+    use.overlap = FALSE
+)
+```
+
+## Explore Ouput
+```{r, "deconvo output"}
+est_prop$bulk.props <- t(est_prop$bulk.props)
+
+head(est_prop$bulk.props)
+```
+
+# 5. Explore deconvolution output and create compostion plots with `DeconvoBuddies` tools
+
+Plot Composition Barplots of Bisque predicted compositions
+```{r, "composition plots"}
+## add Phenotype data to proportion estimates
+
+pd <- colData(rse_gene) |>
+    as.data.frame() |>
+    select(SAMPLE_ID, Sample, library_combo)
+
+## make proption estimates long so they are ggplot friendly
+prop_long <- est_prop$bulk.props |>
+    as.data.frame() |>
+    tibble::rownames_to_column("SAMPLE_ID") |>
+    tidyr::pivot_longer(!SAMPLE_ID, names_to = "cell_type", values_to = "prop") |>
+    left_join(pd)
+
+## create composition bar plots
+## Average by sample
+plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "Sample", add_text = FALSE)
+
+## for all library preparations by sample n=110
+plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "SAMPLE_ID", add_text = FALSE) +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+
+# 6. Check proportion against RNAScope estimated proportions
+
+
+# 7. How to run deconvolution with `hspe`
+
+`hspe` is [downloadable](https://gjhunt.github.io/hspe/) as a tar.gz but 
+can't be shown on this vignettes
+
+Code to prep-input and run hspe pseudobulk the snRNA-seq data (not run here)
+```{r "prep and run hspe"}
+if(FALSE){
+  sce_pb <- spatialLIBD::registration_pseudobulk(sce, 
+                                               var_registration = "cellType_broad_hc",
+                                               var_sample_id = "Sample")
+
+
 ## mixture samples is the gene expression from the bulk rse_gene
 mixture_samples = t(assays(rse_gene)$logcounts)
 mixture_samples[1:5, 1:5]
@@ -258,13 +343,16 @@ reference_samples = t(assays(sce_pb)$logcounts)
 reference_samples[1:5, 1:5]
  
 ncol(mixture_samples) == ncol(reference_samples)
+
+est_prop_hspe = hspe(Y = mixture_samples,
+                       reference = reference_samples,
+                       pure_samples = pure_samples,
+                       markers = marker_genes,
+                       seed = 10524)
+
+}
+
 ```
-
-
-
-# 5. Explore deconvolution output and create compostion plots with `DeconvoBuddies` tools
-# 6. Check proportion against RNAScope estimated proportions
-
 
 # Reproducibility
 
