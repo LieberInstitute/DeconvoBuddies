@@ -109,7 +109,7 @@ fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_example"),
     file_name <-
       "Human_DLPFC_deconvolution_example_snRNAseq_DeconvoBuddies"
     url <-
-      "https://www.dropbox.com/scl/fi/o2lrnvl0zpm96kigmudsy/sce_example.Rdata?rlkey=n8ftm30o6wklpezrmt0m8dq09&st=ze8ns34d&dl=0"
+      "https://www.dropbox.com/scl/fi/o2lrnvl0zpm96kigmudsy/sce_example.Rdata?rlkey=n8ftm30o6wklpezrmt0m8dq09&st=ze8ns34d&dl=1"
   } else if(type == "sce"){
     
     sce_path <- spatialLIBD::fetch_data("spatialDLPFC_snRNAseq") 
