@@ -79,8 +79,8 @@ lobstr::obj_size(sce_DLPFC_example)
 
 ## Rdata file is 4.3 MB
 save(sce_DLPFC_example, file = "~/Desktop/sce_DLPFC_example.Rdata")
-load("~/Desktop/test/sce_DLPFC_example.Rdata")
-load("~/Downloads/sce_DLPFC_example.Rdata", verbose = TRUE)
-SingleCellExperiment::logcounts(sce_DLPFC_example)[1:5,1:5]
-class(assays(sce_DLPFC_example)$logcounts)
+# 
+# load("~/Downloads/sce_DLPFC_example.Rdata", verbose = TRUE)
+# SingleCellExperiment::logcounts(sce_DLPFC_example)[1:5,1:5]
+# class(assays(sce_DLPFC_example)$logcounts)
 
