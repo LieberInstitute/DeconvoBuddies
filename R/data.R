@@ -10,7 +10,7 @@
 
 #' Markers stats from sce.test
 #'
-#' A tibble containing the marker stats from `get_mean_ratio2` for `sce.test`.
+#' A tibble containing the marker stats from `get_mean_ratio` for `sce_DLPFC_example`.
 #' 
 #' 402.60 kB
 #' 

@@ -14,7 +14,7 @@ tibble.
 marker_test
 }
 \description{
-A tibble containing the marker stats from \code{get_mean_ratio2} for \code{sce.test}.
+A tibble containing the marker stats from \code{get_mean_ratio} for \code{sce_DLPFC_example}.
 }
 \details{
 402.60 kB
