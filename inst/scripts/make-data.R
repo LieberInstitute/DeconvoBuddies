@@ -31,35 +31,56 @@ table(sce$cellType_broad_hc)
 ## select 557 genes Mean Ratio > 2 
 ## https://github.com/LieberInstitute/Human_DLPFC_Deconvolution/blob/main/processed-data/08_bulk_deconvolution/markers_MeanRatio_over2.txt
 markers <- scan(here("data-raw", "markers_MeanRatio_over2.txt" ), what="", sep="\n")
-sce_example <- sce[rowData(sce)$gene_id %in% markers,]
+sce_DLPFC_example <- sce[rowData(sce)$gene_id %in% markers,]
 
 ## select 10k random nuc
-sce_example <- sce_example[,sample(colnames(sce_example), 10000)]
-table(sce_example$cellType_broad_hc)
+sce_DLPFC_example <- sce_DLPFC_example[,sample(colnames(sce_DLPFC_example), 10000)]
+table(sce_DLPFC_example$cellType_broad_hc)
 # Astro EndoMural     Micro     Oligo       OPC     Excit     Inhib 
 # 738       425       297      1877       344      4411      1908 
 
-lobstr::obj_size(sce_example)
+lobstr::obj_size(sce_DLPFC_example)
 # 21.36 MB
 
-class(sce_example)
+class(sce_DLPFC_example)
 # [1] "SingleCellExperiment"
 # attr(,"package")
 # [1] "SingleCellExperiment"
-typeof(sce_example)
+typeof(sce_DLPFC_example)
+typeof(counts(sce_DLPFC_example))
 # [1] "S4"
 
 ## Drop Reduced Dims
-reducedDim(sce_example, "GLMPCA_approx") <- NULL
-reducedDim(sce_example, "TSNE") <- NULL
-reducedDim(sce_example, "UMAP") <- NULL
-reducedDim(sce_example, "HARMONY") <- NULL
-lobstr::obj_size(sce_example)
-# 6.53 MB
+reducedDim(sce_DLPFC_example, "GLMPCA_approx") <- NULL
+reducedDim(sce_DLPFC_example, "TSNE") <- NULL
+reducedDim(sce_DLPFC_example, "UMAP") <- NULL
+reducedDim(sce_DLPFC_example, "HARMONY") <- NULL
+lobstr::obj_size(sce_DLPFC_example)
+# 4.78 MB
+
+counts(sce_DLPFC_example) <- NULL
+logcounts(sce_DLPFC_example) <- as.matrix(logcounts(sce_DLPFC_example))
+
+# sce_DLPFC_example <- realize(sce_DLPFC_example)
+
+lobstr::obj_size(sce_DLPFC_example)
+# 58.54 MB
+
+
+
+# lobstr::obj_size(sce_DLPFC_example)
 
 ## output zipped is 13.9 MB
-# HDF5Array::saveHDF5SummarizedExperiment(sce_example,
-#                                         dir = ("~/Desktop/sce_example")) 
+# HDF5Array::saveHDF5SummarizedExperiment(sce_DLPFC_example,
+#                                         dir = ("~/Desktop/sce_DLPFC_example"),
+#                                         replace = TRUE)
+# test <- loadHDF5SummarizedExperiment(("~/Desktop/sce_DLPFC_example"))
+# counts(test)
+
 ## Rdata file is 4.3 MB
-save(sce_example, file = "~/Desktop/sce_example.Rdata")
+save(sce_DLPFC_example, file = "~/Desktop/sce_DLPFC_example.Rdata")
+load("~/Desktop/test/sce_DLPFC_example.Rdata")
+load("~/Downloads/sce_DLPFC_example.Rdata", verbose = TRUE)
+SingleCellExperiment::logcounts(sce_DLPFC_example)[1:5,1:5]
+class(assays(sce_DLPFC_example)$logcounts)
 
