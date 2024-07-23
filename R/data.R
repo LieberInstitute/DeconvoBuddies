@@ -1,6 +1,6 @@
 #' Test Estimated Cell Type Proportions
 #'
-#' A test dataset of estiamted protions for 5 cell types over 100 samples.
+#' A test dataset of estimated proportions for 5 cell types over 100 samples.
 #' 
 #' 11.62 kB
 #'
@@ -8,7 +8,7 @@
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/est_prop.R>
 "est_prop"
 
-#' Markers stats from sce.test
+#' Markers stats from sce_DLPFC_example
 #'
 #' A tibble containing the marker stats from `get_mean_ratio` for `sce_DLPFC_example`.
 #' 

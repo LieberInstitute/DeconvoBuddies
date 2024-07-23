@@ -3,7 +3,7 @@
 \docType{data}
 \name{marker_test}
 \alias{marker_test}
-\title{Markers stats from sce.test}
+\title{Markers stats from sce_DLPFC_example}
 \format{
 tibble.
 }
