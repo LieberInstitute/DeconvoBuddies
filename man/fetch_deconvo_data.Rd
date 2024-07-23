@@ -5,7 +5,7 @@
 \title{Download Human DLPFC Deconvolution Data}
 \usage{
 fetch_deconvo_data(
-  type = c("rse_gene", "sce", "sce_example"),
+  type = c("rse_gene", "sce", "sce_DLPFC_example"),
   destdir = tempdir(),
   eh = ExperimentHub::ExperimentHub(),
   bfc = BiocFileCache::BiocFileCache()
@@ -61,22 +61,22 @@ rse_gene
 
 ## load example snRNA-seq data
 \dontrun{ ## TODO fix
-## A SingleCellExperiment (41.16 MB)
-if (!exists("sce_example")) sce_example2 <- fetch_deconvo_data("sce_example")
+## A SingleCellExperiment (4.79 MB)
+if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 
 
-sce_example
-# class: SingleCellExperiment 
-#  dim: 557 5000 
-# metadata(3): Samples cell_type_colors cell_type_colors_broad
-# assays(2): counts logcounts
-# rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
-# rowData names(7): source type ... gene_type binomial_deviance
-# colnames(5000): 17_TTCCAATTCAACGTGT-1 6_CATCGTCGTCGCCACA-1 ... 9_GGATGTTTCTAAACGC-1 3_GAGCTGCAGTAAACAC-1
-# colData names(32): Sample Barcode ... cellType_layer layer_annotation
-# reducedDimNames(0):
-#  mainExpName: NULL
-# altExpNames(0):
+sce_DLPFC_example
+#class: SingleCellExperiment 
+#dim: 557 10000 
+#metadata(3): Samples cell_type_colors cell_type_colors_broad
+#assays(2): counts logcounts
+#rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
+#rowData names(7): source type ... gene_type binomial_deviance
+#colnames(10000): 16_CGAAGTTTCGCACGAC-1 11_TTGGGATCAACCGCTG-1 ... 8_CGCATAAGTTAAACCC-1 16_AGCTACATCCCGAGAC-1
+#colData names(32): Sample Barcode ... cellType_layer layer_annotation
+#reducedDimNames(0):
+#   mainExpName: NULL
+#altExpNames(0):
 }
 
 \dontrun{

@@ -52,22 +52,22 @@
 #' 
 #' ## load example snRNA-seq data
 #' \dontrun{ ## TODO fix
-#' ## A SingleCellExperiment (41.16 MB)
-#' if (!exists("sce_example")) sce_example2 <- fetch_deconvo_data("sce_example")
+#' ## A SingleCellExperiment (4.79 MB)
+#' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 #' 
 #' 
-#' sce_example
-#' # class: SingleCellExperiment 
-#' #  dim: 557 5000 
-#' # metadata(3): Samples cell_type_colors cell_type_colors_broad
-#' # assays(2): counts logcounts
-#' # rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
-#' # rowData names(7): source type ... gene_type binomial_deviance
-#' # colnames(5000): 17_TTCCAATTCAACGTGT-1 6_CATCGTCGTCGCCACA-1 ... 9_GGATGTTTCTAAACGC-1 3_GAGCTGCAGTAAACAC-1
-#' # colData names(32): Sample Barcode ... cellType_layer layer_annotation
-#' # reducedDimNames(0):
-#' #  mainExpName: NULL
-#' # altExpNames(0):
+#' sce_DLPFC_example
+#' #class: SingleCellExperiment 
+#' #dim: 557 10000 
+#' #metadata(3): Samples cell_type_colors cell_type_colors_broad
+#' #assays(2): counts logcounts
+#' #rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
+#' #rowData names(7): source type ... gene_type binomial_deviance
+#' #colnames(10000): 16_CGAAGTTTCGCACGAC-1 11_TTGGGATCAACCGCTG-1 ... 8_CGCATAAGTTAAACCC-1 16_AGCTACATCCCGAGAC-1
+#' #colData names(32): Sample Barcode ... cellType_layer layer_annotation
+#' #reducedDimNames(0):
+#' #   mainExpName: NULL
+#' #altExpNames(0):
 #' }
 #' 
 #' \dontrun{
@@ -77,12 +77,12 @@
 #'     file.path(tempdir(), "sce_DLPFC_annotated")
 #' )
 #' }
-fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_example"),
+fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_DLPFC_example"),
                              destdir = tempdir(),
                              eh = ExperimentHub::ExperimentHub(),
                              bfc = BiocFileCache::BiocFileCache()){
   
-  rse_gene <- sce_example <- NULL
+  rse_gene <- sce_DLPFC_example <- NULL
   
   ## Choose a type among the valid options
   type <- match.arg(type)
@@ -100,7 +100,7 @@ fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_example"),
       "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
     url <-
       "https://www.dropbox.com/scl/fi/9eyg9e1r98t73wyzsuxhr/rse_gene.Rdata?rlkey=sw2djr71y954yw4o3xrmjv59b&dl=1"
-  } else if(type == "sce_example") {
+  } else if(type == "sce_DLPFC_example") {
     tag <- "Human_DLPFC_deconvolution_snRNAseq_DeconvoBuddies"
     hub_title <-
       "Human_DLPFC_deconvolution_snRNAseq_DeconvoBuddies"
@@ -145,7 +145,7 @@ fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_example"),
     load(file_path)
     return(rse_gene)
   
-    }else if (type == "sce_example") {
+    }else if (type == "sce_DLPFC_example") {
     
     load(file_path)
     return(sce_example)
