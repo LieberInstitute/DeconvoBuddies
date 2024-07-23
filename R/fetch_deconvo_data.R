@@ -51,7 +51,6 @@
 #' # colData names(78): SAMPLE_ID Sample ... diagnosis qc_class
 #' 
 #' ## load example snRNA-seq data
-#' \dontrun{ ## TODO fix
 #' ## A SingleCellExperiment (4.79 MB)
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 #' 
@@ -68,7 +67,9 @@
 #' #reducedDimNames(0):
 #' #   mainExpName: NULL
 #' #altExpNames(0):
-#' }
+#' 
+#' ## check the logcounts
+#' SingleCellExperiment::logcounts(sce_DLPFC_example)[1:5,1:5]
 #' 
 #' \dontrun{
 #' sce_path_zip <- fetch_deconvo_data("sce")
