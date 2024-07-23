@@ -9,8 +9,8 @@ plot_marker_express(
   stats,
   cell_type,
   n_genes = 4,
-  rank_col = "rank_ratio",
-  anno_col = "anno_ratio",
+  rank_col = "MeanRatio.rank",
+  anno_col = "MeanRatio.anno",
   gene_col = "gene",
   cellType_col = "cellType",
   color_pal = NULL,
@@ -53,10 +53,13 @@ The gene expression is plotted as violin plot with \code{plot_gene_express} and 
 annotations to each plot.
 }
 \examples{
-#plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Astro", gene_col = "Symbol")
-#plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Micro", gene_col = "Symbol", n_genes = 1, rank_col = "rank_ratio", anno_col = "anno_ratio", plot_points = TRUE)
-#plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Oligo", gene_col = "Symbol", n_genes = 10, rank_col = "rank_ratio", anno_col = "anno_ratio")
-#plot_marker_express(sce = sce.test, stat = marker_test, cell_type = "Excit.1", gene_col = "Symbol", n_genes = 5, rank_col = "rank_ratio", anno_col = "anno_ratio")
+if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+## plot the top markers for Astrocytes in 
+plot_marker_express(sce = sce_DLPFC_example, 
+                     stat = marker_test, 
+                     cellType_col = "cellType_broad_hc", 
+                     cell_type = "Astro", 
+                     gene_col = "gene")
 }
 \seealso{
 Other expression plotting functions: 
