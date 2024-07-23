@@ -60,10 +60,15 @@ cell types that make up a sample of bulk RNA-seq, based off of cell type gene
 expression profiles in a single cell/nuclei RNA-seq dataset.
 
 <p align="center">
-![Use single cell data to infer the composition of bulk RNA-seq samples](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution.png){width=50%}
+![Use single cell data to infer the composition of bulk RNA-seq samples](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution.png)
 </p>
 
 ### Deconvolution Methods
+
+There are 20+ published reference based deconvolution methods. Below are a 
+selection of 6 methods we tested in our deconvolution benchmark 
+[pre-print](https://doi.org/10.1101/2024.02.09.579665).
+
 | Approach | Method | Citation | Availability | 
 |  ---------- | -------- | ------- | ----------- |  
 | weighted least squares | DWLS | Tsoucas et al, Nature Comm, 2019 | [R Package Cran](https://cran.r-project.org/web/packages/DWLS/index.html) | 
@@ -83,7 +88,7 @@ deconvolution with the `Bisque` package.
 2. Download DLPFC RNA-seq data, and reference snRNA-seq data
 3. Find marker genes with `DeconvoBuddies` tools
 4. Run deconvolution with `BisqueRNA`
-5. Explore deconvolution output and create compostion plots with `DeconvoBuddies` tools
+5. Explore deconvolution output and create composition plots with `DeconvoBuddies` tools
 6. Check proportion against RNAScope estimated proportions
 
 # Basics
