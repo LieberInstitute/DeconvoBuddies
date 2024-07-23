@@ -33,7 +33,7 @@
 #'
 #'
 #' @examples
-#' ## load example SingleCellExperiment (4.79 MB)
+#' ## load example SingleCellExperiment
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 #' 
 #' ## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`
