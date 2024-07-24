@@ -52,7 +52,8 @@ Suggests:
     sessioninfo,
     tidyverse,
     BisqueRNA,
-    HDF5Array
+    HDF5Array,
+    Biobase
 Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
