@@ -37,6 +37,7 @@
 #' if (interactive()) browseURL(pdf_file)
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
+#' @importFrom SummarizedExperiment colData
 plot_marker_express_ALL <- function(sce,
     stats,
     pdf_fn = "marker_expression.pdf",
