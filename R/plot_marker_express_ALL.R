@@ -16,6 +16,7 @@
 #' @param color_pal  A named `character(1)` vector that contains a color pallet matching the values in `cellType_col`.
 #' @param plot_points A logical indicating whether to plot points over the violin,
 #' defaults to `FALSE` as these often become over plotted and quite large (especially when saved as PDF)
+#' @inheritParams plot_marker_express
 #'
 #' @return A pdf with violin plots for the expression of top marker genes for all cell types
 #' @export

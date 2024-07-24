@@ -30,6 +30,8 @@ plot_marker_express_ALL(
 
 \item{anno_col}{The \code{character()} name of column containing annotation in \code{stats}}
 
+\item{gene_col}{The \code{character()} name of column containing gene name in \code{stats} should be the same syntax as \code{rownames(sce)}}
+
 \item{cellType_col}{The \code{character()} name of colData column containing cell type for sce data,
 matches \code{cellType.target} in \code{stats}}
 
