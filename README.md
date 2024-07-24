@@ -87,9 +87,10 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
     #>     colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
     #>     get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
     #>     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
-    #>     Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,
-    #>     table, tapply, union, unique, unsplit, which.max, which.min
+    #>     Position, rank, rbind, Reduce, rownames, sapply, setdiff, table,
+    #>     tapply, union, unique, unsplit, which.max, which.min
     #> Loading required package: S4Vectors
+    #> Warning: package 'S4Vectors' was built under R version 4.4.1
     #> 
     #> Attaching package: 'S4Vectors'
     #> The following objects are masked from 'package:dplyr':
@@ -102,6 +103,7 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
     #> 
     #>     expand.grid, I, unname
     #> Loading required package: IRanges
+    #> Warning: package 'IRanges' was built under R version 4.4.1
     #> 
     #> Attaching package: 'IRanges'
     #> The following objects are masked from 'package:dplyr':
@@ -123,45 +125,37 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
     #> 
     #>     anyMissing, rowMedians
 
-Get mean ratios for each gene x cell type
+## Access Data
+
+Use `fetch_deconvo_data` Download RNA seqencing data from the Human
+DLPFC.  
+\* `rse_gene`: 110 samples of bulk RNA-seq. \* `sce` : snRNA-seq data
+from the Human DLPFC. \* `sce_DLPFC_example`: Sub-set of `sce` useful
+for testing.
 
 ``` r
-ratios <- get_mean_ratio2(sce.test)
-fc <- findMarkers_1vAll(sce.test)
-#> Inhib.2 - '2024-04-25 13:04:18.112684
-#> Inhib.1 - '2024-04-25 13:04:18.658684
-#> OPC - '2024-04-25 13:04:18.863432
-#> Astro - '2024-04-25 13:04:19.091077
-#> Excit.2 - '2024-04-25 13:04:19.313
-#> Oligo - '2024-04-25 13:04:19.496721
-#> Micro - '2024-04-25 13:04:19.681585
-#> Excit.1 - '2024-04-25 13:04:19.866671
-#> Building Table - 2024-04-25 13:04:20.061211
-#> ** Done! **
 
-(marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
-#> # A tibble: 1,778 × 15
-#>    gene       cellType.target mean.target cellType  mean ratio rank_ratio Symbol
-#>    <chr>      <fct>                 <dbl> <fct>    <dbl> <dbl>      <int> <chr> 
-#>  1 ENSG00000… Inhib.2               1.00  Excit.2  0.239  4.20          1 AL139…
-#>  2 ENSG00000… Inhib.2               1.71  Astro    0.512  3.35          2 SDC3  
-#>  3 ENSG00000… Inhib.2               0.950 Astro    0.413  2.30          3 IFI44 
-#>  4 ENSG00000… Inhib.2               3.32  Astro    1.47   2.26          4 COL11…
-#>  5 ENSG00000… Inhib.2               3.55  Astro    1.62   2.19          5 NTNG1 
-#>  6 ENSG00000… Inhib.2               1.22  Excit.1  0.560  2.18          6 TRIM62
-#>  7 ENSG00000… Inhib.2               3.37  Excit.2  1.96   1.72          7 USP24 
-#>  8 ENSG00000… Inhib.2               3.42  Inhib.1  2.44   1.40          8 SPATA6
-#>  9 ENSG00000… Inhib.2               1.21  Astro    0.914  1.33          9 ABCD3 
-#> 10 ENSG00000… Inhib.2               1.21  Astro    0.920  1.32         10 GNG12 
-#> # ℹ 1,768 more rows
-#> # ℹ 7 more variables: anno_ratio <chr>, logFC <dbl>, log.p.value <dbl>,
-#> #   log.FDR <dbl>, std.logFC <dbl>, rank_marker <int>, anno_logFC <chr>
+if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+#> Cannot connect to ExperimentHub server, using 'localHub=TRUE' instead
+#> Using 'localHub=TRUE'
+#>   If offline, please also see BiocManager vignette section on offline use
+#> 2024-07-24 07:12:03.580308 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+```
+
+## Marker Finding
+
+Find cell type specific markers with `get_mean_ratio` for each gene x
+cell type, calculates the Mean Ratio of expression for each gene between
+a target cell type and the next highest cell type.
+
+``` r
+marker_stats <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 ```
 
 ### Extablish Color Scheme
 
 ``` r
-cell_types <- levels(sce.test$cellType)
+cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
 cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", split = "\\.", preview = TRUE)
 ```
 
@@ -169,25 +163,41 @@ cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", s
 
 ### Plot Expression of Specified Genes
 
+Quickly create violin plot of gene expression.
+
 ``` r
-sce_symbol <- sce.test
-rownames(sce_symbol) <- rowData(sce.test)$Symbol
-plot_gene_express(sce = sce_symbol, genes = c("RNF220", "CSF3R"))
+plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+#> No summary function supplied, defaulting to `mean_se()`
+#> No summary function supplied, defaulting to `mean_se()`
 ```
 
 <img src="man/figures/README-plot_gene_expression-1.png" width="100%" />
 
+``` r
+plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_hc", genes = c("GAD2", "CD22"))
+#> No summary function supplied, defaulting to `mean_se()`
+#> No summary function supplied, defaulting to `mean_se()`
+```
+
+<img src="man/figures/README-plot_gene_expression-2.png" width="100%" />
+
 ### Plot Expression of Marker Genes
 
+Plot the expression of top marker genes from the statistics calculated
+in `get_mean_ratio`.
+
 ``` r
-plot_marker_express(sce.test,
+plot_marker_express(sce_DLPFC_example,
     marker_stats,
-    "Astro",
-    n_genes = 5,
-    rank_col = "rank_ratio",
-    anno_col = "anno_ratio",
+    cellType_col = "cellType_broad_hc",
+    cell_type = "Excit", 
+    gene_col = "gene",
     color_pal = cell_colors
 )
+#> No summary function supplied, defaulting to `mean_se()`
+#> No summary function supplied, defaulting to `mean_se()`
+#> No summary function supplied, defaulting to `mean_se()`
+#> No summary function supplied, defaulting to `mean_se()`
 ```
 
 <img src="man/figures/README-plot_marker_expression-1.png" width="100%" />
@@ -195,9 +205,11 @@ plot_marker_express(sce.test,
 ### Create Composition Bar Plot
 
 ``` r
+# extract phenotype data
 pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
     as.data.frame()
 
+# Create a long table of estimated proportion data with phenotype details
 est_prop_long <- est_prop %>%
     tibble::rownames_to_column("RNum") %>%
     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
@@ -205,18 +217,23 @@ est_prop_long <- est_prop %>%
     dplyr::mutate(a = "a")
 #> Joining with `by = join_by(RNum)`
 
+## plot composition bar of average proportion
 plot_composition_bar(est_prop_long)
 ```
 
 <img src="man/figures/README-composition_bar_plot-1.png" width="100%" />
 
 ``` r
+
+## plot composition bar of average proportion by Dx
 plot_composition_bar(est_prop_long, x_col = "Dx")
 ```
 
 <img src="man/figures/README-composition_bar_plot-2.png" width="100%" />
 
 ``` r
+
+## Set a mininum value for adding text
 plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 ```
 
@@ -273,7 +290,7 @@ By contributing to this project, you agree to abide by its terms.
   *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)* customized
   to use [Bioconductor’s docker
   containers](https://www.bioconductor.org/help/docker/) and
-  *[BiocCheck](https://bioconductor.org/packages/3.18/BiocCheck)*.
+  *[BiocCheck](https://bioconductor.org/packages/3.19/BiocCheck)*.
 - Code coverage assessment is possible thanks to
   [codecov](https://codecov.io/gh) and
   *[covr](https://CRAN.R-project.org/package=covr)*.
@@ -289,4 +306,4 @@ By contributing to this project, you agree to abide by its terms.
 For more details, check the `dev` directory.
 
 This package was developed using
-*[biocthis](https://bioconductor.org/packages/3.18/biocthis)*.
+*[biocthis](https://bioconductor.org/packages/3.19/biocthis)*.

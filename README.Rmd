@@ -49,52 +49,70 @@ library("SingleCellExperiment")
 ```
 
 
-Get mean ratios for each gene x cell type
-```{r marker_finding, eval = requireNamespace('DeconvoBuddies')}
-ratios <- get_mean_ratio2(sce.test)
-fc <- findMarkers_1vAll(sce.test)
+## Access Data
+Use `fetch_deconvo_data` Download RNA seqencing data from the Human DLPFC.  
+* `rse_gene`: 110 samples of bulk RNA-seq. 
+* `sce` : snRNA-seq data from the Human DLPFC. 
+* `sce_DLPFC_example`: Sub-set of `sce` useful for testing. 
+```{r `access data}
 
-(marker_stats <- left_join(ratios, fc, by = c("gene", "cellType.target")))
+if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+```
+
+## Marker Finding
+Find cell type specific markers with `get_mean_ratio` for each gene x cell type, 
+calculates the Mean Ratio of expression for each gene between a target cell type 
+and the next highest cell type. 
+
+```{r marker_finding, eval = requireNamespace('DeconvoBuddies')}
+marker_stats <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 ```
 
 ### Extablish Color Scheme
 ```{r establish_colors}
-cell_types <- levels(sce.test$cellType)
+cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
 cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", split = "\\.", preview = TRUE)
 ```
 
 ### Plot Expression of Specified Genes
+Quickly create violin plot of gene expression. 
 ```{r plot_gene_expression}
-sce_symbol <- sce.test
-rownames(sce_symbol) <- rowData(sce.test)$Symbol
-plot_gene_express(sce = sce_symbol, genes = c("RNF220", "CSF3R"))
+plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_hc", genes = c("GAD2", "CD22"))
 ```
 
 ### Plot Expression of Marker Genes
+Plot the expression of top marker genes from the statistics calculated in `get_mean_ratio`.
 ```{r plot_marker_expression}
-plot_marker_express(sce.test,
+plot_marker_express(sce_DLPFC_example,
     marker_stats,
-    "Astro",
-    n_genes = 5,
-    rank_col = "rank_ratio",
-    anno_col = "anno_ratio",
+    cellType_col = "cellType_broad_hc",
+    cell_type = "Excit", 
+    gene_col = "gene",
     color_pal = cell_colors
 )
 ```
 
 ### Create Composition Bar Plot
 ```{r composition_bar_plot}
+# extract phenotype data
 pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
     as.data.frame()
 
+# Create a long table of estimated proportion data with phenotype details
 est_prop_long <- est_prop %>%
     tibble::rownames_to_column("RNum") %>%
     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
     dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
     dplyr::mutate(a = "a")
 
+## plot composition bar of average proportion
 plot_composition_bar(est_prop_long)
+
+## plot composition bar of average proportion by Dx
 plot_composition_bar(est_prop_long, x_col = "Dx")
+
+## Set a mininum value for adding text
 plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
 ```
 
