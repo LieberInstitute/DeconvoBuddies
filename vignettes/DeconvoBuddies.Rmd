@@ -88,13 +88,35 @@ citation("DeconvoBuddies")
 # Quick start to using `DeconvoBuddies`
 
 ```{r "load packages", message=FALSE}
+suppressMessages({
 library("DeconvoBuddies")
 library("SummarizedExperiment")
 library("dplyr")
 library("tidyr")
 library("tibble")
 # library("ggplot2")
+})
 ```
+
+## Access Data
+Use `fetch_deconvo_data` Download RNA seqencing data from the Human DLPFC.  
+
+* `rse_gene`: 110 samples of bulk RNA-seq. [21745 genes x 110 samples]. 
+
+* `sce` : snRNA-seq data from the Human DLPFC. 
+
+* `sce_DLPFC_example`: Sub-set of `sce` useful for testing.  [557 genes x 10000 nuclei]
+
+
+```{r `access data}
+## Single cell example data 
+if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+
+## Bulk RNA-seq data
+if (!exists("rse_gene")) rse_gene <- fetch_deconvo_data("rse_gene")
+```
+
+
 ## Marker Finding  
 ### Using MeanRatio to Find Cell Type Markers
 Accurate deconvolution requires highly specific marker genes for each cell type
@@ -104,8 +126,8 @@ of target cell type)/mean(Expression of highest non-target cell type)`. These
 values can be calculated for a single cell RNA-seq dataset using `get_mean_ratio2()`.
 
 ```{r `get_mean_ratio2 demo`}
-my_mean_ratios <- get_mean_ratio2(sce.test, cellType_col = "cellType")
-my_mean_ratios
+marker_stats <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc", gene_name = "gene_name", gene_ensembl = "gene_id")
+marker_stats
 ```
 
 ## Plotting Tools  
@@ -135,7 +157,7 @@ creates a scale of related colors. This helps expand on the maximum number of
 colors and makes your pallet flexible when considering different 'resolutions' of
 cell types. 
 ```{r create_cell_colors demo 2`}
-my_cell_types <- levels(sce.test$cellType)
+my_cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
 my_cell_colors <- create_cell_colors(cell_types = my_cell_types, pallet = "classic", preview = TRUE, split = "\\.")
 ```
 
@@ -143,13 +165,13 @@ my_cell_colors <- create_cell_colors(cell_types = my_cell_types, pallet = "class
 The function `plot_marker_express()` helps quickly visualize expression of top
 marker genes, by ordering and annotating violin plots of expression over cell type.
 ```{r `plot_marker_expression demo`}
+# plot expression of the top 5 Astro marker genes
 plot_marker_express(
-    sce = sce.test,
-    stats = my_mean_ratios,
+    sce = sce_DLPFC_example,
+    stats = marker_stats,
     cell_type = "Astro",
     n_genes = 5,
-    rank_col = "rank_ratio",
-    anno_col = "anno_ratio",
+    cellType_col = "cellType_broad_hc",
     color_pal = my_cell_colors
 )
 ```
