@@ -1,87 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>/articles/DeconvoBuddies.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Deconvolution_Benchmark_DLPFC.html</loc>
-  </url>
-  <url>
-    <loc>/articles/Deconvolution_with_Bisque.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/RNAScope_prop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/create_cell_colors.html</loc>
-  </url>
-  <url>
-    <loc>/reference/est_prop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fetch_deconvo_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/findMarkers_1vAll.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_mean_ratio.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_mean_ratio2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_test_sce.html</loc>
-  </url>
-  <url>
-    <loc>/reference/marker_test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_composition_bar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_gene_express.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_marker_express.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_marker_express_ALL.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_marker_express_List.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rse_bulk_test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sce.test.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sce_ab.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/SUPPORT.html</loc></url>
+<url><loc>/articles/DeconvoBuddies.html</loc></url>
+<url><loc>/articles/Deconvolution_Benchmark_DLPFC.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/RNAScope_prop.html</loc></url>
+<url><loc>/reference/create_cell_colors.html</loc></url>
+<url><loc>/reference/est_prop.html</loc></url>
+<url><loc>/reference/fetch_deconvo_data.html</loc></url>
+<url><loc>/reference/findMarkers_1vAll.html</loc></url>
+<url><loc>/reference/get_mean_ratio.html</loc></url>
+<url><loc>/reference/get_mean_ratio2.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/make_test_sce.html</loc></url>
+<url><loc>/reference/marker_test.html</loc></url>
+<url><loc>/reference/pipe.html</loc></url>
+<url><loc>/reference/plot_composition_bar.html</loc></url>
+<url><loc>/reference/plot_gene_express.html</loc></url>
+<url><loc>/reference/plot_marker_express.html</loc></url>
+<url><loc>/reference/plot_marker_express_ALL.html</loc></url>
+<url><loc>/reference/plot_marker_express_List.html</loc></url>
+<url><loc>/reference/rse_bulk_test.html</loc></url>
+<url><loc>/reference/sce_ab.html</loc></url>
 </urlset>
+
