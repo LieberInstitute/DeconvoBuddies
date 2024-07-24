@@ -51,9 +51,13 @@ library("SingleCellExperiment")
 
 ## Access Data
 Use `fetch_deconvo_data` Download RNA seqencing data from the Human DLPFC.  
+
 * `rse_gene`: 110 samples of bulk RNA-seq. 
+
 * `sce` : snRNA-seq data from the Human DLPFC. 
+
 * `sce_DLPFC_example`: Sub-set of `sce` useful for testing. 
+
 ```{r `access data}
 
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")

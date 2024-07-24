@@ -128,18 +128,18 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 ## Access Data
 
 Use `fetch_deconvo_data` Download RNA seqencing data from the Human
-DLPFC.  
-\* `rse_gene`: 110 samples of bulk RNA-seq. \* `sce` : snRNA-seq data
-from the Human DLPFC. \* `sce_DLPFC_example`: Sub-set of `sce` useful
-for testing.
+DLPFC.
+
+- `rse_gene`: 110 samples of bulk RNA-seq.
+
+- `sce` : snRNA-seq data from the Human DLPFC.
+
+- `sce_DLPFC_example`: Sub-set of `sce` useful for testing.
 
 ``` r
 
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> Cannot connect to ExperimentHub server, using 'localHub=TRUE' instead
-#> Using 'localHub=TRUE'
-#>   If offline, please also see BiocManager vignette section on offline use
-#> 2024-07-24 07:12:03.580308 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2024-07-24 07:59:50.363952 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 ```
 
 ## Marker Finding
