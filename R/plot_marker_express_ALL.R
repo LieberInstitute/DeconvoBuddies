@@ -11,43 +11,42 @@
 #' @param n_genes An `integer()` of number of markers you'd like to plot
 #' @param rank_col The `character()` name of column to rank genes by in `stats`
 #' @param anno_col The `character()` name of column containing annotation in `stats`
-#' @param cellType_col The `character()` name of `colData(sce)` column 
+#' @param cellType_col The `character()` name of `colData(sce)` column
 #' containing cell type that matches `cellType.target` in `stats`
-#' @param color_pal  A named `character(1)` vector that contains a color pallet 
+#' @param color_pal  A named `character(1)` vector that contains a color pallet
 #' matching the values in `cellType_col`.
 #' @param plot_points A logical indicating whether to plot points over the violin,
 #' defaults to `FALSE` as these often become over plotted and quite large (especially when saved as PDF)
 #' @inheritParams plot_marker_express
 #'
-#' @return A pdf with violin plots for the expression of top marker genes for 
+#' @return A pdf with violin plots for the expression of top marker genes for
 #' all cell types
 #' @export
 #'
 #' @examples
 #' # Plot marker gene expression to PDF, one page per cell type in stats
 #' pdf_file <- tempfile("test_marker_expression_ALL", fileext = ".pdf")
-#' 
+#'
 #' plot_marker_express_ALL(
-#'   sce_DLPFC_example,
-#'   cellType_col = "cellType_broad_hc",
-#'   stat = marker_test,
-#'   pdf_fn = pdf_file
+#'     sce_DLPFC_example,
+#'     cellType_col = "cellType_broad_hc",
+#'     stat = marker_test,
+#'     pdf_fn = pdf_file
 #' )
-#' 
+#'
 #' if (interactive()) browseURL(pdf_file)
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
-plot_marker_express_ALL <- function(
-        sce,
-        stats,
-        pdf_fn = "marker_expression.pdf",
-        n_genes = 10,
-        rank_col = "MeanRatio.rank",
-        anno_col = "MeanRatio.anno",
-        gene_col = "gene",
-        cellType_col = "cellType",
-        color_pal = NULL,
-        plot_points = FALSE) {
+plot_marker_express_ALL <- function(sce,
+    stats,
+    pdf_fn = "marker_expression.pdf",
+    n_genes = 10,
+    rank_col = "MeanRatio.rank",
+    anno_col = "MeanRatio.anno",
+    gene_col = "gene",
+    cellType_col = "cellType",
+    color_pal = NULL,
+    plot_points = FALSE) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
 
     if (is.factor(sce[[cellType_col]])) {

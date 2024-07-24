@@ -89,12 +89,12 @@ citation("DeconvoBuddies")
 
 ```{r "load packages", message=FALSE}
 suppressMessages({
-library("DeconvoBuddies")
-library("SummarizedExperiment")
-library("dplyr")
-library("tidyr")
-library("tibble")
-# library("ggplot2")
+    library("DeconvoBuddies")
+    library("SummarizedExperiment")
+    library("dplyr")
+    library("tidyr")
+    library("tibble")
+    # library("ggplot2")
 })
 ```
 
@@ -109,7 +109,7 @@ Use `fetch_deconvo_data` Download RNA seqencing data from the Human DLPFC.
 
 
 ```{r `access data}
-## Single cell example data 
+## Single cell example data
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 
 ## Bulk RNA-seq data

@@ -24,27 +24,28 @@
 #' @examples
 #' ## Using Symbol as rownames makes this more human readable
 #' plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
-#' 
+#'
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 #' ## plot expression of two genes
 #' plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"))
-#' 
+#'
 #' ## plot points - note this creates large images and is easy to over plot
 #' plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"), plot_points = TRUE)
-#' 
+#'
 #' ## Add title
 #' plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"), title = "My Genes")
 #'
 #' @family expression plotting functions
 #'
-plot_gene_express <- function(sce,
-    genes,
-    assay_name = "logcounts",
-    cat = "cellType",
-    color_pal = NULL,
-    title = NULL,
-    plot_points = FALSE,
-    ncol = 2) {
+plot_gene_express <- function(
+        sce,
+        genes,
+        assay_name = "logcounts",
+        cat = "cellType",
+        color_pal = NULL,
+        title = NULL,
+        plot_points = FALSE,
+        ncol = 2) {
     stopifnot(any(genes %in% rownames(sce)))
 
     if (!cat %in% colnames(colData(sce))) {
@@ -71,7 +72,7 @@ plot_gene_express <- function(sce,
         ) +
         ggplot2::theme_bw() +
         ggplot2::theme(
-            legend.position = "None", 
+            legend.position = "None",
             axis.title.x = ggplot2::element_blank(),
             axis.text.x = ggplot2::element_text(angle = 90, hjust = 1),
             strip.text.x = ggplot2::element_text(face = "italic")

@@ -10,5 +10,5 @@ test_that("Correct Dims", {
 
 
 test_that("Ratios are equal", {
-  expect_equal(mrt2$ratio, mrt$MeanRatio)
+    expect_equal(mrt2$ratio, mrt$MeanRatio)
 })

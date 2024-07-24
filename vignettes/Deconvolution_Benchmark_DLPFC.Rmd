@@ -101,8 +101,8 @@ deconvolution with the `Bisque` package.
 
 ```{r "install", eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-  }
+    install.packages("BiocManager")
+}
 
 BiocManager::install("DeconvoBuddies")
 
@@ -160,24 +160,25 @@ This dataset can be accessed with `spatialLIBD::fetch_data()`.
 
 ```{r "load snRNA-seq"}
 ## Use spatialLIBD to fetch the snRNA-seq dataset
- sce_path_zip <- fetch_deconvo_data("sce")
- sce_path <- unzip(sce_path_zip, exdir = tempdir())
- sce <- HDF5Array::loadHDF5SummarizedExperiment(
-     file.path(tempdir(), "sce_DLPFC_annotated"))
- 
- # lobstr::obj_size(sce)
- # 172.28 MB
+sce_path_zip <- fetch_deconvo_data("sce")
+sce_path <- unzip(sce_path_zip, exdir = tempdir())
+sce <- HDF5Array::loadHDF5SummarizedExperiment(
+    file.path(tempdir(), "sce_DLPFC_annotated")
+)
 
- ## exclude Ambiguous cell type
- sce <- sce[,sce$cellType_broad_hc != "Ambiguous"]
- sce$cellType_broad_hc <- droplevels(sce$cellType_broad_hc)
- 
- dim(sce)
- ## Check the broad cell type distribution 
- table(sce$cellType_broad_hc)
- 
- ## We're going to subset to the first 5k genes to save memory
- sce <- sce[seq_len(5000),]
+# lobstr::obj_size(sce)
+# 172.28 MB
+
+## exclude Ambiguous cell type
+sce <- sce[, sce$cellType_broad_hc != "Ambiguous"]
+sce$cellType_broad_hc <- droplevels(sce$cellType_broad_hc)
+
+dim(sce)
+## Check the broad cell type distribution
+table(sce$cellType_broad_hc)
+
+## We're going to subset to the first 5k genes to save memory
+sce <- sce[seq_len(5000), ]
 ```
 
 ## Refernce snRNA-seq data
@@ -202,12 +203,13 @@ Key columns:
 head(DeconvoBuddies::RNAScope_prop)
 
 ## plot the RNAScope compositions
-plot_composition_bar(prop_long = RNAScope_prop,
-                      sample_col = "SAMPLE_ID",
-                      x_col = "SAMPLE_ID",
-                     add_text = FALSE) +
-  facet_wrap(~Combo, nrow = 2, scales = "free_x")
-
+plot_composition_bar(
+    prop_long = RNAScope_prop,
+    sample_col = "SAMPLE_ID",
+    x_col = "SAMPLE_ID",
+    add_text = FALSE
+) +
+    facet_wrap(~Combo, nrow = 2, scales = "free_x")
 ```
 
 
@@ -220,37 +222,36 @@ Mean Ratio marker finding
 </p>
 
 ```{r "Run Mean Ratio"}
+marker_stats <- get_mean_ratio(sce,
+    cellType_col = "cellType_broad_hc",
+    gene_ensembl = "gene_id",
+    gene_name = "gene_name"
+)
 
-marker_stats <- get_mean_ratio(sce, 
-                               cellType_col = "cellType_broad_hc",
-                               gene_ensembl = "gene_id",
-                               gene_name = "gene_name")
-
-marker_stats |> group_by(cellType.target) |> slice(1)
+marker_stats |>
+    group_by(cellType.target) |>
+    slice(1)
 ```
 
 ## plot the top marker genes
 ```{r "plot marker genes"}
-plot_marker_express(sce, 
-                    stats = marker_stats, 
-                    cell_type = "Excit", 
-                    cellType_col = "cellType_broad_hc",
-                    rank_col = "MeanRatio.rank",
-                    anno_col = "MeanRatio.anno",
-                    gene_col = "gene"
-                      )
-
+plot_marker_express(sce,
+    stats = marker_stats,
+    cell_type = "Excit",
+    cellType_col = "cellType_broad_hc",
+    rank_col = "MeanRatio.rank",
+    anno_col = "MeanRatio.anno",
+    gene_col = "gene"
+)
 ```
 ### Create a List of Marker Genes
 ```{r "marker_list"}
-
 marker_genes <- marker_stats |>
-  filter(MeanRatio.rank <= 25 & gene %in% rownames(rse_gene))
+    filter(MeanRatio.rank <= 25 & gene %in% rownames(rse_gene))
 
 marker_genes |> count(cellType.target)
 
 marker_genes <- marker_genes |> pull(gene)
-
 ```
 
 
@@ -321,8 +322,10 @@ plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "S
 
 ## for all library preparations by sample n=110
 plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "SAMPLE_ID", add_text = FALSE) +
-  theme(axis.text.x=element_blank(),
-        axis.ticks.x=element_blank())
+    theme(
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank()
+    )
 ```
 
 
@@ -331,19 +334,20 @@ Note to compare the deconvolution results to the RNAScope proportions, Oligo and
 OPC need to be added together. 
 ```{r "compare prop"}
 prop_long_opc <- prop_long |>
-  mutate(cell_type = gsub("Oligo|OPC", "OligoOPC", cell_type)) |>
-  group_by(SAMPLE_ID, Sample, library_combo, cell_type) |>
-  summarize(prop = sum(prop)) |>
-  ungroup()
+    mutate(cell_type = gsub("Oligo|OPC", "OligoOPC", cell_type)) |>
+    group_by(SAMPLE_ID, Sample, library_combo, cell_type) |>
+    summarize(prop = sum(prop)) |>
+    ungroup()
 
 prop_long_opc |> count(cell_type)
 
 ## Join RNAScope and Bisque Proportions
 prop_compare <- prop_long_opc |>
-  inner_join(RNAScope_prop |>
-              select(Sample, cell_type, prop_RNAScope = prop, prop_sn), 
-            by = c("Sample", "cell_type"))
-
+    inner_join(
+        RNAScope_prop |>
+            select(Sample, cell_type, prop_RNAScope = prop, prop_sn),
+        by = c("Sample", "cell_type")
+    )
 ```
 
 Calculate the correlation plot a scatter plot of the proportions
@@ -353,9 +357,9 @@ cor(prop_compare$prop, prop_compare$prop_RNAScope)
 
 ## Scatter plot with RNAScope proportions
 prop_compare |>
-  ggplot(aes(x = prop_RNAScope, y = prop, color = cell_type, shape = library_combo)) +
-  geom_point() +
-  geom_abline()
+    ggplot(aes(x = prop_RNAScope, y = prop, color = cell_type, shape = library_combo)) +
+    geom_point() +
+    geom_abline()
 
 
 ## correlation with snRNA-seq proportion
@@ -363,11 +367,9 @@ cor(prop_compare$prop, prop_compare$prop_sn)
 
 ## Scatter plot with RNAScope proportions
 prop_compare |>
-  ggplot(aes(x = prop_sn, y = prop, color = cell_type, shape = library_combo)) +
-  geom_point() +
-  geom_abline()
-
-
+    ggplot(aes(x = prop_sn, y = prop, color = cell_type, shape = library_combo)) +
+    geom_point() +
+    geom_abline()
 ```
 
 
@@ -379,33 +381,34 @@ can't be shown on this vignettes
 
 Code to prep-input and run hspe pseudobulk the snRNA-seq data (not run here)
 ```{r "prep and run hspe"}
-if(FALSE){
-  sce_pb <- spatialLIBD::registration_pseudobulk(sce, 
-                                               var_registration = "cellType_broad_hc",
-                                               var_sample_id = "Sample")
+if (FALSE) {
+    sce_pb <- spatialLIBD::registration_pseudobulk(sce,
+        var_registration = "cellType_broad_hc",
+        var_sample_id = "Sample"
+    )
 
 
-## mixture samples is the gene expression from the bulk rse_gene
-mixture_samples = t(assays(rse_gene)$logcounts)
-mixture_samples[1:5, 1:5]
+    ## mixture samples is the gene expression from the bulk rse_gene
+    mixture_samples <- t(assays(rse_gene)$logcounts)
+    mixture_samples[1:5, 1:5]
 
-## pure samples is a vector of indexes of the differnt cell types
-pure_samples = rafalib::splitit(sce_pb$cellType_broad_hc)
+    ## pure samples is a vector of indexes of the differnt cell types
+    pure_samples <- rafalib::splitit(sce_pb$cellType_broad_hc)
 
-## refrence samples is the pseudobulked logcounts
-reference_samples = t(assays(sce_pb)$logcounts)
-reference_samples[1:5, 1:5]
- 
-ncol(mixture_samples) == ncol(reference_samples)
+    ## refrence samples is the pseudobulked logcounts
+    reference_samples <- t(assays(sce_pb)$logcounts)
+    reference_samples[1:5, 1:5]
 
-est_prop_hspe = hspe(Y = mixture_samples,
-                       reference = reference_samples,
-                       pure_samples = pure_samples,
-                       markers = marker_genes,
-                       seed = 10524)
+    ncol(mixture_samples) == ncol(reference_samples)
 
+    est_prop_hspe <- hspe(
+        Y = mixture_samples,
+        reference = reference_samples,
+        pure_samples = pure_samples,
+        markers = marker_genes,
+        seed = 10524
+    )
 }
-
 ```
 
 # Reproducibility

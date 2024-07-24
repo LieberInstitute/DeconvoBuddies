@@ -24,27 +24,27 @@
 #'
 #' @examples
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#' ## plot the top markers for Astrocytes in 
-#' plot_marker_express(sce = sce_DLPFC_example, 
-#'                      stat = marker_test, 
-#'                      cellType_col = "cellType_broad_hc", 
-#'                      cell_type = "Astro", 
-#'                      gene_col = "gene")
+#' ## plot the top markers for Astrocytes in
+#' plot_marker_express(
+#'     sce = sce_DLPFC_example,
+#'     stat = marker_test,
+#'     cellType_col = "cellType_broad_hc",
+#'     cell_type = "Astro",
+#'     gene_col = "gene"
+#' )
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
-plot_marker_express <- function(
-        sce,
-        stats,
-        cell_type,
-        n_genes = 4,
-        rank_col = "MeanRatio.rank",
-        anno_col = "MeanRatio.anno",
-        gene_col = "gene",
-        cellType_col = "cellType",
-        color_pal = NULL,
-        plot_points = FALSE,
-        ncol = 2) {
-  
+plot_marker_express <- function(sce,
+    stats,
+    cell_type,
+    n_genes = 4,
+    rank_col = "MeanRatio.rank",
+    anno_col = "MeanRatio.anno",
+    gene_col = "gene",
+    cellType_col = "cellType",
+    color_pal = NULL,
+    plot_points = FALSE,
+    ncol = 2) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
     stopifnot(cell_type %in% sce[[cellType_col]])
     stopifnot(cell_type %in% stats$cellType.target)
@@ -60,29 +60,32 @@ plot_marker_express <- function(
     stopifnot(rank_col %in% colnames(stats))
     stopifnot(anno_col %in% colnames(stats))
     stopifnot(gene_col %in% colnames(stats))
-    
-    lookup <- c(rank_col = rank_col, 
-                anno_col = anno_col, 
-                gene_col = gene_col)
-    
+
+    lookup <- c(
+        rank_col = rank_col,
+        anno_col = anno_col,
+        gene_col = gene_col
+    )
+
     stats_filter <- stats |>
         dplyr::rename(dplyr::all_of(lookup)) |>
         dplyr::select(gene_col, gene_col, rank_col, cellType.target, anno_col) |>
         dplyr::filter(
             cellType.target == cell_type,
             rank_col <= n_genes
-        ) |> mutate(
+        ) |>
+        mutate(
             Feature = paste0(stringr::str_pad(rank_col, max_digits, "left"), ": ", gene_col),
             Var1 = Feature,
             anno_str = paste0("\n ", anno_col)
         )
 
     # return(stats_filter)
-    
-    if(!any(stats_filter$gene_col %in% rownames(sce))){
-      warning("genes from gene_col don't match rownames(sce), be sure to supply the correct column from stats")
+
+    if (!any(stats_filter$gene_col %in% rownames(sce))) {
+        warning("genes from gene_col don't match rownames(sce), be sure to supply the correct column from stats")
     }
-    
+
     marker_sce <- sce[stats_filter$gene_col, ]
     rownames(marker_sce) <- stats_filter$Feature
 

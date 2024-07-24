@@ -18,23 +18,22 @@
 #' est_prop_long <- est_prop |>
 #'     tibble::rownames_to_column("RNum") |>
 #'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-#'     dplyr::inner_join(pd |> dplyr::select(RNum, Dx))  ## TODO fix example data
+#'     dplyr::inner_join(pd |> dplyr::select(RNum, Dx)) ## TODO fix example data
 #'
 #' plot_composition_bar(est_prop_long)
 #' plot_composition_bar(est_prop_long, x_col = "Dx")
 #' plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
-#' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) + ggplot2::facet_wrap(~Dx, scales="free_x")
-#' 
+#' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) + ggplot2::facet_wrap(~Dx, scales = "free_x")
+#'
 #' @importFrom dplyr rename group_by summarise mutate arrange
 #' @importFrom ggplot2 ggplot geom_bar geom_text aes theme element_text
-plot_composition_bar <- function(
-        prop_long,
-        sample_col = "RNum",
-        x_col = "ALL",
-        prop_col = "prop",
-        ct_col = "cell_type",
-        add_text = TRUE,
-        min_prop_text = 0) {
+plot_composition_bar <- function(prop_long,
+    sample_col = "RNum",
+    x_col = "ALL",
+    prop_col = "prop",
+    ct_col = "cell_type",
+    add_text = TRUE,
+    min_prop_text = 0) {
     x_cat <- cell_type <- anno_y <- NULL
 
     # ct_col <- dplyr::enquo(ct_col)
@@ -52,31 +51,35 @@ plot_composition_bar <- function(
         ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, vjust = 0.5, hjust = 1))
 
     if (add_text) {
-        comp_barplot <- comp_barplot + 
-          ggplot2::geom_text(ggplot2::aes(
-            y = mean_prop,
-            label = ifelse(mean_prop > min_prop_text,
-                format(round(mean_prop, 3), 3),
-                "")
-            ),
-            position = ggplot2::position_stack(vjust = 0.5))
+        comp_barplot <- comp_barplot +
+            ggplot2::geom_text(
+                ggplot2::aes(
+                    y = mean_prop,
+                    label = ifelse(mean_prop > min_prop_text,
+                        format(round(mean_prop, 3), 3),
+                        ""
+                    )
+                ),
+                position = ggplot2::position_stack(vjust = 0.5)
+            )
     }
 
     return(comp_barplot)
 }
 
 
-.get_cat_prop <- function(
-        prop_long,
-        sample_col = "RNum",
-        x_col = "ALL",
-        prop_col = "prop",
-        ct_col = "cell_type") {
+.get_cat_prop <- function(prop_long,
+    sample_col = "RNum",
+    x_col = "ALL",
+    prop_col = "prop",
+    ct_col = "cell_type") {
     cell_type <- prop <- mean_prop <- x_cat <- anno_y <- sum_prop <- n <- NULL
 
     prop_long <- prop_long |>
-        dplyr::mutate(ALL = "ALL", 
-                      sample = !!as.symbol(sample_col)) |>
+        dplyr::mutate(
+            ALL = "ALL",
+            sample = !!as.symbol(sample_col)
+        ) |>
         dplyr::rename(cell_type = ct_col, prop = prop_col, x_cat = x_col)
 
     n_sample <- prop_long |>
@@ -84,13 +87,13 @@ plot_composition_bar <- function(
         dplyr::summarise(n = length(unique(sample)))
 
     cat_prop <- prop_long |>
-      dplyr::group_by(cell_type, x_cat) |>
-      dplyr::mutate(sum_prop = sum(prop)) |>
-      dplyr::slice(1) |>
-      dplyr::left_join(n_sample, by = "x_cat") |>
-      dplyr::mutate(mean_prop = sum_prop / n) |>
-      dplyr::arrange(cell_type) |>
-      dplyr::group_by(x_cat) 
+        dplyr::group_by(cell_type, x_cat) |>
+        dplyr::mutate(sum_prop = sum(prop)) |>
+        dplyr::slice(1) |>
+        dplyr::left_join(n_sample, by = "x_cat") |>
+        dplyr::mutate(mean_prop = sum_prop / n) |>
+        dplyr::arrange(cell_type) |>
+        dplyr::group_by(x_cat)
 
     return(cat_prop)
 }

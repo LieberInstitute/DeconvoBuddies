@@ -22,18 +22,18 @@
 #' @examples
 #' #' ## load example SingleCellExperiment
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#' 
+#'
 #' ## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`
 #' get_mean_ratio2(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
-#' 
-#' #  gene       cellType.target mean.target cellType    mean ratio rank_ratio anno_ratio             
-#' #<chr>      <fct>                 <dbl> <fct>      <dbl> <dbl>      <int> <chr>                  
-#' #1 CD22       Oligo                  1.36 OPC       0.0730  18.6          1 Oligo/OPC: 18.625      
-#' #2 LINC01608  Oligo                  2.39 Micro     0.142   16.8          2 Oligo/Micro: 16.829    
-#' #3 FOLH1      Oligo                  1.59 OPC       0.101   15.7          3 Oligo/OPC: 15.684      
-#' #4 SLC5A11    Oligo                  2.14 Micro     0.145   14.7          4 Oligo/Micro: 14.697    
-#' #5 AC012494.1 Oligo                  2.42 OPC       0.169   14.3          5 Oligo/OPC: 14.282 
-#' 
+#'
+#' #  gene       cellType.target mean.target cellType    mean ratio rank_ratio anno_ratio
+#' #<chr>      <fct>                 <dbl> <fct>      <dbl> <dbl>      <int> <chr>
+#' # 1 CD22       Oligo                  1.36 OPC       0.0730  18.6          1 Oligo/OPC: 18.625
+#' # 2 LINC01608  Oligo                  2.39 Micro     0.142   16.8          2 Oligo/Micro: 16.829
+#' # 3 FOLH1      Oligo                  1.59 OPC       0.101   15.7          3 Oligo/OPC: 15.684
+#' # 4 SLC5A11    Oligo                  2.14 Micro     0.145   14.7          4 Oligo/Micro: 14.697
+#' # 5 AC012494.1 Oligo                  2.42 OPC       0.169   14.3          5 Oligo/OPC: 14.282
+#'
 #' @importFrom dplyr mutate
 #' @importFrom dplyr arrange
 #' @importFrom purrr map
