@@ -43,15 +43,19 @@ clusters with unknown identities.
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 
 ## Create list-of-lists of genes to plot, names of sub-list become title of page
-marker_list <- list(Inhib = c("GAD2", "SAMD5"), Astro = c("RGS20", "PRDM16"))
+my_gene_list <- list(Inhib = c("GAD2", "SAMD5"), Astro = c("RGS20", "PRDM16"))
 
-## plot to PDF, one page per sub-list
-# plot_marker_express_List(sce_DLPFC_example, gene_list = marker_list, cellType_col = "cellType_broad_hc", pdf_fn = "./plots/test_marker_expression_List.pdf")
-## choose a differnt cell type annotation
-# plot_marker_express_List(sce_DLPFC_example, gene_list = marker_list, cellType_col = "cellType_hc", pdf_fn = "./plots/test_marker_expression_List.pdf")
-## plot points in violin plots
-# plot_marker_express_List(sce_DLPFC_example, gene_list = marker_list, cellType_col = "cellType_broad_hc", pdf_fn = "./plots/test_marker_expression_List.pdf", plot_points = TRUE)
+# Plot marker gene expression to PDF, one page per cell type in stats
+pdf_file <- tempfile("test_marker_expression_List", fileext = ".pdf")
 
+plot_marker_express_List(
+    sce_DLPFC_example,
+    gene_list = my_gene_list,
+    pdf_fn = pdf_file,
+    cellType_col = "cellType_broad_hc"
+)
+
+if (interactive()) browseURL(pdf_file)
 }
 \seealso{
 Other expression plotting functions: 
