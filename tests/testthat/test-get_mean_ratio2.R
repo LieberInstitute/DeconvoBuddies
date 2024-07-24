@@ -1,14 +1,14 @@
-mrt <- suppressMessages(get_mean_ratio(sce.test, assay_name = "logcounts", cellType_col = "cellType", gene_name = "Symbol"))
-mrt2 <- get_mean_ratio2(sce.test, assay_name = "logcounts", cellType_col = "cellType", add_symbol = TRUE)
+if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+
+mrt <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
+mrt2 <- get_mean_ratio2(sce_DLPFC_example, assay_name = "logcounts", cellType_col = "cellType_broad_hc", add_symbol = TRUE)
 
 test_that("Correct Dims", {
     expect_equal(nrow(mrt2), nrow(mrt))
     expect_equal(ncol(mrt2), ncol(mrt))
 })
 
-r1 <- mrt %>% dplyr::filter(gene == "ENSG00000187147", cellType.target == "Oligo")
-r2 <- mrt2 %>% dplyr::filter(gene == "ENSG00000187147", cellType.target == "Oligo")
 
-test_that("One Ratio Matches", {
-    expect_equal(r2$ratio, r1$MeanRatio)
+test_that("Ratios are equal", {
+  expect_equal(mrt2$ratio, mrt$MeanRatio)
 })
