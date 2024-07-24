@@ -9,8 +9,9 @@ plot_marker_express_ALL(
   stats,
   pdf_fn = "marker_expression.pdf",
   n_genes = 10,
-  rank_col = "rank_ratio",
-  anno_col = "anno_ratio",
+  rank_col = "MeanRatio.rank",
+  anno_col = "MeanRatio.anno",
+  gene_col = "gene",
   cellType_col = "cellType",
   color_pal = NULL,
   plot_points = FALSE
@@ -47,7 +48,8 @@ The gene expression is plotted as violin plot with \code{plot_gene_express} and 
 annotations to each plot.
 }
 \examples{
-# plot_marker_express_ALL(sce.test, stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
+# Plot marker gene expression to PDF, one page per cell type in stats
+# plot_marker_express_ALL(sce_DLPFC_example,cellType_col = "cellType_broad_hc", stat = marker_test, pdf_fn = "test_marker_expression_ALL.pdf")
 }
 \seealso{
 Other expression plotting functions: 

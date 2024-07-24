@@ -21,7 +21,8 @@
 #' @export
 #'
 #' @examples
-#' # plot_marker_express_ALL(sce.test, stat = marker_test, pdf_fn = "./plots/test_marker_expression_ALL.pdf")
+#' # Plot marker gene expression to PDF, one page per cell type in stats
+#' # plot_marker_express_ALL(sce_DLPFC_example,cellType_col = "cellType_broad_hc", stat = marker_test, pdf_fn = "test_marker_expression_ALL.pdf")
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
 plot_marker_express_ALL <- function(
@@ -29,8 +30,9 @@ plot_marker_express_ALL <- function(
         stats,
         pdf_fn = "marker_expression.pdf",
         n_genes = 10,
-        rank_col = "rank_ratio",
-        anno_col = "anno_ratio",
+        rank_col = "MeanRatio.rank",
+        anno_col = "MeanRatio.anno",
+        gene_col = "gene",
         cellType_col = "cellType",
         color_pal = NULL,
         plot_points = FALSE) {
@@ -58,6 +60,7 @@ plot_marker_express_ALL <- function(
             n_genes = n_genes,
             rank_col = rank_col,
             anno_col = anno_col,
+            gene_col = gene_col,
             cellType_col = cellType_col,
             color_pal = color_pal,
             plot_points = plot_points
