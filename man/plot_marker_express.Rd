@@ -54,12 +54,14 @@ annotations to each plot.
 }
 \examples{
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-## plot the top markers for Astrocytes in 
-plot_marker_express(sce = sce_DLPFC_example, 
-                     stat = marker_test, 
-                     cellType_col = "cellType_broad_hc", 
-                     cell_type = "Astro", 
-                     gene_col = "gene")
+## plot the top markers for Astrocytes in
+plot_marker_express(
+    sce = sce_DLPFC_example,
+    stat = marker_test,
+    cellType_col = "cellType_broad_hc",
+    cell_type = "Astro",
+    gene_col = "gene"
+)
 }
 \seealso{
 Other expression plotting functions: 

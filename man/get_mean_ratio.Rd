@@ -59,31 +59,31 @@ if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_D
 get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 
 # A tibble: 764 × 8
-#gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno         
-#<chr>    <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>                  
-#  1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858    
-#2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254
-#3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65     
-#4 RGS20    Astro                  1.71 Inhib           0.173      9.88              4 Astro/Inhib: 9.876     
-#5 HPSE2    Astro                  2.49 Inhib           0.282      8.82              5 Astro/Inhib: 8.823   
+# gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno
+#<chr>    <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>
+#  1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858
+# 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254
+# 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65
+# 4 RGS20    Astro                  1.71 Inhib           0.173      9.88              4 Astro/Inhib: 9.876
+# 5 HPSE2    Astro                  2.49 Inhib           0.282      8.82              5 Astro/Inhib: 8.823
 
 # Option to specify gene_name as the "Symbol" column from rowData
 # this will be added to the marker stats output
 SummarizedExperiment::rowData(sce_DLPFC_example)
-#  gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno         
-#<chr>    <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>                  
-#1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858    
-#2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254
-#3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65     
-#4 RGS20    Astro                  1.71 Inhib           0.173      9.88              4 Astro/Inhib: 9.876     
-#5 HPSE2    Astro                  2.49 Inhib           0.282      8.82              5 Astro/Inhib: 8.823   
+#  gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno
+#<chr>    <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>
+# 1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858
+# 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254
+# 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65
+# 4 RGS20    Astro                  1.71 Inhib           0.173      9.88              4 Astro/Inhib: 9.876
+# 5 HPSE2    Astro                  2.49 Inhib           0.282      8.82              5 Astro/Inhib: 8.823
 
 get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc", gene_name = "gene_name", gene_ensembl = "gene_id")
 # A tibble: 764 × 10
 # gene            cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno   gene_ensembl gene_name
-# <chr>           <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>            <chr>        <chr>    
-# 1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858     ENSG00000234… OBI1-AS1 
-# 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254 ENSG00000142… PRDM16   
-# 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65      ENSG00000149… PAMR1    
+# <chr>           <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>            <chr>        <chr>
+# 1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858     ENSG00000234… OBI1-AS1
+# 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254 ENSG00000142… PRDM16
+# 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65      ENSG00000149… PAMR1
 
 }

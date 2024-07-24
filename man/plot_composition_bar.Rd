@@ -42,11 +42,11 @@ pd <- SummarizedExperiment::colData(rse_bulk_test) |>
 est_prop_long <- est_prop |>
     tibble::rownames_to_column("RNum") |>
     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-    dplyr::inner_join(pd |> dplyr::select(RNum, Dx))  ## TODO fix example data
+    dplyr::inner_join(pd |> dplyr::select(RNum, Dx)) ## TODO fix example data
 
 plot_composition_bar(est_prop_long)
 plot_composition_bar(est_prop_long, x_col = "Dx")
 plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
-plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) + ggplot2::facet_wrap(~Dx, scales="free_x")
+plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) + ggplot2::facet_wrap(~Dx, scales = "free_x")
 
 }

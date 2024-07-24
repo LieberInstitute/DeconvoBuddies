@@ -56,10 +56,10 @@ annotations to each plot.
 pdf_file <- tempfile("test_marker_expression_ALL", fileext = ".pdf")
 
 plot_marker_express_ALL(
-  sce_DLPFC_example,
-  cellType_col = "cellType_broad_hc",
-  stat = marker_test,
-  pdf_fn = pdf_file
+    sce_DLPFC_example,
+    cellType_col = "cellType_broad_hc",
+    stat = marker_test,
+    pdf_fn = pdf_file
 )
 
 if (interactive()) browseURL(pdf_file)
