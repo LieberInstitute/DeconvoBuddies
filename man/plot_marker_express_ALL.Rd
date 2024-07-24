@@ -32,16 +32,18 @@ plot_marker_express_ALL(
 
 \item{gene_col}{The \code{character()} name of column containing gene name in \code{stats} should be the same syntax as \code{rownames(sce)}}
 
-\item{cellType_col}{The \code{character()} name of colData column containing cell type for sce data,
-matches \code{cellType.target} in \code{stats}}
+\item{cellType_col}{The \code{character()} name of \code{colData(sce)} column
+containing cell type that matches \code{cellType.target} in \code{stats}}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the values in \code{cellType_col}.}
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet
+matching the values in \code{cellType_col}.}
 
 \item{plot_points}{A logical indicating whether to plot points over the violin,
 defaults to \code{FALSE} as these often become over plotted and quite large (especially when saved as PDF)}
 }
 \value{
-A pdf with violin plots for the expression of top marker genes for all cell types
+A pdf with violin plots for the expression of top marker genes for
+all cell types
 }
 \description{
 This function plots the top n marker genes for a all cell types based off of
@@ -51,7 +53,16 @@ annotations to each plot.
 }
 \examples{
 # Plot marker gene expression to PDF, one page per cell type in stats
-# plot_marker_express_ALL(sce_DLPFC_example,cellType_col = "cellType_broad_hc", stat = marker_test, pdf_fn = "test_marker_expression_ALL.pdf")
+pdf_file <- tempfile("test_marker_expression_ALL", fileext = ".pdf")
+
+plot_marker_express_ALL(
+  sce_DLPFC_example,
+  cellType_col = "cellType_broad_hc",
+  stat = marker_test,
+  pdf_fn = pdf_file
+)
+
+if (interactive()) browseURL(pdf_file)
 }
 \seealso{
 Other expression plotting functions: 
