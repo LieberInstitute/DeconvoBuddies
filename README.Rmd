@@ -42,10 +42,12 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 ## Example
 
 ```{r 'load_packages', echo = FALSE}
+suppressMessages({
 library("DeconvoBuddies")
 library("dplyr")
 library("ggplot2")
 library("SingleCellExperiment")
+})
 ```
 
 

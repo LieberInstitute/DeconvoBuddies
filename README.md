@@ -35,95 +35,8 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 
 ## Example
 
-    #> 
-    #> Attaching package: 'dplyr'
-    #> The following objects are masked from 'package:stats':
-    #> 
-    #>     filter, lag
-    #> The following objects are masked from 'package:base':
-    #> 
-    #>     intersect, setdiff, setequal, union
-    #> Loading required package: SummarizedExperiment
-    #> Loading required package: MatrixGenerics
-    #> Loading required package: matrixStats
-    #> 
-    #> Attaching package: 'matrixStats'
-    #> The following object is masked from 'package:dplyr':
-    #> 
-    #>     count
-    #> 
-    #> Attaching package: 'MatrixGenerics'
-    #> The following objects are masked from 'package:matrixStats':
-    #> 
-    #>     colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
-    #>     colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
-    #>     colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
-    #>     colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
-    #>     colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
-    #>     colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
-    #>     colWeightedMeans, colWeightedMedians, colWeightedSds,
-    #>     colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
-    #>     rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
-    #>     rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
-    #>     rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
-    #>     rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
-    #>     rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
-    #>     rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
-    #>     rowWeightedSds, rowWeightedVars
-    #> Loading required package: GenomicRanges
-    #> Loading required package: stats4
-    #> Loading required package: BiocGenerics
-    #> 
-    #> Attaching package: 'BiocGenerics'
-    #> The following objects are masked from 'package:dplyr':
-    #> 
-    #>     combine, intersect, setdiff, union
-    #> The following objects are masked from 'package:stats':
-    #> 
-    #>     IQR, mad, sd, var, xtabs
-    #> The following objects are masked from 'package:base':
-    #> 
-    #>     anyDuplicated, aperm, append, as.data.frame, basename, cbind,
-    #>     colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
-    #>     get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
-    #>     match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
-    #>     Position, rank, rbind, Reduce, rownames, sapply, setdiff, table,
-    #>     tapply, union, unique, unsplit, which.max, which.min
-    #> Loading required package: S4Vectors
     #> Warning: package 'S4Vectors' was built under R version 4.4.1
-    #> 
-    #> Attaching package: 'S4Vectors'
-    #> The following objects are masked from 'package:dplyr':
-    #> 
-    #>     first, rename
-    #> The following object is masked from 'package:utils':
-    #> 
-    #>     findMatches
-    #> The following objects are masked from 'package:base':
-    #> 
-    #>     expand.grid, I, unname
-    #> Loading required package: IRanges
     #> Warning: package 'IRanges' was built under R version 4.4.1
-    #> 
-    #> Attaching package: 'IRanges'
-    #> The following objects are masked from 'package:dplyr':
-    #> 
-    #>     collapse, desc, slice
-    #> Loading required package: GenomeInfoDb
-    #> Loading required package: Biobase
-    #> Welcome to Bioconductor
-    #> 
-    #>     Vignettes contain introductory material; view with
-    #>     'browseVignettes()'. To cite Bioconductor, see
-    #>     'citation("Biobase")', and for packages 'citation("pkgname")'.
-    #> 
-    #> Attaching package: 'Biobase'
-    #> The following object is masked from 'package:MatrixGenerics':
-    #> 
-    #>     rowMedians
-    #> The following objects are masked from 'package:matrixStats':
-    #> 
-    #>     anyMissing, rowMedians
 
 ## Access Data
 
@@ -139,7 +52,7 @@ DLPFC.
 ``` r
 
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-07-24 07:59:50.363952 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2024-07-24 08:05:01.115526 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 ```
 
 ## Marker Finding
