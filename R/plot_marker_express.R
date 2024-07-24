@@ -31,7 +31,6 @@
 #'                      cell_type = "Astro", 
 #'                      gene_col = "gene")
 #' @family expression plotting functions
-#' @importFrom magrittr |>
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
 plot_marker_express <- function(
         sce,

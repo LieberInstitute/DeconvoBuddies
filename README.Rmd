@@ -102,14 +102,14 @@ plot_marker_express(sce_DLPFC_example,
 ### Create Composition Bar Plot
 ```{r composition_bar_plot}
 # extract phenotype data
-pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
+pd <- SummarizedExperiment::colData(rse_bulk_test) |>
     as.data.frame()
 
 # Create a long table of estimated proportion data with phenotype details
-est_prop_long <- est_prop %>%
-    tibble::rownames_to_column("RNum") %>%
-    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
-    dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
+est_prop_long <- est_prop |>
+    tibble::rownames_to_column("RNum") |>
+    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
+    dplyr::left_join(pd |> dplyr::select(RNum, Dx)) |>
     dplyr::mutate(a = "a")
 
 ## plot composition bar of average proportion

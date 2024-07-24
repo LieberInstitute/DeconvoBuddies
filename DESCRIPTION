@@ -23,7 +23,6 @@ Imports:
     purrr,
     stringr,
     dplyr,
-    magrittr,
     scran,
     rafalib,
     ggplot2,

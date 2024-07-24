@@ -52,7 +52,7 @@ DLPFC.
 ``` r
 
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-07-24 08:05:01.115526 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2024-07-24 09:54:46.997885 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 ```
 
 ## Marker Finding
@@ -119,14 +119,14 @@ plot_marker_express(sce_DLPFC_example,
 
 ``` r
 # extract phenotype data
-pd <- SummarizedExperiment::colData(rse_bulk_test) %>%
+pd <- SummarizedExperiment::colData(rse_bulk_test) |>
     as.data.frame()
 
 # Create a long table of estimated proportion data with phenotype details
-est_prop_long <- est_prop %>%
-    tibble::rownames_to_column("RNum") %>%
-    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") %>%
-    dplyr::left_join(pd %>% dplyr::select(RNum, Dx)) %>%
+est_prop_long <- est_prop |>
+    tibble::rownames_to_column("RNum") |>
+    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
+    dplyr::left_join(pd |> dplyr::select(RNum, Dx)) |>
     dplyr::mutate(a = "a")
 #> Joining with `by = join_by(RNum)`
 

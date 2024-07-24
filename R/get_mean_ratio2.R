@@ -69,10 +69,10 @@ get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcou
 
     if (add_symbol) {
         ratio_tables$Symbol <- SummarizedExperiment::rowData(sce)[ratio_tables$gene, ]$Symbol
-        # ratio_tables <- ratio_tables %>%
+        # ratio_tables <- ratio_tables |>
         #    mutate(ratio_anno = paste0(stringr::str_pad(rank_ratio, max_digits, "left"),": ",Symbol))
     }
-    ratio_tables <- ratio_tables %>%
+    ratio_tables <- ratio_tables |>
         mutate(anno_ratio = paste0(cellType.target, "/", cellType, ": ", base::round(ratio, 3)))
 
     return(ratio_tables)
@@ -97,14 +97,14 @@ get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcou
 
     nontarget_mean <- cell_means[cell_means$cellType != x, ]
 
-    ratio_table <- dplyr::left_join(target_mean, nontarget_mean, by = "gene") %>%
-        mutate(ratio = mean.target / mean) %>%
-        dplyr::group_by(gene) %>%
-        arrange(ratio) %>%
-        dplyr::slice(1) %>%
-        dplyr::select(gene, cellType.target, mean.target, cellType, mean, ratio) %>%
-        arrange(-ratio) %>%
-        dplyr::ungroup() %>%
+    ratio_table <- dplyr::left_join(target_mean, nontarget_mean, by = "gene") |>
+        mutate(ratio = mean.target / mean) |>
+        dplyr::group_by(gene) |>
+        arrange(ratio) |>
+        dplyr::slice(1) |>
+        dplyr::select(gene, cellType.target, mean.target, cellType, mean, ratio) |>
+        arrange(-ratio) |>
+        dplyr::ungroup() |>
         mutate(rank_ratio = dplyr::row_number())
 
     return(ratio_table)
