@@ -11,7 +11,8 @@
 #'  Based on spatialLIBD::fetch_data()
 #'
 #' @param type A `character(1)` specifying which file you want to download.
-#' `rse_gene` {RangedSummarizedExperiment} with 110 bulk RNA-seq samples
+#' `rse_gene` [RangedSummarizedExperiment-class][SummarizedExperiment::RangedSummarizedExperiment-class] 
+#' with 110 bulk RNA-seq samples
 #' @param destdir The destination directory to where files will be downloaded
 #' to in case the `ExperimentHub` resource is not available. If you already
 #' downloaded the files, you can set this to the current path where the files

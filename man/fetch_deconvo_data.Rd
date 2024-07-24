@@ -13,7 +13,8 @@ fetch_deconvo_data(
 }
 \arguments{
 \item{type}{A \code{character(1)} specifying which file you want to download.
-\code{rse_gene} {RangedSummarizedExperiment} with 110 bulk RNA-seq samples}
+\code{rse_gene} \link[SummarizedExperiment:RangedSummarizedExperiment-class]{RangedSummarizedExperiment-class}
+with 110 bulk RNA-seq samples}
 
 \item{destdir}{The destination directory to where files will be downloaded
 to in case the \code{ExperimentHub} resource is not available. If you already
@@ -34,7 +35,8 @@ The requested object: \code{rse_gene} that you assign to an object
 This function downloads from ExperimentHub, if ExperimentHub is not
 available, this function will download the files from Dropbox using
 BiocFileCache::bfcrpath() unless the files are present already at destdir.
-
+}
+\details{
 Note that ExperimentHub and BiocFileCache will cache the data and
 automatically detect if you have previously downloaded it, thus making it
 the preferred way to interact with the data.
@@ -49,8 +51,8 @@ if (!exists("rse-gene")) rse_gene <- fetch_deconvo_data("rse_gene")
 
 ## explore data
 rse_gene
-# class: RangedSummarizedExperiment 
-# dim: 21745 110 
+# class: RangedSummarizedExperiment
+# dim: 21745 110
 # metadata(1): SPEAQeasy_settings
 # assays(2): counts logcounts
 # rownames(21745): ENSG00000227232.5 ENSG00000278267.1 ... ENSG00000210195.2 ENSG00000210196.2
@@ -65,20 +67,20 @@ if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_D
 
 
 sce_DLPFC_example
-#class: SingleCellExperiment 
-#dim: 557 10000 
-#metadata(3): Samples cell_type_colors cell_type_colors_broad
-#assays(2): counts logcounts
-#rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
-#rowData names(7): source type ... gene_type binomial_deviance
-#colnames(10000): 16_CGAAGTTTCGCACGAC-1 11_TTGGGATCAACCGCTG-1 ... 8_CGCATAAGTTAAACCC-1 16_AGCTACATCCCGAGAC-1
-#colData names(32): Sample Barcode ... cellType_layer layer_annotation
-#reducedDimNames(0):
+# class: SingleCellExperiment
+# dim: 557 10000
+# metadata(3): Samples cell_type_colors cell_type_colors_broad
+# assays(2): counts logcounts
+# rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
+# rowData names(7): source type ... gene_type binomial_deviance
+# colnames(10000): 16_CGAAGTTTCGCACGAC-1 11_TTGGGATCAACCGCTG-1 ... 8_CGCATAAGTTAAACCC-1 16_AGCTACATCCCGAGAC-1
+# colData names(32): Sample Barcode ... cellType_layer layer_annotation
+# reducedDimNames(0):
 #   mainExpName: NULL
-#altExpNames(0):
+# altExpNames(0):
 
 ## check the logcounts
-SingleCellExperiment::logcounts(sce_DLPFC_example)[1:5,1:5]
+SingleCellExperiment::logcounts(sce_DLPFC_example)[1:5, 1:5]
 
 \dontrun{
 sce_path_zip <- fetch_deconvo_data("sce")
