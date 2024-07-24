@@ -43,10 +43,10 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 
 ```{r 'load_packages', echo = FALSE}
 suppressMessages({
-library("DeconvoBuddies")
-library("dplyr")
-library("ggplot2")
-library("SingleCellExperiment")
+    library("DeconvoBuddies")
+    library("dplyr")
+    library("ggplot2")
+    library("SingleCellExperiment")
 })
 ```
 
@@ -61,7 +61,6 @@ Use `fetch_deconvo_data` Download RNA seqencing data from the Human DLPFC.
 * `sce_DLPFC_example`: Sub-set of `sce` useful for testing. 
 
 ```{r `access data}
-
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 ```
 
@@ -93,7 +92,7 @@ Plot the expression of top marker genes from the statistics calculated in `get_m
 plot_marker_express(sce_DLPFC_example,
     marker_stats,
     cellType_col = "cellType_broad_hc",
-    cell_type = "Excit", 
+    cell_type = "Excit",
     gene_col = "gene",
     color_pal = cell_colors
 )
