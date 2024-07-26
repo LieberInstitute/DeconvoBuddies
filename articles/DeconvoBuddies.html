@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Introduction to DeconvoBuddies • DeconvoBuddies</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -168,16 +174,17 @@ to cite the package and the overall approach. Thank you!</p>
 <span><span class="co">#&gt;   package version 0.99.0,</span></span>
 <span><span class="co">#&gt;   &lt;http://www.bioconductor.org/packages/DeconvoBuddies&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt;   Huuki-Myers LA, Montgomery KD, Kwon SH, Cinquemani S, Eagles NJ,</span></span>
+<span><span class="co">#&gt;   Gonzalez-Padilla D, Maden SK, Kleinman JE, Hyde TM, Hicks SC, Maynard</span></span>
+<span><span class="co">#&gt;   KR, Collado-Torres L (2024). "Benchmark of cellular deconvolution</span></span>
+<span><span class="co">#&gt;   methods using a multi-assay reference dataset from postmortem human</span></span>
+<span><span class="co">#&gt;   prefrontal cortex." _bioRxiv_. doi:10.1101/2024.02.09.579665</span></span>
+<span><span class="co">#&gt;   &lt;https://doi.org/10.1101/2024.02.09.579665&gt;,</span></span>
+<span><span class="co">#&gt;   &lt;https://doi.org/10.1101/2024.02.09.579665&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   @Manual{,</span></span>
-<span><span class="co">#&gt;     title = {DeconvoBuddies: a R/Bioconductor package with deconvolution helper functions},</span></span>
-<span><span class="co">#&gt;     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Joel E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},</span></span>
-<span><span class="co">#&gt;     year = {2024},</span></span>
-<span><span class="co">#&gt;     url = {http://www.bioconductor.org/packages/DeconvoBuddies},</span></span>
-<span><span class="co">#&gt;     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.0},</span></span>
-<span><span class="co">#&gt;     doi = {10.18129/B9.bioc.DeconvoBuddies},</span></span>
-<span><span class="co">#&gt;   }</span></span></code></pre></div>
+<span><span class="co">#&gt; To see these entries in BibTeX format, use 'print(&lt;citation&gt;,</span></span>
+<span><span class="co">#&gt; bibtex=TRUE)', 'toBibtex(.)', or set</span></span>
+<span><span class="co">#&gt; 'options(citation.bibtex.max=999)'.</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -195,8 +202,10 @@ to cite the package and the overall approach. Thank you!</p>
 <div class="section level3">
 <h3 id="access-data">Access Data<a class="anchor" aria-label="anchor" href="#access-data"></a>
 </h3>
-<p>Use <code>fetch_deconvo_data</code> Download RNA seqencing data from
-the Human DLPFC.</p>
+<p>Use <code>fetch_deconvo_data</code> Download RNA sequencing data from
+the Human DLPFC (Huuki-Myers, Montgomery, Kwon, Cinquemani, Eagles,
+Gonzalez-Padilla, Maden, Kleinman, Hyde, Hicks, Maynard, and
+Collado-Torres, 2024).</p>
 <ul>
 <li><p><code>rse_gene</code>: 110 samples of bulk RNA-seq. [21745 genes
 x 110 samples].</p></li>
@@ -207,11 +216,11 @@ useful for testing. [557 genes x 10000 nuclei]</p></li>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Single cell example data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-07-26 21:42:19.942981 loading file /github/home/.cache/R/BiocFileCache/1d34441f499_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2024-07-26 21:48:49.622934 loading file /github/home/.cache/R/BiocFileCache/1d2460f59a9_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
 <span></span>
 <span><span class="co">## Bulk RNA-seq data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span><span class="op">)</span> <span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-07-26 21:42:21.533963 loading file /github/home/.cache/R/BiocFileCache/1d342c43f59_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span></code></pre></div>
+<span><span class="co">#&gt; 2024-07-26 21:48:51.203295 loading file /github/home/.cache/R/BiocFileCache/1d2473f47f0_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="marker-finding">Marker Finding<a class="anchor" aria-label="anchor" href="#marker-finding"></a>
@@ -390,9 +399,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"DeconvoBuddies.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-07-26 21:42:25 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-07-26 21:48:55 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 17.761 secs</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 17.644 secs</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
@@ -611,14 +620,24 @@ URL:
 <a href="http://www.bioconductor.org/packages/DeconvoBuddies" class="external-link">http://www.bioconductor.org/packages/DeconvoBuddies</a>.</cite>
 </p>
 <p>
-<a id="bib-mclean2017refmanager"></a><a href="#cite-mclean2017refmanager">[3]</a><cite>
+<a id="bib-huukimyers2024benchmark"></a><a href="#cite-huukimyers2024benchmark">[3]</a><cite>
+L. A. Huuki-Myers, K. D. Montgomery, S. H. Kwon, et al. “Benchmark of
+cellular deconvolution methods using a multi-assay reference dataset
+from postmortem human prefrontal cortex”. In: <em>bioRxiv</em> (2024).
+DOI:
+<a href="https://doi.org/10.1101/2024.02.09.579665" class="external-link">10.1101/2024.02.09.579665</a>.
+URL:
+<a href="https://doi.org/10.1101/2024.02.09.579665" class="external-link">https://doi.org/10.1101/2024.02.09.579665</a>.</cite>
+</p>
+<p>
+<a id="bib-mclean2017refmanager"></a><a href="#cite-mclean2017refmanager">[4]</a><cite>
 M. W. McLean. “RefManageR: Import and Manage BibTeX and BibLaTeX
 References in R”. In: <em>The Journal of Open Source Software</em>
 (2017). DOI:
 <a href="https://doi.org/10.21105/joss.00338" class="external-link">10.21105/joss.00338</a>.</cite>
 </p>
 <p>
-<a id="bib-ole2024biocstyle"></a><a href="#cite-ole2024biocstyle">[4]</a><cite>
+<a id="bib-ole2024biocstyle"></a><a href="#cite-ole2024biocstyle">[5]</a><cite>
 A. Oleś. <em>BiocStyle: Standard styles for vignettes and other
 Bioconductor documents</em>. R package version 2.33.1. 2024. DOI:
 <a href="https://doi.org/10.18129/B9.bioc.BiocStyle" class="external-link">10.18129/B9.bioc.BiocStyle</a>.
@@ -626,26 +645,26 @@ URL:
 <a href="https://bioconductor.org/packages/BiocStyle" class="external-link">https://bioconductor.org/packages/BiocStyle</a>.</cite>
 </p>
 <p>
-<a id="bib-2024language"></a><a href="#cite-2024language">[5]</a><cite>
+<a id="bib-2024language"></a><a href="#cite-2024language">[6]</a><cite>
 R Core Team. <em>R: A Language and Environment for Statistical
 Computing</em>. R Foundation for Statistical Computing. Vienna, Austria,
 2024. URL:
 <a href="https://www.R-project.org/" class="external-link">https://www.R-project.org/</a>.</cite>
 </p>
 <p>
-<a id="bib-wickham2011testthat"></a><a href="#cite-wickham2011testthat">[6]</a><cite>
+<a id="bib-wickham2011testthat"></a><a href="#cite-wickham2011testthat">[7]</a><cite>
 H. Wickham. “testthat: Get Started with Testing”. In: <em>The R
 Journal</em> 3 (2011), pp. 5–10. URL:
 <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf" class="external-link">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>.</cite>
 </p>
 <p>
-<a id="bib-wickham2021sessioninfo"></a><a href="#cite-wickham2021sessioninfo">[7]</a><cite>
+<a id="bib-wickham2021sessioninfo"></a><a href="#cite-wickham2021sessioninfo">[8]</a><cite>
 H. Wickham, W. Chang, R. Flight, et al. <em>sessioninfo: R Session
 Information</em>. R package version 1.2.2, <a href="https://r-lib.github.io/sessioninfo/" class="external-link uri">https://r-lib.github.io/sessioninfo/</a>. 2021. URL:
 <a href="https://github.com/r-lib/sessioninfo#readme" class="external-link">https://github.com/r-lib/sessioninfo#readme</a>.</cite>
 </p>
 <p>
-<a id="bib-xie2024knitr"></a><a href="#cite-xie2024knitr">[8]</a><cite>
+<a id="bib-xie2024knitr"></a><a href="#cite-xie2024knitr">[9]</a><cite>
 Y. Xie. <em>knitr: A General-Purpose Package for Dynamic Report
 Generation in R</em>. R package version 1.48. 2024. URL:
 <a href="https://yihui.org/knitr/" class="external-link">https://yihui.org/knitr/</a>.</cite>

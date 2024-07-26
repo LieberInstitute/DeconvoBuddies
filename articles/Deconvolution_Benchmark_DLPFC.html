@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deconvolution_Benchmark_DLPFC • DeconvoBuddies</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -252,7 +258,7 @@ Total, Nuc), post quality control n=110 samples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## use fetch deconvon data to load rse_gene</span></span>
 <span><span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-07-26 21:42:41.378783 loading file /github/home/.cache/R/BiocFileCache/1d342c43f59_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2024-07-26 21:49:10.641761 loading file /github/home/.cache/R/BiocFileCache/1d2473f47f0_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
 <span><span class="va">rse_gene</span></span>
 <span><span class="co">#&gt; class: RangedSummarizedExperiment </span></span>
 <span><span class="co">#&gt; dim: 21745 110 </span></span>
@@ -288,7 +294,7 @@ Total, Nuc), post quality control n=110 samples.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-07-26 21:42:43.729974 loading file /github/home/.cache/R/BiocFileCache/1d3d91e4f3_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2024-07-26 21:49:12.932182 loading file /github/home/.cache/R/BiocFileCache/1d255e8743a_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">HDF5Array</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDF5Array/man/saveHDF5SummarizedExperiment.html" class="external-link">loadHDF5SummarizedExperiment</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sce_DLPFC_annotated"</span><span class="op">)</span></span>
@@ -670,9 +676,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"Deconvolution_Benchmark_DLPFC.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-07-26 21:43:40 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-07-26 21:50:09 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 1.188 mins</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 1.176 mins</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
