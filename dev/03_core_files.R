@@ -7,9 +7,9 @@ rstudioapi::navigateToFile(usethis::proj_path("dev", "02_git_github_setup.R"))
 
 ## Edit your package DESCRIPTION file
 ## Check http://r-pkgs.had.co.nz/description.html for details
-## as well as http://bioconductor.org/developers/package-guidelines/#description
+## as well as http://contributions.bioconductor.org/description.html
 
-## Check https://github.com/lcolladotor/biocthis/blob/master/DESCRIPTION
+## Check https://github.com/lcolladotor/biocthis/blob/devel/DESCRIPTION
 ## for an example.
 
 ## You'll at least want to edit the version to 0.99.0 (or lower) since that's
@@ -48,18 +48,19 @@ devtools::build_readme()
 biocthis::use_bioc_news_md()
 
 ## Add information for users and contributors
-usethis::use_tidy_coc()
+biocthis::use_bioc_coc()
 usethis::use_tidy_contributing()
 biocthis::use_bioc_support()
 biocthis::use_bioc_issue_template()
+biocthis::use_bioc_feature_request_template()
 biocthis::use_bioc_citation()
 
 ## Add badges to the README.Rmd file
 usethis::use_lifecycle_badge("Experimental")
-usethis::use_bioc_badge()
+biocthis::use_bioc_badges()
 ## NOTE: If your Bioconductor package is an experiment, annotation or workflow
 ## package, you will need to edit the resulting badge!
-usethis::use_github_actions_badge("R-CMD-check-bioc")
+usethis::use_github_actions_badge("check-bioc.yml")
 
 ## Enable using tests
 usethis::use_testthat()
@@ -75,10 +76,17 @@ biocthis::use_bioc_vignette(pkg, paste("Introduction to", pkg))
 
 ## Add a Bioconductor-friendly GitHub actions workflow to check your package
 biocthis::use_bioc_github_action()
-## If:
-## * your package doesn't have testthat tests, change to: has_testthat = 'false'
-## * you don't want to run the covr step, change to: run_covr = 'false'
-## * you don't want to use pkgdown, change to: run_pkgdown = 'false
+## You will need to go to https://github.com/lieberinstitute/deconvobuddies/settings/actions
+## to and enable:
+## > Workflow permissions > Read and write permissions
+## Then click save before you can continue with the instructions in this script.
+
+## While biocthis::use_bioc_github_action() has arguments for all these options,
+## if you missed them, and:
+## * your package doesn't have testthat tests, use: has_testthat = 'false'
+## * you don't want to run the covr step, use: run_covr = 'false'
+## * you don't want to use pkgdown, use: run_pkgdown = 'false'
+## * you don't want to build a docker image, use: run_docker = 'false'
 rstudioapi::navigateToFile(usethis::proj_path(".github", "workflows", "check-bioc.yml"))
 
 ## Setup up your global git config
@@ -88,6 +96,13 @@ usethis::edit_git_config()
 # [user]
 #     name = Your Full Name
 #     email = your.email@somewhere.com
+#
+
+## Setup your pkgdown css file
+biocthis::use_bioc_pkgdown_css()
+
+## Install your package locally before building the documentation website
+devtools::install()
 
 ## ************************* WARNING START *********************************
 ## WARNING: git commit before running this next function!
@@ -99,6 +114,10 @@ usethis::edit_git_config()
 ## GitHub repository in such a way that pkgdown will recognize it and be
 ## able to use it later.
 pkgdown::deploy_to_branch() ## Check the WARNING above before running this!
+
+## For more details about package development, check:
+## * http://contributions.bioconductor.org/
+## * https://r-pkgs.org/
 
 ## Move to the next step: updating your package code before a "git commit"
 rstudioapi::navigateToFile(usethis::proj_path("dev", "04_update.R"))
