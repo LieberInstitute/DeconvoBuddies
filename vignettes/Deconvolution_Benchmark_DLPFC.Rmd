@@ -49,7 +49,7 @@ bib <- c(
 )
 ```
 
-#Introduction
+# Introduction
 
 ## What is Deconvolution?
 
@@ -153,7 +153,7 @@ rownames(rse_gene) <- rowData(rse_gene)$Symbol
 table(rse_gene$library_type, rse_gene$library_prep)
 ```
 
-## Refernce snRNA-seq data
+## Reference snRNA-seq data
 
 This data is paired with a single nucleus RNA-seq data set from `spatialLIBD`. 
 This dataset can be accessed with `spatialLIBD::fetch_data()`.
@@ -181,7 +181,7 @@ table(sce$cellType_broad_hc)
 sce <- sce[seq_len(5000), ]
 ```
 
-## Refernce snRNA-seq data
+## Reference snRNA-seq data
 The cell type proportions from the RNAScope experiment used to evaluate the 
 deconvolution estimations. 
 
@@ -234,6 +234,7 @@ marker_stats |>
 ```
 
 ## plot the top marker genes
+
 ```{r "plot marker genes"}
 plot_marker_express(sce,
     stats = marker_stats,
@@ -244,7 +245,9 @@ plot_marker_express(sce,
     gene_col = "gene"
 )
 ```
+
 ### Create a List of Marker Genes
+
 ```{r "marker_list"}
 marker_genes <- marker_stats |>
     filter(MeanRatio.rank <= 25 & gene %in% rownames(rse_gene))
@@ -258,7 +261,9 @@ marker_genes <- marker_genes |> pull(gene)
 # 4. Prep Data and Run Bisque
 
 ## prep data
+
 convert to `ExpressionSet` format, filter for cells with no counts across marker genes
+
 ```{r "prep data as ExpressionSet"}
 exp_set_bulk <- Biobase::ExpressionSet(
     assayData = assays(rse_gene[marker_genes, ])$counts,
@@ -282,6 +287,7 @@ exp_set_sce <- exp_set_sce[, zero_cell_filter]
 ```
 
 ## Run Bisque
+
 ```{r, "run Bisque"}
 est_prop <- ReferenceBasedDecomposition(
     bulk.eset = exp_set_bulk,
@@ -292,7 +298,8 @@ est_prop <- ReferenceBasedDecomposition(
 )
 ```
 
-## Explore Ouput
+## Explore Output
+
 ```{r, "deconvo output"}
 est_prop$bulk.props <- t(est_prop$bulk.props)
 
@@ -330,8 +337,10 @@ plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "S
 
 
 # 6. Check proportion against RNAScope estimated proportions
+
 Note to compare the deconvolution results to the RNAScope proportions, Oligo and 
 OPC need to be added together. 
+
 ```{r "compare prop"}
 prop_long_opc <- prop_long |>
     mutate(cell_type = gsub("Oligo|OPC", "OligoOPC", cell_type)) |>
@@ -351,6 +360,7 @@ prop_compare <- prop_long_opc |>
 ```
 
 Calculate the correlation plot a scatter plot of the proportions
+
 ```{r "proportion scatter"}
 ## correlation with RNAScope proportions
 cor(prop_compare$prop, prop_compare$prop_RNAScope)
@@ -380,6 +390,7 @@ prop_compare |>
 can't be shown on this vignettes
 
 Code to prep-input and run hspe pseudobulk the snRNA-seq data (not run here)
+
 ```{r "prep and run hspe"}
 if (FALSE) {
     sce_pb <- spatialLIBD::registration_pseudobulk(sce,
@@ -410,6 +421,10 @@ if (FALSE) {
     )
 }
 ```
+
+# Conclusion
+
+TODO
 
 # Reproducibility
 
