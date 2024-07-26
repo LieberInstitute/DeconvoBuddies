@@ -8,3 +8,5 @@
 ^doc$
 ^Meta$
 ^man\figures\DeconvoBuddies.png$
+^pkgdown$
+^docs$
