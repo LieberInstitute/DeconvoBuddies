@@ -50,9 +50,8 @@ DLPFC.
 - `sce_DLPFC_example`: Sub-set of `sce` useful for testing.
 
 ``` r
-
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-07-24 09:54:46.997885 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2024-07-25 13:30:06.916492 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 ```
 
 ## Marker Finding
@@ -103,7 +102,7 @@ in `get_mean_ratio`.
 plot_marker_express(sce_DLPFC_example,
     marker_stats,
     cellType_col = "cellType_broad_hc",
-    cell_type = "Excit", 
+    cell_type = "Excit",
     gene_col = "gene",
     color_pal = cell_colors
 )
