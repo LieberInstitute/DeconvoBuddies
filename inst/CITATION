@@ -22,5 +22,26 @@ c(
         url = "http://www.bioconductor.org/packages/DeconvoBuddies",
         note = pkgVer('DeconvoBuddies'),
         doi = '10.18129/B9.bioc.DeconvoBuddies'
+    ),
+    bibentry(bibtype="article",
+        title = "Benchmark of cellular deconvolution methods using a multi-assay reference dataset from postmortem human prefrontal cortex",
+        author = personList(
+            as.person("Louise A. Huuki-Myers"),
+            as.person("Kelsey D. Montgomery"),
+            as.person("Sang Ho Kwon"),
+            as.person("Sophia Cinquemani"),
+            as.person("Nicholas J. Eagles"),
+            as.person("Daianna Gonzalez-Padilla"),
+            as.person("Sean K. Maden"),
+            as.person("Joel E. Kleinman"),
+            as.person("Thomas M. Hyde"),
+            as.person("Stephanie C. Hicks"),
+            as.person("Kristen R. Maynard"),
+            as.person("Leonardo Collado-Torres")
+        ),
+        year = format(Sys.Date(), "%Y"),
+        journal = "bioRxiv",
+        doi = "10.1101/2024.02.09.579665",
+        url = "https://doi.org/10.1101/2024.02.09.579665"
     )
 )
