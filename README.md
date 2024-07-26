@@ -7,7 +7,23 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
-[![R-CMD-check-bioc](https://github.com/lahuuki/DeconvoBuddies/workflows/R-CMD-check-bioc/badge.svg)](https://github.com/lahuuki/DeconvoBuddies/actions)
+[![check-bioc](https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml/badge.svg)](https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Bioc release
+status](http://www.bioconductor.org/shields/build/release/bioc/DeconvoBuddies.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/DeconvoBuddies)
+[![Bioc devel
+status](http://www.bioconductor.org/shields/build/devel/bioc/DeconvoBuddies.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies)
+[![Bioc downloads
+rank](https://bioconductor.org/shields/downloads/release/DeconvoBuddies.svg)](http://bioconductor.org/packages/stats/bioc/DeconvoBuddies/)
+[![Bioc
+support](https://bioconductor.org/shields/posts/DeconvoBuddies.svg)](https://support.bioconductor.org/tag/DeconvoBuddies)
+[![Bioc
+history](https://bioconductor.org/shields/years-in-bioc/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
+[![Bioc last
+commit](https://bioconductor.org/shields/lastcommit/devel/bioc/DeconvoBuddies.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies/)
+[![Bioc
+dependencies](https://bioconductor.org/shields/dependencies/release/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
 <!-- badges: end -->
 
 The goal of `DeconvoBuddies` is to provide helper functions for the
@@ -51,7 +67,7 @@ DLPFC.
 
 ``` r
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-07-25 13:30:06.916492 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2024-07-26 16:48:51.826308 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 ```
 
 ## Marker Finding
@@ -188,10 +204,10 @@ in the vignettes and/or the paper(s) describing this package.
 
 ## Code of Conduct
 
-Please note that the `DeconvoBuddies` project is released with a
+Please note that the DeconvoBuddies project is released with a
 [Contributor Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Conduct](http://bioconductor.org/about/code-of-conduct/). By
+contributing to this project, you agree to abide by its terms.
 
 ## Development tools
 
