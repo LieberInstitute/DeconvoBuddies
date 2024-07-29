@@ -51,9 +51,6 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 
 ## Example
 
-    #> Warning: package 'S4Vectors' was built under R version 4.4.1
-    #> Warning: package 'IRanges' was built under R version 4.4.1
-
 ## Access Data
 
 Use `fetch_deconvo_data` Download RNA seqencing data from the Human
@@ -67,7 +64,11 @@ DLPFC.
 
 ``` r
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+<<<<<<< HEAD
 #> 2024-07-26 16:48:51.826308 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+=======
+#> 2024-07-26 17:27:52.71057 loading file /Users/leocollado/Library/Caches/org.R-project.R/R/BiocFileCache/ae44256c3eb9_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+>>>>>>> 1991e9e68bfe8f6d516494b3e9c6957b29853b71
 ```
 
 ## Marker Finding
@@ -195,6 +196,25 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>     url = {http://www.bioconductor.org/packages/DeconvoBuddies},
 #>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.0},
 #>     doi = {10.18129/B9.bioc.DeconvoBuddies},
+#>   }
+#> 
+#>   Huuki-Myers LA, Montgomery KD, Kwon SH, Cinquemani S, Eagles NJ,
+#>   Gonzalez-Padilla D, Maden SK, Kleinman JE, Hyde TM, Hicks SC, Maynard
+#>   KR, Collado-Torres L (2024). "Benchmark of cellular deconvolution
+#>   methods using a multi-assay reference dataset from postmortem human
+#>   prefrontal cortex." _bioRxiv_. doi:10.1101/2024.02.09.579665
+#>   <https://doi.org/10.1101/2024.02.09.579665>,
+#>   <https://doi.org/10.1101/2024.02.09.579665>.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Article{,
+#>     title = {Benchmark of cellular deconvolution methods using a multi-assay reference dataset from postmortem human prefrontal cortex},
+#>     author = {Louise A. Huuki-Myers and Kelsey D. Montgomery and Sang Ho Kwon and Sophia Cinquemani and Nicholas J. Eagles and Daianna Gonzalez-Padilla and Sean K. Maden and Joel E. Kleinman and Thomas M. Hyde and Stephanie C. Hicks and Kristen R. Maynard and Leonardo Collado-Torres},
+#>     year = {2024},
+#>     journal = {bioRxiv},
+#>     doi = {10.1101/2024.02.09.579665},
+#>     url = {https://doi.org/10.1101/2024.02.09.579665},
 #>   }
 ```
 
