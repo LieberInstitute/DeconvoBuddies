@@ -45,7 +45,8 @@ bib <- c(
     rmarkdown = citation("rmarkdown")[1],
     sessioninfo = citation("sessioninfo")[1],
     testthat = citation("testthat")[1],
-    DeconvoBuddies = citation("DeconvoBuddies")[1]
+    DeconvoBuddies = citation("DeconvoBuddies")[1],
+    DeconvoBuddiespaper = citation("DeconvoBuddies")[2]
 )
 ```
 
@@ -99,7 +100,8 @@ suppressMessages({
 ```
 
 ## Access Data
-Use `fetch_deconvo_data` Download RNA seqencing data from the Human DLPFC.  
+
+Use `fetch_deconvo_data` Download RNA sequencing data from the Human DLPFC `r Citep(bib[["DeconvoBuddiespaper"]])`.  
 
 * `rse_gene`: 110 samples of bulk RNA-seq. [21745 genes x 110 samples]. 
 
