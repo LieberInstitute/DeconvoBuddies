@@ -1,5 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>/404.html</loc></url>
+<url><loc>/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/CONTRIBUTING.html</loc></url>
 <url><loc>/SUPPORT.html</loc></url>
 <url><loc>/articles/DeconvoBuddies.html</loc></url>
 <url><loc>/articles/Deconvolution_Benchmark_DLPFC.html</loc></url>

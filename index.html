@@ -121,9 +121,12 @@
 <li><p><code>sce</code> : snRNA-seq data from the Human DLPFC.</p></li>
 <li><p><code>sce_DLPFC_example</code>: Sub-set of <code>sce</code> useful for testing.</p></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-07-26 17:27:52.71057 loading file /Users/leocollado/Library/Caches/org.R-project.R/R/BiocFileCache/ae44256c3eb9_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">"sce_DLPFC_example"</span>)) sce_DLPFC_example <span class="ot">&lt;-</span> <span class="fu">fetch_deconvo_data</span>(<span class="st">"sce_DLPFC_example"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span> HEAD</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; 2024-07-26 16:48:51.826308 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="sc">==</span><span class="er">=====</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; 2024-07-26 17:27:52.71057 loading file /Users/leocollado/Library/Caches/org.R-project.R/R/BiocFileCache/ae44256c3eb9_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="fl">1991e9</span>e68bfe8f6d516494b3e9c6957b29853b71</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="marker-finding">Marker Finding<a class="anchor" aria-label="anchor" href="#marker-finding"></a>
@@ -254,7 +257,7 @@
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
 </h2>
-<p>Please note that the <code>DeconvoBuddies</code> project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the DeconvoBuddies project is released with a <a href="http://bioconductor.org/about/code-of-conduct/" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div class="section level2">
 <h2 id="development-tools">Development tools<a class="anchor" aria-label="anchor" href="#development-tools"></a>
@@ -291,6 +294,8 @@
 <div class="community">
 <h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 <li><a href="SUPPORT.html">Getting help</a></li>
 </ul>
 </div>
@@ -313,7 +318,15 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main" class="external-link"><img src="https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/lahuuki/DeconvoBuddies/actions" class="external-link"><img src="https://github.com/lahuuki/DeconvoBuddies/workflows/R-CMD-check-bioc/badge.svg" alt="R-CMD-check-bioc"></a></li>
+<li><a href="https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml" class="external-link"><img src="https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml/badge.svg" alt="check-bioc"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://bioconductor.org/checkResults/release/bioc-LATEST/DeconvoBuddies" class="external-link"><img src="http://www.bioconductor.org/shields/build/release/bioc/DeconvoBuddies.svg" alt="Bioc release status"></a></li>
+<li><a href="https://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies" class="external-link"><img src="http://www.bioconductor.org/shields/build/devel/bioc/DeconvoBuddies.svg" alt="Bioc devel status"></a></li>
+<li><a href="http://bioconductor.org/packages/stats/bioc/DeconvoBuddies/" class="external-link"><img src="https://bioconductor.org/shields/downloads/release/DeconvoBuddies.svg" alt="Bioc downloads rank"></a></li>
+<li><a href="https://support.bioconductor.org/tag/DeconvoBuddies" class="external-link"><img src="https://bioconductor.org/shields/posts/DeconvoBuddies.svg" alt="Bioc support"></a></li>
+<li><a href="https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since" class="external-link"><img src="https://bioconductor.org/shields/years-in-bioc/DeconvoBuddies.svg" alt="Bioc history"></a></li>
+<li><a href="http://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies/" class="external-link"><img src="https://bioconductor.org/shields/lastcommit/devel/bioc/DeconvoBuddies.svg" alt="Bioc last commit"></a></li>
+<li><a href="https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since" class="external-link"><img src="https://bioconductor.org/shields/dependencies/release/DeconvoBuddies.svg" alt="Bioc dependencies"></a></li>
 </ul>
 </div>
 
