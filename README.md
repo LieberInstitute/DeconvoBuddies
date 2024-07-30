@@ -51,6 +51,9 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 
 ## Example
 
+    #> Warning: package 'S4Vectors' was built under R version 4.4.1
+    #> Warning: package 'IRanges' was built under R version 4.4.1
+
 ## Access Data
 
 Use `fetch_deconvo_data` Download RNA seqencing data from the Human
@@ -64,11 +67,7 @@ DLPFC.
 
 ``` r
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-<<<<<<< HEAD
-#> 2024-07-26 16:48:51.826308 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
-=======
-#> 2024-07-26 17:27:52.71057 loading file /Users/leocollado/Library/Caches/org.R-project.R/R/BiocFileCache/ae44256c3eb9_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
->>>>>>> 1991e9e68bfe8f6d516494b3e9c6957b29853b71
+#> 2024-07-29 21:39:52.017771 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 ```
 
 ## Marker Finding
