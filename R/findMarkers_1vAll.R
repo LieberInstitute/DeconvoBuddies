@@ -32,7 +32,7 @@ findMarkers_1vAll <- function(sce, assay_name = "counts", cellType_col = "cellTy
 
     if (!is.null(mod)) {
         mod <- with(pd, stats::model.matrix(as.formula(mod)))
-        mod <- mod[, -1, drop = F] # intercept otherwise automatically dropped by `findMarkers()`
+        mod <- mod[, -1, drop = FALSE] # intercept otherwise automatically dropped by `findMarkers()`
     }
 
     markers.t.1vAll <- map(cell_types, function(x) {
