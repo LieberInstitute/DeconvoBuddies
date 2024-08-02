@@ -73,7 +73,7 @@ clusters with unknown identities.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_marker_express_List</span><span class="op">(</span></span>
 <span>  <span class="va">sce</span>,</span>
 <span>  <span class="va">gene_list</span>,</span>
-<span>  pdf_fn <span class="op">=</span> <span class="st">"marker_expression.pdf"</span>,</span>
+<span>  pdf_fn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  cellType_col <span class="op">=</span> <span class="st">"cellType"</span>,</span>
 <span>  gene_name_col <span class="op">=</span> <span class="st">"gene_name"</span>,</span>
 <span>  color_pal <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -94,7 +94,7 @@ clusters with unknown identities.</p>
 
 
 <dt id="arg-pdf-fn">pdf_fn<a class="anchor" aria-label="anchor" href="#arg-pdf-fn"></a></dt>
-<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> of the pdf file name to plot to</p></dd>
+<dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> of the pdf filename to plot to, if <code>NULL</code> returns all plots</p></dd>
 
 
 <dt id="arg-celltype-col">cellType_col<a class="anchor" aria-label="anchor" href="#arg-celltype-col"></a></dt>
@@ -111,7 +111,8 @@ clusters with unknown identities.</p>
 
 <dt id="arg-plot-points">plot_points<a class="anchor" aria-label="anchor" href="#arg-plot-points"></a></dt>
 <dd><p>A logical indicating whether to plot points over the violin,
-defaults to <code>FALSE</code> as these often become over plotted and quite large (especially when saved as PDF)</p></dd>
+defaults to <code>FALSE</code> as these often become over plotted and quite large (especially when saved as PDF)
+#' @inheritParams plot_marker_express_ALL</p></dd>
 
 </dl></div>
     <div id="value">
@@ -130,11 +131,22 @@ defaults to <code>FALSE</code> as these often become over plotted and quite larg
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Fetch sce example data</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-02 16:13:30.962833 loading file /github/home/.cache/R/BiocFileCache/50b29bfe067_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-02 20:17:20.162284 loading file /github/home/.cache/R/BiocFileCache/2fc3ed140ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Create list-of-lists of genes to plot, names of sub-list become title of page</span></span></span>
 <span class="r-in"><span><span class="va">my_gene_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Inhib <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"SAMD5"</span><span class="op">)</span>, Astro <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RGS20"</span>, <span class="st">"PRDM16"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Return a list of plots </span></span></span>
+<span class="r-in"><span><span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu">plot_marker_express_List</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">sce_DLPFC_example</span>,</span></span>
+<span class="r-in"><span>    gene_list <span class="op">=</span> <span class="va">my_gene_list</span>,</span></span>
+<span class="r-in"><span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    </span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">plots</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
+<span class="r-plt img"><img src="plot_marker_express_List-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span>    </span></span>
 <span class="r-in"><span><span class="co"># Plot marker gene expression to PDF, one page per cell type in stats</span></span></span>
 <span class="r-in"><span><span class="va">pdf_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="st">"test_marker_expression_List"</span>, fileext <span class="op">=</span> <span class="st">".pdf"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -144,18 +156,19 @@ defaults to <code>FALSE</code> as these often become over plotted and quite larg
 <span class="r-in"><span>    pdf_fn <span class="op">=</span> <span class="va">pdf_file</span>,</span></span>
 <span class="r-in"><span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Plotting Genes for...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 	Inhib</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Inhib</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 	Astro</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Astro</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Done!</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> agg_png </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       2 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html" class="external-link">browseURL</a></span><span class="op">(</span><span class="va">pdf_file</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
