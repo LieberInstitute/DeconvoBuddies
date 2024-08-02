@@ -25,7 +25,6 @@ knitr::opts_chunk$set(
 [![Bioc support](https://bioconductor.org/shields/posts/DeconvoBuddies.svg)](https://support.bioconductor.org/tag/DeconvoBuddies)
 [![Bioc history](https://bioconductor.org/shields/years-in-bioc/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
 [![Bioc last commit](https://bioconductor.org/shields/lastcommit/devel/bioc/DeconvoBuddies.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies/)
-[![Bioc dependencies](https://bioconductor.org/shields/dependencies/release/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
 <!-- badges: end -->
 
 The goal of `DeconvoBuddies` is to provide helper functions for the deconvolution process
@@ -90,8 +89,8 @@ cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", s
 ### Plot Expression of Specified Genes
 Quickly create violin plot of gene expression. 
 ```{r plot_gene_expression}
-plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"))
-plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_hc", genes = c("GAD2", "CD22"))
 ```
 
 ### Plot Expression of Marker Genes

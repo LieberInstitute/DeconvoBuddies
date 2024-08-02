@@ -22,8 +22,6 @@ support](https://bioconductor.org/shields/posts/DeconvoBuddies.svg)](https://sup
 history](https://bioconductor.org/shields/years-in-bioc/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
 [![Bioc last
 commit](https://bioconductor.org/shields/lastcommit/devel/bioc/DeconvoBuddies.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies/)
-[![Bioc
-dependencies](https://bioconductor.org/shields/dependencies/release/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
 <!-- badges: end -->
 
 The goal of `DeconvoBuddies` is to provide helper functions for the
@@ -67,7 +65,7 @@ DLPFC.
 
 ``` r
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-07-29 21:39:52.017771 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2024-08-02 10:50:28.235565 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 ```
 
 ## Marker Finding
@@ -94,7 +92,7 @@ cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", s
 Quickly create violin plot of gene expression.
 
 ``` r
-plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 #> No summary function supplied, defaulting to `mean_se()`
 #> No summary function supplied, defaulting to `mean_se()`
 ```
@@ -102,7 +100,7 @@ plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c(
 <img src="man/figures/README-plot_gene_expression-1.png" width="100%" />
 
 ``` r
-plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_hc", genes = c("GAD2", "CD22"))
 #> No summary function supplied, defaulting to `mean_se()`
 #> No summary function supplied, defaulting to `mean_se()`
 ```
