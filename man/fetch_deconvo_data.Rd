@@ -13,8 +13,15 @@ fetch_deconvo_data(
 }
 \arguments{
 \item{type}{A \code{character(1)} specifying which file you want to download.
-\code{rse_gene} \link[SummarizedExperiment:RangedSummarizedExperiment-class]{RangedSummarizedExperiment-class}
-with 110 bulk RNA-seq samples}
+\itemize{
+\item \code{rse_gene}: A \link[SummarizedExperiment:RangedSummarizedExperiment-class]{RangedSummarizedExperiment-class}
+with 110 bulk RNA-seq samples x 21k genes. (41 MB)
+\item \code{sce}: A \link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment}
+object with Human DLPFC snRNA-seq data. 77k nuclei x 36k genes (172 MB)
+\item \code{sce_DLPFC_example}: An example subset of \code{sec}
+\link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment}
+with 10k nuclei x 557 genes (49 MB)
+}}
 
 \item{destdir}{The destination directory to where files will be downloaded
 to in case the \code{ExperimentHub} resource is not available. If you already

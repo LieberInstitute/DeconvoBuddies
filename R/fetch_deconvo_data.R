@@ -11,8 +11,14 @@
 #'  Based on spatialLIBD::fetch_data()
 #'
 #' @param type A `character(1)` specifying which file you want to download.
-#' `rse_gene` [RangedSummarizedExperiment-class][SummarizedExperiment::RangedSummarizedExperiment-class] 
-#' with 110 bulk RNA-seq samples
+#' * `rse_gene`: A [RangedSummarizedExperiment-class][SummarizedExperiment::RangedSummarizedExperiment-class] 
+#' with 110 bulk RNA-seq samples x 21k genes. (41 MB)
+#' * `sce`: A [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment-class] 
+#' object with Human DLPFC snRNA-seq data. 77k nuclei x 36k genes (172 MB)
+#' * `sce_DLPFC_example`: An example subset of `sec` 
+#' [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment-class] 
+#' with 10k nuclei x 557 genes (49 MB)
+#' 
 #' @param destdir The destination directory to where files will be downloaded
 #' to in case the `ExperimentHub` resource is not available. If you already
 #' downloaded the files, you can set this to the current path where the files
