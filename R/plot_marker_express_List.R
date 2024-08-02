@@ -5,6 +5,7 @@
 #' clusters with unknown identities.
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
+#' @param pdf_fn A `character()` of the pdf filename to plot to, if `NULL` returns all plots
 #' @param gene_list A named list containing the names of genes to plot
 #' @param cellType_col The `character()` name of `colData` column containing cell type for `sce` data
 #' @param gene_name_col The `character()` name of `rowData` matching the gene name from `gene_list`

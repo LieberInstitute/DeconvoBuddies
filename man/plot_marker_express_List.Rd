@@ -19,6 +19,8 @@ plot_marker_express_List(
 
 \item{gene_list}{A named list containing the names of genes to plot}
 
+\item{pdf_fn}{A \code{character()} of the pdf filename to plot to, if \code{NULL} returns all plots}
+
 \item{cellType_col}{The \code{character()} name of \code{colData} column containing cell type for \code{sce} data}
 
 \item{gene_name_col}{The \code{character()} name of \code{rowData} matching the gene name from \code{gene_list}}
