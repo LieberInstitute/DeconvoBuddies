@@ -7,7 +7,7 @@
 plot_marker_express_List(
   sce,
   gene_list,
-  pdf_fn = "marker_expression.pdf",
+  pdf_fn = NULL,
   cellType_col = "cellType",
   gene_name_col = "gene_name",
   color_pal = NULL,
@@ -19,8 +19,6 @@ plot_marker_express_List(
 
 \item{gene_list}{A named list containing the names of genes to plot}
 
-\item{pdf_fn}{A \code{character()} of the pdf file name to plot to}
-
 \item{cellType_col}{The \code{character()} name of \code{colData} column containing cell type for \code{sce} data}
 
 \item{gene_name_col}{The \code{character()} name of \code{rowData} matching the gene name from \code{gene_list}}
@@ -28,7 +26,8 @@ plot_marker_express_List(
 \item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the values in \code{cellType_col}.}
 
 \item{plot_points}{A logical indicating whether to plot points over the violin,
-defaults to \code{FALSE} as these often become over plotted and quite large (especially when saved as PDF)}
+defaults to \code{FALSE} as these often become over plotted and quite large (especially when saved as PDF)
+#' @inheritParams pdf_fn}
 }
 \value{
 A pdf with violin plots for the expression of top marker genes for all cell types
@@ -45,6 +44,14 @@ if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_D
 ## Create list-of-lists of genes to plot, names of sub-list become title of page
 my_gene_list <- list(Inhib = c("GAD2", "SAMD5"), Astro = c("RGS20", "PRDM16"))
 
+# Return a list of plots 
+plots <- plot_marker_express_List(
+    sce_DLPFC_example,
+    gene_list = my_gene_list,
+    cellType_col = "cellType_broad_hc")
+    
+print(plots[[1]])
+    
 # Plot marker gene expression to PDF, one page per cell type in stats
 pdf_file <- tempfile("test_marker_expression_List", fileext = ".pdf")
 
@@ -56,6 +63,7 @@ plot_marker_express_List(
 )
 
 if (interactive()) browseURL(pdf_file)
+
 }
 \seealso{
 Other expression plotting functions: 
