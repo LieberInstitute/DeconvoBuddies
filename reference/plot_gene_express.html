@@ -72,7 +72,7 @@ over a user defined category, typically a cell type annotation.</p>
 <span>  <span class="va">sce</span>,</span>
 <span>  <span class="va">genes</span>,</span>
 <span>  assay_name <span class="op">=</span> <span class="st">"logcounts"</span>,</span>
-<span>  cat <span class="op">=</span> <span class="st">"cellType"</span>,</span>
+<span>  catagorey <span class="op">=</span> <span class="st">"cellType"</span>,</span>
 <span>  color_pal <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plot_points <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -99,13 +99,13 @@ over a user defined category, typically a cell type annotation.</p>
 it typically contains the normalized expression values.</p></dd>
 
 
-<dt id="arg-cat">cat<a class="anchor" aria-label="anchor" href="#arg-cat"></a></dt>
+<dt id="arg-catagorey">catagorey<a class="anchor" aria-label="anchor" href="#arg-catagorey"></a></dt>
 <dd><p>A <code>character(1)</code> specifying the name of the categorical variable
 to group the cells or nuclei by. Defaults to <code>cellType</code>.</p></dd>
 
 
 <dt id="arg-color-pal">color_pal<a class="anchor" aria-label="anchor" href="#arg-color-pal"></a></dt>
-<dd><p>A named <code>character(1)</code> vector that contains a color pallet matching the <code>cat</code> values.</p></dd>
+<dd><p>A named <code>character(1)</code> vector that contains a color pallet matching the <code>catagorey</code> values.</p></dd>
 
 
 <dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
@@ -114,7 +114,7 @@ to group the cells or nuclei by. Defaults to <code>cellType</code>.</p></dd>
 
 <dt id="arg-plot-points">plot_points<a class="anchor" aria-label="anchor" href="#arg-plot-points"></a></dt>
 <dd><p>A logical indicating whether to plot points over the violin,
-defaults to <code>FALSE</code> as these often become overplotted and quite large (especially when saved as PDF)</p></dd>
+defaults to <code>FALSE</code> as these often become over plotted and quite large (especially when saved as PDF)</p></dd>
 
 
 <dt id="arg-ncol">ncol<a class="anchor" aria-label="anchor" href="#arg-ncol"></a></dt>
@@ -141,21 +141,21 @@ defaults to <code>FALSE</code> as these often become overplotted and quite large
 <span class="r-plt img"><img src="plot_gene_express-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-07-29 15:03:05.764179 loading file /github/home/.cache/R/BiocFileCache/26f75fbd2cd_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-02 16:13:07.914814 loading file /github/home/.cache/R/BiocFileCache/50b29bfe067_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
 <span class="r-in"><span><span class="co">## plot expression of two genes</span></span></span>
-<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>, cat <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>, catagorey <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
 <span class="r-plt img"><img src="plot_gene_express-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## plot points - note this creates large images and is easy to over plot</span></span></span>
-<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>, cat <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>, plot_points <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>, catagorey <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>, plot_points <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
 <span class="r-plt img"><img src="plot_gene_express-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Add title</span></span></span>
-<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>, cat <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">"My Genes"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>, catagorey <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">"My Genes"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No summary function supplied, defaulting to `mean_se()`</span>
 <span class="r-plt img"><img src="plot_gene_express-4.png" alt="" width="700" height="433"></span>
