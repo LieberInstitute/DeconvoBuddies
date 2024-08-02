@@ -8,7 +8,7 @@ plot_gene_express(
   sce,
   genes,
   assay_name = "logcounts",
-  cat = "cellType",
+  catagorey = "cellType",
   color_pal = NULL,
   title = NULL,
   plot_points = FALSE,
@@ -25,15 +25,15 @@ plot_gene_express(
 \code{sce} object to use to rank expression values. Defaults to \code{logcounts} since
 it typically contains the normalized expression values.}
 
-\item{cat}{A \code{character(1)} specifying the name of the categorical variable
+\item{catagorey}{A \code{character(1)} specifying the name of the categorical variable
 to group the cells or nuclei by. Defaults to \code{cellType}.}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{cat} values.}
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{catagorey} values.}
 
 \item{title}{A \code{character(1)} to title the plot}
 
 \item{plot_points}{A logical indicating whether to plot points over the violin,
-defaults to \code{FALSE} as these often become overplotted and quite large (especially when saved as PDF)}
+defaults to \code{FALSE} as these often become over plotted and quite large (especially when saved as PDF)}
 
 \item{ncol}{= Number of columns for the facet in the final plot. Defaults to 2.}
 }
@@ -50,13 +50,13 @@ plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
 
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 ## plot expression of two genes
-plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 
 ## plot points - note this creates large images and is easy to over plot
-plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"), plot_points = TRUE)
+plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"), plot_points = TRUE)
 
 ## Add title
-plot_gene_express(sce = sce_DLPFC_example, cat = "cellType_broad_hc", genes = c("GAD2", "CD22"), title = "My Genes")
+plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"), title = "My Genes")
 
 }
 \seealso{
