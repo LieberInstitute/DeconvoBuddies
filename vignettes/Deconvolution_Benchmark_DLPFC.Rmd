@@ -1,5 +1,5 @@
 ---
-title: "Deconvolution_Benchmark_DLPFC"
+title: "Deconvolution Benchmark in Human DLPFC"
 author: 
   - name: Louise Huuki-Myers
     affiliation:
@@ -193,7 +193,7 @@ evaluate the accuracy of cell type proportion estimates.
 
 
 <p align="center">
-![RNAScope/IF measures the cell type proportions through imaging ](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proprotions.png)
+![RNAScope/IF measures the cell type proportions through imaging ](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proportions.png)
 
 Key columns:
 
@@ -226,8 +226,8 @@ plot_composition_bar(
 
 # 3. Select Marker Genes
 
-Marker genes are genes with cell type specific expression (i.e. high expression 
-in one cell type, low expression in other cell types). These genes can be used 
+Marker genes are genes with high expression in one cell type and low expression in
+other cell types, or cell-type specfic expression. These genes can be used 
 to learn more about the identity and function of cell types, but here we are 
 interested in using a sets of cell type specific marker genes to reduce noise in
 deconvolution and increase accuracy.
@@ -242,7 +242,7 @@ selected as marker genes.
 ![Use Mean Ratio to find less noisy marker genes than 1vALL](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
 </p>
 
-## Use `DeconvoBuddies::get_mean_ratio` to calculate the Mean Ratio. 
+## Use `get_mean_ratio` to find marker genes. 
 
 The function `DeconvoBuddies::get_mean_ratio` calculates the `Mean Ratio` and 
 the rank of genes for each cell type. 
@@ -278,14 +278,22 @@ plot_marker_express(sce,
 )
 ```
 
+Looks nice and cell type specific!
+
 ### Create a List of Marker Genes
 
+With the `Mean Ratio` calculated, we will select the top 25 highest Mean Ratio 
+genes for each cell type, that also exists in the bulk data `rse_gene`.
+
 ```{r "marker_list"}
+# select top 25 marker genes for each cell type, that are also in rse_gene
 marker_genes <- marker_stats |>
     filter(MeanRatio.rank <= 25 & gene %in% rownames(rse_gene))
 
+# check how many genes for each cell type
 marker_genes |> count(cellType.target)
 
+# create a vector of marker genes
 marker_genes <- marker_genes |> pull(gene)
 ```
 
