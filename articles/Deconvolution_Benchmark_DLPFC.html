@@ -61,6 +61,9 @@
 <li>
       <a href="../articles/Deconvolution_Benchmark_DLPFC.html">Deconvolution_Benchmark_DLPFC</a>
     </li>
+    <li>
+      <a href="../articles/Marker_Finding.html">Finding Marker Genes with DeconvoBuddies</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -261,7 +264,7 @@ Total, Nuc), post quality control n=110 samples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## use fetch deconvon data to load rse_gene</span></span>
 <span><span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-05 19:21:24.926186 loading file /github/home/.cache/R/BiocFileCache/3bb67abeecf_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-05 20:22:27.742117 loading file /github/home/.cache/R/BiocFileCache/3ba64212a70_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
 <span><span class="va">rse_gene</span></span>
 <span><span class="co">#&gt; class: RangedSummarizedExperiment </span></span>
 <span><span class="co">#&gt; dim: 21745 110 </span></span>
@@ -297,7 +300,9 @@ Total, Nuc), post quality control n=110 samples.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-05 19:21:26.589729 loading file /github/home/.cache/R/BiocFileCache/3bb636bd39f_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-05 20:22:29.181863 loading file /github/home/.cache/R/BiocFileCache/3ba6e273314_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span></span>
+<span><span class="co">## unzip and load the data</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">HDF5Array</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDF5Array/man/saveHDF5SummarizedExperiment.html" class="external-link">loadHDF5SummarizedExperiment</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sce_DLPFC_annotated"</span><span class="op">)</span></span>
@@ -322,10 +327,20 @@ Total, Nuc), post quality control n=110 samples.</p>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="va">sce</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">5000</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="reference-snrna-seq-data-1">Reference snRNA-seq data<a class="anchor" aria-label="anchor" href="#reference-snrna-seq-data-1"></a>
+<h3 id="orthogonal-cell-type-proportion-from-rnascopeif">Orthogonal Cell Type Proportion from RNAScope/IF<a class="anchor" aria-label="anchor" href="#orthogonal-cell-type-proportion-from-rnascopeif"></a>
 </h3>
-<p>The cell type proportions from the RNAScope experiment used to
-evaluate the deconvolution estimations.</p>
+<p>An alternative method for calculating cell type proportions is
+through imaging a slice of tissue with cell type probes (RNAScope/IF).
+Then analyse the image to count cells and annotate them by cell type (we
+used HALO from Indica Labs)</p>
+<p>The cell type proportions from the RNAScope/IF experiment will be
+used to evaluate the accuracy of cell type proportion estimates.</p>
+<p align="center">
+</p>
+<div class="float">
+<img src="http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proprotions.png" alt="RNAScope/IF measures the cell type proportions through imaging"><div class="figcaption">RNAScope/IF measures the cell type proportions
+through imaging</div>
+</div>
 <p>Key columns:</p>
 <ul>
 <li><p><code>SAMPLE_ID</code>: DLPFC Tissue block + RNAScope
@@ -339,7 +354,8 @@ and cell type.</p></li>
 n_cell</p></li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">DeconvoBuddies</span><span class="fu">::</span><span class="va"><a href="../reference/RNAScope_prop.html">RNAScope_prop</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Access the RNAScope proportion data table</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">DeconvoBuddies</span><span class="fu">::</span><span class="va"><a href="../reference/RNAScope_prop.html">RNAScope_prop</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt;        SAMPLE_ID      Sample  Combo cell_type Confidence n_cell       prop</span></span>
 <span><span class="co">#&gt; 1 Br2720P_CIRCLE Br2720_post Circle     Astro       High   3385 0.09357808</span></span>
 <span><span class="co">#&gt; 2 Br2720P_CIRCLE Br2720_post Circle EndoMural       High   1680 0.04644348</span></span>
@@ -367,24 +383,41 @@ n_cell</p></li>
 </div>
 </div>
 <div class="section level2">
-<h2 id="find-marker-genes-with-deconvobuddiesget_mean_ratio">3. Find marker genes with
-<code>DeconvoBuddies::get_mean_ratio</code><a class="anchor" aria-label="anchor" href="#find-marker-genes-with-deconvobuddiesget_mean_ratio"></a>
+<h2 id="select-marker-genes">3. Select Marker Genes<a class="anchor" aria-label="anchor" href="#select-marker-genes"></a>
 </h2>
-<p>Mean Ratio marker finding</p>
+<p>Marker genes are genes with cell type specific expression (i.e. high
+expression in one cell type, low expression in other cell types). These
+genes can be used to learn more about the identity and function of cell
+types, but here we are interested in using a sets of cell type specific
+marker genes to reduce noise in deconvolution and increase accuracy.</p>
+<p>We have developed a method for finding marker genes called the “Mean
+Ratio”. We calculate the <code>Mean Ratio</code> for a target cell type
+for each gene by dividing the mean expression of the target cell by the
+mean expression of the next highest non-target cell type. Genes with the
+highest <code>Mean Ratio</code> values are selected as marker genes.</p>
 <p align="center">
 </p>
 <div class="float">
-<img src="http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png" alt="Use Mean Ratio to find less noisy marker genes htan 1vALL"><div class="figcaption">Use Mean Ratio to find less noisy marker genes
-htan 1vALL</div>
+<img src="http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png" alt="Use Mean Ratio to find less noisy marker genes than 1vALL"><div class="figcaption">Use Mean Ratio to find less noisy marker genes
+than 1vALL</div>
 </div>
 
+<div class="section level3">
+<h3 id="use-deconvobuddiesget_mean_ratio-to-calculate-the-mean-ratio-">Use <code>DeconvoBuddies::get_mean_ratio</code> to calculate the
+Mean Ratio.<a class="anchor" aria-label="anchor" href="#use-deconvobuddiesget_mean_ratio-to-calculate-the-mean-ratio-"></a>
+</h3>
+<p>The function <code><a href="../reference/get_mean_ratio.html">DeconvoBuddies::get_mean_ratio</a></code> calculates
+the <code>Mean Ratio</code> and the rank of genes for each cell
+type.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">marker_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mean_ratio.html">get_mean_ratio</a></span><span class="op">(</span><span class="va">sce</span>,</span>
+<code class="sourceCode R"><span><span class="co"># calculate the Mean Ratio of genes for each cell type</span></span>
+<span><span class="va">marker_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mean_ratio.html">get_mean_ratio</a></span><span class="op">(</span><span class="va">sce</span>,</span>
 <span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
 <span>    gene_ensembl <span class="op">=</span> <span class="st">"gene_id"</span>,</span>
 <span>    gene_name <span class="op">=</span> <span class="st">"gene_name"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># check the top gene ranked gene for each cell type</span></span>
 <span><span class="va">marker_stats</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">cellType.target</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
@@ -401,11 +434,16 @@ htan 1vALL</div>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> LYPD6B     Inhib                  1.20 Excit          0.096<span style="text-decoration: underline;">7</span>     12.4 </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: MeanRatio.rank &lt;int&gt;, MeanRatio.anno &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gene_ensembl &lt;chr&gt;, gene_name &lt;chr&gt;</span></span></span></code></pre></div>
+</div>
 <div class="section level3">
 <h3 id="plot-the-top-marker-genes">plot the top marker genes<a class="anchor" aria-label="anchor" href="#plot-the-top-marker-genes"></a>
 </h3>
+<p>Use <code>DeconvoBuddies</code> plotting tools to quickly plot the
+gene expression of the top 4 Exitatory neuron marker genes across the
+<code>cellType_broad_hc</code> cell type annotations.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_marker_express.html">plot_marker_express</a></span><span class="op">(</span><span class="va">sce</span>,</span>
+<code class="sourceCode R"><span><span class="co"># plot expression across cell type the top 4 Excit marker genes</span></span>
+<span><span class="fu"><a href="../reference/plot_marker_express.html">plot_marker_express</a></span><span class="op">(</span><span class="va">sce</span>,</span>
 <span>    stats <span class="op">=</span> <span class="va">marker_stats</span>,</span>
 <span>    cell_type <span class="op">=</span> <span class="st">"Excit"</span>,</span>
 <span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
@@ -687,9 +725,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"Deconvolution_Benchmark_DLPFC.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-08-05 19:22:25 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-08-05 20:23:30 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 1.213 mins</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 1.233 mins</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
