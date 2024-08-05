@@ -36,7 +36,7 @@ object, to identify effective marker genes for deconvolution."><meta property="o
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Deconvolution_Benchmark_DLPFC.html">Deconvolution_Benchmark_DLPFC</a>
+      <a href="../articles/Deconvolution_Benchmark_DLPFC.html">Deconvolution Benchmark in Human DLPFC</a>
     </li>
     <li>
       <a href="../articles/Marker_Finding.html">Finding Marker Genes with DeconvoBuddies</a>
@@ -117,7 +117,7 @@ it typically contains the normalized expression values.</p></dd>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#' ## load example SingleCellExperiment</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-05 20:21:25.552974 loading file /github/home/.cache/R/BiocFileCache/3ba275748d9_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-05 21:16:52.640253 loading file /github/home/.cache/R/BiocFileCache/3bb5cf99dcc_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`</span></span></span>
 <span class="r-in"><span><span class="fu">get_mean_ratio2</span><span class="op">(</span><span class="va">sce_DLPFC_example</span>, cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span><span class="op">)</span></span></span>
