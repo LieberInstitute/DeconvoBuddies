@@ -194,8 +194,10 @@ evaluate the accuracy of cell type proportion estimates.
 
 <p align="center">
 ![RNAScope/IF measures the cell type proportions through imaging ](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proportions.png)
+The RNAScope/IF proportion data is stored as a `data.frame` object
+in `DeconvoBuddies::RNAScope_prop`.
 
-Key columns:
+Key columns in `RNAScope_prop`:
 
 * `SAMPLE_ID`: DLPFC Tissue block + RNAScope combination. 
 
@@ -208,9 +210,8 @@ Key columns:
 * `prop` : the calculated cell type proportion from n_cell
 
 
-
 ```{r "access RNAScope proportions"}
-# Access the RNAScope proportion data table
+# Access the RNAScope proportion data.frame
 head(DeconvoBuddies::RNAScope_prop)
 
 ## plot the RNAScope compositions
@@ -227,7 +228,7 @@ plot_composition_bar(
 # 3. Select Marker Genes
 
 Marker genes are genes with high expression in one cell type and low expression in
-other cell types, or cell-type specfic expression. These genes can be used 
+other cell types, or "cell-type specific" expression. These genes can be used 
 to learn more about the identity and function of cell types, but here we are 
 interested in using a sets of cell type specific marker genes to reduce noise in
 deconvolution and increase accuracy.
@@ -239,13 +240,14 @@ highest non-target cell type. Genes with the highest `Mean Ratio` values are
 selected as marker genes. 
 
 <p align="center">
-![Use Mean Ratio to find less noisy marker genes than 1vALL](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
+![Mean Ratio calculation process comapred to 1vALL Marker Gene selection](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
 </p>
 
 ## Use `get_mean_ratio` to find marker genes. 
 
 The function `DeconvoBuddies::get_mean_ratio` calculates the `Mean Ratio` and 
-the rank of genes for each cell type. 
+the rank of genes for a specified cell type annotation in an 
+`SingleCellExperiment` object.
 
 ```{r "Run Mean Ratio"}
 # calculate the Mean Ratio of genes for each cell type
@@ -261,9 +263,9 @@ marker_stats |>
     slice(1)
 ```
 
-## plot the top marker genes
+## Plot the top marker genes
 Use `DeconvoBuddies` plotting tools to quickly plot the gene expression of the 
-top 4 Exitatory neuron marker genes across the `cellType_broad_hc` cell type 
+top 4 Excitatory neuron marker genes across the `cellType_broad_hc` cell type 
 annotations. 
 
 ```{r "plot marker genes"}
@@ -293,7 +295,7 @@ marker_genes <- marker_stats |>
 # check how many genes for each cell type
 marker_genes |> count(cellType.target)
 
-# create a vector of marker genes
+# create a vector of marker genes to subset data before deconvolution
 marker_genes <- marker_genes |> pull(gene)
 ```
 
@@ -301,10 +303,16 @@ marker_genes <- marker_genes |> pull(gene)
 # 4. Prep Data and Run Bisque
 
 ## prep data
+To run `Bisque` the snRNA-seq and bulk data must first be converted to
+`ExpressionSet` format. We will subset our data to our selected MeanRatio marker
+genes. 
 
-convert to `ExpressionSet` format, filter for cells with no counts across marker genes
+The snRNA-seq data must also be filtered for cells with no 
+counts across marker genes.
 
 ```{r "prep data as ExpressionSet"}
+## convert bulk data to Expression set, sub-setting to marker genes
+## include sample ID
 exp_set_bulk <- Biobase::ExpressionSet(
     assayData = assays(rse_gene[marker_genes, ])$counts,
     phenoData = AnnotatedDataFrame(
@@ -312,10 +320,12 @@ exp_set_bulk <- Biobase::ExpressionSet(
     )
 )
 
+## convert snRNA-seq data to Expression set, sub-setting to marker genes
+## include cell type and dononr information
 exp_set_sce <- Biobase::ExpressionSet(
     assayData = as.matrix(assays(sce[marker_genes, ])$counts),
     phenoData = AnnotatedDataFrame(
-        as.data.frame(colData(sce))[, c("cellType_broad_hc", "BrNum")]
+        as.data.frame(colData(sce))[, c("cellType_broad_hc", "BrNum")] 
     )
 )
 
@@ -328,7 +338,12 @@ exp_set_sce <- exp_set_sce[, zero_cell_filter]
 
 ## Run Bisque
 
+`Bisque` needs the bulk and single cell `ExpressionSet` we prepared above, plus 
+columns in the single cell data that specify the cell type annotation to use 
+`cellType_broad_hc` and donor id (`BrNum` in this data).
+
 ```{r, "run Bisque"}
+## Run Bisque with bulk and single cell ExpressionSet inputs
 est_prop <- ReferenceBasedDecomposition(
     bulk.eset = exp_set_bulk,
     sc.eset = exp_set_sce,
@@ -339,8 +354,11 @@ est_prop <- ReferenceBasedDecomposition(
 ```
 
 ## Explore Output
+Bisque predicts the proportion of the cell types in `cellType_broad_hc` for each 
+sample in the bulk data.
 
 ```{r, "deconvo output"}
+## Examine the output from Bisque
 est_prop$bulk.props <- t(est_prop$bulk.props)
 
 head(est_prop$bulk.props)
