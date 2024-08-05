@@ -90,6 +90,10 @@ get_mean_ratio <- function(sce,
 
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
+    
+    ct_table <- table(sce[[cellType_col]])
+    
+    if(any(ct_table < 10)) warning("One or more cell types has < 10 cells, this may result in unstable marker genes results")
 
     sce_assay <- as.matrix(SummarizedExperiment::assays(sce)[[assay_name]])
 
