@@ -161,6 +161,8 @@ This dataset can be accessed with `spatialLIBD::fetch_data()`.
 ```{r "load snRNA-seq"}
 ## Use spatialLIBD to fetch the snRNA-seq dataset
 sce_path_zip <- fetch_deconvo_data("sce")
+
+## unzip and load the data
 sce_path <- unzip(sce_path_zip, exdir = tempdir())
 sce <- HDF5Array::loadHDF5SummarizedExperiment(
     file.path(tempdir(), "sce_DLPFC_annotated")
@@ -181,9 +183,17 @@ table(sce$cellType_broad_hc)
 sce <- sce[seq_len(5000), ]
 ```
 
-## Reference snRNA-seq data
-The cell type proportions from the RNAScope experiment used to evaluate the 
-deconvolution estimations. 
+## Orthogonal Cell Type Proportion from RNAScope/IF
+An alternative method for calculating cell type proportions is through imaging
+a slice of tissue with cell type probes (RNAScope/IF). Then analyse the image to
+count cells and annotate them by cell type (we used HALO from Indica Labs)
+
+The cell type proportions from the RNAScope/IF experiment will be used to 
+evaluate the accuracy of cell type proportion estimates. 
+
+
+<p align="center">
+![RNAScope/IF measures the cell type proportions through imaging ](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proprotions.png)
 
 Key columns:
 
@@ -200,6 +210,7 @@ Key columns:
 
 
 ```{r "access RNAScope proportions"}
+# Access the RNAScope proportion data table
 head(DeconvoBuddies::RNAScope_prop)
 
 ## plot the RNAScope compositions
@@ -213,29 +224,50 @@ plot_composition_bar(
 ```
 
 
-# 3. Find marker genes with `DeconvoBuddies::get_mean_ratio`
+# 3. Select Marker Genes
 
-Mean Ratio marker finding 
+Marker genes are genes with cell type specific expression (i.e. high expression 
+in one cell type, low expression in other cell types). These genes can be used 
+to learn more about the identity and function of cell types, but here we are 
+interested in using a sets of cell type specific marker genes to reduce noise in
+deconvolution and increase accuracy.
+
+We have developed a method for finding marker genes called the "Mean Ratio". 
+We calculate the `Mean Ratio` for a target cell type for each gene by dividing 
+the mean expression of the target cell by the mean expression of the next 
+highest non-target cell type. Genes with the highest `Mean Ratio` values are 
+selected as marker genes. 
 
 <p align="center">
-![Use Mean Ratio to find less noisy marker genes htan 1vALL](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
+![Use Mean Ratio to find less noisy marker genes than 1vALL](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
 </p>
 
+## Use `DeconvoBuddies::get_mean_ratio` to calculate the Mean Ratio. 
+
+The function `DeconvoBuddies::get_mean_ratio` calculates the `Mean Ratio` and 
+the rank of genes for each cell type. 
+
 ```{r "Run Mean Ratio"}
+# calculate the Mean Ratio of genes for each cell type
 marker_stats <- get_mean_ratio(sce,
     cellType_col = "cellType_broad_hc",
     gene_ensembl = "gene_id",
     gene_name = "gene_name"
 )
 
+# check the top gene ranked gene for each cell type
 marker_stats |>
     group_by(cellType.target) |>
     slice(1)
 ```
 
 ## plot the top marker genes
+Use `DeconvoBuddies` plotting tools to quickly plot the gene expression of the 
+top 4 Exitatory neuron marker genes across the `cellType_broad_hc` cell type 
+annotations. 
 
 ```{r "plot marker genes"}
+# plot expression across cell type the top 4 Excit marker genes
 plot_marker_express(sce,
     stats = marker_stats,
     cell_type = "Excit",
