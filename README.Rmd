@@ -48,7 +48,7 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 ```
 ## Example
 
-```{r 'load_packages', echo = FALSE}
+```{r 'load_packages', warning = FALSE}
 suppressMessages({
     library("DeconvoBuddies")
     library("dplyr")
@@ -59,7 +59,7 @@ suppressMessages({
 
 
 ## Access Data
-Use `fetch_deconvo_data` Download RNA seqencing data from the Human DLPFC.  
+Use `fetch_deconvo_data` Download RNA sequencing data from the Human DLPFC.  
 
 * `rse_gene`: 110 samples of bulk RNA-seq. 
 
@@ -81,20 +81,30 @@ marker_stats <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad
 ```
 
 ### Extablish Color Scheme
+
 ```{r establish_colors}
 cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
-cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", split = "\\.", preview = TRUE)
+cell_colors <- create_cell_colors(
+    cell_types = cell_types,
+    pallet = "classic",
+    split = "\\.",
+    preview = TRUE
+)
 ```
 
 ### Plot Expression of Specified Genes
+
 Quickly create violin plot of gene expression. 
+
 ```{r plot_gene_expression}
 plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 plot_gene_express(sce = sce_DLPFC_example, category = "cellType_hc", genes = c("GAD2", "CD22"))
 ```
 
 ### Plot Expression of Marker Genes
+
 Plot the expression of top marker genes from the statistics calculated in `get_mean_ratio`.
+
 ```{r plot_marker_expression}
 plot_marker_express(sce_DLPFC_example,
     marker_stats,
@@ -106,6 +116,7 @@ plot_marker_express(sce_DLPFC_example,
 ```
 
 ### Create Composition Bar Plot
+
 ```{r composition_bar_plot}
 # extract phenotype data
 pd <- SummarizedExperiment::colData(rse_bulk_test) |>

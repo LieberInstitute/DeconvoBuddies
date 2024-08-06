@@ -49,12 +49,18 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 
 ## Example
 
-    #> Warning: package 'S4Vectors' was built under R version 4.4.1
-    #> Warning: package 'IRanges' was built under R version 4.4.1
+``` r
+suppressMessages({
+    library("DeconvoBuddies")
+    library("dplyr")
+    library("ggplot2")
+    library("SingleCellExperiment")
+})
+```
 
 ## Access Data
 
-Use `fetch_deconvo_data` Download RNA seqencing data from the Human
+Use `fetch_deconvo_data` Download RNA sequencing data from the Human
 DLPFC.
 
 - `rse_gene`: 110 samples of bulk RNA-seq.
@@ -65,7 +71,7 @@ DLPFC.
 
 ``` r
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-08-02 10:50:28.235565 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2024-08-06 15:34:35.658167 loading file /Users/leocollado/Library/Caches/org.R-project.R/R/BiocFileCache/ae44256c3eb9_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 ```
 
 ## Marker Finding
@@ -82,7 +88,12 @@ marker_stats <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad
 
 ``` r
 cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
-cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", split = "\\.", preview = TRUE)
+cell_colors <- create_cell_colors(
+    cell_types = cell_types,
+    pallet = "classic",
+    split = "\\.",
+    preview = TRUE
+)
 ```
 
 <img src="man/figures/README-establish_colors-1.png" width="100%" />

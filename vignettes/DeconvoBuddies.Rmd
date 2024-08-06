@@ -88,6 +88,8 @@ citation("DeconvoBuddies")
 
 # Quick start to using `DeconvoBuddies`
 
+Let's load some packages we'll use in this vignette.
+
 ```{r "load packages", message=FALSE}
 suppressMessages({
     library("DeconvoBuddies")
@@ -160,7 +162,12 @@ colors and makes your pallet flexible when considering different 'resolutions' o
 cell types. 
 ```{r create_cell_colors demo 2`}
 my_cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
-my_cell_colors <- create_cell_colors(cell_types = my_cell_types, pallet = "classic", preview = TRUE, split = "\\.")
+my_cell_colors <- create_cell_colors(
+    cell_types = my_cell_types,
+    pallet = "classic",
+    preview = TRUE,
+    split = "\\."
+)
 ```
 
 ### Plot Expression of Top Markers
