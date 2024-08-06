@@ -24,7 +24,7 @@
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 #'
 #' ## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`
-#' get_mean_ratio2(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
+#' .get_mean_ratio2(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 #'
 #' #  gene       cellType.target mean.target cellType    mean ratio rank_ratio anno_ratio
 #' #<chr>      <fct>                 <dbl> <fct>      <dbl> <dbl>      <int> <chr>
@@ -39,7 +39,8 @@
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom matrixStats rowMedians
-get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcounts", add_symbol = TRUE) {
+#' @keywords internal
+.get_mean_ratio2 <- function(sce, cellType_col = "cellType", assay_name = "logcounts", add_symbol = TRUE) {
     # RCMD fix
     cellType.target <- NULL
     cellType <- NULL
