@@ -105,19 +105,20 @@ suppressMessages({
 
 Use `fetch_deconvo_data` Download RNA sequencing data from the Human DLPFC `r Citep(bib[["DeconvoBuddiespaper"]])`.  
 
-* `rse_gene`: 110 samples of bulk RNA-seq. [21745 genes x 110 samples]. 
+* `rse_gene`: 110 samples of bulk RNA-seq. [110 bulk RNA-seq samples x 21k genes] (41 MB). 
 
-* `sce` : snRNA-seq data from the Human DLPFC. 
+* `sce` : snRNA-seq data from the Human DLPFC. [77k nuclei x 36k genes] (172 MB)
 
-* `sce_DLPFC_example`: Sub-set of `sce` useful for testing.  [557 genes x 10000 nuclei]
-
+* `sce_DLPFC_example`: Sub-set of `sce` useful for testing.  [10k nuclei x 557 genes] (49 MB)
 
 ```{r `access data}
-## Single cell example data
+## Access and explore Single cell example data
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+sce_DLPFC_example
 
-## Bulk RNA-seq data
+## Access and explore Bulk RNA-seq data
 if (!exists("rse_gene")) rse_gene <- fetch_deconvo_data("rse_gene")
+rse_gene
 ```
 
 
@@ -130,7 +131,13 @@ of target cell type)/mean(Expression of highest non-target cell type)`. These
 values can be calculated for a single cell RNA-seq dataset using `get_mean_ratio2()`.
 
 ```{r `get_mean_ratio2 demo`}
-marker_stats <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc", gene_name = "gene_name", gene_ensembl = "gene_id")
+## find marker genes with get_mean_ratio
+marker_stats <- get_mean_ratio(sce_DLPFC_example,
+                               cellType_col = "cellType_broad_hc", 
+                               gene_name = "gene_name", 
+                               gene_ensembl = "gene_id")
+
+## explore tibble output, gene with high MeanRatio values are good marker genes
 marker_stats
 ```
 
@@ -143,8 +150,11 @@ corresponding to the names of cell types. This list is compatible with functions
 like `ggplot2::scale_color_manual()`.
 
 There are three pallets to choose from to generate colors:  
+
   * "classic" (default): Set1 from `RColorBrewer` - max 9 colors  
+  
   * "gg": Equi-distant hues, same process for selecting colors as `ggplot` - no maximum number  
+  
   * "tableau": tableau20 color set (TODO cite this) - max 20 colors  
 
 ```{r `create_cell_colors demo 1`}
@@ -161,12 +171,12 @@ creates a scale of related colors. This helps expand on the maximum number of
 colors and makes your pallet flexible when considering different 'resolutions' of
 cell types. 
 ```{r create_cell_colors demo 2`}
-my_cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
+my_cell_types <- levels(sce_DLPFC_example$cellType_hc)
 my_cell_colors <- create_cell_colors(
     cell_types = my_cell_types,
     pallet = "classic",
     preview = TRUE,
-    split = "\\."
+    split = "_"
 )
 ```
 
@@ -189,17 +199,20 @@ plot_marker_express(
 Visualize deconvolution results with a stacked barplot showing the average cell
 type proportion for a group. 
 ```{r `demo plot_composition_bar`}
+# access the colData of a test rse dataset
 pd <- colData(rse_bulk_test) |>
     as.data.frame()
 
-## need to pivot data to long format
+## pivot data to long format and join with test estimated proportion data
 est_prop_long <- est_prop |>
     rownames_to_column("RNum") |>
     pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
     left_join(pd |> dplyr::select(RNum, Dx))
 
+## explore est_prop_long
 est_prop_long
 
+## the composition bar plot shows the average cell type composition for each Dx
 plot_composition_bar(est_prop_long, x_col = "Dx") +
     ggplot2::scale_fill_manual(values = test_cell_colors_classic)
 ```
