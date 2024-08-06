@@ -16,8 +16,11 @@ date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
   %\VignetteIndexEntry{Deconvolution_Benchmark_DLPFC}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}  
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include = FALSE}
@@ -27,7 +30,6 @@ knitr::opts_chunk$set(
     crop = NULL ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html
 )
 ```
-
 
 ```{r vignetteSetup, echo=FALSE, message=FALSE, warning = FALSE}
 ## Track time spent on making the vignette
@@ -53,49 +55,61 @@ bib <- c(
 
 ## What is Deconvolution?
 
-**Inferring the composition of different cell types in a bulk RNA-seq data**
+**Inferring the composition of different cell types in a bulk RNA-seq
+data**
 
-Deconvolution is a analysis that aims to calculate the proportion of different
-cell types that make up a sample of bulk RNA-seq, based off of cell type gene
-expression profiles in a single cell/nuclei RNA-seq dataset.
+Deconvolution is a analysis that aims to calculate the proportion of
+different cell types that make up a sample of bulk RNA-seq, based off of
+cell type gene expression profiles in a single cell/nuclei RNA-seq
+dataset.
 
 <p align="center">
-![Use single cell data to infer the composition of bulk RNA-seq samples](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution.png)
+
+![Use single cell data to infer the composition of bulk RNA-seq
+samples](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution.png)
+
 </p>
 
 ### Deconvolution Methods
 
-There are 20+ published reference based deconvolution methods. Below are a 
-selection of 6 methods we tested in our deconvolution benchmark 
+There are 20+ published reference based deconvolution methods. Below are
+a selection of 6 methods we tested in our deconvolution benchmark
 [pre-print](https://doi.org/10.1101/2024.02.09.579665).
 
-| Approach | Method | Citation | Availability | 
-|  ---------- | -------- | ------- | ----------- |  
-| weighted least squares | DWLS | Tsoucas et al, Nature Comm, 2019 | [R Package Cran](https://cran.r-project.org/web/packages/DWLS/index.html) | 
-| Bias correction: Assay | Bisque | Jew et al, Nature Comm, 2020 | R Package github | 
-| Bias correction: Sourse | MuSiC | Wang et al, Nature Communications, 2019 | R Package github | 
-| Machine Learning | CIBERSORTx | Newman et al., Nature BioTech, 2019 | [Webtool](https://cibersortx.stanford.edu/) | 
-| Bayesian | BayesPrism | Chu et al., Nature Cancer, 2022 | [Webtool/R Package](https://github.com/Danko-Lab/BayesPrism) | 
-| linear | Hspe | Hunt et al., Ann. Appl. Stat, 2021 | [R package github](https://gjhunt.github.io/hspe/) | 
+| Approach                | Method     | Citation                                | Availability                                                              |
+|-------------------|-----------------|-----------------|---------------------|
+| weighted least squares  | DWLS       | Tsoucas et al, Nature Comm, 2019        | [R Package Cran](https://cran.r-project.org/web/packages/DWLS/index.html) |
+| Bias correction: Assay  | Bisque     | Jew et al, Nature Comm, 2020            | R Package github                                                          |
+| Bias correction: Sourse | MuSiC      | Wang et al, Nature Communications, 2019 | R Package github                                                          |
+| Machine Learning        | CIBERSORTx | Newman et al., Nature BioTech, 2019     | [Webtool](https://cibersortx.stanford.edu/)                               |
+| Bayesian                | BayesPrism | Chu et al., Nature Cancer, 2022         | [Webtool/R Package](https://github.com/Danko-Lab/BayesPrism)              |
+| linear                  | Hspe       | Hunt et al., Ann. Appl. Stat, 2021      | [R package github](https://gjhunt.github.io/hspe/)                        |
 
+## Goals of this Vignette
 
-## Goals of this Vignette 
-
-We will be demonstrating how to use `DeconvoBuddies` tools when applying 
+We will be demonstrating how to use `DeconvoBuddies` tools when applying
 deconvolution with the `Bisque` package.
 
-1. Install and load required packages 
-2. Download DLPFC RNA-seq data, and reference snRNA-seq data
-3. Find marker genes with `DeconvoBuddies` tools
-4. Run deconvolution with `BisqueRNA`
-5. Explore deconvolution output and create composition plots with `DeconvoBuddies` tools
-6. Check proportion against RNAScope estimated proportions
+1.  Install and load required packages
+2.  Download DLPFC RNA-seq data, and reference snRNA-seq data
+3.  Find marker genes with `DeconvoBuddies` tools
+4.  Run deconvolution with `BisqueRNA`
+5.  Explore deconvolution output and create composition plots with
+    `DeconvoBuddies` tools
+6.  Check proportion against RNAScope estimated proportions
 
 # Basics
 
 # 1. Install and load required packages
 
-`R` is an open-source statistical environment which can be easily modified to enhance its functionality via packages. `r Biocpkg("DeconvoBuddies")` is a `R` package available via the [Bioconductor](http://bioconductor.org) repository for packages. `R` can be installed on any operating system from [CRAN](https://cran.r-project.org/) after which you can install `r Biocpkg("DeconvoBuddies")` by using the following commands in your `R` session:
+`R` is an open-source statistical environment which can be easily
+modified to enhance its functionality via packages.
+`r Biocpkg("DeconvoBuddies")` is a `R` package available via the
+[Bioconductor](http://bioconductor.org) repository for packages. `R` can
+be installed on any operating system from
+[CRAN](https://cran.r-project.org/) after which you can install
+`r Biocpkg("DeconvoBuddies")` by using the following commands in your
+`R` session:
 
 ## Install `DeconvoBuddies`
 
@@ -128,15 +142,16 @@ library("tibble")
 library("ggplot2")
 ```
 
-# 2. Download DLPFC RNA-seq data, and reference snRNA-seq data. 
-
+# 2. Download DLPFC RNA-seq data, and reference snRNA-seq data.
 
 ## Bulk RNA-seq data
 
-Access the 110 sample Human DLPFC bulk RNA-seq dataset for LIBD. These samples  
-are from 19 tissue blocks, and 10 neurotypical adult donors. Samples were sequenced
-with two different `library_types` (polyA and RiboZeroGold), and three different 
-`RNA_extraction` (Cyto, Total, Nuc), post quality control n=110 samples. 
+Access the 110 sample Human DLPFC bulk RNA-seq dataset for LIBD. These
+samples\
+are from 19 tissue blocks, and 10 neurotypical adult donors. Samples
+were sequenced with two different `library_types` (polyA and
+RiboZeroGold), and three different `RNA_extraction` (Cyto, Total, Nuc),
+post quality control n=110 samples.
 
 ```{r "load rse_gene"}
 ## use fetch deconvon data to load rse_gene
@@ -155,8 +170,9 @@ table(rse_gene$library_type, rse_gene$library_prep)
 
 ## Reference snRNA-seq data
 
-This data is paired with a single nucleus RNA-seq data set from `spatialLIBD`. 
-This dataset can be accessed with `spatialLIBD::fetch_data()`.
+This data is paired with a single nucleus RNA-seq data set from
+`spatialLIBD`. This dataset can be accessed with
+`spatialLIBD::fetch_data()`.
 
 ```{r "load snRNA-seq"}
 ## Use spatialLIBD to fetch the snRNA-seq dataset
@@ -184,31 +200,33 @@ sce <- sce[seq_len(5000), ]
 ```
 
 ## Orthogonal Cell Type Proportion from RNAScope/IF
-An alternative method for calculating cell type proportions is through imaging
-a slice of tissue with cell type probes (RNAScope/IF). Then analyse the image to
-count cells and annotate them by cell type (we used HALO from Indica Labs)
 
-The cell type proportions from the RNAScope/IF experiment will be used to 
-evaluate the accuracy of cell type proportion estimates. 
+An alternative method for calculating cell type proportions is through
+imaging a slice of tissue with cell type probes (RNAScope/IF). Then
+analyse the image to count cells and annotate them by cell type (we used
+HALO from Indica Labs)
 
+The cell type proportions from the RNAScope/IF experiment will be used
+to evaluate the accuracy of cell type proportion estimates.
 
 <p align="center">
-![RNAScope/IF measures the cell type proportions through imaging ](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proportions.png)
-The RNAScope/IF proportion data is stored as a `data.frame` object
-in `DeconvoBuddies::RNAScope_prop`.
+
+![RNAScope/IF measures the cell type proportions through
+imaging](http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proportions.png)
+The RNAScope/IF proportion data is stored as a `data.frame` object in
+`DeconvoBuddies::RNAScope_prop`.
 
 Key columns in `RNAScope_prop`:
 
-* `SAMPLE_ID`: DLPFC Tissue block + RNAScope combination. 
+-   `SAMPLE_ID`: DLPFC Tissue block + RNAScope combination.
 
-* `Sample` : DLFPC Tissue block (Donor BrNum + DLPFC position). 
+-   `Sample` : DLFPC Tissue block (Donor BrNum + DLPFC position).
 
-* `cell_type` : The cell type measured. 
+-   `cell_type` : The cell type measured.
 
-* `n_cell` : the number of cells counted for the Sample and cell type. 
+-   `n_cell` : the number of cells counted for the Sample and cell type.
 
-* `prop` : the calculated cell type proportion from n_cell
-
+-   `prop` : the calculated cell type proportion from n_cell
 
 ```{r "access RNAScope proportions"}
 # Access the RNAScope proportion data.frame
@@ -224,30 +242,33 @@ plot_composition_bar(
     facet_wrap(~Combo, nrow = 2, scales = "free_x")
 ```
 
-
 # 3. Select Marker Genes
 
-Marker genes are genes with high expression in one cell type and low expression in
-other cell types, or "cell-type specific" expression. These genes can be used 
-to learn more about the identity and function of cell types, but here we are 
-interested in using a sets of cell type specific marker genes to reduce noise in
-deconvolution and increase accuracy.
+Marker genes are genes with high expression in one cell type and low
+expression in other cell types, or "cell-type specific" expression.
+These genes can be used to learn more about the identity and function of
+cell types, but here we are interested in using a sets of cell type
+specific marker genes to reduce noise in deconvolution and increase
+accuracy.
 
-We have developed a method for finding marker genes called the "Mean Ratio". 
-We calculate the `Mean Ratio` for a target cell type for each gene by dividing 
-the mean expression of the target cell by the mean expression of the next 
-highest non-target cell type. Genes with the highest `Mean Ratio` values are 
-selected as marker genes. 
+We have developed a method for finding marker genes called the "Mean
+Ratio". We calculate the `Mean Ratio` for a target cell type for each
+gene by dividing the mean expression of the target cell by the mean
+expression of the next highest non-target cell type. Genes with the
+highest `Mean Ratio` values are selected as marker genes.
 
 <p align="center">
-![Mean Ratio calculation process comapred to 1vALL Marker Gene selection](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
+
+![Mean Ratio calculation process compared to 1vALL Marker Gene
+selection](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
+
 </p>
 
-## Use `get_mean_ratio` to find marker genes. 
+## Use `get_mean_ratio` to find marker genes.
 
-The function `DeconvoBuddies::get_mean_ratio` calculates the `Mean Ratio` and 
-the rank of genes for a specified cell type annotation in an 
-`SingleCellExperiment` object.
+The function `DeconvoBuddies::get_mean_ratio` calculates the
+`Mean Ratio` and the rank of genes for a specified cell type annotation
+in an `SingleCellExperiment` object.
 
 ```{r "Run Mean Ratio"}
 # calculate the Mean Ratio of genes for each cell type
@@ -264,9 +285,10 @@ marker_stats |>
 ```
 
 ## Plot the top marker genes
-Use `DeconvoBuddies` plotting tools to quickly plot the gene expression of the 
-top 4 Excitatory neuron marker genes across the `cellType_broad_hc` cell type 
-annotations. 
+
+Use `DeconvoBuddies` plotting tools to quickly plot the gene expression
+of the top 4 Excitatory neuron marker genes across the
+`cellType_broad_hc` cell type annotations.
 
 ```{r "plot marker genes"}
 # plot expression across cell type the top 4 Excit marker genes
@@ -284,31 +306,37 @@ Looks nice and cell type specific!
 
 ### Create a List of Marker Genes
 
-With the `Mean Ratio` calculated, we will select the top 25 highest Mean Ratio 
-genes for each cell type, that also exists in the bulk data `rse_gene`.
+With the `Mean Ratio` calculated, we will select the top 25 highest Mean
+Ratio genes for each cell type, that also exists in the bulk data
+`rse_gene`.
 
 ```{r "marker_list"}
 # select top 25 marker genes for each cell type, that are also in rse_gene
 marker_genes <- marker_stats |>
     filter(MeanRatio.rank <= 25 & gene %in% rownames(rse_gene))
 
-# check how many genes for each cell type
+# check how many genes for each cell type (some genes are not in both datasets)
 marker_genes |> count(cellType.target)
 
 # create a vector of marker genes to subset data before deconvolution
 marker_genes <- marker_genes |> pull(gene)
 ```
 
-
 # 4. Prep Data and Run Bisque
 
-## prep data
-To run `Bisque` the snRNA-seq and bulk data must first be converted to
-`ExpressionSet` format. We will subset our data to our selected MeanRatio marker
-genes. 
+[*Bisque*](https://github.com/cozygene/bisque) is an R package for cell
+type deconvolution. In our deconvolution benchmark, we found it was a
+top preforming method. Below we will briefly show how to run Bisque's
+"reference based decomposition (deconvolution)".
 
-The snRNA-seq data must also be filtered for cells with no 
-counts across marker genes.
+## prep data
+
+To run `Bisque` the snRNA-seq and bulk data must first be converted to
+`ExpressionSet` format. We will subset our data to our selected
+MeanRatio marker genes.
+
+The snRNA-seq data must also be filtered for cells with no counts across
+marker genes.
 
 ```{r "prep data as ExpressionSet"}
 ## convert bulk data to Expression set, sub-setting to marker genes
@@ -338,9 +366,10 @@ exp_set_sce <- exp_set_sce[, zero_cell_filter]
 
 ## Run Bisque
 
-`Bisque` needs the bulk and single cell `ExpressionSet` we prepared above, plus 
-columns in the single cell data that specify the cell type annotation to use 
-`cellType_broad_hc` and donor id (`BrNum` in this data).
+`Bisque` needs the bulk and single cell `ExpressionSet` we prepared
+above, plus columns in the single cell data that specify the cell type
+annotation to use `cellType_broad_hc` and donor id (`BrNum` in this
+data).
 
 ```{r, "run Bisque"}
 ## Run Bisque with bulk and single cell ExpressionSet inputs
@@ -354,19 +383,25 @@ est_prop <- ReferenceBasedDecomposition(
 ```
 
 ## Explore Output
-Bisque predicts the proportion of the cell types in `cellType_broad_hc` for each 
-sample in the bulk data.
+
+Bisque predicts the proportion of the cell types in `cellType_broad_hc`
+for each sample in the bulk data.
 
 ```{r, "deconvo output"}
-## Examine the output from Bisque
+## Examine the output from Bisque, transpose to make it easier to work with
 est_prop$bulk.props <- t(est_prop$bulk.props)
 
+## sample x cell type matrix
 head(est_prop$bulk.props)
 ```
 
-# 5. Explore deconvolution output and create compostion plots with `DeconvoBuddies` tools
+# 5. Explore deconvolution output and create composition plots with `DeconvoBuddies` tools
 
-Plot Composition Barplots of Bisque predicted compositions
+To visualize the cell type proportion predictions, we can plot cell type
+composition bar plots with \`DeconvoBuddies::plot_composition_bar\`,
+either the prediction for each sample, or the average proportion over a
+group of samples.
+
 ```{r, "composition plots"}
 ## add Phenotype data to proportion estimates
 
@@ -382,8 +417,6 @@ prop_long <- est_prop$bulk.props |>
     left_join(pd)
 
 ## create composition bar plots
-## Average by sample
-plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "Sample", add_text = FALSE)
 
 ## for all library preparations by sample n=110
 plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "SAMPLE_ID", add_text = FALSE) +
@@ -391,13 +424,16 @@ plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "S
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank()
     )
-```
 
+## Average by sample
+plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "Sample", add_text = FALSE)
+
+```
 
 # 6. Check proportion against RNAScope estimated proportions
 
-Note to compare the deconvolution results to the RNAScope proportions, Oligo and 
-OPC need to be added together. 
+Note to compare the deconvolution results to the RNAScope proportions,
+Oligo and OPC need to be added together.
 
 ```{r "compare prop"}
 prop_long_opc <- prop_long |>
@@ -420,7 +456,7 @@ prop_compare <- prop_long_opc |>
 Calculate the correlation plot a scatter plot of the proportions
 
 ```{r "proportion scatter"}
-## correlation with RNAScope proportions
+## compute correlation with RNAScope proportions
 cor(prop_compare$prop, prop_compare$prop_RNAScope)
 
 ## Scatter plot with RNAScope proportions
@@ -440,36 +476,42 @@ prop_compare |>
     geom_abline()
 ```
 
-
-
 # 7. How to run deconvolution with `hspe`
 
-`hspe` is [downloadable](https://gjhunt.github.io/hspe/) as a tar.gz but 
+*hspe* (formally *detangle*) is another R package for deconvolution. It
+was also a top performing method in our deconvolution benchmark.
+
+`hspe` is [downloadable](https://gjhunt.github.io/hspe/) as a tar.gz but
 can't be shown on this vignettes
 
-Code to prep-input and run hspe pseudobulk the snRNA-seq data (not run here)
+Below we show some example code to prep input and run `hspe` (not run
+here):
 
 ```{r "prep and run hspe"}
 if (FALSE) {
+  
+  #pseudobulk the sce data by sample + cell type
     sce_pb <- spatialLIBD::registration_pseudobulk(sce,
         var_registration = "cellType_broad_hc",
         var_sample_id = "Sample"
     )
 
 
-    ## mixture samples is the gene expression from the bulk rse_gene
+    ## extract the gene expression from the bulk rse_gene
     mixture_samples <- t(assays(rse_gene)$logcounts)
     mixture_samples[1:5, 1:5]
 
-    ## pure samples is a vector of indexes of the differnt cell types
+    ## create a vector of indexes of the differnt cell types
     pure_samples <- rafalib::splitit(sce_pb$cellType_broad_hc)
 
-    ## refrence samples is the pseudobulked logcounts
+    ## extract the the pseudobulked logcounts
     reference_samples <- t(assays(sce_pb)$logcounts)
     reference_samples[1:5, 1:5]
 
+    ## check the number of genes match in the bulk (mixture) and single cell (reference)
     ncol(mixture_samples) == ncol(reference_samples)
 
+    ## run hspe
     est_prop_hspe <- hspe(
         Y = mixture_samples,
         reference = reference_samples,
@@ -482,22 +524,24 @@ if (FALSE) {
 
 # Conclusion
 
-TODO
+In this vignette we have demonstrated some of the functions and data in
+the `DeconvoBuddies` package, and how to use them in a deconvolution
+workflow to predict cell type proportions.
 
 # Reproducibility
 
-The `r Biocpkg("DeconvoBuddies")` package `r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
+The `r Biocpkg("DeconvoBuddies")` package
+`r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
 
-* R `r Citep(bib[["R"]])`
-* `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
-* `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])`
-* `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`
-* `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])`
-* `r CRANpkg("sessioninfo")` `r Citep(bib[["sessioninfo"]])`
-* `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
+-   R `r Citep(bib[["R"]])`
+-   `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
+-   `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])`
+-   `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`
+-   `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])`
+-   `r CRANpkg("sessioninfo")` `r Citep(bib[["sessioninfo"]])`
+-   `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
 
 This package was developed using `r BiocStyle::Biocpkg("biocthis")`.
-
 
 Code for creating the vignette
 
@@ -535,14 +579,15 @@ options(width = 120)
 session_info()
 ```
 
-
-
 # Bibliography
 
-This vignette was generated using `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
-with `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])` and `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])` running behind the scenes.
+This vignette was generated using `r Biocpkg("BiocStyle")`
+`r Citep(bib[["BiocStyle"]])` with `r CRANpkg("knitr")`
+`r Citep(bib[["knitr"]])` and `r CRANpkg("rmarkdown")`
+`r Citep(bib[["rmarkdown"]])` running behind the scenes.
 
-Citations made with `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`.
+Citations made with `r CRANpkg("RefManageR")`
+`r Citep(bib[["RefManageR"]])`.
 
 ```{r vignetteBiblio, results = "asis", echo = FALSE, warning = FALSE, message = FALSE}
 ## Print bibliography
