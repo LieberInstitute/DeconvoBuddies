@@ -16,7 +16,7 @@ make_test_sce(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 2)
 \item{n_donor}{Number of donors}
 }
 \value{
-SingelCellExperiment object with randomly generated counts and colData
+SingleCellExperiment object with randomly generated counts and colData
 }
 \description{
 Simulate a SingleCellExperiment for testing

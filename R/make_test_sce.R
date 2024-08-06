@@ -5,7 +5,7 @@
 #' @param n_cellType Number of cell types
 #' @param n_donor Number of donors
 #'
-#' @return SingelCellExperiment object with randomly generated counts and colData
+#' @return SingleCellExperiment object with randomly generated counts and colData
 #' @export
 #'
 #' @examples
@@ -29,7 +29,7 @@ make_test_sce <- function(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 
     )
 
     width <- nchar(as.character(n_cell))
-    rownames(pd) <- paste0("S", stringr::str_pad(1:n_cell, width = width, pad = "0"))
+    rownames(pd) <- paste0("S", stringr::str_pad(seq_len(n_cell), width = width, pad = "0"))
     SummarizedExperiment::colData(sce) <- pd
 
     rownames(sce) <- paste0("G", seq(n_gene))
