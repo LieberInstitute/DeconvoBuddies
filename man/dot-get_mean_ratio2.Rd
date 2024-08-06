@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_mean_ratio2.R
 \name{.get_mean_ratio2}
 \alias{.get_mean_ratio2}
-\title{Get Mean Ratio for Each Gene x Cell Type}
+\title{Get Mean Ratio for Each Gene x Cell Type (Old internal version)}
 \usage{
 .get_mean_ratio2(
   sce,

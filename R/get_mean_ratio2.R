@@ -1,4 +1,4 @@
-#' Get Mean Ratio for Each Gene x Cell Type
+#' Get Mean Ratio for Each Gene x Cell Type (Old internal version)
 #'
 #' Calculate the mean ratio value and rank for each gene for each cell type in the `sce`
 #' object, to identify effective marker genes for deconvolution.
