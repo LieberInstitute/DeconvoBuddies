@@ -85,7 +85,8 @@ object, to identify effective marker genes for deconvolution.</p>
 
 
 <dl><dt id="arg-sce">sce<a class="anchor" aria-label="anchor" href="#arg-sce"></a></dt>
-<dd><p><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment-class</a> object</p></dd>
+<dd><p><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">SummarizedExperiment-class</a>
+(or any derivative class) object containing single cell/nucleus gene expression data</p></dd>
 
 
 <dt id="arg-celltype-col">cellType_col<a class="anchor" aria-label="anchor" href="#arg-celltype-col"></a></dt>
@@ -132,7 +133,42 @@ column with the gene names (symbols).</p></dd>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## load example SingleCellExperiment</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-06 19:24:22.140926 loading file /github/home/.cache/R/BiocFileCache/3f74a9eabb6_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-06 19:39:53.426301 loading file /github/home/.cache/R/BiocFileCache/3f64c5bb00d_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-in"><span><span class="co">## Explore properties of the sce object</span></span></span>
+<span class="r-in"><span><span class="va">sce_DLPFC_example</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class: SingleCellExperiment </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dim: 557 10000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> metadata(3): Samples cell_type_colors cell_type_colors_broad</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> assays(1): logcounts</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> rownames(557): GABRD PRDM16 ... AFF2 MAMLD1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> rowData names(7): source type ... gene_type binomial_deviance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> colnames(10000): 8_AGTGACTGTAGTTACC-1 17_GCAGCCAGTGAGTCAG-1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   12_GGACGTCTCTGACAGT-1 1_GGTTAACTCTCTCTAA-1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> colData names(32): Sample Barcode ... cellType_layer layer_annotation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> reducedDimNames(0):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mainExpName: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> altExpNames(0):</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## this data contains logcounts of gene expression </span></span></span>
+<span class="r-in"><span><span class="fu">SummarizedExperiment</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assays</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span><span class="op">)</span><span class="op">$</span><span class="va">logcounts</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           8_AGTGACTGTAGTTACC-1 17_GCAGCCAGTGAGTCAG-1 3_CTGGACGAGCTTCATG-1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GABRD                        0             0.9249246             0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PRDM16                       0             0.0000000             0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MICOS10                      0             0.0000000             0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LINC01141                    0             0.0000000             0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ADGRB2                       0             0.9249246             2.253612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           13_CCCTCAAAGTCTAGCT-1 11_TGTAAGCCATTCTGTT-1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GABRD                  0.000000             0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PRDM16                 0.000000             0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MICOS10                0.000000             0.6528615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LINC01141              0.000000             0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ADGRB2                 2.253454             0.0000000</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## nuclei are classified in to cell types</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span><span class="op">$</span><span class="va">cellType_broad_hc</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Astro EndoMural     Micro     Oligo       OPC     Excit     Inhib </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       692       417       316      1970       350      4335      1920 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`</span></span></span>
 <span class="r-in"><span><span class="fu">get_mean_ratio</span><span class="op">(</span><span class="va">sce_DLPFC_example</span>, cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span><span class="op">)</span></span></span>
@@ -151,15 +187,6 @@ column with the gene names (symbols).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> MOG        Oligo                  2.06 OPC            0.185       11.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 752 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: MeanRatio.rank &lt;int&gt;, MeanRatio.anno &lt;chr&gt;</span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># A tibble: 764 × 8</span></span></span>
-<span class="r-in"><span><span class="co"># gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno</span></span></span>
-<span class="r-in"><span><span class="co">#&lt;chr&gt;    &lt;fct&gt;                 &lt;dbl&gt; &lt;fct&gt;           &lt;dbl&gt;     &lt;dbl&gt;          &lt;int&gt; &lt;chr&gt;</span></span></span>
-<span class="r-in"><span><span class="co">#  1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858</span></span></span>
-<span class="r-in"><span><span class="co"># 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254</span></span></span>
-<span class="r-in"><span><span class="co"># 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65</span></span></span>
-<span class="r-in"><span><span class="co"># 4 RGS20    Astro                  1.71 Inhib           0.173      9.88              4 Astro/Inhib: 9.876</span></span></span>
-<span class="r-in"><span><span class="co"># 5 HPSE2    Astro                  2.49 Inhib           0.282      8.82              5 Astro/Inhib: 8.823</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Option to specify gene_name as the "Symbol" column from rowData</span></span></span>
 <span class="r-in"><span><span class="co"># this will be added to the marker stats output</span></span></span>
@@ -191,14 +218,8 @@ column with the gene names (symbols).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> RTL8C     protein_coding           98554.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AFF2      protein_coding          111683.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> MAMLD1    protein_coding           75492.1</span>
-<span class="r-in"><span><span class="co">#  gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno</span></span></span>
-<span class="r-in"><span><span class="co">#&lt;chr&gt;    &lt;fct&gt;                 &lt;dbl&gt; &lt;fct&gt;           &lt;dbl&gt;     &lt;dbl&gt;          &lt;int&gt; &lt;chr&gt;</span></span></span>
-<span class="r-in"><span><span class="co"># 1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858</span></span></span>
-<span class="r-in"><span><span class="co"># 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254</span></span></span>
-<span class="r-in"><span><span class="co"># 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65</span></span></span>
-<span class="r-in"><span><span class="co"># 4 RGS20    Astro                  1.71 Inhib           0.173      9.88              4 Astro/Inhib: 9.876</span></span></span>
-<span class="r-in"><span><span class="co"># 5 HPSE2    Astro                  2.49 Inhib           0.282      8.82              5 Astro/Inhib: 8.823</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## specify rowData col names for gene_name and gene_ensembl</span></span></span>
 <span class="r-in"><span><span class="fu">get_mean_ratio</span><span class="op">(</span><span class="va">sce_DLPFC_example</span>, cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, gene_name <span class="op">=</span> <span class="st">"gene_name"</span>, gene_ensembl <span class="op">=</span> <span class="st">"gene_id"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 762 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    gene       cellType.target mean.target cellType.2nd mean.2nd MeanRatio</span>
@@ -216,12 +237,6 @@ column with the gene names (symbols).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 752 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: MeanRatio.rank &lt;int&gt;, MeanRatio.anno &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   gene_ensembl &lt;chr&gt;, gene_name &lt;chr&gt;</span></span>
-<span class="r-in"><span><span class="co"># A tibble: 764 × 10</span></span></span>
-<span class="r-in"><span><span class="co"># gene            cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno   gene_ensembl gene_name</span></span></span>
-<span class="r-in"><span><span class="co"># &lt;chr&gt;           &lt;fct&gt;                 &lt;dbl&gt; &lt;fct&gt;           &lt;dbl&gt;     &lt;dbl&gt;          &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;</span></span></span>
-<span class="r-in"><span><span class="co"># 1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858     ENSG00000234… OBI1-AS1</span></span></span>
-<span class="r-in"><span><span class="co"># 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254 ENSG00000142… PRDM16</span></span></span>
-<span class="r-in"><span><span class="co"># 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65      ENSG00000149… PAMR1</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
