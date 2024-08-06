@@ -13,7 +13,8 @@ get_mean_ratio(
 )
 }
 \arguments{
-\item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
+\item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class}
+(or any derivative class) object containing single cell/nucleus gene expression data}
 
 \item{cellType_col}{A \code{character(1)} name of the column in the
 \link[SummarizedExperiment:SummarizedExperiment-class]{colData()} of \code{sce} that
@@ -54,36 +55,23 @@ Improved argument names and documentaion, but same functionalty from \code{get_m
 \examples{
 ## load example SingleCellExperiment
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+## Explore properties of the sce object
+sce_DLPFC_example
+
+## this data contains logcounts of gene expression 
+SummarizedExperiment::assays(sce_DLPFC_example)$logcounts[1:5, 1:5]
+
+## nuclei are classified in to cell types
+table(sce_DLPFC_example$cellType_broad_hc)
 
 ## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`
 get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 
-# A tibble: 764 × 8
-# gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno
-#<chr>    <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>
-#  1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858
-# 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254
-# 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65
-# 4 RGS20    Astro                  1.71 Inhib           0.173      9.88              4 Astro/Inhib: 9.876
-# 5 HPSE2    Astro                  2.49 Inhib           0.282      8.82              5 Astro/Inhib: 8.823
-
 # Option to specify gene_name as the "Symbol" column from rowData
 # this will be added to the marker stats output
 SummarizedExperiment::rowData(sce_DLPFC_example)
-#  gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno
-#<chr>    <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>
-# 1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858
-# 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254
-# 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65
-# 4 RGS20    Astro                  1.71 Inhib           0.173      9.88              4 Astro/Inhib: 9.876
-# 5 HPSE2    Astro                  2.49 Inhib           0.282      8.82              5 Astro/Inhib: 8.823
 
+## specify rowData col names for gene_name and gene_ensembl
 get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc", gene_name = "gene_name", gene_ensembl = "gene_id")
-# A tibble: 764 × 10
-# gene            cellType.target mean.target cellType.2nd mean.2nd MeanRatio MeanRatio.rank MeanRatio.anno   gene_ensembl gene_name
-# <chr>           <fct>                 <dbl> <fct>           <dbl>     <dbl>          <int> <chr>            <chr>        <chr>
-# 1 OBI1-AS1 Astro                  3.74 Oligo           0.291     12.9               1 Astro/Oligo: 12.858     ENSG00000234… OBI1-AS1
-# 2 PRDM16   Astro                  1.97 EndoMural       0.175     11.3               2 Astro/EndoMural: 11.254 ENSG00000142… PRDM16
-# 3 PAMR1    Astro                  2.21 Excit           0.208     10.7               3 Astro/Excit: 10.65      ENSG00000149… PAMR1
 
 }
