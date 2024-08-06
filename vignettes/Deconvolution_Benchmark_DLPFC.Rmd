@@ -474,7 +474,7 @@ prop_compare |>
 
 # 7. How to run deconvolution with `hspe`
 
-*hspe* (formally *detangle*) is another R package for deconvolution. It
+*hspe* (formerly *dtangle*) is another R package for deconvolution. It
 was also a top performing method in our deconvolution benchmark.
 
 `hspe` is [downloadable](https://gjhunt.github.io/hspe/) as a tar.gz but
