@@ -46,14 +46,15 @@ if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_D
 ## Create list-of-lists of genes to plot, names of sub-list become title of page
 my_gene_list <- list(Inhib = c("GAD2", "SAMD5"), Astro = c("RGS20", "PRDM16"))
 
-# Return a list of plots 
+# Return a list of plots
 plots <- plot_marker_express_List(
     sce_DLPFC_example,
     gene_list = my_gene_list,
-    cellType_col = "cellType_broad_hc")
-    
+    cellType_col = "cellType_broad_hc"
+)
+
 print(plots[[1]])
-    
+
 # Plot marker gene expression to PDF, one page per cell type in stats
 pdf_file <- tempfile("test_marker_expression_List", fileext = ".pdf")
 

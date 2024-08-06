@@ -6,6 +6,6 @@ test_that("Means all zero", {
 
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 
-test_that("Warn for <10 cells",{
-  expect_warning(get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_hc"))
+test_that("Warn for <10 cells", {
+    expect_warning(get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_hc"))
 })

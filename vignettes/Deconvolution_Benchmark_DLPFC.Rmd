@@ -350,7 +350,7 @@ exp_set_bulk <- Biobase::ExpressionSet(
 exp_set_sce <- Biobase::ExpressionSet(
     assayData = as.matrix(assays(sce[marker_genes, ])$counts),
     phenoData = AnnotatedDataFrame(
-        as.data.frame(colData(sce))[, c("cellType_broad_hc", "BrNum")] 
+        as.data.frame(colData(sce))[, c("cellType_broad_hc", "BrNum")]
     )
 )
 
@@ -424,7 +424,6 @@ plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "S
 
 ## Average by sample
 plot_composition_bar(prop_long = prop_long, sample_col = "SAMPLE_ID", x_col = "Sample", add_text = FALSE)
-
 ```
 
 # 6. Check proportion against RNAScope estimated proportions
@@ -486,8 +485,7 @@ here):
 
 ```{r "prep and run hspe"}
 if (FALSE) {
-  
-  #pseudobulk the sce data by sample + cell type
+    # pseudobulk the sce data by sample + cell type
     sce_pb <- spatialLIBD::registration_pseudobulk(sce,
         var_registration = "cellType_broad_hc",
         var_sample_id = "Sample"

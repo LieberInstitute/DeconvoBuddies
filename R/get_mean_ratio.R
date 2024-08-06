@@ -5,7 +5,7 @@
 #'
 #' Improved argument names and documentaion, but same functionalty from `get_mean_ratio2()`.
 #'
-#' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] 
+#' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class]
 #' (or any derivative class) object containing single cell/nucleus gene expression data
 #' @param cellType_col A `character(1)` name of the column in the
 #' [colData()][SummarizedExperiment::SummarizedExperiment-class] of `sce` that
@@ -39,19 +39,19 @@
 #' ## Explore properties of the sce object
 #' sce_DLPFC_example
 #'
-#' ## this data contains logcounts of gene expression 
+#' ## this data contains logcounts of gene expression
 #' SummarizedExperiment::assays(sce_DLPFC_example)$logcounts[1:5, 1:5]
-#' 
+#'
 #' ## nuclei are classified in to cell types
 #' table(sce_DLPFC_example$cellType_broad_hc)
-#' 
+#'
 #' ## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`
 #' get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 #'
 #' # Option to specify gene_name as the "Symbol" column from rowData
 #' # this will be added to the marker stats output
 #' SummarizedExperiment::rowData(sce_DLPFC_example)
-#' 
+#'
 #' ## specify rowData col names for gene_name and gene_ensembl
 #' get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc", gene_name = "gene_name", gene_ensembl = "gene_id")
 #'
@@ -60,11 +60,12 @@
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom matrixStats rowMedians
-get_mean_ratio <- function(sce,
-    cellType_col,
-    assay_name = "logcounts",
-    gene_ensembl = NULL,
-    gene_name = NULL) {
+get_mean_ratio <- function(
+        sce,
+        cellType_col,
+        assay_name = "logcounts",
+        gene_ensembl = NULL,
+        gene_name = NULL) {
     # RCMD fix
     cellType.target <- NULL
     cellType <- NULL
@@ -78,10 +79,10 @@ get_mean_ratio <- function(sce,
 
     cell_types <- unique(sce[[cellType_col]])
     names(cell_types) <- cell_types
-    
+
     ct_table <- table(sce[[cellType_col]])
-    
-    if(any(ct_table < 10)) warning("One or more cell types has < 10 cells, this may result in unstable marker genes results")
+
+    if (any(ct_table < 10)) warning("One or more cell types has < 10 cells, this may result in unstable marker genes results")
 
     sce_assay <- as.matrix(SummarizedExperiment::assays(sce)[[assay_name]])
 

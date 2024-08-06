@@ -34,17 +34,18 @@
 #' )
 #' @family expression plotting functions
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
-plot_marker_express <- function(sce,
-    stats,
-    cell_type,
-    n_genes = 4,
-    rank_col = "MeanRatio.rank",
-    anno_col = "MeanRatio.anno",
-    gene_col = "gene",
-    cellType_col = "cellType",
-    color_pal = NULL,
-    plot_points = FALSE,
-    ncol = 2) {
+plot_marker_express <- function(
+        sce,
+        stats,
+        cell_type,
+        n_genes = 4,
+        rank_col = "MeanRatio.rank",
+        anno_col = "MeanRatio.anno",
+        gene_col = "gene",
+        cellType_col = "cellType",
+        color_pal = NULL,
+        plot_points = FALSE,
+        ncol = 2) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
     stopifnot(cell_type %in% sce[[cellType_col]])
     stopifnot(cell_type %in% stats$cellType.target)

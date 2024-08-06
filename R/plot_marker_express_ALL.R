@@ -26,7 +26,7 @@
 #' @examples
 #' #' ## Fetch sce example data
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#' 
+#'
 #' # Plot marker gene expression to PDF, one page per cell type in stats
 #' pdf_file <- tempfile("test_marker_expression_ALL", fileext = ".pdf")
 #'
@@ -42,16 +42,17 @@
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
 #' @importFrom SummarizedExperiment colData
 #' @importFrom purrr map
-plot_marker_express_ALL <- function(sce,
-    stats,
-    pdf_fn = "marker_expression.pdf",
-    n_genes = 10,
-    rank_col = "MeanRatio.rank",
-    anno_col = "MeanRatio.anno",
-    gene_col = "gene",
-    cellType_col = "cellType",
-    color_pal = NULL,
-    plot_points = FALSE) {
+plot_marker_express_ALL <- function(
+        sce,
+        stats,
+        pdf_fn = "marker_expression.pdf",
+        n_genes = 10,
+        rank_col = "MeanRatio.rank",
+        anno_col = "MeanRatio.anno",
+        gene_col = "gene",
+        cellType_col = "cellType",
+        color_pal = NULL,
+        plot_points = FALSE) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
 
     if (is.factor(sce[[cellType_col]])) {
@@ -64,29 +65,28 @@ plot_marker_express_ALL <- function(sce,
         # missing <- cell_types[!cell_types %in% stats$cellType.target]
         stop("Stats is missing cell types, check you're using the correct marker stats data and cellType_col")
     }
-    
-  marker_plots <- purrr::map(
-    cell_types,
-    ~ plot_marker_express(
-      sce = sce,
-      stats = stats,
-      cell_type = .x,
-      n_genes = n_genes,
-      rank_col = rank_col,
-      anno_col = anno_col,
-      gene_col = gene_col,
-      cellType_col = cellType_col,
-      color_pal = color_pal,
-      plot_points = plot_points
-    )
-  )
 
-  if(is.null(pdf_fn)){
-    return(marker_plots)
-  } else {
-    grDevices::pdf(pdf_fn)
-    print(marker_plots)
-    grDevices::dev.off()
-  }
-    
+    marker_plots <- purrr::map(
+        cell_types,
+        ~ plot_marker_express(
+            sce = sce,
+            stats = stats,
+            cell_type = .x,
+            n_genes = n_genes,
+            rank_col = rank_col,
+            anno_col = anno_col,
+            gene_col = gene_col,
+            cellType_col = cellType_col,
+            color_pal = color_pal,
+            plot_points = plot_points
+        )
+    )
+
+    if (is.null(pdf_fn)) {
+        return(marker_plots)
+    } else {
+        grDevices::pdf(pdf_fn)
+        print(marker_plots)
+        grDevices::dev.off()
+    }
 }

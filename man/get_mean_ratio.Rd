@@ -58,7 +58,7 @@ if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_D
 ## Explore properties of the sce object
 sce_DLPFC_example
 
-## this data contains logcounts of gene expression 
+## this data contains logcounts of gene expression
 SummarizedExperiment::assays(sce_DLPFC_example)$logcounts[1:5, 1:5]
 
 ## nuclei are classified in to cell types

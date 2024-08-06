@@ -21,10 +21,11 @@
 #' @importFrom graphics barplot par
 #' @importFrom grDevices hcl
 #' @importFrom utils head
-create_cell_colors <- function(cell_types = c("Astro", "Micro", "Oligo", "OPC", "Inhib", "Excit"),
-    pallet = c("classic", "gg", "tableau"),
-    split = NA,
-    preview = FALSE) {
+create_cell_colors <- function(
+        cell_types = c("Astro", "Micro", "Oligo", "OPC", "Inhib", "Excit"),
+        pallet = c("classic", "gg", "tableau"),
+        split = NA,
+        preview = FALSE) {
     pallet <- match.arg(pallet)
 
     base_cell_types <- unique(ss(cell_types, pattern = split))
