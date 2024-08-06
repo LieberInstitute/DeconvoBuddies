@@ -211,20 +211,46 @@ the Human DLPFC (Huuki-Myers, Montgomery, Kwon, Cinquemani, Eagles,
 Gonzalez-Padilla, Maden, Kleinman, Hyde, Hicks, Maynard, and
 Collado-Torres, 2024).</p>
 <ul>
-<li><p><code>rse_gene</code>: 110 samples of bulk RNA-seq. [21745 genes
-x 110 samples].</p></li>
-<li><p><code>sce</code> : snRNA-seq data from the Human DLPFC.</p></li>
+<li><p><code>rse_gene</code>: 110 samples of bulk RNA-seq. [110 bulk
+RNA-seq samples x 21k genes] (41 MB).</p></li>
+<li><p><code>sce</code> : snRNA-seq data from the Human DLPFC. [77k
+nuclei x 36k genes] (172 MB)</p></li>
 <li><p><code>sce_DLPFC_example</code>: Sub-set of <code>sce</code>
-useful for testing. [557 genes x 10000 nuclei]</p></li>
+useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Single cell example data</span></span>
+<code class="sourceCode R"><span><span class="co">## Access and explore Single cell example data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-06 19:56:34.602448 loading file /github/home/.cache/R/BiocFileCache/3f715646e52_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-06 21:48:39.671245 loading file /github/home/.cache/R/BiocFileCache/3f6388747d_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span><span class="va">sce_DLPFC_example</span></span>
+<span><span class="co">#&gt; class: SingleCellExperiment </span></span>
+<span><span class="co">#&gt; dim: 557 10000 </span></span>
+<span><span class="co">#&gt; metadata(3): Samples cell_type_colors cell_type_colors_broad</span></span>
+<span><span class="co">#&gt; assays(1): logcounts</span></span>
+<span><span class="co">#&gt; rownames(557): GABRD PRDM16 ... AFF2 MAMLD1</span></span>
+<span><span class="co">#&gt; rowData names(7): source type ... gene_type binomial_deviance</span></span>
+<span><span class="co">#&gt; colnames(10000): 8_AGTGACTGTAGTTACC-1 17_GCAGCCAGTGAGTCAG-1 ...</span></span>
+<span><span class="co">#&gt;   12_GGACGTCTCTGACAGT-1 1_GGTTAACTCTCTCTAA-1</span></span>
+<span><span class="co">#&gt; colData names(32): Sample Barcode ... cellType_layer layer_annotation</span></span>
+<span><span class="co">#&gt; reducedDimNames(0):</span></span>
+<span><span class="co">#&gt; mainExpName: NULL</span></span>
+<span><span class="co">#&gt; altExpNames(0):</span></span>
 <span></span>
-<span><span class="co">## Bulk RNA-seq data</span></span>
+<span><span class="co">## Access and explore Bulk RNA-seq data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span><span class="op">)</span> <span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-06 19:56:36.568963 loading file /github/home/.cache/R/BiocFileCache/3f75afdd7e1_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span></code></pre></div>
+<span><span class="co">#&gt; 2024-08-06 21:48:41.489403 loading file /github/home/.cache/R/BiocFileCache/3f619c595d4_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="va">rse_gene</span></span>
+<span><span class="co">#&gt; class: RangedSummarizedExperiment </span></span>
+<span><span class="co">#&gt; dim: 21745 110 </span></span>
+<span><span class="co">#&gt; metadata(1): SPEAQeasy_settings</span></span>
+<span><span class="co">#&gt; assays(2): counts logcounts</span></span>
+<span><span class="co">#&gt; rownames(21745): ENSG00000227232.5 ENSG00000278267.1 ...</span></span>
+<span><span class="co">#&gt;   ENSG00000210195.2 ENSG00000210196.2</span></span>
+<span><span class="co">#&gt; rowData names(11): Length gencodeID ... gencodeTx passExprsCut</span></span>
+<span><span class="co">#&gt; colnames(110): 2107UNHS-0291_Br2720_Mid_Bulk</span></span>
+<span><span class="co">#&gt;   2107UNHS-0291_Br2720_Mid_Cyto ... AN00000906_Br8667_Mid_Cyto</span></span>
+<span><span class="co">#&gt;   AN00000906_Br8667_Mid_Nuc</span></span>
+<span><span class="co">#&gt; colData names(80): SAMPLE_ID Sample ... diagnosis qc_class</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="marker-finding">Marker Finding<a class="anchor" aria-label="anchor" href="#marker-finding"></a>
@@ -240,7 +266,13 @@ type, where
 These values can be calculated for a single cell RNA-seq dataset using
 <code>get_mean_ratio2()</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">marker_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mean_ratio.html">get_mean_ratio</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span>, cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, gene_name <span class="op">=</span> <span class="st">"gene_name"</span>, gene_ensembl <span class="op">=</span> <span class="st">"gene_id"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co">## find marker genes with get_mean_ratio</span></span>
+<span><span class="va">marker_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mean_ratio.html">get_mean_ratio</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span>,</span>
+<span>                               cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, </span>
+<span>                               gene_name <span class="op">=</span> <span class="st">"gene_name"</span>, </span>
+<span>                               gene_ensembl <span class="op">=</span> <span class="st">"gene_id"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## explore tibble output, gene with high MeanRatio values are good marker genes</span></span>
 <span><span class="va">marker_stats</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 762 × 10</span></span></span>
 <span><span class="co">#&gt;    gene       cellType.target mean.target cellType.2nd mean.2nd MeanRatio</span></span>
@@ -272,12 +304,15 @@ different plots. The function <code><a href="../reference/create_cell_colors.htm
 a named vector of hex values, corresponding to the names of cell types.
 This list is compatible with functions like
 <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">ggplot2::scale_color_manual()</a></code>.</p>
-<p>There are three pallets to choose from to generate colors:<br>
-* “classic” (default): Set1 from <code>RColorBrewer</code> - max 9
-colors<br>
-* “gg”: Equi-distant hues, same process for selecting colors as
-<code>ggplot</code> - no maximum number<br>
-* “tableau”: tableau20 color set (TODO cite this) - max 20 colors</p>
+<p>There are three pallets to choose from to generate colors:</p>
+<ul>
+<li><p>“classic” (default): Set1 from <code>RColorBrewer</code> - max 9
+colors</p></li>
+<li><p>“gg”: Equi-distant hues, same process for selecting colors as
+<code>ggplot</code> - no maximum number</p></li>
+<li><p>“tableau”: tableau20 color set (TODO cite this) - max 20
+colors</p></li>
+</ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cell_A"</span>, <span class="st">"cell_B"</span>, <span class="st">"cell_C"</span>, <span class="st">"cell_D"</span>, <span class="st">"cell_E"</span><span class="op">)</span></span>
 <span></span>
@@ -299,12 +334,12 @@ colors<br>
 helps expand on the maximum number of colors and makes your pallet
 flexible when considering different ‘resolutions’ of cell types.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span><span class="op">$</span><span class="va">cellType_broad_hc</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">my_cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span><span class="op">$</span><span class="va">cellType_hc</span><span class="op">)</span></span>
 <span><span class="va">my_cell_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_cell_colors.html">create_cell_colors</a></span><span class="op">(</span></span>
 <span>    cell_types <span class="op">=</span> <span class="va">my_cell_types</span>,</span>
 <span>    pallet <span class="op">=</span> <span class="st">"classic"</span>,</span>
 <span>    preview <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>    split <span class="op">=</span> <span class="st">"\\."</span></span>
+<span>    split <span class="op">=</span> <span class="st">"_"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="DeconvoBuddies_files/figure-html/create_cell_colors%20demo%202%60-1.png" width="700"></p>
 </div>
@@ -337,16 +372,18 @@ violin plots of expression over cell type.</p>
 <p>Visualize deconvolution results with a stacked barplot showing the
 average cell type proportion for a group.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">rse_bulk_test</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="co"># access the colData of a test rse dataset</span></span>
+<span><span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">rse_bulk_test</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## need to pivot data to long format</span></span>
+<span><span class="co">## pivot data to long format and join with test estimated proportion data</span></span>
 <span><span class="va">est_prop_long</span> <span class="op">&lt;-</span> <span class="va">est_prop</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"RNum"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">RNum</span>, names_to <span class="op">=</span> <span class="st">"cell_type"</span>, values_to <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">pd</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">RNum</span>, <span class="va">Dx</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining with `by = join_by(RNum)`</span></span>
 <span></span>
+<span><span class="co">## explore est_prop_long</span></span>
 <span><span class="va">est_prop_long</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 4</span></span></span>
 <span><span class="co">#&gt;    RNum  cell_type   prop Dx   </span></span>
@@ -363,6 +400,7 @@ average cell type proportion for a group.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> R632  cell_E    0.060<span style="text-decoration: underline;">0</span> <span style="color: #BB0000;">NA</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
 <span></span>
+<span><span class="co">## the composition bar plot shows the average cell type composition for each Dx</span></span>
 <span><span class="fu"><a href="../reference/plot_composition_bar.html">plot_composition_bar</a></span><span class="op">(</span><span class="va">est_prop_long</span>, x_col <span class="op">=</span> <span class="st">"Dx"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">test_cell_colors_classic</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DeconvoBuddies_files/figure-html/%60demo%20plot_composition_bar%60-1.png" width="700"></p>
@@ -408,9 +446,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"DeconvoBuddies.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-08-06 19:56:40 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-08-06 21:48:45 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 18.203 secs</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 18.286 secs</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
