@@ -92,7 +92,7 @@ cell_colors <- create_cell_colors(cell_types = cell_types, pallet = "classic", s
 Quickly create violin plot of gene expression.
 
 ``` r
-plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 #> No summary function supplied, defaulting to `mean_se()`
 #> No summary function supplied, defaulting to `mean_se()`
 ```
@@ -100,7 +100,7 @@ plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", gene
 <img src="man/figures/README-plot_gene_expression-1.png" width="100%" />
 
 ``` r
-plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, category = "cellType_hc", genes = c("GAD2", "CD22"))
 #> No summary function supplied, defaulting to `mean_se()`
 #> No summary function supplied, defaulting to `mean_se()`
 ```

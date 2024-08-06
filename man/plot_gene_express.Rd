@@ -8,7 +8,7 @@ plot_gene_express(
   sce,
   genes,
   assay_name = "logcounts",
-  catagorey = "cellType",
+  category = "cellType",
   color_pal = NULL,
   title = NULL,
   plot_points = FALSE,
@@ -25,10 +25,10 @@ plot_gene_express(
 \code{sce} object to use to rank expression values. Defaults to \code{logcounts} since
 it typically contains the normalized expression values.}
 
-\item{catagorey}{A \code{character(1)} specifying the name of the categorical variable
+\item{category}{A \code{character(1)} specifying the name of the categorical variable
 to group the cells or nuclei by. Defaults to \code{cellType}.}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{catagorey} values.}
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{category} values.}
 
 \item{title}{A \code{character(1)} to title the plot}
 
@@ -50,13 +50,13 @@ plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
 
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 ## plot expression of two genes
-plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 
 ## plot points - note this creates large images and is easy to over plot
-plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"), plot_points = TRUE)
+plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"), plot_points = TRUE)
 
 ## Add title
-plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"), title = "My Genes")
+plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"), title = "My Genes")
 
 }
 \seealso{

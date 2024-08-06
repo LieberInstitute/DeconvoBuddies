@@ -10,9 +10,9 @@
 #' `sce` object to use to rank expression values. Defaults to `logcounts` since
 #' it typically contains the normalized expression values.
 #'
-#' @param catagorey  A `character(1)` specifying the name of the categorical variable
+#' @param category  A `character(1)` specifying the name of the categorical variable
 #' to group the cells or nuclei by. Defaults to `cellType`.
-#' @param color_pal  A named `character(1)` vector that contains a color pallet matching the `catagorey` values.
+#' @param color_pal  A named `character(1)` vector that contains a color pallet matching the `category` values.
 #' @param title A `character(1)` to title the plot
 #' @param plot_points A logical indicating whether to plot points over the violin,
 #' defaults to `FALSE` as these often become over plotted and quite large (especially when saved as PDF)
@@ -27,13 +27,13 @@
 #'
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 #' ## plot expression of two genes
-#' plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+#' plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 #'
 #' ## plot points - note this creates large images and is easy to over plot
-#' plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"), plot_points = TRUE)
+#' plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"), plot_points = TRUE)
 #'
 #' ## Add title
-#' plot_gene_express(sce = sce_DLPFC_example, catagorey = "cellType_broad_hc", genes = c("GAD2", "CD22"), title = "My Genes")
+#' plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"), title = "My Genes")
 #'
 #' @family expression plotting functions
 #'
@@ -41,30 +41,33 @@ plot_gene_express <- function(
         sce,
         genes,
         assay_name = "logcounts",
-        catagorey = "cellType",
+        category = "cellType",
         color_pal = NULL,
         title = NULL,
         plot_points = FALSE,
         ncol = 2) {
     stopifnot(any(genes %in% rownames(sce)))
 
-    if (!catagorey %in% colnames(colData(sce))) {
-        message("ERROR '", catagorey, "' is not a column name in colData(sce), check that `catagorey` matches this sce")
-        stop()
+    if (!category %in% colnames(colData(sce))) {
+        stop(
+            category,
+            "' is not a column name in colData(sce), check that `category` matches this sce",
+            call. = FALSE
+        )
     }
 
     stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
 
     value <- median <- NULL
 
-    catagorey_df <- as.data.frame(colData(sce))[, catagorey, drop = FALSE]
+    category_df <- as.data.frame(colData(sce))[, category, drop = FALSE]
     expression_long <- reshape2::melt(as.matrix(SummarizedExperiment::assays(sce)[[assay_name]][genes, , drop = FALSE]))
 
-    catagorey <- catagorey_df[expression_long$Var2, ]
-    expression_long <- cbind(expression_long, catagorey)
+    category <- category_df[expression_long$Var2, ]
+    expression_long <- cbind(expression_long, category)
 
-    expression_violin <- ggplot(data = expression_long, aes(x = catagorey, y = value)) +
-        # ggplot2::geom_violin(aes(fill = catagorey), scale = "width") +
+    expression_violin <- ggplot(data = expression_long, aes(x = category, y = value)) +
+        # ggplot2::geom_violin(aes(fill = category), scale = "width") +
         ggplot2::facet_wrap(~Var1, ncol = ncol) +
         ggplot2::labs(
             y = paste0("Expression (", assay_name, ")"),
@@ -80,8 +83,8 @@ plot_gene_express <- function(
 
     if (plot_points) {
         expression_violin <- expression_violin +
-            ggplot2::geom_violin(aes(color = catagorey), scale = "width") +
-            ggplot2::geom_jitter(aes(color = catagorey),
+            ggplot2::geom_violin(aes(color = category), scale = "width") +
+            ggplot2::geom_jitter(aes(color = category),
                 position = ggplot2::position_jitter(seed = 1, width = 0.2), size = .5
             ) +
             ggplot2::stat_summary(
@@ -96,7 +99,7 @@ plot_gene_express <- function(
     }
 
     expression_violin <- expression_violin +
-        ggplot2::geom_violin(aes(fill = catagorey), scale = "width") +
+        ggplot2::geom_violin(aes(fill = category), scale = "width") +
         ggplot2::stat_summary(
             fun = median,
             geom = "crossbar",

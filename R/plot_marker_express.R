@@ -93,7 +93,7 @@ plot_marker_express <- function(sce,
     pe <- plot_gene_express(
         sce = marker_sce,
         genes = stats_filter$Feature,
-        catagorey = cellType_col,
+        category = cellType_col,
         color_pal = color_pal,
         title = title,
         plot_points = plot_points,
