@@ -12,11 +12,11 @@
 <url><loc>/news/index.html</loc></url>
 <url><loc>/reference/RNAScope_prop.html</loc></url>
 <url><loc>/reference/create_cell_colors.html</loc></url>
+<url><loc>/reference/dot-get_mean_ratio2.html</loc></url>
 <url><loc>/reference/est_prop.html</loc></url>
 <url><loc>/reference/fetch_deconvo_data.html</loc></url>
 <url><loc>/reference/findMarkers_1vAll.html</loc></url>
 <url><loc>/reference/get_mean_ratio.html</loc></url>
-<url><loc>/reference/get_mean_ratio2.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/make_test_sce.html</loc></url>
 <url><loc>/reference/marker_test.html</loc></url>
