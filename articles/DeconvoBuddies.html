@@ -98,7 +98,7 @@ Huuki-Myers</h4>
 Campus<br><a class="author_email" href="mailto:#"></a><a href="mailto:lahuuki@gmail.com" class="email">lahuuki@gmail.com</a>
       </address>
                   
-            <h4 data-toc-skip class="date">6 August 2024</h4>
+            <h4 data-toc-skip class="date">7 August 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lahuuki/DeconvoBuddies/blob/devel/vignettes/DeconvoBuddies.Rmd" class="external-link"><code>vignettes/DeconvoBuddies.Rmd</code></a></small>
       <div class="hidden name"><code>DeconvoBuddies.Rmd</code></div>
@@ -201,7 +201,6 @@ to cite the package and the overall approach. Thank you!</p>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyr.tidyverse.org" class="external-link">"tidyr"</a></span><span class="op">)</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tibble.tidyverse.org/" class="external-link">"tibble"</a></span><span class="op">)</span></span>
-<span>    <span class="co"># library("ggplot2")</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="access-data">Access Data<a class="anchor" aria-label="anchor" href="#access-data"></a>
@@ -219,9 +218,11 @@ nuclei x 36k genes] (172 MB)</p></li>
 useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Access and explore Single cell example data</span></span>
+<code class="sourceCode R"><span><span class="co">## Access and snRNA-seq example data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-06 21:48:39.671245 loading file /github/home/.cache/R/BiocFileCache/3f6388747d_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-07 16:58:36.388689 loading file /github/home/.cache/R/BiocFileCache/3f640a0025_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span></span>
+<span><span class="co">## Explore snRNA-seq data in sce_DLPFC_example</span></span>
 <span><span class="va">sce_DLPFC_example</span></span>
 <span><span class="co">#&gt; class: SingleCellExperiment </span></span>
 <span><span class="co">#&gt; dim: 557 10000 </span></span>
@@ -236,9 +237,11 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 <span><span class="co">#&gt; mainExpName: NULL</span></span>
 <span><span class="co">#&gt; altExpNames(0):</span></span>
 <span></span>
-<span><span class="co">## Access and explore Bulk RNA-seq data</span></span>
+<span><span class="co">## Access Bulk RNA-seq data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span><span class="op">)</span> <span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-06 21:48:41.489403 loading file /github/home/.cache/R/BiocFileCache/3f619c595d4_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-07 16:58:38.159815 loading file /github/home/.cache/R/BiocFileCache/3f646bca9ae_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span></span>
+<span><span class="co">## Explore bulk data in rse_gene</span></span>
 <span><span class="va">rse_gene</span></span>
 <span><span class="co">#&gt; class: RangedSummarizedExperiment </span></span>
 <span><span class="co">#&gt; dim: 21745 110 </span></span>
@@ -251,6 +254,9 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 <span><span class="co">#&gt;   2107UNHS-0291_Br2720_Mid_Cyto ... AN00000906_Br8667_Mid_Cyto</span></span>
 <span><span class="co">#&gt;   AN00000906_Br8667_Mid_Nuc</span></span>
 <span><span class="co">#&gt; colData names(80): SAMPLE_ID Sample ... diagnosis qc_class</span></span></code></pre></div>
+<p>For more details on this dataset, and an example deconvolution run
+check out the <a href="https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html" class="external-link">Vignette:
+Deconvolution Benchmark in Human DLPFC</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="marker-finding">Marker Finding<a class="anchor" aria-label="anchor" href="#marker-finding"></a>
@@ -260,9 +266,9 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 </h4>
 <p>Accurate deconvolution requires highly specific marker genes for each
 cell type to be defined. To select genes specific for each cell type,
-you can evaluate the <code>mean ratio</code> for each gene x each cell
+you can evaluate the <code>MeanRatio</code> for each gene x each cell
 type, where
-<code>mean ratio = mean(Expression  of target cell type)/mean(Expression of highest non-target cell type)</code>.
+<code>MeanRatio = mean(Expression  of target cell type)/mean(Expression of highest non-target cell type)</code>.
 These values can be calculated for a single cell RNA-seq dataset using
 <code>get_mean_ratio2()</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -290,6 +296,9 @@ These values can be calculated for a single cell RNA-seq dataset using
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 752 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: MeanRatio.rank &lt;int&gt;, MeanRatio.anno &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gene_ensembl &lt;chr&gt;, gene_name &lt;chr&gt;</span></span></span></code></pre></div>
+<p>For more discussion of finding marker genes with
+<code>DeconvoBuddies</code> check out the <a href="https://research.libd.org/DeconvoBuddies/articles/Marker_Finding.html" class="external-link">Vignette:
+Finding Marker Genes with DeconvoBuddies.</a></p>
 </div>
 </div>
 <div class="section level3">
@@ -310,8 +319,8 @@ This list is compatible with functions like
 colors</p></li>
 <li><p>“gg”: Equi-distant hues, same process for selecting colors as
 <code>ggplot</code> - no maximum number</p></li>
-<li><p>“tableau”: tableau20 color set (TODO cite this) - max 20
-colors</p></li>
+<li><p>“tableau”: <a href="https://jrnold.github.io/ggthemes/reference/tableau_color_pal.html" class="external-link">tableau20</a>
+color set - max 20 colors</p></li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cell_A"</span>, <span class="st">"cell_B"</span>, <span class="st">"cell_C"</span>, <span class="st">"cell_D"</span>, <span class="st">"cell_E"</span><span class="op">)</span></span>
@@ -348,14 +357,15 @@ flexible when considering different ‘resolutions’ of cell types.</p>
 </h4>
 <p>The function <code><a href="../reference/plot_marker_express.html">plot_marker_express()</a></code> helps quickly
 visualize expression of top marker genes, by ordering and annotating
-violin plots of expression over cell type.</p>
+violin plots of expression over cell type. Here we’ll plot the
+expression of the top 6 marker genes for Astrocytes.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># plot expression of the top 5 Astro marker genes</span></span>
+<code class="sourceCode R"><span><span class="co"># plot expression of the top 6 Astro marker genes</span></span>
 <span><span class="fu"><a href="../reference/plot_marker_express.html">plot_marker_express</a></span><span class="op">(</span></span>
 <span>    sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span>
 <span>    stats <span class="op">=</span> <span class="va">marker_stats</span>,</span>
 <span>    cell_type <span class="op">=</span> <span class="st">"Astro"</span>,</span>
-<span>    n_genes <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>    n_genes <span class="op">=</span> <span class="fl">6</span>,</span>
 <span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
 <span>    color_pal <span class="op">=</span> <span class="va">my_cell_colors</span></span>
 <span><span class="op">)</span></span>
@@ -363,14 +373,21 @@ violin plots of expression over cell type.</p>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
+<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
 <span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
 <p><img src="DeconvoBuddies_files/figure-html/%60plot_marker_expression%20demo%60-1.png" width="700"></p>
+<p>The violin plots of gene expression confirm the cell type specificity
+of these marker genes, most of the nueli with high expression of these
+six genes are Astro.</p>
 </div>
 <div class="section level4">
 <h4 id="plot-composition-bar-plot">Plot Composition Bar Plot<a class="anchor" aria-label="anchor" href="#plot-composition-bar-plot"></a>
 </h4>
-<p>Visualize deconvolution results with a stacked barplot showing the
-average cell type proportion for a group.</p>
+<p>The output of deconvolution are cell type estimates that sum to 1. A
+good visulization for these predictions is a stacked bar plot. The
+function <code><a href="../reference/plot_composition_bar.html">plot_composition_bar()</a></code> creates a stacked bar plot
+showing the cell type proportion for each sample, or the average
+proportion for a group of samples.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># access the colData of a test rse dataset</span></span>
 <span><span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">rse_bulk_test</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -380,30 +397,37 @@ average cell type proportion for a group.</p>
 <span><span class="va">est_prop_long</span> <span class="op">&lt;-</span> <span class="va">est_prop</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"RNum"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">RNum</span>, names_to <span class="op">=</span> <span class="st">"cell_type"</span>, values_to <span class="op">=</span> <span class="st">"prop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">pd</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">RNum</span>, <span class="va">Dx</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">pd</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; Joining with `by = join_by(RNum)`</span></span>
 <span></span>
 <span><span class="co">## explore est_prop_long</span></span>
 <span><span class="va">est_prop_long</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 4</span></span></span>
-<span><span class="co">#&gt;    RNum  cell_type   prop Dx   </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> R071  cell_A    0.390  <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> R071  cell_B    0.378  <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> R071  cell_C    0.040<span style="text-decoration: underline;">0</span> <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> R071  cell_D    0.147  <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> R071  cell_E    0.044<span style="text-decoration: underline;">1</span> <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> R632  cell_A    0.405  <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> R632  cell_B    0.239  <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> R632  cell_C    0.263  <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> R632  cell_D    0.032<span style="text-decoration: underline;">6</span> <span style="color: #BB0000;">NA</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> R632  cell_E    0.060<span style="text-decoration: underline;">0</span> <span style="color: #BB0000;">NA</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 7</span></span></span>
+<span><span class="co">#&gt;    RNum  cell_type   prop BrNum Sex   Dx        Age</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> R913  cell_A    0.380  Br001 F     Case     71.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> R913  cell_B    0.240  Br001 F     Case     71.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> R913  cell_C    0.162  Br001 F     Case     71.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> R913  cell_D    0.108  Br001 F     Case     71.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> R913  cell_E    0.111  Br001 F     Case     71.9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> R602  cell_A    0.443  Br002 F     Control  73.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> R602  cell_B    0.207  Br002 F     Control  73.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> R602  cell_C    0.074<span style="text-decoration: underline;">3</span> Br002 F     Control  73.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> R602  cell_D    0.160  Br002 F     Control  73.1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> R602  cell_E    0.115  Br002 F     Control  73.1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
 <span></span>
+<span><span class="co">## the composition bar plot shows cell type composition for Sample</span></span>
+<span><span class="fu"><a href="../reference/plot_composition_bar.html">plot_composition_bar</a></span><span class="op">(</span><span class="va">est_prop_long</span>, x_col <span class="op">=</span> <span class="st">"RNum"</span>,</span>
+<span>                     add_text <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">test_cell_colors_classic</span><span class="op">)</span></span></code></pre></div>
+<p><img src="DeconvoBuddies_files/figure-html/%60demo%20plot_composition_bar%60-1.png" width="700"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="co">## the composition bar plot shows the average cell type composition for each Dx</span></span>
 <span><span class="fu"><a href="../reference/plot_composition_bar.html">plot_composition_bar</a></span><span class="op">(</span><span class="va">est_prop_long</span>, x_col <span class="op">=</span> <span class="st">"Dx"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">test_cell_colors_classic</span><span class="op">)</span></span></code></pre></div>
-<p><img src="DeconvoBuddies_files/figure-html/%60demo%20plot_composition_bar%60-1.png" width="700"></p>
+<p><img src="DeconvoBuddies_files/figure-html/%60demo%20plot_composition_bar%60-2.png" width="700"></p>
 </div>
 </div>
 </div>
@@ -437,7 +461,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 </ul>
 <p>This package was developed using <em><a href="https://bioconductor.org/packages/3.20/biocthis" class="external-link">biocthis</a></em>.</p>
 <p>Code for creating the vignette</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Create the vignette</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/rmarkdown" class="external-link">"rmarkdown"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"DeconvoBuddies.Rmd"</span>, <span class="st">"BiocStyle::html_document"</span><span class="op">)</span><span class="op">)</span></span>
@@ -446,9 +470,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"DeconvoBuddies.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-08-06 21:48:45 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-08-07 16:58:42 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 18.286 secs</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 18.94 secs</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
@@ -460,7 +484,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2024-08-06</span></span>
+<span><span class="co">#&gt;  date     2024-08-07</span></span>
 <span><span class="co">#&gt;  pandoc   3.2 @ /usr/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
@@ -505,7 +529,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  data.table             1.15.4     <span style="color: #555555;">2024-03-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  DBI                    1.2.3      <span style="color: #555555;">2024-06-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  dbplyr                 2.5.0      <span style="color: #555555;">2024-03-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.0     <span style="color: #555555;">2024-08-06</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
+<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.0     <span style="color: #555555;">2024-08-07</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  DelayedArray           0.31.11    <span style="color: #555555;">2024-08-04</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.1)</span></span></span>
 <span><span class="co">#&gt;  desc                   1.4.3      <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  digest                 0.6.36     <span style="color: #555555;">2024-06-23</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
