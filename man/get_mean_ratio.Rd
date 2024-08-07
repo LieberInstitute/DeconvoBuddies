@@ -18,7 +18,7 @@ get_mean_ratio(
 
 \item{cellType_col}{A \code{character(1)} name of the column in the
 \link[SummarizedExperiment:SummarizedExperiment-class]{colData()} of \code{sce} that
-denotes the cell type or group of interest}
+denotes the cell type or group of interest.}
 
 \item{assay_name}{A \code{character(1)} specifying the name of the
 \link[SummarizedExperiment:SummarizedExperiment-class]{assay()} in the
@@ -50,7 +50,8 @@ Calculate the mean ratio value and rank for each gene for each cell type in the 
 object, to identify effective marker genes for deconvolution.
 }
 \details{
-Improved argument names and documentaion, but same functionalty from \code{get_mean_ratio2()}.
+Note if a cell type has < 10 cells the MeanRatio results may be unstable.
+See rational in OSCA: \url{https://bioconductor.org/books/3.19/OSCA.multisample/multi-sample-comparisons.html#performing-the-de-analysis}
 }
 \examples{
 ## load example SingleCellExperiment

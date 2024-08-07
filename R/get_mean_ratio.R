@@ -3,13 +3,14 @@
 #' Calculate the mean ratio value and rank for each gene for each cell type in the `sce`
 #' object, to identify effective marker genes for deconvolution.
 #'
-#' Improved argument names and documentaion, but same functionalty from `get_mean_ratio2()`.
+#' Note if a cell type has < 10 cells the MeanRatio results may be unstable. 
+#' See rational in OSCA: <https://bioconductor.org/books/3.19/OSCA.multisample/multi-sample-comparisons.html#performing-the-de-analysis>
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class]
 #' (or any derivative class) object containing single cell/nucleus gene expression data
 #' @param cellType_col A `character(1)` name of the column in the
 #' [colData()][SummarizedExperiment::SummarizedExperiment-class] of `sce` that
-#' denotes the cell type or group of interest
+#' denotes the cell type or group of interest. 
 #' @param assay_name A `character(1)` specifying the name of the
 #' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
 #' `sce` object to use to rank expression values. Defaults to `logcounts` since
@@ -82,7 +83,7 @@ get_mean_ratio <- function(
 
     ct_table <- table(sce[[cellType_col]])
 
-    if (any(ct_table < 10)) warning("One or more cell types has < 10 cells, this may result in unstable marker genes results")
+    if (any(ct_table < 10)) warning("One or more cell types has < 10 cells, this may result in unstable marker genes results. Check details of get_mean_ratio() for more info")
 
     sce_assay <- as.matrix(SummarizedExperiment::assays(sce)[[assay_name]])
 
