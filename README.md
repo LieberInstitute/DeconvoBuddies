@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# DeconvoBuddies <img src="man/figures/logo.png" align="right" height="138" alt="" />
+# DeconvoBuddies <img src="man/figures/logo.png" align="right" height="138"/>
 
 <!-- badges: start -->
 
@@ -22,10 +22,14 @@ support](https://bioconductor.org/shields/posts/DeconvoBuddies.svg)](https://sup
 history](https://bioconductor.org/shields/years-in-bioc/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
 [![Bioc last
 commit](https://bioconductor.org/shields/lastcommit/devel/bioc/DeconvoBuddies.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies/)
+
 <!-- badges: end -->
 
 The goal of `DeconvoBuddies` is to provide helper functions for the
-deconvolution process
+deconvolution process, as well as a paired dataset designed to test the
+performance of deconvolution arguments. The dataset is from Human DLPFC,
+and contains bulk RNA-seq, single nucleus RNA-seq, and estimated cell
+type proportions from RNAScope/IF.
 
 ## Installation instructions
 
@@ -49,132 +53,51 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 
 ## Example
 
-``` r
-suppressMessages({
-    library("DeconvoBuddies")
-    library("dplyr")
-    library("ggplot2")
-    library("SingleCellExperiment")
-})
-```
-
-## Access Data
-
-Use `fetch_deconvo_data` Download RNA sequencing data from the Human
-DLPFC.
-
-- `rse_gene`: 110 samples of bulk RNA-seq.
-
-- `sce` : snRNA-seq data from the Human DLPFC.
-
-- `sce_DLPFC_example`: Sub-set of `sce` useful for testing.
-
-``` r
-if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-08-06 15:34:35.658167 loading file /Users/leocollado/Library/Caches/org.R-project.R/R/BiocFileCache/ae44256c3eb9_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
-```
-
-## Marker Finding
-
-Find cell type specific markers with `get_mean_ratio` for each gene x
-cell type, calculates the Mean Ratio of expression for each gene between
-a target cell type and the next highest cell type.
-
-``` r
-marker_stats <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
-```
-
-### Extablish Color Scheme
-
-``` r
-cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
-cell_colors <- create_cell_colors(
-    cell_types = cell_types,
-    pallet = "classic",
-    split = "\\.",
-    preview = TRUE
-)
-```
-
-<img src="man/figures/README-establish_colors-1.png" width="100%" />
-
-### Plot Expression of Specified Genes
-
 Quickly create violin plot of gene expression.
 
+## Access Datasets
+
+DeconvoBuddies contains Paired snRNA-seq, bulk RNA-seq, and cell type
+proportion data.
+
 ``` r
-plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
+## Access and explore Single cell example data
+if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+#> 2024-08-07 11:56:19.433874 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+sce_DLPFC_example
+#> class: SingleCellExperiment 
+#> dim: 557 10000 
+#> metadata(3): Samples cell_type_colors cell_type_colors_broad
+#> assays(1): logcounts
+#> rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
+#> rowData names(7): source type ... gene_type binomial_deviance
+#> colnames(10000): 8_AGTGACTGTAGTTACC-1 17_GCAGCCAGTGAGTCAG-1 ...
+#>   12_GGACGTCTCTGACAGT-1 1_GGTTAACTCTCTCTAA-1
+#> colData names(32): Sample Barcode ... cellType_layer layer_annotation
+#> reducedDimNames(0):
+#> mainExpName: NULL
+#> altExpNames(0):
+```
+
+### Plot Expression of Marker Genes
+
+Quickly plot expression of selected genes in snRNA-seq data.
+
+``` r
+plot_gene_express(sce = sce_DLPFC_example, 
+                  category = "cellType_broad_hc", 
+                  genes = c("GAD2", "CD22"))
 #> No summary function supplied, defaulting to `mean_se()`
 #> No summary function supplied, defaulting to `mean_se()`
 ```
 
 <img src="man/figures/README-plot_gene_expression-1.png" width="100%" />
 
-``` r
-plot_gene_express(sce = sce_DLPFC_example, category = "cellType_hc", genes = c("GAD2", "CD22"))
-#> No summary function supplied, defaulting to `mean_se()`
-#> No summary function supplied, defaulting to `mean_se()`
-```
+## Plot Deconvoltion Cell Type Proportions
 
-<img src="man/figures/README-plot_gene_expression-2.png" width="100%" />
+Create compostion bar plots of predicted cell type proportions.
 
-### Plot Expression of Marker Genes
-
-Plot the expression of top marker genes from the statistics calculated
-in `get_mean_ratio`.
-
-``` r
-plot_marker_express(sce_DLPFC_example,
-    marker_stats,
-    cellType_col = "cellType_broad_hc",
-    cell_type = "Excit",
-    gene_col = "gene",
-    color_pal = cell_colors
-)
-#> No summary function supplied, defaulting to `mean_se()`
-#> No summary function supplied, defaulting to `mean_se()`
-#> No summary function supplied, defaulting to `mean_se()`
-#> No summary function supplied, defaulting to `mean_se()`
-```
-
-<img src="man/figures/README-plot_marker_expression-1.png" width="100%" />
-
-### Create Composition Bar Plot
-
-``` r
-# extract phenotype data
-pd <- SummarizedExperiment::colData(rse_bulk_test) |>
-    as.data.frame()
-
-# Create a long table of estimated proportion data with phenotype details
-est_prop_long <- est_prop |>
-    tibble::rownames_to_column("RNum") |>
-    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-    dplyr::left_join(pd |> dplyr::select(RNum, Dx)) |>
-    dplyr::mutate(a = "a")
-#> Joining with `by = join_by(RNum)`
-
-## plot composition bar of average proportion
-plot_composition_bar(est_prop_long)
-```
-
-<img src="man/figures/README-composition_bar_plot-1.png" width="100%" />
-
-``` r
-
-## plot composition bar of average proportion by Dx
-plot_composition_bar(est_prop_long, x_col = "Dx")
-```
-
-<img src="man/figures/README-composition_bar_plot-2.png" width="100%" />
-
-``` r
-
-## Set a mininum value for adding text
-plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
-```
-
-<img src="man/figures/README-composition_bar_plot-3.png" width="100%" />
+<img src="man/figures/README-`demo_plot_composition_bar`-1.png" width="100%" />
 
 ## Citation
 

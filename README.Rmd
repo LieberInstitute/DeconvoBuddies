@@ -1,5 +1,8 @@
 ---
 output: github_document
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -13,25 +16,41 @@ knitr::opts_chunk$set(
 )
 ```
 
-# DeconvoBuddies <img src="man/figures/logo.png" align="right" height="138" alt="" />
+# DeconvoBuddies <img src="man/figures/logo.png" align="right" height="138"/>
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
+
+[![Codecov test
+coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main)
 [![check-bioc](https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml/badge.svg)](https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![Bioc release status](http://www.bioconductor.org/shields/build/release/bioc/DeconvoBuddies.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/DeconvoBuddies)
-[![Bioc devel status](http://www.bioconductor.org/shields/build/devel/bioc/DeconvoBuddies.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies)
-[![Bioc downloads rank](https://bioconductor.org/shields/downloads/release/DeconvoBuddies.svg)](http://bioconductor.org/packages/stats/bioc/DeconvoBuddies/)
-[![Bioc support](https://bioconductor.org/shields/posts/DeconvoBuddies.svg)](https://support.bioconductor.org/tag/DeconvoBuddies)
-[![Bioc history](https://bioconductor.org/shields/years-in-bioc/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
-[![Bioc last commit](https://bioconductor.org/shields/lastcommit/devel/bioc/DeconvoBuddies.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies/)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Bioc release
+status](http://www.bioconductor.org/shields/build/release/bioc/DeconvoBuddies.svg)](https://bioconductor.org/checkResults/release/bioc-LATEST/DeconvoBuddies)
+[![Bioc devel
+status](http://www.bioconductor.org/shields/build/devel/bioc/DeconvoBuddies.svg)](https://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies)
+[![Bioc downloads
+rank](https://bioconductor.org/shields/downloads/release/DeconvoBuddies.svg)](http://bioconductor.org/packages/stats/bioc/DeconvoBuddies/)
+[![Bioc
+support](https://bioconductor.org/shields/posts/DeconvoBuddies.svg)](https://support.bioconductor.org/tag/DeconvoBuddies)
+[![Bioc
+history](https://bioconductor.org/shields/years-in-bioc/DeconvoBuddies.svg)](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since)
+[![Bioc last
+commit](https://bioconductor.org/shields/lastcommit/devel/bioc/DeconvoBuddies.svg)](http://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies/)
+
 <!-- badges: end -->
 
-The goal of `DeconvoBuddies` is to provide helper functions for the deconvolution process
+The goal of `DeconvoBuddies` is to provide helper functions for the
+deconvolution process, as well as a paired dataset designed to test the
+performance of deconvolution arguments. The dataset is from Human DLPFC,
+and contains bulk RNA-seq, single nucleus RNA-seq, and estimated cell
+type proportions from RNAScope/IF.
 
 ## Installation instructions
 
-Get the latest stable `R` release from [CRAN](http://cran.r-project.org/). Then install `DeconvoBuddies` using from [Bioconductor](http://bioconductor.org/) the following code:
+Get the latest stable `R` release from
+[CRAN](http://cran.r-project.org/). Then install `DeconvoBuddies` using
+from [Bioconductor](http://bioconductor.org/) the following code:
 
 ```{r 'install', eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
@@ -46,125 +65,96 @@ And the development version from [GitHub](https://github.com/) with:
 ```{r 'install_dev', eval = FALSE}
 BiocManager::install("LieberInstitute/DeconvoBuddies")
 ```
+
 ## Example
 
-```{r 'load_packages', warning = FALSE}
+```{r 'load_packages', warning = FALSE, echo=FALSE}
 suppressMessages({
     library("DeconvoBuddies")
-    library("dplyr")
-    library("ggplot2")
-    library("SingleCellExperiment")
 })
+
 ```
 
+Quickly create violin plot of gene expression.
 
-## Access Data
-Use `fetch_deconvo_data` Download RNA sequencing data from the Human DLPFC.  
+## Access Datasets
 
-* `rse_gene`: 110 samples of bulk RNA-seq. 
-
-* `sce` : snRNA-seq data from the Human DLPFC. 
-
-* `sce_DLPFC_example`: Sub-set of `sce` useful for testing. 
+DeconvoBuddies contains Paired snRNA-seq, bulk RNA-seq, and cell type proportion
+data.
 
 ```{r `access data}
+## Access and explore Single cell example data
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-```
-
-## Marker Finding
-Find cell type specific markers with `get_mean_ratio` for each gene x cell type, 
-calculates the Mean Ratio of expression for each gene between a target cell type 
-and the next highest cell type. 
-
-```{r marker_finding, eval = requireNamespace('DeconvoBuddies')}
-marker_stats <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
-```
-
-### Extablish Color Scheme
-
-```{r establish_colors}
-cell_types <- levels(sce_DLPFC_example$cellType_broad_hc)
-cell_colors <- create_cell_colors(
-    cell_types = cell_types,
-    pallet = "classic",
-    split = "\\.",
-    preview = TRUE
-)
-```
-
-### Plot Expression of Specified Genes
-
-Quickly create violin plot of gene expression. 
-
-```{r plot_gene_expression}
-plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
-plot_gene_express(sce = sce_DLPFC_example, category = "cellType_hc", genes = c("GAD2", "CD22"))
+sce_DLPFC_example
 ```
 
 ### Plot Expression of Marker Genes
 
-Plot the expression of top marker genes from the statistics calculated in `get_mean_ratio`.
+Quickly plot expression of selected genes in snRNA-seq data.
 
-```{r plot_marker_expression}
-plot_marker_express(sce_DLPFC_example,
-    marker_stats,
-    cellType_col = "cellType_broad_hc",
-    cell_type = "Excit",
-    gene_col = "gene",
-    color_pal = cell_colors
-)
+```{r plot_gene_expression}
+plot_gene_express(sce = sce_DLPFC_example, 
+                  category = "cellType_broad_hc", 
+                  genes = c("GAD2", "CD22"))
 ```
 
-### Create Composition Bar Plot
+## Plot Deconvoltion Cell Type Proportions
 
-```{r composition_bar_plot}
-# extract phenotype data
-pd <- SummarizedExperiment::colData(rse_bulk_test) |>
-    as.data.frame()
+Create compostion bar plots of predicted cell type proportions.
 
-# Create a long table of estimated proportion data with phenotype details
+```{r `demo_plot_composition_bar`, echo=FALSE}
+## pivot data to long format and join with test estimated proportion data
 est_prop_long <- est_prop |>
     tibble::rownames_to_column("RNum") |>
-    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-    dplyr::left_join(pd |> dplyr::select(RNum, Dx)) |>
-    dplyr::mutate(a = "a")
+    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") 
 
-## plot composition bar of average proportion
-plot_composition_bar(est_prop_long)
-
-## plot composition bar of average proportion by Dx
-plot_composition_bar(est_prop_long, x_col = "Dx")
-
-## Set a mininum value for adding text
-plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
+## composition bar plot
+plot_composition_bar(est_prop_long |> 
+                       dplyr::filter(RNum %in% sample(rownames(est_prop), 10)),
+                     x_col = "RNum") 
 ```
-
 
 ## Citation
 
-Below is the citation output from using `citation('DeconvoBuddies')` in R. Please
-run this yourself to check for any updates on how to cite __DeconvoBuddies__.
+Below is the citation output from using `citation('DeconvoBuddies')` in
+R. Please run this yourself to check for any updates on how to cite
+**DeconvoBuddies**.
 
 ```{r 'citation', eval = requireNamespace('DeconvoBuddies')}
 print(citation("DeconvoBuddies"), bibtex = TRUE)
 ```
 
-Please note that the `DeconvoBuddies` was only made possible thanks to many other R and bioinformatics software authors, which are cited either in the vignettes and/or the paper(s) describing this package.
+Please note that the `DeconvoBuddies` was only made possible thanks to
+many other R and bioinformatics software authors, which are cited either
+in the vignettes and/or the paper(s) describing this package.
 
 ## Code of Conduct
 
-  Please note that the DeconvoBuddies project is released with a [Contributor Code of Conduct](http://bioconductor.org/about/code-of-conduct/). By contributing to this project, you agree to abide by its terms.
-  
+Please note that the DeconvoBuddies project is released with a
+[Contributor Code of
+Conduct](http://bioconductor.org/about/code-of-conduct/). By
+contributing to this project, you agree to abide by its terms.
+
 ## Development tools
 
-* Continuous code testing is possible thanks to [GitHub actions](https://www.tidyverse.org/blog/2020/04/usethis-1-6-0/)  through `r BiocStyle::CRANpkg('usethis')`, `r BiocStyle::CRANpkg('remotes')`, and `r BiocStyle::CRANpkg('rcmdcheck')` customized to use [Bioconductor's docker containers](https://www.bioconductor.org/help/docker/) and `r BiocStyle::Biocpkg('BiocCheck')`.
-* Code coverage assessment is possible thanks to [codecov](https://codecov.io/gh) and `r BiocStyle::CRANpkg('covr')`.
-* The [documentation website](http://.github.io/DeconvoBuddies) is automatically updated thanks to `r BiocStyle::CRANpkg('pkgdown')`.
-* The code is styled automatically thanks to `r BiocStyle::CRANpkg('styler')`.
-* The documentation is formatted thanks to `r BiocStyle::CRANpkg('devtools')` and `r BiocStyle::CRANpkg('roxygen2')`.
+-   Continuous code testing is possible thanks to [GitHub
+    actions](https://www.tidyverse.org/blog/2020/04/usethis-1-6-0/)
+    through `r BiocStyle::CRANpkg('usethis')`,
+    `r BiocStyle::CRANpkg('remotes')`, and
+    `r BiocStyle::CRANpkg('rcmdcheck')` customized to use
+    [Bioconductor's docker
+    containers](https://www.bioconductor.org/help/docker/) and
+    `r BiocStyle::Biocpkg('BiocCheck')`.
+-   Code coverage assessment is possible thanks to
+    [codecov](https://codecov.io/gh) and `r BiocStyle::CRANpkg('covr')`.
+-   The [documentation website](http://.github.io/DeconvoBuddies) is
+    automatically updated thanks to `r BiocStyle::CRANpkg('pkgdown')`.
+-   The code is styled automatically thanks to
+    `r BiocStyle::CRANpkg('styler')`.
+-   The documentation is formatted thanks to
+    `r BiocStyle::CRANpkg('devtools')` and
+    `r BiocStyle::CRANpkg('roxygen2')`.
 
 For more details, check the `dev` directory.
 
 This package was developed using `r BiocStyle::Biocpkg('biocthis')`.
-
-
