@@ -16,8 +16,11 @@ date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
   %\VignetteIndexEntry{Introduction to DeconvoBuddies}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}  
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include = FALSE}
@@ -27,7 +30,6 @@ knitr::opts_chunk$set(
     crop = NULL ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html
 )
 ```
-
 
 ```{r vignetteSetup, echo=FALSE, message=FALSE, warning = FALSE}
 ## Track time spent on making the vignette
@@ -54,7 +56,14 @@ bib <- c(
 
 ## Install `DeconvoBuddies`
 
-`R` is an open-source statistical environment which can be easily modified to enhance its functionality via packages. `r Biocpkg("DeconvoBuddies")` is a `R` package available via the [Bioconductor](http://bioconductor.org) repository for packages. `R` can be installed on any operating system from [CRAN](https://cran.r-project.org/) after which you can install `r Biocpkg("DeconvoBuddies")` by using the following commands in your `R` session:
+`R` is an open-source statistical environment which can be easily
+modified to enhance its functionality via packages.
+`r Biocpkg("DeconvoBuddies")` is a `R` package available via the
+[Bioconductor](http://bioconductor.org) repository for packages. `R` can
+be installed on any operating system from
+[CRAN](https://cran.r-project.org/) after which you can install
+`r Biocpkg("DeconvoBuddies")` by using the following commands in your
+`R` session:
 
 ```{r "install", eval = FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE)) {
@@ -69,17 +78,38 @@ BiocManager::valid()
 
 ## Required knowledge
 
-`r Biocpkg("DeconvoBuddies")` is based on many other packages and in particular in those that have implemented the infrastructure needed for dealing with snRNA-seq data. That is, packages like `r Biocpkg("SingleCellExperiment")`.
+`r Biocpkg("DeconvoBuddies")` is based on many other packages and in
+particular in those that have implemented the infrastructure needed for
+dealing with snRNA-seq data. That is, packages like
+`r Biocpkg("SingleCellExperiment")`.
 
-If you are asking yourself the question "Where do I start using Bioconductor?" you might be interested in [this blog post](http://lcolladotor.github.io/2014/10/16/startbioc/#.VkOKbq6rRuU).
+If you are asking yourself the question "Where do I start using
+Bioconductor?" you might be interested in [this blog
+post](http://lcolladotor.github.io/2014/10/16/startbioc/#.VkOKbq6rRuU).
 
 ## Asking for help
 
-As package developers, we try to explain clearly how to use our packages and in which order to use the functions. But `R` and `Bioconductor` have a steep learning curve so it is critical to learn where to ask for help. The blog post quoted above mentions some but we would like to highlight the [Bioconductor support site](https://support.bioconductor.org/) as the main resource for getting help: remember to use the `DeconvoBuddies` tag and check [the older posts](https://support.bioconductor.org/t/DeconvoBuddies/). Other alternatives are available such as creating GitHub issues and tweeting. However, please note that if you want to receive help you should adhere to the [posting guidelines](http://www.bioconductor.org/help/support/posting-guide/). It is particularly critical that you provide a small reproducible example and your session information so package developers can track down the source of the error.
+As package developers, we try to explain clearly how to use our packages
+and in which order to use the functions. But `R` and `Bioconductor` have
+a steep learning curve so it is critical to learn where to ask for help.
+The blog post quoted above mentions some but we would like to highlight
+the [Bioconductor support site](https://support.bioconductor.org/) as
+the main resource for getting help: remember to use the `DeconvoBuddies`
+tag and check [the older
+posts](https://support.bioconductor.org/t/DeconvoBuddies/). Other
+alternatives are available such as creating GitHub issues and tweeting.
+However, please note that if you want to receive help you should adhere
+to the [posting
+guidelines](http://www.bioconductor.org/help/support/posting-guide/). It
+is particularly critical that you provide a small reproducible example
+and your session information so package developers can track down the
+source of the error.
 
 ## Citing `DeconvoBuddies`
 
-We hope that `r Biocpkg("DeconvoBuddies")` will be useful for your research. Please use the following information to cite the package and the overall approach. Thank you!
+We hope that `r Biocpkg("DeconvoBuddies")` will be useful for your
+research. Please use the following information to cite the package and
+the overall approach. Thank you!
 
 ```{r "citation"}
 ## Citation info
@@ -90,45 +120,58 @@ citation("DeconvoBuddies")
 
 Let's load some packages we'll use in this vignette.
 
-```{r "load packages", message=FALSE}
+```{r "load packages", message=FALSE, warning=FALSE}
 suppressMessages({
     library("DeconvoBuddies")
     library("SummarizedExperiment")
     library("dplyr")
     library("tidyr")
     library("tibble")
-    # library("ggplot2")
 })
 ```
 
 ## Access Data
 
-Use `fetch_deconvo_data` Download RNA sequencing data from the Human DLPFC `r Citep(bib[["DeconvoBuddiespaper"]])`.  
+Use `fetch_deconvo_data` Download RNA sequencing data from the Human
+DLPFC `r Citep(bib[["DeconvoBuddiespaper"]])`.
 
-* `rse_gene`: 110 samples of bulk RNA-seq. [110 bulk RNA-seq samples x 21k genes] (41 MB). 
+-   `rse_gene`: 110 samples of bulk RNA-seq. [110 bulk RNA-seq samples x
+    21k genes] (41 MB).
 
-* `sce` : snRNA-seq data from the Human DLPFC. [77k nuclei x 36k genes] (172 MB)
+-   `sce` : snRNA-seq data from the Human DLPFC. [77k nuclei x 36k
+    genes] (172 MB)
 
-* `sce_DLPFC_example`: Sub-set of `sce` useful for testing.  [10k nuclei x 557 genes] (49 MB)
+-   `sce_DLPFC_example`: Sub-set of `sce` useful for testing. [10k
+    nuclei x 557 genes] (49 MB)
 
 ```{r `access data}
-## Access and explore Single cell example data
+## Access and snRNA-seq example data
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+
+## Explore snRNA-seq data in sce_DLPFC_example
 sce_DLPFC_example
 
-## Access and explore Bulk RNA-seq data
+## Access Bulk RNA-seq data
 if (!exists("rse_gene")) rse_gene <- fetch_deconvo_data("rse_gene")
+
+## Explore bulk data in rse_gene
 rse_gene
 ```
 
+For more details on this dataset, and an example deconvolution run check
+out the [Vignette: Deconvolution Benchmark in Human
+DLPFC](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html).
 
-## Marker Finding  
+## Marker Finding
+
 ### Using MeanRatio to Find Cell Type Markers
-Accurate deconvolution requires highly specific marker genes for each cell type
-to be defined. To select genes specific for each cell type, you can evaluate the
-`mean ratio` for each gene x each cell type, where `mean ratio = mean(Expression 
-of target cell type)/mean(Expression of highest non-target cell type)`. These
-values can be calculated for a single cell RNA-seq dataset using `get_mean_ratio2()`.
+
+Accurate deconvolution requires highly specific marker genes for each
+cell type to be defined. To select genes specific for each cell type,
+you can evaluate the `MeanRatio` for each gene x each cell type, where
+`MeanRatio = mean(Expression  of target cell type)/mean(Expression of highest non-target cell type)`.
+These values can be calculated for a single cell RNA-seq dataset using
+`get_mean_ratio2()`.
 
 ```{r `get_mean_ratio2 demo`}
 ## find marker genes with get_mean_ratio
@@ -141,21 +184,30 @@ marker_stats <- get_mean_ratio(sce_DLPFC_example,
 marker_stats
 ```
 
-## Plotting Tools  
+For more discussion of finding marker genes with `DeconvoBuddies` check
+out the [Vignette: Finding Marker Genes with
+DeconvoBuddies.](https://research.libd.org/DeconvoBuddies/articles/Marker_Finding.html)
+
+## Plotting Tools
+
 ### Creating A Cell Type Color Pallet
-As you work with single-cell data and deconovoltion outputs, it is very useful
-to establish a consistent color pallet to use across different plots. The
-function `create_cell_colors()` returns a named vector of hex values, 
-corresponding to the names of cell types. This list is compatible with functions 
-like `ggplot2::scale_color_manual()`.
 
-There are three pallets to choose from to generate colors:  
+As you work with single-cell data and deconovoltion outputs, it is very
+useful to establish a consistent color pallet to use across different
+plots. The function `create_cell_colors()` returns a named vector of hex
+values, corresponding to the names of cell types. This list is
+compatible with functions like `ggplot2::scale_color_manual()`.
 
-  * "classic" (default): Set1 from `RColorBrewer` - max 9 colors  
-  
-  * "gg": Equi-distant hues, same process for selecting colors as `ggplot` - no maximum number  
-  
-  * "tableau": tableau20 color set (TODO cite this) - max 20 colors  
+There are three pallets to choose from to generate colors:
+
+-   "classic" (default): Set1 from `RColorBrewer` - max 9 colors
+
+-   "gg": Equi-distant hues, same process for selecting colors as
+    `ggplot` - no maximum number
+
+-   "tableau":
+    [tableau20](https://jrnold.github.io/ggthemes/reference/tableau_color_pal.html)
+    color set - max 20 colors
 
 ```{r `create_cell_colors demo 1`}
 test_cell_types <- c("cell_A", "cell_B", "cell_C", "cell_D", "cell_E")
@@ -166,10 +218,12 @@ test_cell_colors_tableau <- create_cell_colors(cell_types = test_cell_types, pal
 
 test_cell_colors_tableau
 ```
-If there are sub-cell types with consistent delimiters, the `split` argument
-creates a scale of related colors. This helps expand on the maximum number of
-colors and makes your pallet flexible when considering different 'resolutions' of
-cell types. 
+
+If there are sub-cell types with consistent delimiters, the `split`
+argument creates a scale of related colors. This helps expand on the
+maximum number of colors and makes your pallet flexible when considering
+different 'resolutions' of cell types.
+
 ```{r create_cell_colors demo 2`}
 my_cell_types <- levels(sce_DLPFC_example$cellType_hc)
 my_cell_colors <- create_cell_colors(
@@ -181,23 +235,36 @@ my_cell_colors <- create_cell_colors(
 ```
 
 ### Plot Expression of Top Markers
-The function `plot_marker_express()` helps quickly visualize expression of top
-marker genes, by ordering and annotating violin plots of expression over cell type.
+
+The function `plot_marker_express()` helps quickly visualize expression
+of top marker genes, by ordering and annotating violin plots of
+expression over cell type. Here we'll plot the expression of the top 6
+marker genes for Astrocytes.
+
 ```{r `plot_marker_expression demo`}
-# plot expression of the top 5 Astro marker genes
+# plot expression of the top 6 Astro marker genes
 plot_marker_express(
     sce = sce_DLPFC_example,
     stats = marker_stats,
     cell_type = "Astro",
-    n_genes = 5,
+    n_genes = 6,
     cellType_col = "cellType_broad_hc",
     color_pal = my_cell_colors
 )
 ```
 
+The violin plots of gene expression confirm the cell type specificity of
+these marker genes, most of the nueli with high expression of these six
+genes are Astro.
+
 ### Plot Composition Bar Plot
-Visualize deconvolution results with a stacked barplot showing the average cell
-type proportion for a group. 
+
+The output of deconvolution are cell type estimates that sum to 1. A
+good visulization for these predictions is a stacked bar plot. The
+function `plot_composition_bar()` creates a stacked bar plot showing the
+cell type proportion for each sample, or the average proportion for a
+group of samples.
+
 ```{r `demo plot_composition_bar`}
 # access the colData of a test rse dataset
 pd <- colData(rse_bulk_test) |>
@@ -207,31 +274,35 @@ pd <- colData(rse_bulk_test) |>
 est_prop_long <- est_prop |>
     rownames_to_column("RNum") |>
     pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-    left_join(pd |> dplyr::select(RNum, Dx))
+    left_join(pd) 
 
 ## explore est_prop_long
 est_prop_long
+
+## the composition bar plot shows cell type composition for Sample
+plot_composition_bar(est_prop_long, x_col = "RNum",
+                     add_text = FALSE) +
+    ggplot2::scale_fill_manual(values = test_cell_colors_classic)
 
 ## the composition bar plot shows the average cell type composition for each Dx
 plot_composition_bar(est_prop_long, x_col = "Dx") +
     ggplot2::scale_fill_manual(values = test_cell_colors_classic)
 ```
 
-
 # Reproducibility
 
-The `r Biocpkg("DeconvoBuddies")` package `r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
+The `r Biocpkg("DeconvoBuddies")` package
+`r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
 
-* R `r Citep(bib[["R"]])`
-* `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
-* `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])`
-* `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`
-* `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])`
-* `r CRANpkg("sessioninfo")` `r Citep(bib[["sessioninfo"]])`
-* `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
+-   R `r Citep(bib[["R"]])`
+-   `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
+-   `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])`
+-   `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`
+-   `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])`
+-   `r CRANpkg("sessioninfo")` `r Citep(bib[["sessioninfo"]])`
+-   `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
 
 This package was developed using `r BiocStyle::Biocpkg("biocthis")`.
-
 
 Code for creating the vignette
 
@@ -269,14 +340,15 @@ options(width = 120)
 session_info()
 ```
 
-
-
 # Bibliography
 
-This vignette was generated using `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
-with `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])` and `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])` running behind the scenes.
+This vignette was generated using `r Biocpkg("BiocStyle")`
+`r Citep(bib[["BiocStyle"]])` with `r CRANpkg("knitr")`
+`r Citep(bib[["knitr"]])` and `r CRANpkg("rmarkdown")`
+`r Citep(bib[["rmarkdown"]])` running behind the scenes.
 
-Citations made with `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`.
+Citations made with `r CRANpkg("RefManageR")`
+`r Citep(bib[["RefManageR"]])`.
 
 ```{r vignetteBiblio, results = "asis", echo = FALSE, warning = FALSE, message = FALSE}
 ## Print bibliography
