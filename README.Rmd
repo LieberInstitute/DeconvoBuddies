@@ -66,7 +66,7 @@ And the development version from [GitHub](https://github.com/) with:
 BiocManager::install("LieberInstitute/DeconvoBuddies")
 ```
 
-## Example
+## Application of DeconvoBuddies
 
 ```{r 'load_packages', warning = FALSE, echo=FALSE}
 suppressMessages({
@@ -75,34 +75,37 @@ suppressMessages({
 
 ```
 
-Quickly create violin plot of gene expression.
+### Access Datasets
 
-## Access Datasets
-
-DeconvoBuddies contains Paired snRNA-seq, bulk RNA-seq, and cell type proportion
-data.
+DeconvoBuddies contains paired snRNA-seq, bulk RNA-seq, and cell type proportion
+data from the human DLPFC.
 
 ```{r `access data}
-## Access and explore Single cell example data
-if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+## Access data with fetch_deconvo_data
+sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+
+## explore the single cell ecperiment object
 sce_DLPFC_example
 ```
 
-### Plot Expression of Marker Genes
+### Find Marker Genes and Visualize Expression
 
-Quickly plot expression of selected genes in snRNA-seq data.
+DeconvBuddies has tools for finding marker genes ideal for deconvolution,
+and plotting functions to quickly visualize the expression of selected genes in a 
+snRNA-seq data.
 
-```{r plot_gene_expression}
+```{r plot_gene_expression, echo=FALSE, warning=FALSE}
 plot_gene_express(sce = sce_DLPFC_example, 
                   category = "cellType_broad_hc", 
                   genes = c("GAD2", "CD22"))
 ```
 
-## Plot Deconvoltion Cell Type Proportions
+### Plot Deconvoltion Cell Type Proportions
 
-Create compostion bar plots of predicted cell type proportions.
+Create composition bar plots of predicted cell type proportions.
 
 ```{r `demo_plot_composition_bar`, echo=FALSE}
+set.seed(123)
 ## pivot data to long format and join with test estimated proportion data
 est_prop_long <- est_prop |>
     tibble::rownames_to_column("RNum") |>

@@ -51,19 +51,19 @@ And the development version from [GitHub](https://github.com/) with:
 BiocManager::install("LieberInstitute/DeconvoBuddies")
 ```
 
-## Example
+## Application of DeconvoBuddies
 
-Quickly create violin plot of gene expression.
+### Access Datasets
 
-## Access Datasets
-
-DeconvoBuddies contains Paired snRNA-seq, bulk RNA-seq, and cell type
-proportion data.
+DeconvoBuddies contains paired snRNA-seq, bulk RNA-seq, and cell type
+proportion data from the human DLPFC.
 
 ``` r
-## Access and explore Single cell example data
-if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-08-07 11:56:19.433874 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+## Access data with fetch_deconvo_data
+sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+#> 2024-08-07 12:06:18.922814 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+
+## explore the single cell ecperiment object
 sce_DLPFC_example
 #> class: SingleCellExperiment 
 #> dim: 557 10000 
@@ -79,23 +79,20 @@ sce_DLPFC_example
 #> altExpNames(0):
 ```
 
-### Plot Expression of Marker Genes
+### Find Marker Genes and Visualize Expression
 
-Quickly plot expression of selected genes in snRNA-seq data.
+DeconvBuddies has tools for finding marker genes ideal for
+deconvolution, and plotting functions to quickly visualize the
+expression of selected genes in a snRNA-seq data.
 
-``` r
-plot_gene_express(sce = sce_DLPFC_example, 
-                  category = "cellType_broad_hc", 
-                  genes = c("GAD2", "CD22"))
-#> No summary function supplied, defaulting to `mean_se()`
-#> No summary function supplied, defaulting to `mean_se()`
-```
+    #> No summary function supplied, defaulting to `mean_se()`
+    #> No summary function supplied, defaulting to `mean_se()`
 
 <img src="man/figures/README-plot_gene_expression-1.png" width="100%" />
 
-## Plot Deconvoltion Cell Type Proportions
+### Plot Deconvoltion Cell Type Proportions
 
-Create compostion bar plots of predicted cell type proportions.
+Create composition bar plots of predicted cell type proportions.
 
 <img src="man/figures/README-`demo_plot_composition_bar`-1.png" width="100%" />
 
