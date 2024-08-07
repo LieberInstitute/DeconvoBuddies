@@ -13,4 +13,6 @@ colnames(est_prop) <- cell_types
 
 est_prop <- as.data.frame(est_prop)
 
+setequal(rownames(est_prop), colnames(rse_bulk_test))
+
 usethis::use_data(est_prop, overwrite = TRUE)
