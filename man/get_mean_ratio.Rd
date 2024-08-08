@@ -41,8 +41,10 @@ A \code{tibble} with the \code{MeanRatio} values for each gene x cell type.
 \item \code{mean.2nd} is the mean expression of \code{gene} for \code{cellType.2nd}.
 \item \code{MeanRatio} is the ratio of \code{mean.target/mean.2nd}.
 \item \code{MeanRatio.rank} is the rank of \code{MeanRatio} for the cell type.
-\item \code{MeanRatio.anno} is an annotation of the \code{MeanRatio} calculation helpful for plotting.
-\item \code{gene_ensembl} & \code{gene_name} optional cols spcified by the user to add gene infomation
+\item \code{MeanRatio.anno} is an annotation of the \code{MeanRatio} calculation helpful
+for plotting.
+\item \code{gene_ensembl} & \code{gene_name} optional cols from \code{rowData(sce)}specified by
+the user to add gene information
 }
 }
 \description{

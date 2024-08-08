@@ -28,8 +28,10 @@
 #' * `mean.2nd` is the mean expression of `gene` for `cellType.2nd`.
 #' * `MeanRatio` is the ratio of `mean.target/mean.2nd`.
 #' * `MeanRatio.rank` is the rank of `MeanRatio` for the cell type.
-#' * `MeanRatio.anno` is an annotation of the `MeanRatio` calculation helpful for plotting.
-#' * `gene_ensembl` & `gene_name` optional cols spcified by the user to add gene infomation
+#' * `MeanRatio.anno` is an annotation of the `MeanRatio` calculation helpful 
+#' for plotting.
+#' * `gene_ensembl` & `gene_name` optional cols from `rowData(sce)`specified by
+#'  the user to add gene information
 #'
 #' @export
 #'

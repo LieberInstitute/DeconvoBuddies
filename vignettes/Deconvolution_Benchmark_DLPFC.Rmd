@@ -249,10 +249,10 @@ specific marker genes to reduce noise in deconvolution and increase
 accuracy.
 
 We have developed a method for finding marker genes called the "Mean
-Ratio". We calculate the `Mean Ratio` for a target cell type for each
+Ratio". We calculate the `MeanRatio` for a target cell type for each
 gene by dividing the mean expression of the target cell by the mean
 expression of the next highest non-target cell type. Genes with the
-highest `Mean Ratio` values are selected as marker genes.
+highest `MeanRatio` values are selected as marker genes.
 
 For a tutorial on marker gene selection check out  [Vignette: Deconvolution Benchmark in Human
 DLPFC](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html).
