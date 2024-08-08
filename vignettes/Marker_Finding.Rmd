@@ -16,8 +16,11 @@ date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
   %\VignetteIndexEntry{Finding Marker Genes with DeconvoBuddies}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}  
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include = FALSE}
@@ -27,7 +30,6 @@ knitr::opts_chunk$set(
     crop = NULL ## Related to https://stat.ethz.ch/pipermail/bioc-devel/2020-April/016656.html
 )
 ```
-
 
 ```{r vignetteSetup, echo=FALSE, message=FALSE, warning = FALSE}
 ## Track time spent on making the vignette
@@ -53,22 +55,81 @@ bib <- c(
 
 ## What are Marker Genes?
 
+Cell type marker genes have cell type specific expression, that is high
+expression in the target cell type, and low expression in all other cell
+types. Sub-setting the genes considered in a cell type deconvolution
+analysis helps reduce noise and can improve the accuracy of a
+deconvolution method.
+
 ### How can we select marker genes?
 
-## The MeanRatio Method
+There are several approaches to select marker genes.
+
+One popular method is "1 vs. All" differential expression (Lun et al.,
+2016, F1000Res) (TODO update citation), where genes are tested for
+differential expression between the target cell type, and a combined
+group of all **"other"** cell types. Statistically significant
+differntially expressed genes (DEGs) can be selected as a set of marker
+genes, DEGs can be ranked by high log fold change.
+
+However in some cases *1vAll* can select genes with high expression in
+non-target cell types, especially in cell types related to the target
+cell types (such as Neuron sub-types), or when there is a smaller number
+of cells in the cell type and the signal is disguised within the other
+group.
+
+For example, in our snRNA-seq dataset from Human DLPFC selecting marker
+gene for the cell type Oligodendrocyte (Oligo), *MBP* has a high log
+fold change when testing by *1vALL* (see illustration below). But, when
+the expression of MBP is observed by individual cell types there is also
+expression in the related cell types Microglia (Micro) and
+Oligodendrocyte precursor cells (OPC).
+
+![*1vALL* Marker Gene differential expression vs. *MeanRatio* method for
+marker gene
+selection](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
+
+</p>
+
+## The *Mean Ratio* Method
+
+To capture genes with more cell type specific expression and less noise,
+we developed the ***Mean Ratio*** method. The *Mean Ratio* method works
+by selecting genes with large differences between gene expression in the
+target cell type and the closest non-target cell type, by evaluating
+genes by their `MeanRatio` metric.
+
+We calculate the `MeanRatio` for a target cell type for each gene by
+**dividing the mean expression of the target cell by the mean expression
+of the next highest non-target cell type**. Genes with the highest
+`MeanRatio` values are selected as marker genes.
+
+In the above example, **Oligo** is the target cell type. Micro has the
+highest mean expression out of the other non-target (not Oligo) cell
+types. The `MeanRatio = mean expression Oligo/mean expression Micro`,
+for *MBP* `MeanRatio` = 2.68 for gene *FOLH1* `MeanRatio` is much higher
+21.6 showing FOLH1 is the better marker gene (in contrast to ranking by
+*1vALL* log FC). In the violin plots you can see that expression of
+*FOLH1* is much more specific to Oligo than MBP, supporting the ranking
+by `MeanRatio`.
+
+We have implemented the ***Mean Ratio*** method in this R package with
+the function `get_mean_ratio()` this Vignette will cover our process for
+marker gene selection.
 
 ## Goals of this Vignette
 
-We will be demonstrating how to use `DeconvoBuddies` tools when finding cell 
-type marker genes in single cell RNA-seq data via the MeanRatio method.
+We will be demonstrating how to use `DeconvoBuddies` tools when finding
+cell type marker genes in single cell RNA-seq data via the *MeanRatio*
+method.
 
 1.  Install and load required packages
 2.  Download DLPFC snRNA-seq data
 3.  Find MeanRatio marker genes with `DeconvoBuddies::get_mean_ratio()`
 4.  Find 1vALL marker genes with `DeconvoBuddies::findMarkers_1vALL()`
 5.  Compare marker gene selection
-6.  Visualize marker genes expression with `DeconcoBuddies::plot_gene_express()`
-and related functions
+6.  Visualize marker genes expression with
+    `DeconcoBuddies::plot_gene_express()` and related functions
 
 # 1. Install and load required packages
 
@@ -99,15 +160,15 @@ BiocManager::valid()
 ```{r "load_packages", message=FALSE, warning=FALSE}
 library("spatialLIBD")
 library("DeconvoBuddies")
-library("SummarizedExperiment")
 library("SingleCellExperiment")
-library("dplyr")
-library("tidyr")
-library("tibble")
-library("ggplot2")
+# library("dplyr")
+# library("tidyr")
+# library("tibble")
+# library("ggplot2")
 ```
 
 # 2. Download DLPFC snRNA-seq data.
+
 ```{r "load snRNA-seq"}
 ## Use spatialLIBD to fetch the snRNA-seq dataset
 sce_path_zip <- fetch_deconvo_data("sce")
@@ -133,21 +194,20 @@ table(sce$cellType_broad_hc)
 sce <- sce[seq_len(5000), ]
 ```
 
-
 # Reproducibility
 
-The `r Biocpkg("DeconvoBuddies")` package `r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
+The `r Biocpkg("DeconvoBuddies")` package
+`r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
 
-* R `r Citep(bib[["R"]])`
-* `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
-* `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])`
-* `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`
-* `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])`
-* `r CRANpkg("sessioninfo")` `r Citep(bib[["sessioninfo"]])`
-* `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
+-   R `r Citep(bib[["R"]])`
+-   `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
+-   `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])`
+-   `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`
+-   `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])`
+-   `r CRANpkg("sessioninfo")` `r Citep(bib[["sessioninfo"]])`
+-   `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
 
 This package was developed using `r BiocStyle::Biocpkg("biocthis")`.
-
 
 Code for creating the vignette
 
@@ -185,14 +245,15 @@ options(width = 120)
 session_info()
 ```
 
-
-
 # Bibliography
 
-This vignette was generated using `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
-with `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])` and `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])` running behind the scenes.
+This vignette was generated using `r Biocpkg("BiocStyle")`
+`r Citep(bib[["BiocStyle"]])` with `r CRANpkg("knitr")`
+`r Citep(bib[["knitr"]])` and `r CRANpkg("rmarkdown")`
+`r Citep(bib[["rmarkdown"]])` running behind the scenes.
 
-Citations made with `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`.
+Citations made with `r CRANpkg("RefManageR")`
+`r Citep(bib[["RefManageR"]])`.
 
 ```{r vignetteBiblio, results = "asis", echo = FALSE, warning = FALSE, message = FALSE}
 ## Print bibliography
