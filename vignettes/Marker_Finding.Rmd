@@ -207,12 +207,12 @@ dim(sce)
 
 To find *Mean Ratio* marker genes for the data in `sce` we'll use the
 function `DeconvoBuddies::get_mean_ratio()`, this function takes a
-`SingleCellExperiment` the name of the column in the `colData(sce)` that
-contains the cell type annotations of interest (here we'll use
-`cellType_broad_hc`), and
-optionally you can also supply additional column
-names from the `rowData(sce)` to add the `gene_name` and/or
-`gene_ensembl` information to the table output of `get_mean_ratio`. 
+`SingleCellExperiment` object `sce` the name of the column in the
+`colData(sce)` that contains the cell type annotations of interest (here
+we'll use `cellType_broad_hc`), and optionally you can also supply
+additional column names from the `rowData(sce)` to add the `gene_name`
+and/or `gene_ensembl` information to the table output of
+`get_mean_ratio`.
 
 ```{r "Run get_mean_ratio"}
 # calculate the Mean Ratio of genes for each cell type in sce
@@ -225,7 +225,8 @@ mean_ratio_marker_stats <- get_mean_ratio(
 )
 ```
 
-The function `get_mean_ratio()` a `tibble` with the following columns:
+The function `get_mean_ratio()` returns a `tibble` with the following
+columns:
 
 -   `gene` is the name of the gene (from rownames(`sce`)).
 -   `cellType.target` is the cell type we're finding marker genes for.
@@ -249,28 +250,55 @@ mean_ratio_marker_stats |>
     filter(MeanRatio.rank == 1)
 ```
 
-
 # 4. Find 1vALL marker genes
 
-To further explore cell type marker genes it can be helpful to also calculate 
-the 1vALL stats for the dataset. To help with this we have included the function
-`DeconvoBuddies::findMarkers_1vALL`, which is a wrapper for 
-`scran::findMarkers()` that iterates through cell types and creates an table 
-output in a compatible with the output `get_mean_ratio()`.
+To further explore cell type marker genes it can be helpful to also
+calculate the 1vALL stats for the dataset. To help with this we have
+included the function `DeconvoBuddies::findMarkers_1vALL`, which is a
+wrapper for `scran::findMarkers()` that iterates through cell types and
+creates an table output in a compatible with the output
+`get_mean_ratio()`.
+
+Similarity
+
+Note this function can take a bit of time to run.
 
 ```{r `Run findMarkers_1vALL`}
 
-marker_stats_1vALL <- findMarkers_1vAll(
-  sce = sce, # sce is the SingleCellExperiment with our data
-  cellType_col = "cellType_broad_hc", # column in colData with cell type info
+marker_stats_1vAll <- findMarkers_1vAll(
+ sce = sce, # sce is the SingleCellExperiment with our data
+ assay_name = "counts",
+ cellType_col = "cellType_broad_hc", # column in colData with cell type info
+ mod = "~BrNum" # Control for donor stored in "BrNum" with mod
 )
-
 
 ```
 
+The function `findMarkers_1vALL()` returns a `tibble` with the following
+columns:
 
+-   `gene` is the name of the gene (from rownames(`sce`)).
+-   `logFC` the log fold change from the DE test
+-   `log.p.value` the log of the p-value of the DE test
+-   `log.FDR` the log of the False Discovery Rate adjusted p.value
+-   `std.logFC` the standard logFC
+-   `cellType.target` the cell type we're finding marker genes for
+-   `std.logFC.rank` the rank of `std.logFC` for each cell type
+-   `std.logFC.anno` is an annotation of the `std.logFC` value
+    helpful for plotting.
+
+```{r "Explore findMarkers_1vALL output}
+## Explore the tibble output
+marker_stats_1vAll
+
+## genes with the highest MeanRatio are the best marker genes for each cell type
+marker_stats_1vAll |>
+    filter(MeanRatio.rank == 1)
+```
 
 # 5. Compare marker gene selection
+
+Let's join the 
 
 # 6. Visualize marker genes expression with
 
