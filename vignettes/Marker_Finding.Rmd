@@ -161,13 +161,19 @@ BiocManager::valid()
 library("spatialLIBD")
 library("DeconvoBuddies")
 library("SingleCellExperiment")
-# library("dplyr")
+library("dplyr")
 # library("tidyr")
 # library("tibble")
 # library("ggplot2")
 ```
 
 # 2. Download DLPFC snRNA-seq data.
+
+Here we will download single nucleus RNA-seq data from the Human DLPFC
+with 77k nuclei x 36k genes (TODO cite). This data is stored in a
+`SingleCellExperiment` object. The nuclei in this dataset are labled by
+cell types at a few resolutions, we will focus on the "broad" resolution
+that contains seven cell types.
 
 ```{r "load snRNA-seq"}
 ## Use spatialLIBD to fetch the snRNA-seq dataset
@@ -186,13 +192,87 @@ sce <- HDF5Array::loadHDF5SummarizedExperiment(
 sce <- sce[, sce$cellType_broad_hc != "Ambiguous"]
 sce$cellType_broad_hc <- droplevels(sce$cellType_broad_hc)
 
-dim(sce)
 ## Check the broad cell type distribution
 table(sce$cellType_broad_hc)
 
 ## We're going to subset to the first 5k genes to save memory
+## In a real application you'll want to use the full dataset
 sce <- sce[seq_len(5000), ]
+
+## check the final dimensions of the dataset
+dim(sce)
 ```
+
+# 3. Find MeanRatio marker genes
+
+To find *Mean Ratio* marker genes for the data in `sce` we'll use the
+function `DeconvoBuddies::get_mean_ratio()`, this function takes a
+`SingleCellExperiment` the name of the column in the `colData(sce)` that
+contains the cell type annotations of interest (here we'll use
+`cellType_broad_hc`), and
+optionally you can also supply additional column
+names from the `rowData(sce)` to add the `gene_name` and/or
+`gene_ensembl` information to the table output of `get_mean_ratio`. 
+
+```{r "Run get_mean_ratio"}
+# calculate the Mean Ratio of genes for each cell type in sce
+mean_ratio_marker_stats <- get_mean_ratio(
+    sce = sce, # sce is the SingleCellExperiment with our data
+    assay_name = "logcounts", ## assay to use, we recommend logcounts [default]
+    cellType_col = "cellType_broad_hc", # column in colData with cell type info
+    gene_ensembl = "gene_id", # column in rowData with ensembl gene ids
+    gene_name = "gene_name" # column in rowData with gene names/symbols
+)
+```
+
+The function `get_mean_ratio()` a `tibble` with the following columns:
+
+-   `gene` is the name of the gene (from rownames(`sce`)).
+-   `cellType.target` is the cell type we're finding marker genes for.
+-   `mean.target` is the mean expression of `gene` for
+    `cellType.target`.
+-   `cellType.2nd` is the second highest non-target cell type.
+-   `mean.2nd` is the mean expression of `gene` for `cellType.2nd`.
+-   `MeanRatio` is the ratio of `mean.target/mean.2nd`.
+-   `MeanRatio.rank` is the rank of `MeanRatio` for the cell type.
+-   `MeanRatio.anno` is an annotation of the `MeanRatio` calculation
+    helpful for plotting.
+-   `gene_ensembl` & `gene_name` optional cols from `rowData(sce)`
+    specified by the user to add gene information
+
+```{r "Explore get_mean_ratio output}
+## Explore the tibble output
+mean_ratio_marker_stats
+
+## genes with the highest MeanRatio are the best marker genes for each cell type
+mean_ratio_marker_stats |>
+    filter(MeanRatio.rank == 1)
+```
+
+
+# 4. Find 1vALL marker genes
+
+To further explore cell type marker genes it can be helpful to also calculate 
+the 1vALL stats for the dataset. To help with this we have included the function
+`DeconvoBuddies::findMarkers_1vALL`, which is a wrapper for 
+`scran::findMarkers()` that iterates through cell types and creates an table 
+output in a compatible with the output `get_mean_ratio()`.
+
+```{r `Run findMarkers_1vALL`}
+
+marker_stats_1vALL <- findMarkers_1vAll(
+  sce = sce, # sce is the SingleCellExperiment with our data
+  cellType_col = "cellType_broad_hc", # column in colData with cell type info
+)
+
+
+```
+
+
+
+# 5. Compare marker gene selection
+
+# 6. Visualize marker genes expression with
 
 # Reproducibility
 
