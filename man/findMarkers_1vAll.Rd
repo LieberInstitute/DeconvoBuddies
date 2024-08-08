@@ -10,7 +10,7 @@ findMarkers_1vAll(
   assay_name = "counts",
   cellType_col = "cellType",
   add_symbol = FALSE,
-  mod = "~donor",
+  mod = NULL,
   verbose = TRUE
 )
 }
@@ -23,19 +23,50 @@ findMarkers_1vAll(
 
 \item{add_symbol}{Add the gene symbol column to the marker stats table}
 
-\item{mod}{String specifying the model used as design in findMarkers. Can be \code{NULL} if there are no blocking terms with uninteresting factors as documented at \link[scran:pairwiseTTests]{pairwiseTTests}.}
+\item{mod}{String specifying the model used as design in findMarkers.
+Can be \code{NULL} (default) if there are no blocking terms with uninteresting
+factors as documented at \link[scran:pairwiseTTests]{pairwiseTTests}.}
 
 \item{verbose}{Boolean choosing to print progress messages or not}
 }
 \value{
-Table of 1 vs. ALL std log fold change + p-values for each gene x cell type
+Tibble of 1 vs. ALL std log fold change + p-values for each gene x cell type
+\itemize{
+\item \code{gene} is the name of the gene (from rownames(\code{sce})).
+\item \code{logFC} the log fold change from the DE test
+\item \code{log.p.value} the log of the p-value of the DE test
+\item \code{log.FDR} the log of the False Discovery Rate adjusted p.value
+\item \code{std.logFC} the standard logFC
+\item \code{cellType.target} the cell type we're finding marker genes for
+\item \code{std.logFC.rank} the rank of \code{std.logFC} for each cell type
+\item \code{std.logFC.anno} is an annotation of the \code{std.logFC} value
+helpful for plotting.
+}
 }
 \description{
 Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
 function for scran::findMarkers
 }
 \examples{
-markers_1vAll <- findMarkers_1vAll(sce_ab)
-head(markers_1vAll)
+## load example SingleCellExperiment
+if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+## Explore properties of the sce object
+sce_DLPFC_example
+
+## this data contains logcounts of gene expression
+SummarizedExperiment::assays(sce_DLPFC_example)$logcounts[1:5, 1:5]
+
+## nuclei are classified in to cell types
+table(sce_DLPFC_example$cellType_broad_hc)
+
+## Get the 1vALL stats for each gene for each cell type defined in `cellType_broad_hc`
+marker_stats_1vAll <- findMarkers_1vAll(
+ sce = sce_DLPFC_example,
+ assay_name = "logcounts",
+ cellType_col = "cellType_broad_hc",
+ mod = "~BrNum"
+)
+
+head(marker_stats_1vAll)
 
 }
