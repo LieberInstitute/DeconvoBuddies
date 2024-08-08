@@ -56,40 +56,21 @@ Based on spatialLIBD::fetch_data()
 
 if (!exists("rse-gene")) rse_gene <- fetch_deconvo_data("rse_gene")
 
-## explore data
+## explore bulk data
 rse_gene
-# class: RangedSummarizedExperiment
-# dim: 21745 110
-# metadata(1): SPEAQeasy_settings
-# assays(2): counts logcounts
-# rownames(21745): ENSG00000227232.5 ENSG00000278267.1 ... ENSG00000210195.2 ENSG00000210196.2
-# rowData names(11): Length gencodeID ... gencodeTx passExprsCut
-# colnames(110): 2107UNHS-0291_Br2720_Mid_Bulk 2107UNHS-0291_Br2720_Mid_Cyto ... AN00000906_Br8667_Mid_Cyto
-# AN00000906_Br8667_Mid_Nuc
-# colData names(78): SAMPLE_ID Sample ... diagnosis qc_class
 
 ## load example snRNA-seq data
 ## A SingleCellExperiment (4.79 MB)
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
 
-
+## explore example sce data
 sce_DLPFC_example
-# class: SingleCellExperiment
-# dim: 557 10000
-# metadata(3): Samples cell_type_colors cell_type_colors_broad
-# assays(2): counts logcounts
-# rownames(557): GABRD PRDM16 ... AFF2 MAMLD1
-# rowData names(7): source type ... gene_type binomial_deviance
-# colnames(10000): 16_CGAAGTTTCGCACGAC-1 11_TTGGGATCAACCGCTG-1 ... 8_CGCATAAGTTAAACCC-1 16_AGCTACATCCCGAGAC-1
-# colData names(32): Sample Barcode ... cellType_layer layer_annotation
-# reducedDimNames(0):
-#   mainExpName: NULL
-# altExpNames(0):
 
 ## check the logcounts
 SingleCellExperiment::logcounts(sce_DLPFC_example)[1:5, 1:5]
 
 \dontrun{
+## download the full sce experiment object
 sce_path_zip <- fetch_deconvo_data("sce")
 sce_path <- unzip(sce_path_zip, exdir = tempdir())
 sce <- HDF5Array::loadHDF5SummarizedExperiment(

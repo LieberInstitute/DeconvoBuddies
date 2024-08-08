@@ -56,7 +56,10 @@
 #' SummarizedExperiment::rowData(sce_DLPFC_example)
 #'
 #' ## specify rowData col names for gene_name and gene_ensembl
-#' get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc", gene_name = "gene_name", gene_ensembl = "gene_id")
+#'  get_mean_ratio(sce_DLPFC_example, 
+#'                 cellType_col = "cellType_broad_hc", 
+#'                 gene_name = "gene_name", 
+#'                 gene_ensembl = "gene_id")
 #'
 #' @importFrom dplyr mutate
 #' @importFrom dplyr arrange
