@@ -287,7 +287,7 @@ columns:
 -   `std.logFC.anno` is an annotation of the `std.logFC` value
     helpful for plotting.
 
-```{r "Explore findMarkers_1vALL output}
+```{r "Explore findMarkers_1vALL output"}
 ## Explore the tibble output
 marker_stats_1vAll
 
