@@ -67,6 +67,7 @@ marker_stats_1vAll <- findMarkers_1vAll(
  mod = "~BrNum"
 )
 
+## explore output, top markers have high logFC
 head(marker_stats_1vAll)
 
 }
