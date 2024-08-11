@@ -241,7 +241,7 @@ columns:
 -   `gene_ensembl` & `gene_name` optional cols from `rowData(sce)`
     specified by the user to add gene information
 
-```{r "Explore get_mean_ratio output}
+```{r "Explore get_mean_ratio output"}
 ## Explore the tibble output
 mean_ratio_marker_stats
 
