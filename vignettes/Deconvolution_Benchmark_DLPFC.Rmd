@@ -98,6 +98,13 @@ deconvolution with the `Bisque` package.
     `DeconvoBuddies` tools
 6.  Check proportion against RNAScope estimated proportions
 
+## Video Tutorial
+
+Linked is a video from a presentation of an earlier version of this tutorial 
+from our LIBD Rstats club. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6fTnp_hcYeI?si=UbkGNclU2q8I8WXO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 # Basics
 
 # 1. Install and load required packages
