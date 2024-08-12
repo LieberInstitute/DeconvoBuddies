@@ -259,10 +259,11 @@ wrapper for `scran::findMarkers()` that iterates through cell types and
 creates an table output in a compatible with the output
 `get_mean_ratio()`.
 
-Similarity to `get_mean_ratio` this function requires the `sce` object, 
-`cellType_col` to define cell types, and `assay_name`.But `findMarkers_1vALL`
-also takes a model (`mod`) to use as design in `scran::findMarkers()`, in this 
-example we will control for donor which is stored as `BrNum`. 
+Similarity to `get_mean_ratio` this function requires the `sce` object,
+`cellType_col` to define cell types, and `assay_name`.But
+`findMarkers_1vALL` also takes a model (`mod`) to use as design in
+`scran::findMarkers()`, in this example we will control for donor which
+is stored as `BrNum`.
 
 Note this function can take a bit of time to run.
 
@@ -287,8 +288,8 @@ columns:
 -   `std.logFC` the standard logFC
 -   `cellType.target` the cell type we're finding marker genes for
 -   `std.logFC.rank` the rank of `std.logFC` for each cell type
--   `std.logFC.anno` is an annotation of the `std.logFC` value
-    helpful for plotting.
+-   `std.logFC.anno` is an annotation of the `std.logFC` value helpful
+    for plotting.
 
 ```{r "Explore findMarkers_1vALL output"}
 ## Explore the tibble output
@@ -299,13 +300,14 @@ marker_stats_1vAll |>
     filter(std.logFC.rank == 1)
 ```
 
-As this is a differential expression test, you can create volcano plots to 
-explore the outputs. 🌋
+As this is a differential expression test, you can create volcano plots
+to explore the outputs. 🌋
 
-Note that with the default option "up" for direction only up-regulated genes are
-considered marker candidates, so all genes with logFC<1 will have a p.value=0.
-As a results these plots will only have the right half of the volcano shape. 
-If you'd like all p-values set `findMarkers_1vALL(direction="any")`.
+Note that with the default option "up" for direction only up-regulated
+genes are considered marker candidates, so all genes with logFC\<1 will
+have a p.value=0. As a results these plots will only have the right half
+of the volcano shape. If you'd like all p-values set
+`findMarkers_1vALL(direction="any")`.
 
 ```{r, "volcano plots"}
 # Create volcano plots of DE stats from 1vALL
@@ -317,11 +319,14 @@ marker_stats_1vAll |>
 
 ```
 
-
 # 5. Compare Marker Gene Selection
 
-Let's join the two `marker_stats` tables together to compare the findings of the
-two methods.
+Let's join the two `marker_stats` tables together to compare the
+findings of the two methods.
+
+Note as we are using a subset of data for this example, for some genes
+there is not enough data to test and 1vALL will have some missing
+results.
 
 ```{r "join marker_stats"}
 ## join the two marker_stats tables
@@ -335,47 +340,99 @@ marker_stats |>
 
 ```
 
+## Hockey Stick Plots
 
-## Hockey Stick Plots 
+Plotting the values of Mean Ratio vs. standard log fold change (from
+1vAll) we create what we call "hockey stick plots" 🏒. These plots help
+visualize the distribution of `MeanRatio` and `logFC` values.
 
-Plotting the values of Mean Ratio vs. standard log fold change (from 1vAll) we 
-create what we call "hockey stick plots" 🏒. These plots help visualize the 
-distribution of `MeanRatio` and `logFC` values.
-
-![Hockey Stick plots compare values of *1vALL* logFC vs. *MeanRatio* and help select marker genes. ](http://research.libd.org/DeconvoBuddies/reference/figures/hockey_plot_anno.png)
+![Hockey Stick plots compare values of *1vALL* logFC vs. *MeanRatio* and
+help select marker
+genes.](http://research.libd.org/DeconvoBuddies/reference/figures/hockey_plot_anno.png)
 
 </p>
 
-Typically for a cell type see most genes have low Mean Ratio and low fold change,
-these genes are not marker genes. Genes with higher fold change from 1vALL are 
-better marker gene candidates, but most have low MeanRatio values indicating 
-that one or more non-target cell types have high expression for that gene, 
-causing noise. Genes with high MeanRatio typically have high 1vALL fold changes 
-as well, these are non-nonithese make up the handle of the hockey stick
+Typically for a cell type see most genes have low Mean Ratio and low
+fold change, these genes are not marker genes (red box in illustration
+above).
+
+Genes with higher fold change from 1vALL are better marker gene
+candidates, but most have low MeanRatio values indicating that one or
+more non-target cell types have high expression for that gene, causing
+noise (orange box).
+
+Genes with high MeanRatio typically also have high 1vALL fold changes,
+these are cell type specific marker genes we are selecting for (green
+box).
 
 ```{r "hockey stick plots"}
-
+# create hockey stick plots to compare MeanRatio and logFC values.
 marker_stats |>
   ggplot(aes(MeanRatio, std.logFC)) +
   geom_point() +
   facet_wrap(~cellType.target)
 
+```
 
-hockey <- marker_stats |>
-  filter(cellType.target == "Micro") |>
-  ggplot(aes(MeanRatio, std.logFC)) +
-  geom_point() + 
-  theme_bw() +
-  theme(panel.background = element_rect(fill='transparent'),
-        plot.background = element_rect(fill='transparent', color=NA))
+We can see a "hockey stick" shape in most of the cell types, with a few
+marker genes with high values for both `logFC` and `MeanRatio`.
 
-ggsave(hockey, filename = "~/Pictures/Deconvolution/hockey/hockey_plot.png",bg='transparent', height = 4)
+# 6. Visualize Marker Genes Expression
+
+An important step for ensuring you have selected high quality marker
+genes is to visualize their expression over the cell types in the
+dataset. `DeconvoBuddies` has several functions to help quickly plot
+gene expression at a few levels:
+
+`plot_gene_express()` plots the expression of one or more genes as a
+violin plot.
+
+```{r, "plot_gene_express"}
+
+## plot expression of two genes from a list
+plot_gene_express(sce = sce, 
+                  category = "cellType_broad_hc", 
+                  genes = c("SLC2A1", "CREG2"))
 
 ```
 
+`plot_marker_express()` plots the top n marker genes for a specified
+cell type based on the values from `marker_stats`. Annotations for the
+details of the MeanRatio value + calculation are added to each panel.
 
+```{r, "plot_marker_express MeanRatio"}
 
-# 6. Visualize Marker Genes Expression
+# plot the top 10 MeanRatio genes for Excit
+plot_marker_express(
+  sce = sce,
+  stats = marker_stats,
+  cell_type = "Excit",
+  n_genes = 10,
+  cellType_col = "cellType_broad_hc"
+)
+
+```
+
+This function defaults to selecting genes by the MeanRatio stats, but
+can also be used to plot the 1vAll genes.
+
+```{r, "plot_marker_express logFC"}
+
+# plot the top 10 1vAll genes for Excit
+plot_marker_express(
+  sce = sce,
+  stats = marker_stats,
+  cell_type = "Excit",
+  n_genes = 10,
+  rank_col = "std.logFC.rank", ## use logFC cols from 1vALL
+  anno_col = "std.logFC.anno",
+  cellType_col = "cellType_broad_hc"
+)
+
+```
+
+`plot_marker_express_ALL()` plots the top marker genes for all cell
+types
 
 # Reproducibility
 
