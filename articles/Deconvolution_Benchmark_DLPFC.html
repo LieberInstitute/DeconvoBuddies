@@ -98,7 +98,7 @@ Huuki-Myers</h4>
 Campus<br><a class="author_email" href="mailto:#"></a><a href="mailto:lahuuki@gmail.com" class="email">lahuuki@gmail.com</a>
       </address>
                   
-            <h4 data-toc-skip class="date">7 August 2024</h4>
+            <h4 data-toc-skip class="date">12 August 2024</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/lahuuki/DeconvoBuddies/blob/devel/vignettes/Deconvolution_Benchmark_DLPFC.Rmd" class="external-link"><code>vignettes/Deconvolution_Benchmark_DLPFC.Rmd</code></a></small>
       <div class="hidden name"><code>Deconvolution_Benchmark_DLPFC.Rmd</code></div>
@@ -138,46 +138,46 @@ are a selection of 6 methods we tested in our deconvolution benchmark <a href="h
 <col width="22%">
 <col width="28%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Approach</th>
 <th>Method</th>
 <th>Citation</th>
 <th>Availability</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>weighted least squares</td>
 <td>DWLS</td>
 <td>Tsoucas et al, Nature Comm, 2019</td>
 <td><a href="https://cran.r-project.org/web/packages/DWLS/index.html" class="external-link">R
 Package Cran</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Bias correction: Assay</td>
 <td>Bisque</td>
 <td>Jew et al, Nature Comm, 2020</td>
 <td>R Package github</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Bias correction: Sourse</td>
 <td>MuSiC</td>
 <td>Wang et al, Nature Communications, 2019</td>
 <td>R Package github</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Machine Learning</td>
 <td>CIBERSORTx</td>
 <td>Newman et al., Nature BioTech, 2019</td>
 <td><a href="https://cibersortx.stanford.edu/" class="external-link">Webtool</a></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Bayesian</td>
 <td>BayesPrism</td>
 <td>Chu et al., Nature Cancer, 2022</td>
 <td><a href="https://github.com/Danko-Lab/BayesPrism" class="external-link">Webtool/R
 Package</a></td>
 </tr>
-<tr class="even">
+<tr>
 <td>linear</td>
 <td>Hspe</td>
 <td>Hunt et al., Ann. Appl. Stat, 2021</td>
@@ -261,7 +261,7 @@ Total, Nuc), post quality control n=110 samples.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## use fetch deconvon data to load rse_gene</span></span>
 <span><span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-07 17:34:07.847847 loading file /github/home/.cache/R/BiocFileCache/4a1de5efa9_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-12 15:08:59.333378 loading file /github/home/.cache/R/BiocFileCache/146b2dbc692f_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
 <span><span class="va">rse_gene</span></span>
 <span><span class="co">#&gt; class: RangedSummarizedExperiment </span></span>
 <span><span class="co">#&gt; dim: 21745 110 </span></span>
@@ -297,7 +297,7 @@ Total, Nuc), post quality control n=110 samples.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-07 17:34:09.528637 loading file /github/home/.cache/R/BiocFileCache/4a1415db437_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-12 15:09:01.898358 loading file /github/home/.cache/R/BiocFileCache/146b2a8cb8a7_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span></span>
 <span><span class="co">## unzip and load the data</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -388,10 +388,12 @@ cell types, but here we are interested in using a sets of cell type
 specific marker genes to reduce noise in deconvolution and increase
 accuracy.</p>
 <p>We have developed a method for finding marker genes called the “Mean
-Ratio”. We calculate the <code>Mean Ratio</code> for a target cell type
+Ratio”. We calculate the <code>MeanRatio</code> for a target cell type
 for each gene by dividing the mean expression of the target cell by the
 mean expression of the next highest non-target cell type. Genes with the
-highest <code>Mean Ratio</code> values are selected as marker genes.</p>
+highest <code>MeanRatio</code> values are selected as marker genes.</p>
+<p>For a tutorial on marker gene selection check out <a href="https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html" class="external-link">Vignette:
+Deconvolution Benchmark in Human DLPFC</a>.</p>
 <p align="center">
 </p>
 <div class="float">
@@ -762,9 +764,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"Deconvolution_Benchmark_DLPFC.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-08-07 17:35:08 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-08-12 15:10:03 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 1.214 mins</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 1.27 mins</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
@@ -776,8 +778,8 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2024-08-07</span></span>
-<span><span class="co">#&gt;  pandoc   3.2 @ /usr/bin/ (via rmarkdown)</span></span>
+<span><span class="co">#&gt;  date     2024-08-12</span></span>
+<span><span class="co">#&gt;  pandoc   3.3 @ /usr/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">package             </span> <span style="color: #555555; font-style: italic;">*</span> <span style="color: #555555; font-style: italic;">version   </span> <span style="color: #555555; font-style: italic;">date (UTC)</span> <span style="color: #555555; font-style: italic;">lib</span> <span style="color: #555555; font-style: italic;">source</span></span></span>
@@ -822,7 +824,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  data.table             1.15.4     <span style="color: #555555;">2024-03-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  DBI                    1.2.3      <span style="color: #555555;">2024-06-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  dbplyr                 2.5.0      <span style="color: #555555;">2024-03-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.0     <span style="color: #555555;">2024-08-07</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
+<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.0     <span style="color: #555555;">2024-08-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  DelayedArray           0.31.11    <span style="color: #555555;">2024-08-04</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.1)</span></span></span>
 <span><span class="co">#&gt;  desc                   1.4.3      <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  digest                 0.6.36     <span style="color: #555555;">2024-06-23</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -891,7 +893,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  paletteer              1.6.0      <span style="color: #555555;">2024-01-21</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  pillar                 1.9.0      <span style="color: #555555;">2023-03-22</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  pkgconfig              2.0.3      <span style="color: #555555;">2019-09-22</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  pkgdown                <span style="color: #BB00BB; font-weight: bold;">2.1.0.9000</span> <span style="color: #555555;">2024-08-05</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">Github (r-lib/pkgdown@1d40a80)</span></span></span>
+<span><span class="co">#&gt;  pkgdown                <span style="color: #BB00BB; font-weight: bold;">2.1.0.9000</span> <span style="color: #555555;">2024-08-12</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">Github (r-lib/pkgdown@1d40a80)</span></span></span>
 <span><span class="co">#&gt;  plotly                 4.10.4     <span style="color: #555555;">2024-01-13</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  plyr                   1.8.9      <span style="color: #555555;">2023-10-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  png                    0.1-8      <span style="color: #555555;">2022-11-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>

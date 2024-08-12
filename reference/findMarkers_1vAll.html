@@ -76,7 +76,7 @@ function for scran::findMarkers</p>
 <span>  assay_name <span class="op">=</span> <span class="st">"counts"</span>,</span>
 <span>  cellType_col <span class="op">=</span> <span class="st">"cellType"</span>,</span>
 <span>  add_symbol <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  mod <span class="op">=</span> <span class="st">"~donor"</span>,</span>
+<span>  mod <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -102,7 +102,9 @@ function for scran::findMarkers</p>
 
 
 <dt id="arg-mod">mod<a class="anchor" aria-label="anchor" href="#arg-mod"></a></dt>
-<dd><p>String specifying the model used as design in findMarkers. Can be <code>NULL</code> if there are no blocking terms with uninteresting factors as documented at <a href="https://rdrr.io/pkg/scran/man/pairwiseTTests.html" class="external-link">pairwiseTTests</a>.</p></dd>
+<dd><p>String specifying the model used as design in findMarkers.
+Can be <code>NULL</code> (default) if there are no blocking terms with uninteresting
+factors as documented at <a href="https://rdrr.io/pkg/scran/man/pairwiseTTests.html" class="external-link">pairwiseTTests</a>.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
@@ -111,28 +113,88 @@ function for scran::findMarkers</p>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Table of 1 vs. ALL std log fold change + p-values for each gene x cell type</p>
-    </div>
+    <p>Tibble of 1 vs. ALL std log fold change + p-values for each gene x cell type</p><ul><li><p><code>gene</code> is the name of the gene (from rownames(<code>sce</code>)).</p></li>
+<li><p><code>logFC</code> the log fold change from the DE test</p></li>
+<li><p><code>log.p.value</code> the log of the p-value of the DE test</p></li>
+<li><p><code>log.FDR</code> the log of the False Discovery Rate adjusted p.value</p></li>
+<li><p><code>std.logFC</code> the standard logFC</p></li>
+<li><p><code>cellType.target</code> the cell type we're finding marker genes for</p></li>
+<li><p><code>std.logFC.rank</code> the rank of <code>std.logFC</code> for each cell type</p></li>
+<li><p><code>std.logFC.anno</code> is an annotation of the <code>std.logFC</code> value
+helpful for plotting.</p></li>
+</ul></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">markers_1vAll</span> <span class="op">&lt;-</span> <span class="fu">findMarkers_1vAll</span><span class="op">(</span><span class="va">sce_ab</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> A - '2024-08-07 17:32:58.690142</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> B - '2024-08-07 17:32:59.008849</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Building Table - 2024-08-07 17:32:59.164719</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## load example SingleCellExperiment</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 15:07:45.774661 loading file /github/home/.cache/R/BiocFileCache/146b342eafd5_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-in"><span><span class="co">## Explore properties of the sce object</span></span></span>
+<span class="r-in"><span><span class="va">sce_DLPFC_example</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> class: SingleCellExperiment </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dim: 557 10000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> metadata(3): Samples cell_type_colors cell_type_colors_broad</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> assays(1): logcounts</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> rownames(557): GABRD PRDM16 ... AFF2 MAMLD1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> rowData names(7): source type ... gene_type binomial_deviance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> colnames(10000): 8_AGTGACTGTAGTTACC-1 17_GCAGCCAGTGAGTCAG-1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   12_GGACGTCTCTGACAGT-1 1_GGTTAACTCTCTCTAA-1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> colData names(32): Sample Barcode ... cellType_layer layer_annotation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> reducedDimNames(0):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mainExpName: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> altExpNames(0):</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## this data contains logcounts of gene expression</span></span></span>
+<span class="r-in"><span><span class="fu">SummarizedExperiment</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assays</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span><span class="op">)</span><span class="op">$</span><span class="va">logcounts</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           8_AGTGACTGTAGTTACC-1 17_GCAGCCAGTGAGTCAG-1 3_CTGGACGAGCTTCATG-1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GABRD                        0             0.9249246             0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PRDM16                       0             0.0000000             0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MICOS10                      0             0.0000000             0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LINC01141                    0             0.0000000             0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ADGRB2                       0             0.9249246             2.253612</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           13_CCCTCAAAGTCTAGCT-1 11_TGTAAGCCATTCTGTT-1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GABRD                  0.000000             0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PRDM16                 0.000000             0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MICOS10                0.000000             0.6528615</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LINC01141              0.000000             0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ADGRB2                 2.253454             0.0000000</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## nuclei are classified in to cell types</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span><span class="op">$</span><span class="va">cellType_broad_hc</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Astro EndoMural     Micro     Oligo       OPC     Excit     Inhib </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       692       417       316      1970       350      4335      1920 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Get the 1vALL stats for each gene for each cell type defined in `cellType_broad_hc`</span></span></span>
+<span class="r-in"><span><span class="va">marker_stats_1vAll</span> <span class="op">&lt;-</span> <span class="fu">findMarkers_1vAll</span><span class="op">(</span></span></span>
+<span class="r-in"><span> sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span></span>
+<span class="r-in"><span> assay_name <span class="op">=</span> <span class="st">"logcounts"</span>,</span></span>
+<span class="r-in"><span> cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span></span>
+<span class="r-in"><span> mod <span class="op">=</span> <span class="st">"~BrNum"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 15:07:46.02474 - Find markers for: Oligo</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 15:07:46.488802 - Find markers for: Excit</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 15:07:46.874934 - Find markers for: Inhib</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 15:07:47.995957 - Find markers for: Micro</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 15:07:48.331533 - Find markers for: OPC</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 15:07:48.667361 - Find markers for: EndoMural</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 15:07:49.036291 - Find markers for: Astro</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Building Table - 2024-08-12 15:07:49.415034</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ** Done! **</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">markers_1vAll</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## explore output, top markers have high logFC</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">marker_stats_1vAll</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   cellType.target [2]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gene   logFC log.p.value   log.FDR std.logFC cellType.target rank_marker</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> G-D1_A   0.5   -<span style="color: #BB0000;">3.65</span><span style="color: #949494;">e</span>+ 1 -<span style="color: #BB0000;">3.58</span><span style="color: #949494;">e</span>+ 1      1.97 A                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> G-D2_A   0.5   -<span style="color: #BB0000;">3.65</span><span style="color: #949494;">e</span>+ 1 -<span style="color: #BB0000;">3.58</span><span style="color: #949494;">e</span>+ 1      1.97 A                         2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> G-D1_B  -<span style="color: #BB0000;">0.5</span>   -<span style="color: #BB0000;">1.42</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span> -<span style="color: #BB0000;">1.42</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span>     -<span style="color: #BB0000;">1.97</span> A                         3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> G-D2_B  -<span style="color: #BB0000;">0.5</span>   -<span style="color: #BB0000;">1.42</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span> -<span style="color: #BB0000;">1.42</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-16</span>     -<span style="color: #BB0000;">1.97</span> A                         4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> G-D2_B   0.5   -<span style="color: #BB0000;">3.65</span><span style="color: #949494;">e</span>+ 1 -<span style="color: #BB0000;">3.58</span><span style="color: #949494;">e</span>+ 1      1.97 B                         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> G-D1_B   0.5   -<span style="color: #BB0000;">3.65</span><span style="color: #949494;">e</span>+ 1 -<span style="color: #BB0000;">3.58</span><span style="color: #949494;">e</span>+ 1      1.97 B                         2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: anno_logFC &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   cellType.target [1]</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   gene   logFC log.p.value log.FDR std.logFC cellType.target std.logFC.rank</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ST18    4.46      -<span style="color: #BB0000; text-decoration: underline;">6</span><span style="color: #BB0000;">697.</span>  -<span style="color: #BB0000; text-decoration: underline;">6</span><span style="color: #BB0000;">691.</span>      4.32 Oligo                        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> PLP1    4.25      -<span style="color: #BB0000; text-decoration: underline;">5</span><span style="color: #BB0000;">233.</span>  -<span style="color: #BB0000; text-decoration: underline;">5</span><span style="color: #BB0000;">227.</span>      3.50 Oligo                        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> MOBP    3.18      -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">821.</span>  -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">816.</span>      3.28 Oligo                        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ENPP2   2.72      -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">521.</span>  -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">516.</span>      3.12 Oligo                        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> TF      3.00      -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">466.</span>  -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">462.</span>      3.09 Oligo                        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> RNF220  3.80      -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">390.</span>  -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">385.</span>      3.05 Oligo                        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: std.logFC.anno &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
