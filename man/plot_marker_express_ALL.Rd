@@ -7,7 +7,7 @@
 plot_marker_express_ALL(
   sce,
   stats,
-  pdf_fn = "marker_expression.pdf",
+  pdf_fn = NULL,
   n_genes = 10,
   rank_col = "MeanRatio.rank",
   anno_col = "MeanRatio.anno",
