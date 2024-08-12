@@ -229,7 +229,7 @@ by using the following commands in your <code>R</code> session:</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="co"># library("tidyr")</span></span>
 <span><span class="co"># library("tibble")</span></span>
-<span><span class="co"># library("ggplot2")</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -243,7 +243,7 @@ resolution that contains seven cell types.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-12 17:49:59.161387 loading file /github/home/.cache/R/BiocFileCache/1d37b225fc_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-12 17:55:12.475693 loading file /github/home/.cache/R/BiocFileCache/1d34a5e0271_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span></span>
 <span><span class="co">## unzip and load the data</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -287,7 +287,7 @@ and optionally you can also supply additional column names from the
 <code>get_mean_ratio</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># calculate the Mean Ratio of genes for each cell type in sce</span></span>
-<span><span class="va">mean_ratio_marker_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mean_ratio.html">get_mean_ratio</a></span><span class="op">(</span></span>
+<span><span class="va">marker_stats_MeanRatio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mean_ratio.html">get_mean_ratio</a></span><span class="op">(</span></span>
 <span>    sce <span class="op">=</span> <span class="va">sce</span>, <span class="co"># sce is the SingleCellExperiment with our data</span></span>
 <span>    assay_name <span class="op">=</span> <span class="st">"logcounts"</span>, <span class="co">## assay to use, we recommend logcounts [default]</span></span>
 <span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, <span class="co"># column in colData with cell type info</span></span>
@@ -328,7 +328,7 @@ information</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Explore the tibble output</span></span>
-<span><span class="va">mean_ratio_marker_stats</span></span>
+<span><span class="va">marker_stats_MeanRatio</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,721 × 10</span></span></span>
 <span><span class="co">#&gt;    gene     cellType.target mean.target cellType.2nd mean.2nd MeanRatio</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -347,7 +347,7 @@ information</li>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gene_ensembl &lt;chr&gt;, gene_name &lt;chr&gt;</span></span></span>
 <span></span>
 <span><span class="co">## genes with the highest MeanRatio are the best marker genes for each cell type</span></span>
-<span><span class="va">mean_ratio_marker_stats</span> <span class="op">|&gt;</span></span>
+<span><span class="va">marker_stats_MeanRatio</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">MeanRatio.rank</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 10</span></span></span>
 <span><span class="co">#&gt;   gene       cellType.target mean.target cellType.2nd mean.2nd MeanRatio</span></span>
@@ -371,10 +371,15 @@ included the function <code>DeconvoBuddies::findMarkers_1vALL</code>,
 which is a wrapper for <code><a href="https://rdrr.io/pkg/scran/man/findMarkers.html" class="external-link">scran::findMarkers()</a></code> that iterates
 through cell types and creates an table output in a compatible with the
 output <code><a href="../reference/get_mean_ratio.html">get_mean_ratio()</a></code>.</p>
-<p>Similarity</p>
+<p>Similarity to <code>get_mean_ratio</code> this function requires the
+<code>sce</code> object, <code>cellType_col</code> to define cell types,
+and <code>assay_name</code>.But <code>findMarkers_1vALL</code> also
+takes a model (<code>mod</code>) to use as design in
+<code><a href="https://rdrr.io/pkg/scran/man/findMarkers.html" class="external-link">scran::findMarkers()</a></code>, in this example we will control for
+donor which is stored as <code>BrNum</code>.</p>
 <p>Note this function can take a bit of time to run.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<code class="sourceCode R"><span><span class="co">## Run 1vALL DE to find markers for each cell type</span></span>
 <span><span class="va">marker_stats_1vAll</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/findMarkers_1vAll.html">findMarkers_1vAll</a></span><span class="op">(</span></span>
 <span> sce <span class="op">=</span> <span class="va">sce</span>, <span class="co"># sce is the SingleCellExperiment with our data</span></span>
 <span> assay_name <span class="op">=</span> <span class="st">"counts"</span>,</span>
@@ -382,14 +387,14 @@ output <code><a href="../reference/get_mean_ratio.html">get_mean_ratio()</a></co
 <span> mod <span class="op">=</span> <span class="st">"~BrNum"</span> <span class="co"># Control for donor stored in "BrNum" with mod</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Running 1vALL Testing for up-regulated genes</span></span>
-<span><span class="co">#&gt; 2024-08-12 17:50:37.114562 - Find markers for: Inhib</span></span>
-<span><span class="co">#&gt; 2024-08-12 17:52:10.528088 - Find markers for: Oligo</span></span>
-<span><span class="co">#&gt; 2024-08-12 17:53:43.385441 - Find markers for: OPC</span></span>
-<span><span class="co">#&gt; 2024-08-12 17:55:16.831131 - Find markers for: Excit</span></span>
-<span><span class="co">#&gt; 2024-08-12 17:56:49.711321 - Find markers for: Astro</span></span>
-<span><span class="co">#&gt; 2024-08-12 17:58:22.403923 - Find markers for: EndoMural</span></span>
-<span><span class="co">#&gt; 2024-08-12 17:59:56.041262 - Find markers for: Micro</span></span>
-<span><span class="co">#&gt; 2024-08-12 18:01:29.157545 - Building Table</span></span>
+<span><span class="co">#&gt; 2024-08-12 17:55:51.613991 - Find markers for: Inhib</span></span>
+<span><span class="co">#&gt; 2024-08-12 17:57:26.435171 - Find markers for: Oligo</span></span>
+<span><span class="co">#&gt; 2024-08-12 17:58:59.718957 - Find markers for: OPC</span></span>
+<span><span class="co">#&gt; 2024-08-12 18:00:33.160525 - Find markers for: Excit</span></span>
+<span><span class="co">#&gt; 2024-08-12 18:02:07.447894 - Find markers for: Astro</span></span>
+<span><span class="co">#&gt; 2024-08-12 18:03:41.233839 - Find markers for: EndoMural</span></span>
+<span><span class="co">#&gt; 2024-08-12 18:05:15.709013 - Find markers for: Micro</span></span>
+<span><span class="co">#&gt; 2024-08-12 18:06:48.729333 - Building Table</span></span>
 <span><span class="co">#&gt; ** Done! **</span></span></code></pre></div>
 <p>The function <code>findMarkers_1vALL()</code> returns a
 <code>tibble</code> with the following columns:</p>
@@ -451,14 +456,57 @@ each cell type</li>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> EPAS1      6.50       -<span style="color: #BB0000; text-decoration: underline;">9</span><span style="color: #BB0000;">480.</span>  -<span style="color: #BB0000; text-decoration: underline;">9</span><span style="color: #BB0000;">471.</span>      3.31 EndoMural                    1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> CSF3R      0.808      -<span style="color: #BB0000; text-decoration: underline;">9</span><span style="color: #BB0000;">670.</span>  -<span style="color: #BB0000; text-decoration: underline;">9</span><span style="color: #BB0000;">661.</span>      3.86 Micro                        1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: std.logFC.anno &lt;chr&gt;</span></span></span></code></pre></div>
+<p>As this is a differential expression, you can create volcano plots to
+explore the outputs. Note that with the default option for direction,
+all genes with logFC&lt;1 will have a p.value of 0, so these plots will
+only be a half volcano.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create volcano plots of DE stats from 1vALL</span></span>
+<span><span class="va">marker_stats_1vAll</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">logFC</span>, <span class="op">-</span><span class="va">log.p.value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">cellType.target</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>, linetype<span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Marker_Finding_files/figure-html/volcano%20plots-1.png" width="700"></p>
 </div>
 <div class="section level2">
-<h2 id="compare-marker-gene-selection">5. Compare marker gene selection<a class="anchor" aria-label="anchor" href="#compare-marker-gene-selection"></a>
+<h2 id="compare-marker-gene-selection">5. Compare Marker Gene Selection<a class="anchor" aria-label="anchor" href="#compare-marker-gene-selection"></a>
 </h2>
-<p>Let’s join the</p>
+<p>Let’s join the two <code>marker_stats</code> tables together to
+compare the findings of the two methods.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## join the two marker_stats tables</span></span>
+<span><span class="va">marker_stats</span> <span class="op">&lt;-</span> <span class="va">marker_stats_MeanRatio</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">marker_stats_1vAll</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">gene</span>, <span class="va">cellType.target</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Check stats for our top genes</span></span>
+<span><span class="va">marker_stats</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">MeanRatio.rank</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">gene</span>, <span class="va">cellType.target</span>, <span class="va">MeanRatio</span>, <span class="va">MeanRatio.rank</span>, <span class="va">std.logFC</span>, <span class="va">std.logFC.rank</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 6</span></span></span>
+<span><span class="co">#&gt;   gene       cellType.target MeanRatio MeanRatio.rank std.logFC std.logFC.rank</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> LYPD6B     Inhib               12.4               1      1.37              2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> AC012494.1 Oligo               16.1               1     <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> MIR3681HG  OPC                  7.69              1      1.42             11</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> AC011995.2 Excit                7.51              1     <span style="color: #BB0000;">NA</span>                <span style="color: #BB0000;">NA</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> PRDM16     Astro               13.9               1      2.38              1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> SLC2A1     EndoMural           10.2               1      2.30              4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> LINC01141  Micro               24.5               1      2.07              8</span></span></code></pre></div>
+<p>Comparing the values of Mean Ratio and standard log fold change (from
+1vAll) we can see</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">marker_stats</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">MeanRatio</span>, <span class="va">std.logFC</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">cellType.target</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Removed 29 rows containing missing values or values outside the scale range</span></span>
+<span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
+<p><img src="Marker_Finding_files/figure-html/hockey%20stick%20plots-1.png" width="700"></p>
 </div>
 <div class="section level2">
-<h2 id="visualize-marker-genes-expression-with">6. Visualize marker genes expression with<a class="anchor" aria-label="anchor" href="#visualize-marker-genes-expression-with"></a>
+<h2 id="visualize-marker-genes-expression">6. Visualize Marker Genes Expression<a class="anchor" aria-label="anchor" href="#visualize-marker-genes-expression"></a>
 </h2>
 </div>
 <div class="section level2">
@@ -491,7 +539,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 </ul>
 <p>This package was developed using <em><a href="https://bioconductor.org/packages/3.20/biocthis" class="external-link">biocthis</a></em>.</p>
 <p>Code for creating the vignette</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Create the vignette</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/rmarkdown" class="external-link">"rmarkdown"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"Marker_Finding.Rmd"</span>, <span class="st">"BiocStyle::html_document"</span><span class="op">)</span><span class="op">)</span></span>
@@ -500,9 +548,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"Marker_Finding.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-08-12 18:01:29 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-08-12 18:06:51 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 11.72 mins</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 11.858 mins</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
@@ -572,6 +620,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  evaluate               0.24.0     <span style="color: #555555;">2024-06-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  ExperimentHub          2.13.1     <span style="color: #555555;">2024-07-31</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.1)</span></span></span>
 <span><span class="co">#&gt;  fansi                  1.0.6      <span style="color: #555555;">2023-12-08</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
+<span><span class="co">#&gt;  farver                 2.1.2      <span style="color: #555555;">2024-05-13</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  fastmap                1.2.0      <span style="color: #555555;">2024-05-15</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  fields                 16.2       <span style="color: #555555;">2024-06-27</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  filelock               1.0.3      <span style="color: #555555;">2023-12-11</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -583,13 +632,14 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  GenomicAlignments      1.41.0     <span style="color: #555555;">2024-05-01</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  GenomicRanges        * 1.57.1     <span style="color: #555555;">2024-06-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  ggbeeswarm             0.7.2      <span style="color: #555555;">2023-04-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  ggplot2                3.5.1      <span style="color: #555555;">2024-04-23</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
+<span><span class="co">#&gt;  ggplot2              * 3.5.1      <span style="color: #555555;">2024-04-23</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  ggrepel                0.9.5      <span style="color: #555555;">2024-01-10</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  glue                   1.7.0      <span style="color: #555555;">2024-01-09</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  golem                  0.4.1      <span style="color: #555555;">2023-06-05</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  gridExtra              2.3        <span style="color: #555555;">2017-09-09</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  gtable                 0.3.5      <span style="color: #555555;">2024-04-22</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  HDF5Array              1.33.5     <span style="color: #555555;">2024-07-21</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.1)</span></span></span>
+<span><span class="co">#&gt;  highr                  0.11       <span style="color: #555555;">2024-05-26</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  htmltools              0.5.8.1    <span style="color: #555555;">2024-04-04</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  htmlwidgets            1.6.4      <span style="color: #555555;">2023-12-06</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  httpuv                 1.6.15     <span style="color: #555555;">2024-03-26</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -602,6 +652,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  jsonlite               1.8.8      <span style="color: #555555;">2023-12-04</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  KEGGREST               1.45.1     <span style="color: #555555;">2024-06-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  knitr                  1.48       <span style="color: #555555;">2024-07-07</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
+<span><span class="co">#&gt;  labeling               0.4.3      <span style="color: #555555;">2023-08-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  later                  1.3.2      <span style="color: #555555;">2023-12-06</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  lattice                0.22-6     <span style="color: #555555;">2024-03-20</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.4.1)</span></span></span>
 <span><span class="co">#&gt;  lazyeval               0.2.2      <span style="color: #555555;">2019-03-15</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>

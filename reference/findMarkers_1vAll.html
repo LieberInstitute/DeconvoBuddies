@@ -135,7 +135,7 @@ helpful for plotting.</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## load example SingleCellExperiment</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:28.862997 loading file /github/home/.cache/R/BiocFileCache/1d362cb0cfd_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:39.718337 loading file /github/home/.cache/R/BiocFileCache/1d355bf16d7_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
 <span class="r-in"><span><span class="co">## Explore properties of the sce object</span></span></span>
 <span class="r-in"><span><span class="va">sce_DLPFC_example</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class: SingleCellExperiment </span>
@@ -177,32 +177,31 @@ helpful for plotting.</p></li>
 <span class="r-in"><span> sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span></span>
 <span class="r-in"><span> assay_name <span class="op">=</span> <span class="st">"logcounts"</span>,</span></span>
 <span class="r-in"><span> cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span></span>
-<span class="r-in"><span> mod <span class="op">=</span> <span class="st">"~BrNum"</span>,</span></span>
-<span class="r-in"><span> direction <span class="op">=</span> <span class="st">"down"</span></span></span>
+<span class="r-in"><span> mod <span class="op">=</span> <span class="st">"~BrNum"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Running 1vALL Testing for down-regulated genes</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:29.109437 - Find markers for: Oligo</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:29.535377 - Find markers for: Excit</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:29.878169 - Find markers for: Inhib</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:30.932321 - Find markers for: Micro</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:31.211169 - Find markers for: OPC</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:31.494901 - Find markers for: EndoMural</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:31.786907 - Find markers for: Astro</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:47:32.116972 - Building Table</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Running 1vALL Testing for up-regulated genes</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:39.963271 - Find markers for: Oligo</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:40.426614 - Find markers for: Excit</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:40.811749 - Find markers for: Inhib</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:41.944189 - Find markers for: Micro</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:42.283543 - Find markers for: OPC</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:42.6184 - Find markers for: EndoMural</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:42.96527 - Find markers for: Astro</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-08-12 17:52:43.364274 - Building Table</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ** Done! **</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## explore output, top markers have high logFC</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">marker_stats_1vAll</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:   cellType.target [1]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   gene     logFC log.p.value log.FDR std.logFC cellType.target std.logFC.rank</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> MMP16   -<span style="color: #BB0000;">1.33</span>        -<span style="color: #BB0000;">712.</span>   -<span style="color: #BB0000;">706.</span>    -<span style="color: #BB0000;">1.00</span>  Oligo                        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> TNR     -<span style="color: #BB0000;">1.37</span>        -<span style="color: #BB0000;">681.</span>   -<span style="color: #BB0000;">675.</span>    -<span style="color: #BB0000;">0.980</span> Oligo                        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> SEZ6L   -<span style="color: #BB0000;">1.10</span>        -<span style="color: #BB0000;">608.</span>   -<span style="color: #BB0000;">603.</span>    -<span style="color: #BB0000;">0.922</span> Oligo                        3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> GALNTL6 -<span style="color: #BB0000;">1.67</span>        -<span style="color: #BB0000;">577.</span>   -<span style="color: #BB0000;">572.</span>    -<span style="color: #BB0000;">0.896</span> Oligo                        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> DGCR9   -<span style="color: #BB0000;">0.887</span>       -<span style="color: #BB0000;">562.</span>   -<span style="color: #BB0000;">558.</span>    -<span style="color: #BB0000;">0.884</span> Oligo                        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> PID1    -<span style="color: #BB0000;">1.00</span>        -<span style="color: #BB0000;">540.</span>   -<span style="color: #BB0000;">536.</span>    -<span style="color: #BB0000;">0.866</span> Oligo                        6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   gene   logFC log.p.value log.FDR std.logFC cellType.target std.logFC.rank</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ST18    4.46      -<span style="color: #BB0000; text-decoration: underline;">6</span><span style="color: #BB0000;">697.</span>  -<span style="color: #BB0000; text-decoration: underline;">6</span><span style="color: #BB0000;">691.</span>      4.32 Oligo                        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> PLP1    4.25      -<span style="color: #BB0000; text-decoration: underline;">5</span><span style="color: #BB0000;">233.</span>  -<span style="color: #BB0000; text-decoration: underline;">5</span><span style="color: #BB0000;">227.</span>      3.50 Oligo                        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> MOBP    3.18      -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">821.</span>  -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">816.</span>      3.28 Oligo                        3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ENPP2   2.72      -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">521.</span>  -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">516.</span>      3.12 Oligo                        4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> TF      3.00      -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">466.</span>  -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">462.</span>      3.09 Oligo                        5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> RNF220  3.80      -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">390.</span>  -<span style="color: #BB0000; text-decoration: underline;">4</span><span style="color: #BB0000;">385.</span>      3.05 Oligo                        6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: std.logFC.anno &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
