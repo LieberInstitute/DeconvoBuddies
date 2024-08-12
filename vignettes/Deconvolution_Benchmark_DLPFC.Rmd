@@ -254,8 +254,7 @@ gene by dividing the mean expression of the target cell by the mean
 expression of the next highest non-target cell type. Genes with the
 highest `MeanRatio` values are selected as marker genes.
 
-For a tutorial on marker gene selection check out  [Vignette: Deconvolution Benchmark in Human
-DLPFC](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html).
+For a tutorial on marker gene selection check out  [Vignette: Finding Marker Genes with Deconvo Buddies](https://research.libd.org/DeconvoBuddies/articles/Marker_Finding.html).
 
 <p align="center">
 

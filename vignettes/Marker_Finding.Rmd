@@ -467,6 +467,12 @@ We covered how to find and compare *MeanRatio* marker genes with
 And finally, how to visualize the expression of these marker genes with
 `plot_marker_express()` and related functions.
 
+**Next Steps**
+
+For an example of how to use these marker genes in a deconvolution
+workflow, check out [Vignette: Deconvolution Benchmark in Human
+DLPFC](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html).
+
 We hope this vignette and *DeconvoBuddies* helps you with your research
 goals! Thanks for reading 😁
 
