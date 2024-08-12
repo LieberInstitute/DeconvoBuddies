@@ -413,6 +413,10 @@ plot_marker_express(
 
 ```
 
+In these violin plots we can see these genes have high expression in the
+target cell type Excit , and mostly low expression nuclei in the other
+cell types.
+
 This function defaults to selecting genes by the MeanRatio stats, but
 can also be used to plot the 1vAll genes.
 
@@ -431,8 +435,40 @@ plot_marker_express(
 
 ```
 
+We can see in the top 1vALL genes there is some expression of these
+genes in Inhib nuclei in addition to the target cell type Excit.
+
 `plot_marker_express_ALL()` plots the top marker genes for all cell
-types
+types. This is a quick and easy way to look at the the top markers in
+your dataset, which is an important step and can help identify genes
+with multimodal distributions that may confound the MeanRatio method.
+
+```{r, plot_marker_express_ALL}
+
+# plot the top 10 1vAll genes for all cell types
+print(plot_marker_express_ALL(
+  sce = sce,
+  stats = marker_stats,
+  n_genes = 10,
+  cellType_col = "cellType_broad_hc"
+))
+```
+
+The violin plots can also be directly printed to a pdf using the built
+in argument `plot_marker_express_ALL(pdf = "my_marker_genes.pdf")` for
+portability and easy sharing.
+
+# Summary
+
+In this vignette we covered the importance of finding marker genes, and
+introduced our method for finding cell type specific genes *MeanRatio*.
+We covered how to find and compare *MeanRatio* marker genes with
+`get_mean_ratio()`, and *1vALL* marker genes with `findMarkers_1vALL()`.
+And finally, how to visualize the expression of these marker genes with
+`plot_marker_express()` and related functions.
+
+We hope this vignette and *DeconvoBuddies* helps you with your research
+goals! Thanks for reading 😁
 
 # Reproducibility
 
