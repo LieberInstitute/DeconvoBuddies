@@ -42,8 +42,7 @@
 #'  sce = sce_DLPFC_example,
 #'  assay_name = "logcounts",
 #'  cellType_col = "cellType_broad_hc",
-#'  mod = "~BrNum",
-#'  direction = "down"
+#'  mod = "~BrNum"
 #' )
 #' 
 #' ## explore output, top markers have high logFC
