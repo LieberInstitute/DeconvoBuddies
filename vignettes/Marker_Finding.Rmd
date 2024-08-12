@@ -293,7 +293,7 @@ marker_stats_1vAll
 
 ## genes with the highest MeanRatio are the best marker genes for each cell type
 marker_stats_1vAll |>
-    filter(MeanRatio.rank == 1)
+    filter(std.logFC.rank == 1)
 ```
 
 # 5. Compare marker gene selection
