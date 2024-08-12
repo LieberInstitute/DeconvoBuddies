@@ -11,7 +11,8 @@ findMarkers_1vAll(
   cellType_col = "cellType",
   add_symbol = FALSE,
   mod = NULL,
-  verbose = TRUE
+  verbose = TRUE,
+  direction = "up"
 )
 }
 \arguments{
@@ -28,6 +29,10 @@ Can be \code{NULL} (default) if there are no blocking terms with uninteresting
 factors as documented at \link[scran:pairwiseTTests]{pairwiseTTests}.}
 
 \item{verbose}{Boolean choosing to print progress messages or not}
+
+\item{direction}{Choice of direction tested as markers, "up" (default),
+"any", or "down". Impacts p-values, if "up" genes with logFC < 0 will have
+p.value=1.}
 }
 \value{
 Tibble of 1 vs. ALL std log fold change + p-values for each gene x cell type
@@ -64,7 +69,8 @@ marker_stats_1vAll <- findMarkers_1vAll(
  sce = sce_DLPFC_example,
  assay_name = "logcounts",
  cellType_col = "cellType_broad_hc",
- mod = "~BrNum"
+ mod = "~BrNum",
+ direction = "down"
 )
 
 ## explore output, top markers have high logFC

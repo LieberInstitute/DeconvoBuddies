@@ -9,6 +9,9 @@
 #' Can be `NULL` (default) if there are no blocking terms with uninteresting 
 #' factors as documented at [pairwiseTTests][scran::pairwiseTTests].
 #' @param verbose Boolean choosing to print progress messages or not
+#' @param direction Choice of direction tested as markers, "up" (default), 
+#' "any", or "down". Impacts p-values, if "up" genes with logFC < 0 will have
+#'  p.value=1.
 #'
 #' @return Tibble of 1 vs. ALL std log fold change + p-values for each gene x cell type
 #' -   `gene` is the name of the gene (from rownames(`sce`)).
@@ -39,7 +42,8 @@
 #'  sce = sce_DLPFC_example,
 #'  assay_name = "logcounts",
 #'  cellType_col = "cellType_broad_hc",
-#'  mod = "~BrNum"
+#'  mod = "~BrNum",
+#'  direction = "down"
 #' )
 #' 
 #' ## explore output, top markers have high logFC
@@ -54,7 +58,8 @@ findMarkers_1vAll <- function(sce,
                               cellType_col = "cellType", 
                               add_symbol = FALSE,
                               mod = NULL, 
-                              verbose = TRUE) {
+                              verbose = TRUE,
+                              direction = "up") {
     # RCMD Fix
     gene <- rank_marker <- cellType.target <- std.logFC <- rowData <- Symbol <- NULL
 
@@ -64,6 +69,8 @@ findMarkers_1vAll <- function(sce,
     ## Traditional t-test with design as in PB'd/limma approach
     pd <- as.data.frame(SummarizedExperiment::colData(sce))
     # message("donor" %in% colnames(pd))
+    
+    if (verbose) message("Running 1vALL Testing for ", direction, "-regulated genes")
 
     if (!is.null(mod)) {
         mod <- with(pd, stats::model.matrix(as.formula(mod)))
@@ -78,7 +85,7 @@ findMarkers_1vAll <- function(sce,
         fm <- scran::findMarkers(sce,
             groups = sce$contrast,
             assay.type = assay_name, design = mod, test.type = "t",
-            direction = "up", pval.type = "all", full.stats = TRUE
+            direction = direction, pval.type = "all", full.stats = TRUE
         )
         fm <- fm[[2]]$stats.0
 
@@ -86,7 +93,7 @@ findMarkers_1vAll <- function(sce,
             groups = sce$contrast,
             assay.type = assay_name, design = mod, test.type = "t",
             std.lfc = TRUE,
-            direction = "up", pval.type = "all", full.stats = TRUE
+            direction = direction, pval.type = "all", full.stats = TRUE
         )
         fm.std <- fm.std[[2]]$stats.0
         colnames(fm.std)[[1]] <- "std.logFC"
@@ -94,7 +101,7 @@ findMarkers_1vAll <- function(sce,
         return(cbind(fm, fm.std[, 1, drop = FALSE]))
     })
 
-    if (verbose) message("Building Table - ", Sys.time())
+    if (verbose) message(Sys.time(), " - Building Table")
     markers.t.1vAll.table <- do.call("rbind", markers.t.1vAll) |>
         as.data.frame() |>
         tibble::rownames_to_column("gene") |>
