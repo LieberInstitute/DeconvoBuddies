@@ -299,9 +299,13 @@ marker_stats_1vAll |>
     filter(std.logFC.rank == 1)
 ```
 
-As this is a differential expression, you can create volcano plots to explore the
-outputs. Note that with the default option for direction, all genes with logFC<1
-will have a p.value of 0, so these plots will only be a half volcano.
+As this is a differential expression test, you can create volcano plots to 
+explore the outputs. 🌋
+
+Note that with the default option "up" for direction only up-regulated genes are
+considered marker candidates, so all genes with logFC<1 will have a p.value=0.
+As a results these plots will only have the right half of the volcano shape. 
+If you'd like all p-values set `findMarkers_1vALL(direction="any")`.
 
 ```{r, "volcano plots"}
 # Create volcano plots of DE stats from 1vALL
@@ -331,8 +335,23 @@ marker_stats |>
 
 ```
 
-Comparing the values of Mean Ratio and standard log fold change (from 1vAll) we 
-can see 
+
+## Hockey Stick Plots 
+
+Plotting the values of Mean Ratio vs. standard log fold change (from 1vAll) we 
+create what we call "hockey stick plots" 🏒. These plots help visualize the 
+distribution of `MeanRatio` and `logFC` values.
+
+![Hockey Stick plots compare values of *1vALL* logFC vs. *MeanRatio* and help select marker genes. ](http://research.libd.org/DeconvoBuddies/reference/figures/hockey_plot_anno.png)
+
+</p>
+
+Typically for a cell type see most genes have low Mean Ratio and low fold change,
+these genes are not marker genes. Genes with higher fold change from 1vALL are 
+better marker gene candidates, but most have low MeanRatio values indicating 
+that one or more non-target cell types have high expression for that gene, 
+causing noise. Genes with high MeanRatio typically have high 1vALL fold changes 
+as well, these are non-nonithese make up the handle of the hockey stick
 
 ```{r "hockey stick plots"}
 
@@ -340,6 +359,17 @@ marker_stats |>
   ggplot(aes(MeanRatio, std.logFC)) +
   geom_point() +
   facet_wrap(~cellType.target)
+
+
+hockey <- marker_stats |>
+  filter(cellType.target == "Micro") |>
+  ggplot(aes(MeanRatio, std.logFC)) +
+  geom_point() + 
+  theme_bw() +
+  theme(panel.background = element_rect(fill='transparent'),
+        plot.background = element_rect(fill='transparent', color=NA))
+
+ggsave(hockey, filename = "~/Pictures/Deconvolution/hockey/hockey_plot.png",bg='transparent', height = 4)
 
 ```
 
