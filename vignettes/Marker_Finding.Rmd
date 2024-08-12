@@ -299,6 +299,21 @@ marker_stats_1vAll |>
     filter(std.logFC.rank == 1)
 ```
 
+As this is a differential expression, you can create volcano plots to explore the
+outputs. Note that with the default option for direction, all genes with logFC<1
+will have a p.value of 0, so these plots will only be a half volcano.
+
+```{r, "volcano plots"}
+# Create volcano plots of DE stats from 1vALL
+marker_stats_1vAll |> 
+  ggplot(aes(logFC, -log.p.value)) + 
+  geom_point() + 
+  facet_wrap(~cellType.target) +
+  geom_vline(xintercept = c(1, -1), linetype= "dashed", color = "red")
+
+```
+
+
 # 5. Compare Marker Gene Selection
 
 Let's join the two `marker_stats` tables together to compare the findings of the
