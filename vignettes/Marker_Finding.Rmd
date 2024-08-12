@@ -164,7 +164,7 @@ library("SingleCellExperiment")
 library("dplyr")
 # library("tidyr")
 # library("tibble")
-# library("ggplot2")
+library("ggplot2")
 ```
 
 # 2. Download DLPFC snRNA-seq data.
@@ -216,7 +216,7 @@ and/or `gene_ensembl` information to the table output of
 
 ```{r "Run get_mean_ratio"}
 # calculate the Mean Ratio of genes for each cell type in sce
-mean_ratio_marker_stats <- get_mean_ratio(
+marker_stats_MeanRatio <- get_mean_ratio(
     sce = sce, # sce is the SingleCellExperiment with our data
     assay_name = "logcounts", ## assay to use, we recommend logcounts [default]
     cellType_col = "cellType_broad_hc", # column in colData with cell type info
@@ -243,10 +243,10 @@ columns:
 
 ```{r "Explore get_mean_ratio output"}
 ## Explore the tibble output
-mean_ratio_marker_stats
+marker_stats_MeanRatio
 
 ## genes with the highest MeanRatio are the best marker genes for each cell type
-mean_ratio_marker_stats |>
+marker_stats_MeanRatio |>
     filter(MeanRatio.rank == 1)
 ```
 
@@ -259,12 +259,15 @@ wrapper for `scran::findMarkers()` that iterates through cell types and
 creates an table output in a compatible with the output
 `get_mean_ratio()`.
 
-Similarity
+Similarity to `get_mean_ratio` this function requires the `sce` object, 
+`cellType_col` to define cell types, and `assay_name`.But `findMarkers_1vALL`
+also takes a model (`mod`) to use as design in `scran::findMarkers()`, in this 
+example we will control for donor which is stored as `BrNum`. 
 
 Note this function can take a bit of time to run.
 
 ```{r `Run findMarkers_1vALL`}
-
+## Run 1vALL DE to find markers for each cell type
 marker_stats_1vAll <- findMarkers_1vAll(
  sce = sce, # sce is the SingleCellExperiment with our data
  assay_name = "counts",
@@ -296,11 +299,38 @@ marker_stats_1vAll |>
     filter(std.logFC.rank == 1)
 ```
 
-# 5. Compare marker gene selection
+# 5. Compare Marker Gene Selection
 
-Let's join the 
+Let's join the two `marker_stats` tables together to compare the findings of the
+two methods.
 
-# 6. Visualize marker genes expression with
+```{r "join marker_stats"}
+## join the two marker_stats tables
+marker_stats <- marker_stats_MeanRatio |> 
+  left_join(marker_stats_1vAll, by = join_by(gene, cellType.target))
+
+## Check stats for our top genes
+marker_stats |>
+    filter(MeanRatio.rank == 1) |>
+  select(gene, cellType.target, MeanRatio, MeanRatio.rank, std.logFC, std.logFC.rank)
+
+```
+
+Comparing the values of Mean Ratio and standard log fold change (from 1vAll) we 
+can see 
+
+```{r "hockey stick plots"}
+
+marker_stats |>
+  ggplot(aes(MeanRatio, std.logFC)) +
+  geom_point() +
+  facet_wrap(~cellType.target)
+
+```
+
+
+
+# 6. Visualize Marker Genes Expression
 
 # Reproducibility
 
