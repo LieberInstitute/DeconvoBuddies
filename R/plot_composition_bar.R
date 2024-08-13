@@ -12,18 +12,31 @@
 #' @export
 #'
 #' @examples
+#' # extract relvant colData from rse
 #' pd <- SummarizedExperiment::colData(rse_bulk_test) |>
 #'     as.data.frame()
 #'
+#' # combine with est prop in long style table
 #' est_prop_long <- est_prop |>
 #'     tibble::rownames_to_column("RNum") |>
 #'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-#'     dplyr::inner_join(pd |> dplyr::select(RNum, Dx)) ## TODO fix example data
+#'     dplyr::inner_join(pd |> dplyr::select(RNum, Dx)) 
+#'     
+#' est_prop_long
 #'
-#' plot_composition_bar(est_prop_long)
+#' # Create composition bar plots
+#' # Mean composition of all samples
+#' plot_composition_bar(est_prop_long) 
+#' 
+#' # Mean composition by Dx
 #' plot_composition_bar(est_prop_long, x_col = "Dx")
+#' 
+#' # control minimum value of text to add 
 #' plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
-#' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) + ggplot2::facet_wrap(~Dx, scales = "free_x")
+#' 
+#' # plot all samples, then facet by Dx
+#' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) + 
+#' ggplot2::facet_wrap(~Dx, scales = "free_x")
 #'
 #' @importFrom dplyr rename group_by summarise mutate arrange
 #' @importFrom ggplot2 ggplot geom_bar geom_text aes theme element_text
