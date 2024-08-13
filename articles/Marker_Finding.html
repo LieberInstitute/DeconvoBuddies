@@ -244,7 +244,7 @@ resolution that contains seven cell types.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:42:36.360704 loading file /github/home/.cache/R/BiocFileCache/27834da77fa_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-13 16:53:15.460905 loading file /github/home/.cache/R/BiocFileCache/27613f65ab4_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span></span>
 <span><span class="co">## unzip and load the data</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -388,14 +388,14 @@ donor which is stored as <code>BrNum</code>.</p>
 <span>    mod <span class="op">=</span> <span class="st">"~BrNum"</span> <span class="co"># Control for donor stored in "BrNum" with mod</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Running 1vALL Testing for up-regulated genes</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:43:18.924674 - Find markers for: Inhib</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:44:53.442233 - Find markers for: Oligo</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:46:28.192897 - Find markers for: OPC</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:48:03.267241 - Find markers for: Excit</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:49:37.165433 - Find markers for: Astro</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:51:11.613102 - Find markers for: EndoMural</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:52:45.700337 - Find markers for: Micro</span></span>
-<span><span class="co">#&gt; 2024-08-13 16:54:19.921761 - Building Table</span></span>
+<span><span class="co">#&gt; 2024-08-13 16:53:54.175258 - Find markers for: Inhib</span></span>
+<span><span class="co">#&gt; 2024-08-13 16:55:29.507241 - Find markers for: Oligo</span></span>
+<span><span class="co">#&gt; 2024-08-13 16:57:03.838373 - Find markers for: OPC</span></span>
+<span><span class="co">#&gt; 2024-08-13 16:58:38.378926 - Find markers for: Excit</span></span>
+<span><span class="co">#&gt; 2024-08-13 17:00:12.883703 - Find markers for: Astro</span></span>
+<span><span class="co">#&gt; 2024-08-13 17:01:47.248213 - Find markers for: EndoMural</span></span>
+<span><span class="co">#&gt; 2024-08-13 17:03:22.657633 - Find markers for: Micro</span></span>
+<span><span class="co">#&gt; 2024-08-13 17:04:57.145359 - Building Table</span></span>
 <span><span class="co">#&gt; ** Done! **</span></span></code></pre></div>
 <p>The function <code>findMarkers_1vALL()</code> returns a
 <code>tibble</code> with the following columns:</p>
@@ -552,9 +552,7 @@ genes as a violin plot.</p>
 <span>    sce <span class="op">=</span> <span class="va">sce</span>,</span>
 <span>    category <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
 <span>    genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SLC2A1"</span>, <span class="st">"CREG2"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="Marker_Finding_files/figure-html/plot_gene_express-1.png" width="700"></p>
 <p><code><a href="../reference/plot_marker_express.html">plot_marker_express()</a></code> plots the top n marker genes for a
 specified cell type based on the values from <code>marker_stats</code>.
@@ -568,17 +566,7 @@ added to each panel.</p>
 <span>    cell_type <span class="op">=</span> <span class="st">"Excit"</span>,</span>
 <span>    n_genes <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express%20MeanRatio-1.png" width="700"></p>
 <p>In these violin plots we can see these genes have high expression in
 the target cell type Excit , and mostly low expression nuclei in the
@@ -595,16 +583,7 @@ can also be used to plot the 1vAll genes.</p>
 <span>    rank_col <span class="op">=</span> <span class="st">"std.logFC.rank"</span>, <span class="co">## use logFC cols from 1vALL</span></span>
 <span>    anno_col <span class="op">=</span> <span class="st">"std.logFC.anno"</span>,</span>
 <span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express%20logFC-1.png" width="700"></p>
 <p>We can see in the top 1vALL genes there is some expression of these
 genes in Inhib nuclei in addition to the target cell type Excit.</p>
@@ -621,95 +600,25 @@ MeanRatio method.</p>
 <span>    n_genes <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre></div>
+<span><span class="co">#&gt; [[1]]</span></span></code></pre></div>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express_ALL-1.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[2]]</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre>
+<span><span class="co">#&gt; [[2]]</span></span></code></pre>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express_ALL-2.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[3]]</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre>
+<span><span class="co">#&gt; [[3]]</span></span></code></pre>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express_ALL-3.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[4]]</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre>
+<span><span class="co">#&gt; [[4]]</span></span></code></pre>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express_ALL-4.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[5]]</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre>
+<span><span class="co">#&gt; [[5]]</span></span></code></pre>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express_ALL-5.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[6]]</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre>
+<span><span class="co">#&gt; [[6]]</span></span></code></pre>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express_ALL-6.png" width="700"></p>
 <pre><code><span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; [[7]]</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span>
-<span><span class="co">#&gt; No summary function supplied, defaulting to `mean_se()`</span></span></code></pre>
+<span><span class="co">#&gt; [[7]]</span></span></code></pre>
 <p><img src="Marker_Finding_files/figure-html/plot_marker_express_ALL-7.png" width="700"></p>
 <p>The violin plots can also be directly printed to a pdf using the
 built in argument
@@ -772,9 +681,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"Marker_Finding.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-08-13 16:55:55 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-08-13 17:06:32 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 13.536 mins</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 13.508 mins</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
