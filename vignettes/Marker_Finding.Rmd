@@ -21,6 +21,7 @@ vignette: >
 editor_options: 
   markdown: 
     wrap: 72
+bibliography: references.bib
 ---
 
 ```{r setup, include = FALSE}
@@ -65,12 +66,11 @@ deconvolution method.
 
 There are several approaches to select marker genes.
 
-One popular method is "1 vs. All" differential expression (Lun et al.,
-2016, F1000Res) (TODO update citation), where genes are tested for
-differential expression between the target cell type, and a combined
-group of all **"other"** cell types. Statistically significant
-differentially expressed genes (DEGs) can be selected as a set of marker
-genes, DEGs can be ranked by high log fold change.
+One popular method is "1 vs. All" differential expression [@lun], where
+genes are tested for differential expression between the target cell
+type, and a combined group of all **"other"** cell types. Statistically
+significant differentially expressed genes (DEGs) can be selected as a
+set of marker genes, DEGs can be ranked by high log fold change.
 
 However in some cases *1vAll* can select genes with high expression in
 non-target cell types, especially in cell types related to the target
@@ -170,7 +170,7 @@ library("ggplot2")
 # 2. Download DLPFC snRNA-seq data.
 
 Here we will download single nucleus RNA-seq data from the Human DLPFC
-with 77k nuclei x 36k genes (TODO cite). This data is stored in a
+with 77k nuclei x 36k genes[@huuki-myers2024]. This data is stored in a
 `SingleCellExperiment` object. The nuclei in this dataset are labeled by
 cell types at a few resolutions, we will focus on the "broad" resolution
 that contains seven cell types.
