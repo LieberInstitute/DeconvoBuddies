@@ -4,18 +4,20 @@
 #' over a user defined category, typically a cell type annotation.
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
-#' @param genes  A `list()` of `character(1)` specifying the genes to plot, this should match the format of `rownames(sce)`
+#' @param genes  A `list()` of `character(1)` specifying the genes to plot, 
+#' this should match the format of `rownames(sce)`
 #' @param assay_name A `character(1)` specifying the name of the
 #' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
 #' `sce` object to use to rank expression values. Defaults to `logcounts` since
 #' it typically contains the normalized expression values.
-#'
-#' @param category  A `character(1)` specifying the name of the categorical variable
-#' to group the cells or nuclei by. Defaults to `cellType`.
-#' @param color_pal  A named `character(1)` vector that contains a color pallet matching the `category` values.
+#' @param category  A `character(1)` specifying the name of the categorical 
+#' variable to group the cells or nuclei by. Defaults to `cellType`.
+#' @param color_pal  A named `character(1)` vector that contains a color pallet 
+#' matching the `category` values.
 #' @param title A `character(1)` to title the plot
-#' @param plot_points A logical indicating whether to plot points over the violin,
-#' defaults to `FALSE` as these often become over plotted and quite large (especially when saved as PDF)
+#' @param plot_points A logical indicating whether to plot points over the 
+#' violin, defaults to `FALSE` as these often become over plotted and quite large 
+#' (especially when saved as PDF)
 #' @param ncol = Number of columns for the facet in the final plot. Defaults to 2.
 #'
 #' @return A `ggplot()` violin plot for selected genes
@@ -25,7 +27,9 @@
 #' ## Using Symbol as rownames makes this more human readable
 #' plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
 #'
+#' # Access example data
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+#' 
 #' ## plot expression of two genes
 #' plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 #'
@@ -88,7 +92,7 @@ plot_gene_express <- function(
                 position = ggplot2::position_jitter(seed = 1, width = 0.2), size = .5
             ) +
             ggplot2::stat_summary(
-                fun = median,
+                fun = mean,
                 geom = "crossbar",
                 width = 0.3
             )
@@ -101,7 +105,7 @@ plot_gene_express <- function(
     expression_violin <- expression_violin +
         ggplot2::geom_violin(aes(fill = category), scale = "width") +
         ggplot2::stat_summary(
-            fun = median,
+            fun = mean,
             geom = "crossbar",
             width = 0.3
         )

@@ -18,22 +18,25 @@ plot_gene_express(
 \arguments{
 \item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
 
-\item{genes}{A \code{list()} of \code{character(1)} specifying the genes to plot, this should match the format of \code{rownames(sce)}}
+\item{genes}{A \code{list()} of \code{character(1)} specifying the genes to plot,
+this should match the format of \code{rownames(sce)}}
 
 \item{assay_name}{A \code{character(1)} specifying the name of the
 \link[SummarizedExperiment:SummarizedExperiment-class]{assay()} in the
 \code{sce} object to use to rank expression values. Defaults to \code{logcounts} since
 it typically contains the normalized expression values.}
 
-\item{category}{A \code{character(1)} specifying the name of the categorical variable
-to group the cells or nuclei by. Defaults to \code{cellType}.}
+\item{category}{A \code{character(1)} specifying the name of the categorical
+variable to group the cells or nuclei by. Defaults to \code{cellType}.}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the \code{category} values.}
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet
+matching the \code{category} values.}
 
 \item{title}{A \code{character(1)} to title the plot}
 
-\item{plot_points}{A logical indicating whether to plot points over the violin,
-defaults to \code{FALSE} as these often become over plotted and quite large (especially when saved as PDF)}
+\item{plot_points}{A logical indicating whether to plot points over the
+violin, defaults to \code{FALSE} as these often become over plotted and quite large
+(especially when saved as PDF)}
 
 \item{ncol}{= Number of columns for the facet in the final plot. Defaults to 2.}
 }
@@ -48,7 +51,9 @@ over a user defined category, typically a cell type annotation.
 ## Using Symbol as rownames makes this more human readable
 plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
 
+# Access example data
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
+
 ## plot expression of two genes
 plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 
