@@ -69,7 +69,7 @@ One popular method is "1 vs. All" differential expression (Lun et al.,
 2016, F1000Res) (TODO update citation), where genes are tested for
 differential expression between the target cell type, and a combined
 group of all **"other"** cell types. Statistically significant
-differntially expressed genes (DEGs) can be selected as a set of marker
+differentially expressed genes (DEGs) can be selected as a set of marker
 genes, DEGs can be ranked by high log fold change.
 
 However in some cases *1vAll* can select genes with high expression in
@@ -171,7 +171,7 @@ library("ggplot2")
 
 Here we will download single nucleus RNA-seq data from the Human DLPFC
 with 77k nuclei x 36k genes (TODO cite). This data is stored in a
-`SingleCellExperiment` object. The nuclei in this dataset are labled by
+`SingleCellExperiment` object. The nuclei in this dataset are labeled by
 cell types at a few resolutions, we will focus on the "broad" resolution
 that contains seven cell types.
 

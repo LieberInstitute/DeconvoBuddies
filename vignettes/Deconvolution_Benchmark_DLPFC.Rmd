@@ -80,7 +80,7 @@ a selection of 6 methods we tested in our deconvolution benchmark
 |-------------------|-----------------|-----------------|---------------------|
 | weighted least squares  | DWLS       | Tsoucas et al, Nature Comm, 2019        | [R Package Cran](https://cran.r-project.org/web/packages/DWLS/index.html) |
 | Bias correction: Assay  | Bisque     | Jew et al, Nature Comm, 2020            | R Package github                                                          |
-| Bias correction: Sourse | MuSiC      | Wang et al, Nature Communications, 2019 | R Package github                                                          |
+| Bias correction: Source | MuSiC      | Wang et al, Nature Communications, 2019 | R Package github                                                          |
 | Machine Learning        | CIBERSORTx | Newman et al., Nature BioTech, 2019     | [Webtool](https://cibersortx.stanford.edu/)                               |
 | Bayesian                | BayesPrism | Chu et al., Nature Cancer, 2022         | [Webtool/R Package](https://github.com/Danko-Lab/BayesPrism)              |
 | linear                  | Hspe       | Hunt et al., Ann. Appl. Stat, 2021      | [R package github](https://gjhunt.github.io/hspe/)                        |
@@ -158,7 +158,7 @@ RiboZeroGold), and three different `RNA_extraction` (Cyto, Total, Nuc),
 post quality control n=110 samples.
 
 ```{r "load rse_gene"}
-## use fetch deconvon data to load rse_gene
+## use fetch deconvo data to load rse_gene
 rse_gene <- fetch_deconvo_data("rse_gene")
 rse_gene
 # lobstr::obj_size(rse_gene)
@@ -355,7 +355,7 @@ exp_set_bulk <- Biobase::ExpressionSet(
 )
 
 ## convert snRNA-seq data to Expression set, sub-setting to marker genes
-## include cell type and dononr information
+## include cell type and donor information
 exp_set_sce <- Biobase::ExpressionSet(
     assayData = as.matrix(assays(sce[marker_genes, ])$counts),
     phenoData = AnnotatedDataFrame(
@@ -415,7 +415,7 @@ pd <- colData(rse_gene) |>
     as.data.frame() |>
     select(SAMPLE_ID, Sample, library_combo)
 
-## make proption estimates long so they are ggplot friendly
+## make proportion estimates long so they are ggplot friendly
 prop_long <- est_prop$bulk.props |>
     as.data.frame() |>
     tibble::rownames_to_column("SAMPLE_ID") |>
@@ -505,7 +505,7 @@ if (FALSE) {
     mixture_samples <- t(assays(rse_gene)$logcounts)
     mixture_samples[1:5, 1:5]
 
-    ## create a vector of indexes of the differnt cell types
+    ## create a vector of indexes of the different cell types
     pure_samples <- rafalib::splitit(sce_pb$cellType_broad_hc)
 
     ## extract the the pseudobulked logcounts
