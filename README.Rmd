@@ -72,7 +72,6 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 suppressMessages({
     library("DeconvoBuddies")
 })
-
 ```
 
 ### Access Datasets
@@ -95,9 +94,11 @@ and plotting functions to quickly visualize the expression of selected genes in 
 snRNA-seq data.
 
 ```{r plot_gene_expression, echo=FALSE, warning=FALSE}
-plot_gene_express(sce = sce_DLPFC_example, 
-                  category = "cellType_broad_hc", 
-                  genes = c("GAD2", "CD22"))
+plot_gene_express(
+    sce = sce_DLPFC_example,
+    category = "cellType_broad_hc",
+    genes = c("GAD2", "CD22")
+)
 ```
 
 ### Plot Deconvoltion Cell Type Proportions
@@ -109,12 +110,14 @@ set.seed(123)
 ## pivot data to long format and join with test estimated proportion data
 est_prop_long <- est_prop |>
     tibble::rownames_to_column("RNum") |>
-    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") 
+    tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop")
 
 ## composition bar plot
-plot_composition_bar(est_prop_long |> 
-                       dplyr::filter(RNum %in% sample(rownames(est_prop), 10)),
-                     x_col = "RNum") 
+plot_composition_bar(
+    est_prop_long |>
+        dplyr::filter(RNum %in% sample(rownames(est_prop), 10)),
+    x_col = "RNum"
+)
 ```
 
 ## Citation

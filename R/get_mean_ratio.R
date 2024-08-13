@@ -3,14 +3,14 @@
 #' Calculate the mean ratio value and rank for each gene for each cell type in the `sce`
 #' object, to identify effective marker genes for deconvolution.
 #'
-#' Note if a cell type has < 10 cells the MeanRatio results may be unstable. 
+#' Note if a cell type has < 10 cells the MeanRatio results may be unstable.
 #' See rational in OSCA: <https://bioconductor.org/books/3.19/OSCA.multisample/multi-sample-comparisons.html#performing-the-de-analysis>
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class]
 #' (or any derivative class) object containing single cell/nucleus gene expression data
 #' @param cellType_col A `character(1)` name of the column in the
 #' [colData()][SummarizedExperiment::SummarizedExperiment-class] of `sce` that
-#' denotes the cell type or group of interest. 
+#' denotes the cell type or group of interest.
 #' @param assay_name A `character(1)` specifying the name of the
 #' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
 #' `sce` object to use to rank expression values. Defaults to `logcounts` since
@@ -28,7 +28,7 @@
 #' * `mean.2nd` is the mean expression of `gene` for `cellType.2nd`.
 #' * `MeanRatio` is the ratio of `mean.target/mean.2nd`.
 #' * `MeanRatio.rank` is the rank of `MeanRatio` for the cell type.
-#' * `MeanRatio.anno` is an annotation of the `MeanRatio` calculation helpful 
+#' * `MeanRatio.anno` is an annotation of the `MeanRatio` calculation helpful
 #' for plotting.
 #' * `gene_ensembl` & `gene_name` optional cols from `rowData(sce)`specified by
 #'  the user to add gene information
@@ -56,22 +56,22 @@
 #' SummarizedExperiment::rowData(sce_DLPFC_example)
 #'
 #' ## specify rowData col names for gene_name and gene_ensembl
-#'  get_mean_ratio(sce_DLPFC_example, 
-#'                 cellType_col = "cellType_broad_hc", 
-#'                 gene_name = "gene_name", 
-#'                 gene_ensembl = "gene_id")
+#' get_mean_ratio(sce_DLPFC_example,
+#'     cellType_col = "cellType_broad_hc",
+#'     gene_name = "gene_name",
+#'     gene_ensembl = "gene_id"
+#' )
 #'
 #' @importFrom dplyr mutate
 #' @importFrom dplyr arrange
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom matrixStats rowMedians
-get_mean_ratio <- function(
-        sce,
-        cellType_col,
-        assay_name = "logcounts",
-        gene_ensembl = NULL,
-        gene_name = NULL) {
+get_mean_ratio <- function(sce,
+    cellType_col,
+    assay_name = "logcounts",
+    gene_ensembl = NULL,
+    gene_name = NULL) {
     # RCMD fix
     cellType.target <- NULL
     cellType <- NULL

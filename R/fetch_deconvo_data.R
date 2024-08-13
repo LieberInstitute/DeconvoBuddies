@@ -45,7 +45,7 @@
 #'
 #' ## explore bulk data
 #' rse_gene
-#' 
+#'
 #' ## load example snRNA-seq data
 #' ## A SingleCellExperiment (4.79 MB)
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
@@ -64,11 +64,10 @@
 #'     file.path(tempdir(), "sce_DLPFC_annotated")
 #' )
 #' }
-fetch_deconvo_data <- function(
-        type = c("rse_gene", "sce", "sce_DLPFC_example"),
-        destdir = tempdir(),
-        eh = ExperimentHub::ExperimentHub(),
-        bfc = BiocFileCache::BiocFileCache()) {
+fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_DLPFC_example"),
+    destdir = tempdir(),
+    eh = ExperimentHub::ExperimentHub(),
+    bfc = BiocFileCache::BiocFileCache()) {
     rse_gene <- sce_DLPFC_example <- NULL
 
     ## Choose a type among the valid options

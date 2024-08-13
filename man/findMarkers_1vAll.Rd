@@ -66,10 +66,10 @@ table(sce_DLPFC_example$cellType_broad_hc)
 
 ## Get the 1vALL stats for each gene for each cell type defined in `cellType_broad_hc`
 marker_stats_1vAll <- findMarkers_1vAll(
- sce = sce_DLPFC_example,
- assay_name = "logcounts",
- cellType_col = "cellType_broad_hc",
- mod = "~BrNum"
+    sce = sce_DLPFC_example,
+    assay_name = "logcounts",
+    cellType_col = "cellType_broad_hc",
+    mod = "~BrNum"
 )
 
 ## explore output, top markers have high logFC

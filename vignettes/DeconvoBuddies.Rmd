@@ -176,9 +176,10 @@ These values can be calculated for a single cell RNA-seq dataset using
 ```{r `get_mean_ratio2 demo`}
 ## find marker genes with get_mean_ratio
 marker_stats <- get_mean_ratio(sce_DLPFC_example,
-                               cellType_col = "cellType_broad_hc", 
-                               gene_name = "gene_name", 
-                               gene_ensembl = "gene_id")
+    cellType_col = "cellType_broad_hc",
+    gene_name = "gene_name",
+    gene_ensembl = "gene_id"
+)
 
 ## explore tibble output, gene with high MeanRatio values are good marker genes
 marker_stats
@@ -274,14 +275,16 @@ pd <- colData(rse_bulk_test) |>
 est_prop_long <- est_prop |>
     rownames_to_column("RNum") |>
     pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-    left_join(pd) 
+    left_join(pd)
 
 ## explore est_prop_long
 est_prop_long
 
 ## the composition bar plot shows cell type composition for Sample
-plot_composition_bar(est_prop_long, x_col = "RNum",
-                     add_text = FALSE) +
+plot_composition_bar(est_prop_long,
+    x_col = "RNum",
+    add_text = FALSE
+) +
     ggplot2::scale_fill_manual(values = test_cell_colors_classic)
 
 ## the composition bar plot shows the average cell type composition for each Dx

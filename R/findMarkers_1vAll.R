@@ -5,11 +5,11 @@
 #' @param assay_name Name of the assay to use for calculation
 #' @param cellType_col Column name on colData of the sce that denotes the celltype
 #' @param add_symbol Add the gene symbol column to the marker stats table
-#' @param mod String specifying the model used as design in findMarkers. 
-#' Can be `NULL` (default) if there are no blocking terms with uninteresting 
+#' @param mod String specifying the model used as design in findMarkers.
+#' Can be `NULL` (default) if there are no blocking terms with uninteresting
 #' factors as documented at [pairwiseTTests][scran::pairwiseTTests].
 #' @param verbose Boolean choosing to print progress messages or not
-#' @param direction Choice of direction tested as markers, "up" (default), 
+#' @param direction Choice of direction tested as markers, "up" (default),
 #' "any", or "down". Impacts p-values, if "up" genes with logFC < 0 will have
 #'  p.value=1.
 #'
@@ -39,12 +39,12 @@
 #'
 #' ## Get the 1vALL stats for each gene for each cell type defined in `cellType_broad_hc`
 #' marker_stats_1vAll <- findMarkers_1vAll(
-#'  sce = sce_DLPFC_example,
-#'  assay_name = "logcounts",
-#'  cellType_col = "cellType_broad_hc",
-#'  mod = "~BrNum"
+#'     sce = sce_DLPFC_example,
+#'     assay_name = "logcounts",
+#'     cellType_col = "cellType_broad_hc",
+#'     mod = "~BrNum"
 #' )
-#' 
+#'
 #' ## explore output, top markers have high logFC
 #' head(marker_stats_1vAll)
 #'
@@ -52,13 +52,13 @@
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
 #' @importFrom tibble rownames_to_column as_tibble add_column
-findMarkers_1vAll <- function(sce, 
-                              assay_name = "counts", 
-                              cellType_col = "cellType", 
-                              add_symbol = FALSE,
-                              mod = NULL, 
-                              verbose = TRUE,
-                              direction = "up") {
+findMarkers_1vAll <- function(sce,
+    assay_name = "counts",
+    cellType_col = "cellType",
+    add_symbol = FALSE,
+    mod = NULL,
+    verbose = TRUE,
+    direction = "up") {
     # RCMD Fix
     gene <- rank_marker <- cellType.target <- std.logFC <- rowData <- Symbol <- NULL
 
@@ -68,7 +68,7 @@ findMarkers_1vAll <- function(sce,
     ## Traditional t-test with design as in PB'd/limma approach
     pd <- as.data.frame(SummarizedExperiment::colData(sce))
     # message("donor" %in% colnames(pd))
-    
+
     if (verbose) message("Running 1vALL Testing for ", direction, "-regulated genes")
 
     if (!is.null(mod)) {

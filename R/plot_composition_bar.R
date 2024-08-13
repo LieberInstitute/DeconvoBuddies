@@ -20,34 +20,33 @@
 #' est_prop_long <- est_prop |>
 #'     tibble::rownames_to_column("RNum") |>
 #'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
-#'     dplyr::inner_join(pd |> dplyr::select(RNum, Dx)) 
-#'     
+#'     dplyr::inner_join(pd |> dplyr::select(RNum, Dx))
+#'
 #' est_prop_long
 #'
 #' # Create composition bar plots
 #' # Mean composition of all samples
-#' plot_composition_bar(est_prop_long) 
-#' 
+#' plot_composition_bar(est_prop_long)
+#'
 #' # Mean composition by Dx
 #' plot_composition_bar(est_prop_long, x_col = "Dx")
-#' 
-#' # control minimum value of text to add 
+#'
+#' # control minimum value of text to add
 #' plot_composition_bar(est_prop_long, x_col = "Dx", min_prop_text = 0.1)
-#' 
+#'
 #' # plot all samples, then facet by Dx
-#' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) + 
-#' ggplot2::facet_wrap(~Dx, scales = "free_x")
+#' plot_composition_bar(est_prop_long, x_col = "RNum", add_text = FALSE) +
+#'     ggplot2::facet_wrap(~Dx, scales = "free_x")
 #'
 #' @importFrom dplyr rename group_by summarise mutate arrange
 #' @importFrom ggplot2 ggplot geom_bar geom_text aes theme element_text
-plot_composition_bar <- function(
-        prop_long,
-        sample_col = "RNum",
-        x_col = "ALL",
-        prop_col = "prop",
-        ct_col = "cell_type",
-        add_text = TRUE,
-        min_prop_text = 0) {
+plot_composition_bar <- function(prop_long,
+    sample_col = "RNum",
+    x_col = "ALL",
+    prop_col = "prop",
+    ct_col = "cell_type",
+    add_text = TRUE,
+    min_prop_text = 0) {
     x_cat <- cell_type <- anno_y <- NULL
 
     # ct_col <- dplyr::enquo(ct_col)
@@ -82,12 +81,11 @@ plot_composition_bar <- function(
 }
 
 
-.get_cat_prop <- function(
-        prop_long,
-        sample_col = "RNum",
-        x_col = "ALL",
-        prop_col = "prop",
-        ct_col = "cell_type") {
+.get_cat_prop <- function(prop_long,
+    sample_col = "RNum",
+    x_col = "ALL",
+    prop_col = "prop",
+    ct_col = "cell_type") {
     cell_type <- prop <- mean_prop <- x_cat <- anno_y <- sum_prop <- n <- NULL
 
     prop_long <- prop_long |>

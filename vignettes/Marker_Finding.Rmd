@@ -270,12 +270,11 @@ Note this function can take a bit of time to run.
 ```{r `Run findMarkers_1vALL`}
 ## Run 1vALL DE to find markers for each cell type
 marker_stats_1vAll <- findMarkers_1vAll(
- sce = sce, # sce is the SingleCellExperiment with our data
- assay_name = "counts",
- cellType_col = "cellType_broad_hc", # column in colData with cell type info
- mod = "~BrNum" # Control for donor stored in "BrNum" with mod
+    sce = sce, # sce is the SingleCellExperiment with our data
+    assay_name = "counts",
+    cellType_col = "cellType_broad_hc", # column in colData with cell type info
+    mod = "~BrNum" # Control for donor stored in "BrNum" with mod
 )
-
 ```
 
 The function `findMarkers_1vALL()` returns a `tibble` with the following
@@ -311,12 +310,11 @@ of the volcano shape. If you'd like all p-values set
 
 ```{r, "volcano plots"}
 # Create volcano plots of DE stats from 1vALL
-marker_stats_1vAll |> 
-  ggplot(aes(logFC, -log.p.value)) + 
-  geom_point() + 
-  facet_wrap(~cellType.target) +
-  geom_vline(xintercept = c(1, -1), linetype= "dashed", color = "red")
-
+marker_stats_1vAll |>
+    ggplot(aes(logFC, -log.p.value)) +
+    geom_point() +
+    facet_wrap(~cellType.target) +
+    geom_vline(xintercept = c(1, -1), linetype = "dashed", color = "red")
 ```
 
 # 5. Compare Marker Gene Selection
@@ -330,14 +328,13 @@ results.
 
 ```{r "join marker_stats"}
 ## join the two marker_stats tables
-marker_stats <- marker_stats_MeanRatio |> 
-  left_join(marker_stats_1vAll, by = join_by(gene, cellType.target))
+marker_stats <- marker_stats_MeanRatio |>
+    left_join(marker_stats_1vAll, by = join_by(gene, cellType.target))
 
 ## Check stats for our top genes
 marker_stats |>
     filter(MeanRatio.rank == 1) |>
-  select(gene, cellType.target, MeanRatio, MeanRatio.rank, std.logFC, std.logFC.rank)
-
+    select(gene, cellType.target, MeanRatio, MeanRatio.rank, std.logFC, std.logFC.rank)
 ```
 
 ## Hockey Stick Plots
@@ -368,10 +365,9 @@ box).
 ```{r "hockey stick plots"}
 # create hockey stick plots to compare MeanRatio and logFC values.
 marker_stats |>
-  ggplot(aes(MeanRatio, std.logFC)) +
-  geom_point() +
-  facet_wrap(~cellType.target)
-
+    ggplot(aes(MeanRatio, std.logFC)) +
+    geom_point() +
+    facet_wrap(~cellType.target)
 ```
 
 We can see a "hockey stick" shape in most of the cell types, with a few
@@ -388,12 +384,12 @@ gene expression at a few levels:
 violin plot.
 
 ```{r, "plot_gene_express"}
-
 ## plot expression of two genes from a list
-plot_gene_express(sce = sce, 
-                  category = "cellType_broad_hc", 
-                  genes = c("SLC2A1", "CREG2"))
-
+plot_gene_express(
+    sce = sce,
+    category = "cellType_broad_hc",
+    genes = c("SLC2A1", "CREG2")
+)
 ```
 
 `plot_marker_express()` plots the top n marker genes for a specified
@@ -401,16 +397,14 @@ cell type based on the values from `marker_stats`. Annotations for the
 details of the MeanRatio value + calculation are added to each panel.
 
 ```{r, "plot_marker_express MeanRatio"}
-
 # plot the top 10 MeanRatio genes for Excit
 plot_marker_express(
-  sce = sce,
-  stats = marker_stats,
-  cell_type = "Excit",
-  n_genes = 10,
-  cellType_col = "cellType_broad_hc"
+    sce = sce,
+    stats = marker_stats,
+    cell_type = "Excit",
+    n_genes = 10,
+    cellType_col = "cellType_broad_hc"
 )
-
 ```
 
 In these violin plots we can see these genes have high expression in the
@@ -421,18 +415,16 @@ This function defaults to selecting genes by the MeanRatio stats, but
 can also be used to plot the 1vAll genes.
 
 ```{r, "plot_marker_express logFC"}
-
 # plot the top 10 1vAll genes for Excit
 plot_marker_express(
-  sce = sce,
-  stats = marker_stats,
-  cell_type = "Excit",
-  n_genes = 10,
-  rank_col = "std.logFC.rank", ## use logFC cols from 1vALL
-  anno_col = "std.logFC.anno",
-  cellType_col = "cellType_broad_hc"
+    sce = sce,
+    stats = marker_stats,
+    cell_type = "Excit",
+    n_genes = 10,
+    rank_col = "std.logFC.rank", ## use logFC cols from 1vALL
+    anno_col = "std.logFC.anno",
+    cellType_col = "cellType_broad_hc"
 )
-
 ```
 
 We can see in the top 1vALL genes there is some expression of these
@@ -444,13 +436,12 @@ your dataset, which is an important step and can help identify genes
 with multimodal distributions that may confound the MeanRatio method.
 
 ```{r, plot_marker_express_ALL}
-
 # plot the top 10 1vAll genes for all cell types
 print(plot_marker_express_ALL(
-  sce = sce,
-  stats = marker_stats,
-  n_genes = 10,
-  cellType_col = "cellType_broad_hc"
+    sce = sce,
+    stats = marker_stats,
+    n_genes = 10,
+    cellType_col = "cellType_broad_hc"
 ))
 ```
 
