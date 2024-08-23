@@ -21,15 +21,18 @@ doi: \url{https://doi.org/10.1101/2024.02.09.579665}.
 \details{
 11.49 kB
 
-\code{SAMPLE_ID} : DLPFC Tissue block + RNAScope combination.
-\code{Sample} : DLFPC Tissue block (Donor BrNum + DLPFC position).
-\code{Combo} : RNAScope probe combination, either "Circle" marking cell types Astro
+These are the columns of the \code{data.frame} object:
+\itemize{
+\item \code{SAMPLE_ID} : DLPFC Tissue block + RNAScope combination.
+\item \code{Sample} : DLFPC Tissue block (Donor BrNum + DLPFC position).
+\item \code{Combo} : RNAScope probe combination, either "Circle" marking cell types Astro
 Endo, Inhib, or "Star" marking Excit, Micro, and OligoOPC.
-\code{cell_type} : The cell type measured.
-\code{Confidence} : Image confidence, this dataset has been filtered to the high & Ok confidence images.
-\code{n_cell} : the number of cells counted for the Sample and cell type.
-\code{prop} : the calculated cell type proportion from n_cell.
-\code{n_cell_sn} : number of nuclei in the corresponding snRNA-seq data.
-\code{prop_sn} : cell type proportion from the snRNA-seq data.
+\item \code{cell_type} : The cell type measured.
+\item \code{Confidence} : Image confidence, this dataset has been filtered to the high & Ok confidence images.
+\item \code{n_cell} : the number of cells counted for the Sample and cell type.
+\item \code{prop} : the calculated cell type proportion from n_cell.
+\item \code{n_cell_sn} : number of nuclei in the corresponding snRNA-seq data.
+\item \code{prop_sn} : cell type proportion from the snRNA-seq data.
+}
 }
 \keyword{datasets}
