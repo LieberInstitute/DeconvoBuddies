@@ -37,8 +37,8 @@ factors as documented at \link[scran:pairwiseTTests]{pairwiseTTests}.}
 not.}
 
 \item{direction}{A \code{character(1)} for the choice of direction tested for
-gene cell type markers: "up" (default), "any", or "down". Impacts p-values,
-if "up" genes with logFC < 0 will have \code{p.value = 1}.}
+gene cell type markers: \code{"up"} (default), \code{"any"}, or \code{"down"}. Impacts
+p-values: if \code{"up"} genes with logFC < 0 will have \code{p.value = 1}.}
 }
 \value{
 A \code{tibble::tibble()} of 1 vs. ALL standard log fold change + p-values

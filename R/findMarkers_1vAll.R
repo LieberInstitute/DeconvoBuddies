@@ -28,8 +28,8 @@
 #' @param verbose A `logical(1)` choosing whether to print progress messages or
 #' not.
 #' @param direction A `character(1)` for the choice of direction tested for
-#' gene cell type markers: "up" (default), "any", or "down". Impacts p-values,
-#' if "up" genes with logFC < 0 will have `p.value = 1`.
+#' gene cell type markers: `"up"` (default), `"any"`, or `"down"`. Impacts
+#' p-values: if `"up"` genes with logFC < 0 will have `p.value = 1`.
 #'
 #' @return A `tibble::tibble()` of 1 vs. ALL standard log fold change + p-values
 #' for each gene x cell type.
