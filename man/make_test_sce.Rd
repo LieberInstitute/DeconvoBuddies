@@ -2,26 +2,33 @@
 % Please edit documentation in R/make_test_sce.R
 \name{make_test_sce}
 \alias{make_test_sce}
-\title{Simulate a SingleCellExperiment for testing}
+\title{Simulate a
+\link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment} for
+testing.}
 \usage{
 make_test_sce(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 2)
 }
 \arguments{
-\item{n_cell}{Number of cells}
+\item{n_cell}{An \code{integer(1)} specifying the number of cells.}
 
-\item{n_gene}{Number of genes}
+\item{n_gene}{An \code{integer(1)} specifying the number of genes.}
 
-\item{n_cellType}{Number of cell types}
+\item{n_cellType}{An \code{integer(1)} specifying the number of cell types.}
 
-\item{n_donor}{Number of donors}
+\item{n_donor}{An \code{integer(1)} specifying the number of donors.}
 }
 \value{
-SingleCellExperiment object with randomly generated counts and colData
+A
+\link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment}
+object with randomly generated counts and \code{colData()}.
 }
 \description{
-Simulate a SingleCellExperiment for testing
+The counts are simulated from a poisson distribution with \code{stats::rpois()}.
+Use \code{set.seed()} if you want the results to be reproducible.
 }
 \examples{
+## Create an example sce using default values.
+set.seed(20240823)
 test <- make_test_sce()
-table(test$cellType, test$donor)
+addmargins(table(test$cellType, test$donor))
 }
