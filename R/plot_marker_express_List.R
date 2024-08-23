@@ -1,20 +1,15 @@
 #' Plot a nested list of genes as a multi-page pdf
 #'
-#' This function plots a nested list of genes as a multi-page PDF, one for each sub list.
-#' A use case is plotting known marker genes for multiple cell types over cell type
-#' clusters with unknown identities.
+#' This function plots a nested list of genes as a multi-page PDF, one for each
+#' sub list. A use case is plotting known marker genes for multiple cell types
+#' over cell type clusters with unknown identities.
 #'
-#' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
-#' @param pdf_fn A `character()` of the pdf filename to plot to, if `NULL` returns all plots
-#' @param gene_list A named list containing the names of genes to plot
-#' @param cellType_col The `character()` name of `colData` column containing cell type for `sce` data
-#' @param gene_name_col The `character()` name of `rowData` matching the gene name from `gene_list`
-#' @param color_pal  A named `character(1)` vector that contains a color pallet matching the values in `cellType_col`.
-#' @param plot_points A logical indicating whether to plot points over the violin,
-#' defaults to `FALSE` as these often become over plotted and quite large (especially when saved as PDF)
-#' #' @inheritParams plot_marker_express_ALL
+#' @param gene_list A named `list()` of `character()` vectors containing the
+#' names of genes to plot.
+#' @inheritParams plot_marker_express_ALL
 #'
-#' @return A pdf with violin plots for the expression of top marker genes for all cell types
+#' @return A PDF file with violin plots for the expression of top marker genes
+#' for all cell types.
 #'
 #' @export
 #'
