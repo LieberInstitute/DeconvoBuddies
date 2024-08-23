@@ -164,11 +164,11 @@ DLPFC](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark
 
 ## Marker Finding
 
-### Using MeanRatio to Find Cell Type Markers
+### Using *MeanRatio* to Find Cell Type Markers
 
 Accurate deconvolution requires highly specific marker genes for each
 cell type to be defined. To select genes specific for each cell type,
-you can evaluate the `MeanRatio` for each gene x each cell type, where
+you can evaluate the *MeanRatio* for each gene x each cell type, where
 `MeanRatio = mean(Expression  of target cell type) / mean(Expression of highest non-target cell type)`.
 
 
@@ -320,8 +320,8 @@ with `RNum` we can see more variability across the simulated data.
 Since you are now familiar with the basic overview of `DeconvoBuddies`, you are
 now ready to dive deeper into:
 
-* the application of `DeconvoBuddies` to the [Human Brain (DLPFC) Deconvolution dataset](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html)
-* as well as diving deeper into the [selection of marker genes](https://research.libd.org/DeconvoBuddies/articles/Marker_Finding.html).
+* the [selection of marker genes](https://research.libd.org/DeconvoBuddies/articles/Marker_Finding.html),
+* followed by the application of `DeconvoBuddies` to the [Human Brain (DLPFC) Deconvolution dataset](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html).
 
 # Reproducibility
 

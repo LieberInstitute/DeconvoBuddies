@@ -275,10 +275,10 @@ specific marker genes to reduce noise in deconvolution and increase
 accuracy.
 
 We have developed a method for finding marker genes called the "Mean
-Ratio". We calculate the `MeanRatio` for a target cell type for each
+Ratio". We calculate the *MeanRatio* for a target cell type for each
 gene by dividing the mean expression of the target cell by the mean
 expression of the next highest non-target cell type. Genes with the
-highest `MeanRatio` values are selected as marker genes.
+highest *MeanRatio* values are selected as marker genes.
 
 For a tutorial on marker gene selection check out  [Vignette: Finding Marker Genes with Deconvo Buddies](https://research.libd.org/DeconvoBuddies/articles/Marker_Finding.html).
 
@@ -292,7 +292,7 @@ selection](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ra
 ## Use `get_mean_ratio()` to find marker genes.
 
 The function `DeconvoBuddies::get_mean_ratio()` calculates the
-`Mean Ratio` and the rank of genes for a specified cell type annotation
+*MeanRatio* and the rank of genes for a specified cell type annotation
 in an `SingleCellExperiment` object.
 
 ```{r "Run Mean Ratio"}
@@ -309,7 +309,7 @@ marker_stats |>
     slice(1)
 ```
 
-The columns of this table are documented in detail at `DeconvoBuddies::get_mean_ratio()`. Though `cellType.target` lists the target cell type for which the `Mean Ratio` is being calculated. It is the numerator of the `Mean Ratio`. The `cellType.2nd` lists the cell type against which the target cell type is being compared. It is the denominator of the `Mean Ratio`.
+The columns of this table are documented in detail at `DeconvoBuddies::get_mean_ratio()`. Though `cellType.target` lists the target cell type for which the *MeanRatio* is being calculated. It is the numerator of the *MeanRatio*. The `cellType.2nd` lists the cell type against which the target cell type is being compared. It is the denominator of the *MeanRatio*.
 
 ## Plot the top marker genes
 
@@ -331,11 +331,11 @@ plot_marker_express(sce,
 
 Looks nice and cell type specific!
 
-Note how `plot_marker_express()` lists the 2 cell types that are being compared that result in the specific numerical `Mean Ratio` value being displayed. As we specified that our target cell type is `"Excit"` in our call to `plot_marker_express()`, the numerator is `Excit` in all the panels shown above.
+Note how `plot_marker_express()` lists the 2 cell types that are being compared that result in the specific numerical *MeanRatio* value being displayed. As we specified that our target cell type is `"Excit"` in our call to `plot_marker_express()`, the numerator is `Excit` in all the panels shown above.
 
 ### Create a List of Marker Genes
 
-With the `Mean Ratio` calculated, we will select the top 25 highest Mean
+With the *MeanRatio* calculated, we will select the top 25 highest Mean
 Ratio genes for each cell type, that also exists in the bulk data
 `rse_gene`.
 
@@ -362,7 +362,7 @@ top performing method. Below we will briefly show how to run `Bisque`'s
 
 To run `Bisque` the snRNA-seq and bulk data must first be converted to
 `Biobase::ExpressionSet()` format. We will subset our data to our selected
-`Mean Ratio` marker genes.
+*MeanRatio* marker genes.
 
 The snRNA-seq data must also be filtered for cells with no counts across
 marker genes.
