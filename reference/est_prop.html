@@ -74,7 +74,7 @@
 
     <div id="format">
     <h2>Format</h2>
-    <p>A data.frame object.</p>
+    <p>A <code>data.frame</code> object.</p>
     </div>
     <div id="source">
     <h2>Source</h2>
@@ -83,8 +83,26 @@
     <div id="details">
     <h2>Details</h2>
     <p>11.62 kB</p>
-    </div>
+<p>These are the columns of the <code>data.frame</code> object:</p><ul><li><p>cell_A: estimated proportions for cell type A</p></li>
+<li><p>cell_B: estimated proportions for cell type B</p></li>
+<li><p>cell_C: estimated proportions for cell type C</p></li>
+<li><p>cell_D: estimated proportions for cell type D</p></li>
+<li><p>cell_E: estimated proportions for cell type E</p></li>
+</ul></div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## R Note that the `rowSums(est_prop)` is equal to 1,</span></span></span>
+<span class="r-in"><span><span class="co">## with a small error tolerance.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">est_prop</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> -1.11e-16  0.00e+00  0.00e+00 -1.11e-18  0.00e+00  0.00e+00 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## You can check this yourself with:</span></span></span>
+<span class="r-in"><span><span class="fu">testthat</span><span class="fu">::</span><span class="fu"><a href="https://testthat.r-lib.org/reference/equality-expectations.html" class="external-link">expect_equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">est_prop</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">100</span><span class="op">)</span>, ignore_attr <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -93,7 +111,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Lousie Huuki-Myers.</p>
+  <p></p><p>Developed by Louise Huuki-Myers.</p>
 </div>
 
 <div class="pkgdown">

@@ -1,8 +1,8 @@
 pandoc: '3.3'
 pkgdown: 2.1.0.9000
-pkgdown_sha: 1d40a80e6b3564a6d7da0ce467b0a4570aa5665e
+pkgdown_sha: 020dc44c138193ad0a63a9778bb832ac7afed1f1
 articles:
   DeconvoBuddies: DeconvoBuddies.html
   Deconvolution_Benchmark_DLPFC: Deconvolution_Benchmark_DLPFC.html
   Marker_Finding: Marker_Finding.html
-last_built: 2024-08-13T16:50Z
+last_built: 2024-08-23T17:03Z
