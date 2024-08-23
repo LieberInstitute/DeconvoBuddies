@@ -25,6 +25,9 @@ names of genes to plot.}
 \item{cellType_col}{The \code{character(1)} name of \code{colData()} column containing
 cell type for \code{sce} data. It should match \code{cellType.target} in \code{stats}.}
 
+\item{gene_name_col}{The \code{character(1)} name of \code{rowData()} matching the
+gene name from \code{gene_list}.}
+
 \item{color_pal}{A named \code{character(1)} vector that contains a color pallet
 matching the \code{cell_type} values.}
 

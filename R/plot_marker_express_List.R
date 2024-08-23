@@ -6,6 +6,8 @@
 #'
 #' @param gene_list A named `list()` of `character()` vectors containing the
 #' names of genes to plot.
+#' @param gene_name_col The `character(1)` name of `rowData()` matching the
+#' gene name from `gene_list`.
 #' @inheritParams plot_marker_express_ALL
 #'
 #' @return A PDF file with violin plots for the expression of top marker genes
