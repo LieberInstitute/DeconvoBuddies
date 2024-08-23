@@ -1,19 +1,40 @@
-#' Create a Cell Color Pallet for Plots
+#' Create a cell color pallet for plots
 #'
-#' @param cell_types list of cell types
-#' @param pallet Choice of base pallet "classic", "gg", or "tableau"
-#' @param split delineating character in cell names
-#' @param preview plot preview of colors
+#' This function returns a `character()` vector with valid R colors for a given
+#' input `character()` of unique cell types. These were colors that have been
+#' useful in our experience.
 #'
-#' @return named vector of hex color values compatable with `ggplot2:scale_color_manual()`
+#' @param cell_types A `character()` vector listing unique cell types.
+#' @param pallet Choice of base pallet `"classic"`, `"gg"`, or `"tableau"`.
+#' @param split delineating `character(1)` after which suffixes will be ignored.
+#' This is useful for cases when say `A.1` and `A.2` are both to be considered
+#' as cell type `A` (here `split = "\\."`).
+#' @param preview A `logical(1)` indicating whether to make a plot to preview
+#' the colors.
+#'
+#' @return A named `character()` vector of R and hex color values compatible
+#' with `ggplot2:scale_color_manual()`.
 #' @export
 #'
 #' @examples
 #' create_cell_colors(pallet = "classic")
 #' create_cell_colors(pallet = "classic", preview = TRUE)
 #' create_cell_colors(pallet = "tableau", preview = TRUE)
-#' create_cell_colors(cell_types = c("A.1", "A.2", "B.1", "C"), split = "\\.", pallet = "gg", preview = TRUE)
-#' create_cell_colors(cell_types = c("A.1", "A.2", "B.1", "C", "D"), pallet = "gg", preview = TRUE)
+#'
+#' ## Consider A.1 and A.2 as two different cell types (default)
+#' create_cell_colors(
+#'     cell_types = c("A.1", "A.2", "B.1", "C", "D"),
+#'     pallet = "gg",
+#'     preview = TRUE
+#' )
+#'
+#' ## Consider A.1 and A.2 as cell type A by using the "split" argument
+#' create_cell_colors(
+#'     cell_types = c("A.1", "A.2", "B.1", "C"),
+#'     split = "\\.",
+#'     pallet = "gg",
+#'     preview = TRUE
+#' )
 #' @importFrom RColorBrewer brewer.pal
 #' @importFrom grDevices colorRampPalette
 #' @importFrom rafalib splitit
