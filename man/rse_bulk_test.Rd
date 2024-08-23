@@ -14,7 +14,7 @@ A \code{SummarizedExperiment} object.
 rse_bulk_test
 }
 \description{
-A test rse_gene object, 1000 genes x 100 samples
+A test \code{rse_gene} object with data for 1000 genes across 100 samples.
 }
 \details{
 976.77 kB

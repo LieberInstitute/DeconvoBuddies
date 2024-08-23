@@ -25,17 +25,19 @@
 
 #' Markers stats from sce_DLPFC_example
 #'
-#' A tibble containing the marker stats from `get_mean_ratio` for `sce_DLPFC_example`.
+#' A tibble containing the marker stats from `get_mean_ratio()` for
+#' `sce_DLPFC_example`.
 #'
 #' 402.60 kB
 #'
-#' @format tibble.
+#' @format `tibble`. See `get_mean_ratio()` for more details on the column
+#' names.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/marker_test.R>
 "marker_test"
 
 #' Test bulk rse dataset
 #'
-#' A test rse_gene object, 1000 genes x 100 samples
+#' A test `rse_gene` object with data for 1000 genes across 100 samples.
 #'
 #' 976.77 kB
 #' @format A `SummarizedExperiment` object.
@@ -44,9 +46,9 @@
 
 #' Toy SCE object for testing
 #'
-#' An example sce object for testing, with two cell types A and B.
+#' An example `sce` object for testing, with two cell types A and B.
 #'
-#' Generated with DeconvoBuddies::make_test_sce()
+#' Generated with `DeconvoBuddies::make_test_sce()`
 #' 38.26 kB
 #'
 #' @format A `SingleCellExperiment` object.
