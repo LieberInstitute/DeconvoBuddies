@@ -44,7 +44,7 @@ at \url{https://github.com/LieberInstitute/Human_DLPFC_Deconvolution}.
 Internally, this function downloads the data from \code{ExperimentHub}.
 }
 \details{
-Ee currently waiting for \url{https://doi.org/10.1101/2024.02.09.579665} to
+We are currently waiting for \url{https://doi.org/10.1101/2024.02.09.579665} to
 pass peer review at a journal, which could lead to changes requested by the
 peer reviewers on the processed data for this study. Thus, this function
 temporarily downloads the files from Dropbox using
