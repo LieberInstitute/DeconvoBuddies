@@ -1,24 +1,43 @@
 #' Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
-#' function for scran::findMarkers
+#' function for `scran::findMarkers()`.
 #'
-#' @param sce single cell experiment object
-#' @param assay_name Name of the assay to use for calculation
-#' @param cellType_col Column name on colData of the sce that denotes the celltype
-#' @param add_symbol Add the gene symbol column to the marker stats table
-#' @param mod String specifying the model used as design in findMarkers.
-#' Can be `NULL` (default) if there are no blocking terms with uninteresting
+#' For each cell type, this function computes the statistics comparing that cell
+#' type (the "1") against all other cell types combined ("All").
+#'
+#' See <https://github.com/MarioniLab/scran/issues/57> for a more in depth
+#' discussion about the standard log fold change statistics provided by
+#' `scran::findMarkers()`.
+#'
+#' See also <https://youtu.be/IaclszgZb-g> for a LIBD
+#' rstats club presentation on "Finding and interpreting marker genes in
+#' sc/snRNA-seq data". The companion notes are available at
+#' <https://docs.google.com/document/d/1BeMtKgE7gpmNywInndVC9o_ufopn-U2EZHB32bO7ObM/edit?usp=sharing>.
+#'
+#' @param sce A
+#' [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment-class]
+#' object.
+#' @param assay_name Name of the assay to use for calculation. See
+#' see `assayNames(sce)` for possible values.
+#' @param cellType_col Column name on `colData(sce)` that denotes the cell type.
+#' @param add_symbol A `logical(1)` indicating whether to add the gene symbol
+#' column to the marker stats table.
+#' @param mod A `character(1)` string specifying the model used as design in
+#' `scran::findMarkers()`. It can be `NULL` (default) if there are no blocking
+#' terms with uninteresting
 #' factors as documented at [pairwiseTTests][scran::pairwiseTTests].
-#' @param verbose Boolean choosing to print progress messages or not
-#' @param direction Choice of direction tested as markers, "up" (default),
-#' "any", or "down". Impacts p-values, if "up" genes with logFC < 0 will have
-#'  p.value=1.
+#' @param verbose A `logical(1)` choosing whether to print progress messages or
+#' not.
+#' @param direction A `character(1)` for the choice of direction tested for
+#' gene cell type markers: "up" (default), "any", or "down". Impacts p-values,
+#' if "up" genes with logFC < 0 will have `p.value = 1`.
 #'
-#' @return Tibble of 1 vs. ALL std log fold change + p-values for each gene x cell type
-#' -   `gene` is the name of the gene (from rownames(`sce`)).
+#' @return A `tibble::tibble()` of 1 vs. ALL standard log fold change + p-values
+#' for each gene x cell type.
+#' -   `gene` is the name of the gene (from `rownames(sce)`).
 #' -   `logFC` the log fold change from the DE test
 #' -   `log.p.value` the log of the p-value of the DE test
 #' -   `log.FDR` the log of the False Discovery Rate adjusted p.value
-#' -   `std.logFC` the standard logFC
+#' -   `std.logFC` the standard logFC.
 #' -   `cellType.target` the cell type we're finding marker genes for
 #' -   `std.logFC.rank` the rank of `std.logFC` for each cell type
 #' -   `std.logFC.anno` is an annotation of the `std.logFC` value
@@ -37,7 +56,8 @@
 #' ## nuclei are classified in to cell types
 #' table(sce_DLPFC_example$cellType_broad_hc)
 #'
-#' ## Get the 1vALL stats for each gene for each cell type defined in `cellType_broad_hc`
+#' ## Get the 1vALL stats for each gene for each cell type defined in
+#' ## `cellType_broad_hc`
 #' marker_stats_1vAll <- findMarkers_1vAll(
 #'     sce = sce_DLPFC_example,
 #'     assay_name = "logcounts",

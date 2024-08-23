@@ -3,7 +3,7 @@
 \name{findMarkers_1vAll}
 \alias{findMarkers_1vAll}
 \title{Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
-function for scran::findMarkers}
+function for \code{scran::findMarkers()}.}
 \usage{
 findMarkers_1vAll(
   sce,
@@ -16,32 +16,39 @@ findMarkers_1vAll(
 )
 }
 \arguments{
-\item{sce}{single cell experiment object}
+\item{sce}{A
+\link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment}
+object.}
 
-\item{assay_name}{Name of the assay to use for calculation}
+\item{assay_name}{Name of the assay to use for calculation. See
+see \code{assayNames(sce)} for possible values.}
 
-\item{cellType_col}{Column name on colData of the sce that denotes the celltype}
+\item{cellType_col}{Column name on \code{colData(sce)} that denotes the cell type.}
 
-\item{add_symbol}{Add the gene symbol column to the marker stats table}
+\item{add_symbol}{A \code{logical(1)} indicating whether to add the gene symbol
+column to the marker stats table.}
 
-\item{mod}{String specifying the model used as design in findMarkers.
-Can be \code{NULL} (default) if there are no blocking terms with uninteresting
+\item{mod}{A \code{character(1)} string specifying the model used as design in
+\code{scran::findMarkers()}. It can be \code{NULL} (default) if there are no blocking
+terms with uninteresting
 factors as documented at \link[scran:pairwiseTTests]{pairwiseTTests}.}
 
-\item{verbose}{Boolean choosing to print progress messages or not}
+\item{verbose}{A \code{logical(1)} choosing whether to print progress messages or
+not.}
 
-\item{direction}{Choice of direction tested as markers, "up" (default),
-"any", or "down". Impacts p-values, if "up" genes with logFC < 0 will have
-p.value=1.}
+\item{direction}{A \code{character(1)} for the choice of direction tested for
+gene cell type markers: "up" (default), "any", or "down". Impacts p-values,
+if "up" genes with logFC < 0 will have \code{p.value = 1}.}
 }
 \value{
-Tibble of 1 vs. ALL std log fold change + p-values for each gene x cell type
+A \code{tibble::tibble()} of 1 vs. ALL standard log fold change + p-values
+for each gene x cell type.
 \itemize{
-\item \code{gene} is the name of the gene (from rownames(\code{sce})).
+\item \code{gene} is the name of the gene (from \code{rownames(sce)}).
 \item \code{logFC} the log fold change from the DE test
 \item \code{log.p.value} the log of the p-value of the DE test
 \item \code{log.FDR} the log of the False Discovery Rate adjusted p.value
-\item \code{std.logFC} the standard logFC
+\item \code{std.logFC} the standard logFC.
 \item \code{cellType.target} the cell type we're finding marker genes for
 \item \code{std.logFC.rank} the rank of \code{std.logFC} for each cell type
 \item \code{std.logFC.anno} is an annotation of the \code{std.logFC} value
@@ -49,8 +56,18 @@ helpful for plotting.
 }
 }
 \description{
-Calculate 1 vs. All standard fold change for each gene x cell type, wrapper
-function for scran::findMarkers
+For each cell type, this function computes the statistics comparing that cell
+type (the "1") against all other cell types combined ("All").
+}
+\details{
+See \url{https://github.com/MarioniLab/scran/issues/57} for a more in depth
+discussion about the standard log fold change statistics provided by
+\code{scran::findMarkers()}.
+
+See also \url{https://youtu.be/IaclszgZb-g} for a LIBD
+rstats club presentation on "Finding and interpreting marker genes in
+sc/snRNA-seq data". The companion notes are available at
+\url{https://docs.google.com/document/d/1BeMtKgE7gpmNywInndVC9o_ufopn-U2EZHB32bO7ObM/edit?usp=sharing}.
 }
 \examples{
 ## load example SingleCellExperiment
@@ -64,7 +81,8 @@ SummarizedExperiment::assays(sce_DLPFC_example)$logcounts[1:5, 1:5]
 ## nuclei are classified in to cell types
 table(sce_DLPFC_example$cellType_broad_hc)
 
-## Get the 1vALL stats for each gene for each cell type defined in `cellType_broad_hc`
+## Get the 1vALL stats for each gene for each cell type defined in
+## `cellType_broad_hc`
 marker_stats_1vAll <- findMarkers_1vAll(
     sce = sce_DLPFC_example,
     assay_name = "logcounts",
