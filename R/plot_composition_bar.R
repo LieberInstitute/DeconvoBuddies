@@ -1,6 +1,10 @@
 #' Create barplot of average cell type composition
 #'
-#' @param prop_long data.frame of cell type portions in long form
+#' Given a long formatted `data.frame`, this function creates a barplot for
+#' the average cell type composition among a set of samples (donors) using
+#' `ggplot2`.
+#'
+#' @param prop_long A `data.frame` of cell type portions in long form
 #' @param sample_col name of column that identifies samples
 #' @param x_col category to divide samples by
 #' @param prop_col name of column containing proportion values
@@ -8,15 +12,16 @@
 #' @param add_text Add rounded proportion value to bars
 #' @param min_prop_text Minimum proportion to display text
 #'
-#' @return stacked barplot representing mean proportion of cell types for each group
+#' @return A stacked barplot `ggplot2` object representing the mean proportion
+#' of cell types for each group.
 #' @export
 #'
 #' @examples
-#' # extract relvant colData from rse
+#' # extract relevant colData from the example RangedSummarizedExperiment object
 #' pd <- SummarizedExperiment::colData(rse_bulk_test) |>
 #'     as.data.frame()
 #'
-#' # combine with est prop in long style table
+#' # combine with the example estimated proportions in a long style table
 #' est_prop_long <- est_prop |>
 #'     tibble::rownames_to_column("RNum") |>
 #'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>

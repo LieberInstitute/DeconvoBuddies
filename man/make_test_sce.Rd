@@ -30,5 +30,7 @@ Use \code{set.seed()} if you want the results to be reproducible.
 ## Create an example sce using default values.
 set.seed(20240823)
 test <- make_test_sce()
+
+## Let's check the number of cells per cell type from each donor
 addmargins(table(test$cellType, test$donor))
 }

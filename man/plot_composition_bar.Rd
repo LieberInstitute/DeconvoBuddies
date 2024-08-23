@@ -15,7 +15,7 @@ plot_composition_bar(
 )
 }
 \arguments{
-\item{prop_long}{data.frame of cell type portions in long form}
+\item{prop_long}{A \code{data.frame} of cell type portions in long form}
 
 \item{sample_col}{name of column that identifies samples}
 
@@ -30,17 +30,20 @@ plot_composition_bar(
 \item{min_prop_text}{Minimum proportion to display text}
 }
 \value{
-stacked barplot representing mean proportion of cell types for each group
+A stacked barplot \code{ggplot2} object representing the mean proportion
+of cell types for each group.
 }
 \description{
-Create barplot of average cell type composition
+Given a long formatted \code{data.frame}, this function creates a barplot for
+the average cell type composition among a set of samples (donors) using
+\code{ggplot2}.
 }
 \examples{
-# extract relvant colData from rse
+# extract relevant colData from the example RangedSummarizedExperiment object
 pd <- SummarizedExperiment::colData(rse_bulk_test) |>
     as.data.frame()
 
-# combine with est prop in long style table
+# combine with the example estimated proportions in a long style table
 est_prop_long <- est_prop |>
     tibble::rownames_to_column("RNum") |>
     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
