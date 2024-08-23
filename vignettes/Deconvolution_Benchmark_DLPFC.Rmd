@@ -1,5 +1,5 @@
 ---
-title: "Deconvolution Benchmark in Human DLPFC"
+title: "3. Deconvolution Benchmark in Human DLPFC"
 author: 
   - name: Louise Huuki-Myers
     affiliation:
@@ -15,7 +15,7 @@ output:
 date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
-  %\VignetteIndexEntry{Deconvolution_Benchmark_DLPFC}
+  %\VignetteIndexEntry{3. Deconvolution Benchmark in Human DLPFC}
   %\VignetteEncoding{UTF-8}  
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

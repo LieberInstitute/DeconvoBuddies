@@ -1,5 +1,5 @@
 ---
-title: "Finding Marker Genes with DeconvoBuddies"
+title: "2. Finding Marker Genes with DeconvoBuddies"
 author: 
   - name: Louise Huuki-Myers
     affiliation:
@@ -15,7 +15,7 @@ output:
 date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
-  %\VignetteIndexEntry{Finding Marker Genes with DeconvoBuddies}
+  %\VignetteIndexEntry{2. Finding Marker Genes with DeconvoBuddies}
   %\VignetteEncoding{UTF-8}  
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 

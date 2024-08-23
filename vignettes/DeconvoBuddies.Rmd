@@ -1,5 +1,5 @@
 ---
-title: "Introduction to DeconvoBuddies"
+title: "1. Introduction to DeconvoBuddies"
 author: 
   - name: Louise Huuki-Myers
     affiliation:
@@ -15,7 +15,7 @@ output:
 date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
-  %\VignetteIndexEntry{Introduction to DeconvoBuddies}
+  %\VignetteIndexEntry{1. Introduction to DeconvoBuddies}
   %\VignetteEncoding{UTF-8}  
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
