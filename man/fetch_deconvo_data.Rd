@@ -39,16 +39,23 @@ were previously downloaded to avoid re-downloading them.}
 The requested object: \code{rse_gene} that you assign to an object
 }
 \description{
-This function downloads from ExperimentHub, if ExperimentHub is not
-available, this function will download the files from Dropbox using
-BiocFileCache::bfcrpath() unless the files are present already at destdir.
+This function downloads the processed data for the experiment documented
+at \url{https://github.com/LieberInstitute/Human_DLPFC_Deconvolution}.
+Internally, this function downloads the data from \code{ExperimentHub}.
 }
 \details{
-Note that ExperimentHub and BiocFileCache will cache the data and
+Ee currently waiting for \url{https://doi.org/10.1101/2024.02.09.579665} to
+pass peer review at a journal, which could lead to changes requested by the
+peer reviewers on the processed data for this study. Thus, this function
+temporarily downloads the files from Dropbox using
+\code{BiocFileCache::bfcrpath()} unless the files are present already at
+\code{destdir}.
+
+Note that \code{ExperimentHub} and \code{BiocFileCache} will cache the data and
 automatically detect if you have previously downloaded it, thus making it
 the preferred way to interact with the data.
 
-Based on spatialLIBD::fetch_data()
+This function is based on \code{spatialLIBD::fetch_data()}.
 }
 \examples{
 ## Download the bulk RNA gene expression data
