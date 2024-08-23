@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deconvolution Benchmark in Human DLPFC • DeconvoBuddies</title>
+<title>3. Deconvolution Benchmark in Human DLPFC • DeconvoBuddies</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Deconvolution Benchmark in Human DLPFC">
+<meta property="og:title" content="3. Deconvolution Benchmark in Human DLPFC">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -59,10 +59,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Deconvolution_Benchmark_DLPFC.html">Deconvolution Benchmark in Human DLPFC</a>
+      <a href="../articles/Deconvolution_Benchmark_DLPFC.html">3. Deconvolution Benchmark in Human DLPFC</a>
     </li>
     <li>
-      <a href="../articles/Marker_Finding.html">Finding Marker Genes with DeconvoBuddies</a>
+      <a href="../articles/Marker_Finding.html">2. Finding Marker Genes with DeconvoBuddies</a>
     </li>
   </ul>
 </li>
@@ -90,7 +90,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Deconvolution Benchmark in Human DLPFC</h1>
+      <h1 data-toc-skip>3. Deconvolution Benchmark in Human DLPFC</h1>
                         <h4 data-toc-skip class="author">Louise
 Huuki-Myers</h4>
             <address class="author_afil">
@@ -122,15 +122,16 @@ dataset.</p>
 <p align="center">
 </p>
 <div class="float">
-<img src="http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution.png" alt="Use single cell data to infer the composition of bulk RNA-seq samples"><div class="figcaption">Use single cell data to infer the composition of
-bulk RNA-seq samples</div>
+<img src="http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution.png" alt="Figure 1. Overview on how to use single cell data to infer the composition of bulk RNA-seq samples"><div class="figcaption">Figure 1. Overview on how to use single cell
+data to infer the composition of bulk RNA-seq samples</div>
 </div>
 
 <div class="section level4">
 <h4 id="deconvolution-methods">Deconvolution Methods<a class="anchor" aria-label="anchor" href="#deconvolution-methods"></a>
 </h4>
 <p>There are 20+ published reference based deconvolution methods. Below
-are a selection of 6 methods we tested in our deconvolution benchmark <a href="https://doi.org/10.1101/2024.02.09.579665" class="external-link">pre-print</a>.</p>
+are a selection of 6 methods we tested in our <a href="https://doi.org/10.1101/2024.02.09.579665" class="external-link">deconvolution benchmark
+study</a>.</p>
 <table class="table">
 <colgroup>
 <col width="25%">
@@ -150,19 +151,20 @@ are a selection of 6 methods we tested in our deconvolution benchmark <a href="h
 <td>DWLS</td>
 <td>Tsoucas et al, Nature Comm, 2019</td>
 <td><a href="https://cran.r-project.org/web/packages/DWLS/index.html" class="external-link">R
-Package Cran</a></td>
+Package CRAN</a></td>
 </tr>
 <tr class="even">
 <td>Bias correction: Assay</td>
 <td>Bisque</td>
 <td>Jew et al, Nature Comm, 2020</td>
-<td>R Package github</td>
+<td><a href="https://github.com/cozygene/bisque" class="external-link">R Package
+GitHub</a></td>
 </tr>
 <tr class="odd">
 <td>Bias correction: Source</td>
 <td>MuSiC</td>
 <td>Wang et al, Nature Communications, 2019</td>
-<td>R Package github</td>
+<td><a href="https://github.com/xuranw/MuSiC" class="external-link">R Package GitHub</a></td>
 </tr>
 <tr class="even">
 <td>Machine Learning</td>
@@ -181,7 +183,7 @@ Package</a></td>
 <td>linear</td>
 <td>Hspe</td>
 <td>Hunt et al., Ann. Appl. Stat, 2021</td>
-<td><a href="https://gjhunt.github.io/hspe/" class="external-link">R package github</a></td>
+<td><a href="https://gjhunt.github.io/hspe/" class="external-link">R package GitHub</a></td>
 </tr>
 </tbody>
 </table>
@@ -207,7 +209,8 @@ when applying deconvolution with the <code>Bisque</code> package.</p>
 <h3 id="video-tutorial">Video Tutorial<a class="anchor" aria-label="anchor" href="#video-tutorial"></a>
 </h3>
 <p>Linked is a video from a presentation of an earlier version of this
-tutorial from our LIBD Rstats club.</p>
+tutorial from our <a href="https://research.libd.org/rstatsclub/" class="external-link">LIBD
+Rstats club</a>.</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6fTnp_hcYeI?si=UbkGNclU2q8I8WXO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 </iframe>
 </div>
@@ -241,17 +244,27 @@ by using the following commands in your <code>R</code> session:</p>
 <div class="section level3">
 <h3 id="load-other-packages">Load Other Packages<a class="anchor" aria-label="anchor" href="#load-other-packages"></a>
 </h3>
+<p>Let’s load the packages we’ll be using in this vignette.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/LieberInstitute/spatialLIBD" class="external-link">"spatialLIBD"</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/lahuuki/DeconvoBuddies" class="external-link">"DeconvoBuddies"</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co">## Packages for different types of RNA-seq data structures in R</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">"SummarizedExperiment"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"SingleCellExperiment"</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://www.biorxiv.org/content/10.1101/669911v1" class="external-link">"BisqueRNA"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.org/packages/Biobase" class="external-link">"Biobase"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## For downloading data</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/LieberInstitute/spatialLIBD" class="external-link">"spatialLIBD"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## For running deconvolution</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://www.biorxiv.org/content/10.1101/669911v1" class="external-link">"BisqueRNA"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Other helper packages for this vignette</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyr.tidyverse.org" class="external-link">"tidyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://tibble.tidyverse.org/" class="external-link">"tibble"</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Our main package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/lahuuki/DeconvoBuddies" class="external-link">"DeconvoBuddies"</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -260,16 +273,17 @@ by using the following commands in your <code>R</code> session:</p>
 <div class="section level3">
 <h3 id="bulk-rna-seq-data">Bulk RNA-seq data<a class="anchor" aria-label="anchor" href="#bulk-rna-seq-data"></a>
 </h3>
-<p>Access the 110 sample Human DLPFC bulk RNA-seq dataset for LIBD.
+<p>Access the 110 sample Human DLPFC bulk RNA-seq dataset for LIBD
+described in more detail <a href="https://github.com/LieberInstitute/Human_DLPFC_Deconvolution" class="external-link">here</a>.
 These samples<br>
 are from 19 tissue blocks, and 10 neurotypical adult donors. Samples
 were sequenced with two different <code>library_types</code> (polyA and
 RiboZeroGold), and three different <code>RNA_extraction</code> (Cyto,
-Total, Nuc), post quality control n=110 samples.</p>
+Total, Nuc). There are in total n=110 samples after quality control.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## use fetch deconvo data to load rse_gene</span></span>
 <span><span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-23 18:39:17.347621 loading file /github/home/.cache/R/BiocFileCache/26068bccb29_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-23 22:32:25.907382 loading file /github/home/.cache/R/BiocFileCache/1d419ca4697_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
 <span><span class="va">rse_gene</span></span>
 <span><span class="co">#&gt; class: RangedSummarizedExperiment </span></span>
 <span><span class="co">#&gt; dim: 21745 110 </span></span>
@@ -285,11 +299,11 @@ Total, Nuc), post quality control n=110 samples.</p>
 <span><span class="co"># lobstr::obj_size(rse_gene)</span></span>
 <span><span class="co"># 41.16 MB</span></span>
 <span></span>
-<span><span class="co">## Use Symbol as rownames</span></span>
-<span></span>
+<span><span class="co">## Use gene "Symbol" as identifiers for the genes in rownames(rse_gene)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">rowData</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span><span class="op">$</span><span class="va">Symbol</span></span>
 <span></span>
-<span><span class="co">## bulk RNA seq samples were sequenced with different library types, and RNA extractions</span></span>
+<span><span class="co">## bulk RNA seq samples were sequenced with different library types,</span></span>
+<span><span class="co">## and RNA extractions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">$</span><span class="va">library_type</span>, <span class="va">rse_gene</span><span class="op">$</span><span class="va">library_prep</span><span class="op">)</span></span>
 <span><span class="co">#&gt;               </span></span>
 <span><span class="co">#&gt;                Bulk Cyto Nuc</span></span>
@@ -303,9 +317,9 @@ Total, Nuc), post quality control n=110 samples.</p>
 <code>spatialLIBD</code>. This dataset can be accessed with
 <code><a href="https://rdrr.io/pkg/spatialLIBD/man/fetch_data.html" class="external-link">spatialLIBD::fetch_data()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset</span></span>
+<code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset used in this project</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-23 18:39:19.618658 loading file /github/home/.cache/R/BiocFileCache/2603c67c65c_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-23 22:32:29.043671 loading file /github/home/.cache/R/BiocFileCache/1d4602f9741_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span></span>
 <span><span class="co">## unzip and load the data</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -320,8 +334,11 @@ Total, Nuc), post quality control n=110 samples.</p>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="va">sce</span><span class="op">[</span>, <span class="va">sce</span><span class="op">$</span><span class="va">cellType_broad_hc</span> <span class="op">!=</span> <span class="st">"Ambiguous"</span><span class="op">]</span></span>
 <span><span class="va">sce</span><span class="op">$</span><span class="va">cellType_broad_hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html" class="external-link">droplevels</a></span><span class="op">(</span><span class="va">sce</span><span class="op">$</span><span class="va">cellType_broad_hc</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co">## Check the number of genes by the number of nuclei that we</span></span>
+<span><span class="co">## have to work with:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 36601 56447</span></span>
+<span></span>
 <span><span class="co">## Check the broad cell type distribution</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">sce</span><span class="op">$</span><span class="va">cellType_broad_hc</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -329,22 +346,30 @@ Total, Nuc), post quality control n=110 samples.</p>
 <span><span class="co">#&gt;      3979      2157      1601     10894      1940     24809     11067</span></span>
 <span></span>
 <span><span class="co">## We're going to subset to the first 5k genes to save memory</span></span>
+<span><span class="co">## just for this example. You wouldn't do this on a full analysis.</span></span>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="va">sce</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">5000</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="orthogonal-cell-type-proportion-from-rnascopeif">Orthogonal Cell Type Proportion from RNAScope/IF<a class="anchor" aria-label="anchor" href="#orthogonal-cell-type-proportion-from-rnascopeif"></a>
 </h3>
 <p>An alternative method for calculating cell type proportions is
-through imaging a slice of tissue with cell type probes (RNAScope/IF).
-Then analyse the image to count cells and annotate them by cell type (we
-used HALO from Indica Labs)</p>
+through imaging a slice of tissue with cell type probes using single
+molecule fluorescent <em>in situ</em> hybridization (smFISH) experiments
+performed with RNAScope/IF (ImmunoFluorescence). Then analyse the image
+to count cells and annotate them by cell type. In this study we used <a href="https://indicalab.com/halo/" class="external-link">HALO from Indica Labs</a> for this
+step.</p>
 <p>The cell type proportions from the RNAScope/IF experiment will be
 used to evaluate the accuracy of cell type proportion estimates.</p>
 <p align="center">
 </p>
-<p><img src="http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proportions.png" alt="RNAScope/IF measures the cell type proportions through imaging">
-The RNAScope/IF proportion data is stored as a <code>data.frame</code>
-object in <code><a href="../reference/RNAScope_prop.html">DeconvoBuddies::RNAScope_prop</a></code>.</p>
+<div class="float">
+<img src="http://research.libd.org/DeconvoBuddies/reference/figures/Deconvolution_compare_proportions.png" alt="Figure 2. RNAScope/IF measures the cell type proportions through imaging"><div class="figcaption">Figure 2. RNAScope/IF measures the cell type
+proportions through imaging</div>
+</div>
+
+<p>The RNAScope/IF proportion data is stored as a
+<code>data.frame</code> object in
+<code><a href="../reference/RNAScope_prop.html">DeconvoBuddies::RNAScope_prop</a></code>.</p>
 <p>Key columns in <code>RNAScope_prop</code>:</p>
 <ul>
 <li><p><code>SAMPLE_ID</code>: DLPFC Tissue block + RNAScope
@@ -384,6 +409,15 @@ n_cell</p></li>
 <span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">Combo</span>, nrow <span class="op">=</span> <span class="fl">2</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Deconvolution_Benchmark_DLPFC_files/figure-html/access%20RNAScope%20proportions-1.png" width="700"></p>
+<p>Above we can see the cell proportions for each of the samples in
+either the <code>Circle</code> or the <code>Star</code> combination of
+RNAScope/IF probes. Each combination of RNAScope/IF probes was able to
+assess different sets of cell types. Two of them had to be used to
+measure the number of cell types studied in this case as there are
+limits on how many unique probes you can measure in a given RNAScope/IF
+experiment. For more details about the RNAScope/IF combinations, check
+the paper describing <a href="https://github.com/LieberInstitute/Human_DLPFC_Deconvolution" class="external-link">this
+study</a>.</p>
 </div>
 </div>
 <div class="section level2">
@@ -396,25 +430,25 @@ cell types, but here we are interested in using a sets of cell type
 specific marker genes to reduce noise in deconvolution and increase
 accuracy.</p>
 <p>We have developed a method for finding marker genes called the “Mean
-Ratio”. We calculate the <code>MeanRatio</code> for a target cell type
-for each gene by dividing the mean expression of the target cell by the
-mean expression of the next highest non-target cell type. Genes with the
-highest <code>MeanRatio</code> values are selected as marker genes.</p>
+Ratio”. We calculate the <em>MeanRatio</em> for a target cell type for
+each gene by dividing the mean expression of the target cell by the mean
+expression of the next highest non-target cell type. Genes with the
+highest <em>MeanRatio</em> values are selected as marker genes.</p>
 <p>For a tutorial on marker gene selection check out <a href="https://research.libd.org/DeconvoBuddies/articles/Marker_Finding.html" class="external-link">Vignette:
 Finding Marker Genes with Deconvo Buddies</a>.</p>
 <p align="center">
 </p>
 <div class="float">
-<img src="http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png" alt="Mean Ratio calculation process compared to 1vALL Marker Gene selection"><div class="figcaption">Mean Ratio calculation process compared to 1vALL
-Marker Gene selection</div>
+<img src="http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png" alt="Figure 3. Mean Ratio calculation process compared to 1vALL Marker Gene selection"><div class="figcaption">Figure 3. Mean Ratio calculation process
+compared to 1vALL Marker Gene selection</div>
 </div>
 
 <div class="section level3">
-<h3 id="use-get_mean_ratio-to-find-marker-genes-">Use <code>get_mean_ratio</code> to find marker genes.<a class="anchor" aria-label="anchor" href="#use-get_mean_ratio-to-find-marker-genes-"></a>
+<h3 id="use-get_mean_ratio-to-find-marker-genes-">Use <code>get_mean_ratio()</code> to find marker genes.<a class="anchor" aria-label="anchor" href="#use-get_mean_ratio-to-find-marker-genes-"></a>
 </h3>
-<p>The function <code><a href="../reference/get_mean_ratio.html">DeconvoBuddies::get_mean_ratio</a></code> calculates
-the <code>Mean Ratio</code> and the rank of genes for a specified cell
-type annotation in an <code>SingleCellExperiment</code> object.</p>
+<p>The function <code><a href="../reference/get_mean_ratio.html">DeconvoBuddies::get_mean_ratio()</a></code> calculates
+the <em>MeanRatio</em> and the rank of genes for a specified cell type
+annotation in an <code>SingleCellExperiment</code> object.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># calculate the Mean Ratio of genes for each cell type</span></span>
 <span><span class="va">marker_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_mean_ratio.html">get_mean_ratio</a></span><span class="op">(</span><span class="va">sce</span>,</span>
@@ -440,6 +474,13 @@ type annotation in an <code>SingleCellExperiment</code> object.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> LYPD6B     Inhib                  1.20 Excit          0.096<span style="text-decoration: underline;">7</span>     12.4 </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: MeanRatio.rank &lt;int&gt;, MeanRatio.anno &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gene_ensembl &lt;chr&gt;, gene_name &lt;chr&gt;</span></span></span></code></pre></div>
+<p>The columns of this table are documented in detail at
+<code><a href="../reference/get_mean_ratio.html">DeconvoBuddies::get_mean_ratio()</a></code>. Though
+<code>cellType.target</code> lists the target cell type for which the
+<em>MeanRatio</em> is being calculated. It is the numerator of the
+<em>MeanRatio</em>. The <code>cellType.2nd</code> lists the cell type
+against which the target cell type is being compared. It is the
+denominator of the <em>MeanRatio</em>.</p>
 </div>
 <div class="section level3">
 <h3 id="plot-the-top-marker-genes">Plot the top marker genes<a class="anchor" aria-label="anchor" href="#plot-the-top-marker-genes"></a>
@@ -459,11 +500,17 @@ gene expression of the top 4 Excitatory neuron marker genes across the
 <span><span class="op">)</span></span></code></pre></div>
 <p><img src="Deconvolution_Benchmark_DLPFC_files/figure-html/plot%20marker%20genes-1.png" width="700"></p>
 <p>Looks nice and cell type specific!</p>
+<p>Note how <code><a href="../reference/plot_marker_express.html">plot_marker_express()</a></code> lists the 2 cell types
+that are being compared that result in the specific numerical
+<em>MeanRatio</em> value being displayed. As we specified that our
+target cell type is <code>"Excit"</code> in our call to
+<code><a href="../reference/plot_marker_express.html">plot_marker_express()</a></code>, the numerator is <code>Excit</code>
+in all the panels shown above.</p>
 <div class="section level4">
 <h4 id="create-a-list-of-marker-genes">Create a List of Marker Genes<a class="anchor" aria-label="anchor" href="#create-a-list-of-marker-genes"></a>
 </h4>
-<p>With the <code>Mean Ratio</code> calculated, we will select the top
-25 highest Mean Ratio genes for each cell type, that also exists in the
+<p>With the <em>MeanRatio</em> calculated, we will select the top 25
+highest Mean Ratio genes for each cell type, that also exists in the
 bulk data <code>rse_gene</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select top 25 marker genes for each cell type, that are also in rse_gene</span></span>
@@ -492,16 +539,16 @@ bulk data <code>rse_gene</code>.</p>
 <h2 id="prep-data-and-run-bisque">4. Prep Data and Run Bisque<a class="anchor" aria-label="anchor" href="#prep-data-and-run-bisque"></a>
 </h2>
 <p><a href="https://github.com/cozygene/bisque" class="external-link"><em>Bisque</em></a> is
-an R package for cell type deconvolution. In our deconvolution
-benchmark, we found it was a top preforming method. Below we will
-briefly show how to run Bisque’s “reference based decomposition
-(deconvolution)”.</p>
+an R package for cell type deconvolution. In our <a href="https://github.com/LieberInstitute/Human_DLPFC_Deconvolution" class="external-link">deconvolution
+benchmark</a>, we found it was a top performing method. Below we will
+briefly show how to run <code>Bisque</code>’s “reference based
+decomposition (deconvolution)”.</p>
 <div class="section level3">
-<h3 id="prep-data">prep data<a class="anchor" aria-label="anchor" href="#prep-data"></a>
+<h3 id="prepare-data">Prepare data<a class="anchor" aria-label="anchor" href="#prepare-data"></a>
 </h3>
 <p>To run <code>Bisque</code> the snRNA-seq and bulk data must first be
-converted to <code>ExpressionSet</code> format. We will subset our data
-to our selected MeanRatio marker genes.</p>
+converted to <code><a href="https://rdrr.io/pkg/Biobase/man/class.ExpressionSet.html" class="external-link">Biobase::ExpressionSet()</a></code> format. We will
+subset our data to our selected <em>MeanRatio</em> marker genes.</p>
 <p>The snRNA-seq data must also be filtered for cells with no counts
 across marker genes.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -560,7 +607,7 @@ data).</p>
 <div class="section level3">
 <h3 id="explore-output">Explore Output<a class="anchor" aria-label="anchor" href="#explore-output"></a>
 </h3>
-<p>Bisque predicts the proportion of the cell types in
+<p><code>Bisque</code> predicts the proportion of the cell types in
 <code>cellType_broad_hc</code> for each sample in the bulk data.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Examine the output from Bisque, transpose to make it easier to work with</span></span>
@@ -589,17 +636,17 @@ data).</p>
 <code>DeconvoBuddies</code> tools<a class="anchor" aria-label="anchor" href="#explore-deconvolution-output-and-create-composition-plots-with-deconvobuddies-tools"></a>
 </h2>
 <p>To visualize the cell type proportion predictions, we can plot cell
-type composition bar plots with `DeconvoBuddies::plot_composition_bar`,
-either the prediction for each sample, or the average proportion over a
-group of samples.</p>
+type composition bar plots with
+<code><a href="../reference/plot_composition_bar.html">DeconvoBuddies::plot_composition_bar()</a></code>, either the
+prediction for each sample, or the average proportion over a group of
+samples.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## add Phenotype data to proportion estimates</span></span>
-<span></span>
 <span><span class="va">pd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">colData</a></span><span class="op">(</span><span class="va">rse_gene</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">SAMPLE_ID</span>, <span class="va">Sample</span>, <span class="va">library_combo</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">## make proportion estimates long so they are ggplot friendly</span></span>
+<span><span class="co">## make proportion estimates long so they are ggplot2 friendly</span></span>
 <span><span class="va">prop_long</span> <span class="op">&lt;-</span> <span class="va">est_prop</span><span class="op">$</span><span class="va">bulk.props</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"SAMPLE_ID"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -610,25 +657,59 @@ group of samples.</p>
 <span><span class="co">## create composition bar plots</span></span>
 <span></span>
 <span><span class="co">## for all library preparations by sample n=110</span></span>
-<span><span class="fu"><a href="../reference/plot_composition_bar.html">plot_composition_bar</a></span><span class="op">(</span>prop_long <span class="op">=</span> <span class="va">prop_long</span>, sample_col <span class="op">=</span> <span class="st">"SAMPLE_ID"</span>, x_col <span class="op">=</span> <span class="st">"SAMPLE_ID"</span>, add_text <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
-<span>        axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>        axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="op">)</span></span></code></pre></div>
+<span><span class="co">## Remove the SAMPLE_ID names since they are very long using ggplot2::theme()</span></span>
+<span><span class="fu"><a href="../reference/plot_composition_bar.html">plot_composition_bar</a></span><span class="op">(</span></span>
+<span>    prop_long <span class="op">=</span> <span class="va">prop_long</span>,</span>
+<span>    sample_col <span class="op">=</span> <span class="st">"SAMPLE_ID"</span>,</span>
+<span>    x_col <span class="op">=</span> <span class="st">"SAMPLE_ID"</span>,</span>
+<span>    add_text <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>, axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Deconvolution_Benchmark_DLPFC_files/figure-html/composition%20plots-1.png" width="700"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="co">## Average by sample</span></span>
-<span><span class="fu"><a href="../reference/plot_composition_bar.html">plot_composition_bar</a></span><span class="op">(</span>prop_long <span class="op">=</span> <span class="va">prop_long</span>, sample_col <span class="op">=</span> <span class="st">"SAMPLE_ID"</span>, x_col <span class="op">=</span> <span class="st">"Sample"</span>, add_text <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">## Average by brain donor</span></span>
+<span><span class="fu"><a href="../reference/plot_composition_bar.html">plot_composition_bar</a></span><span class="op">(</span></span>
+<span>    prop_long <span class="op">=</span> <span class="va">prop_long</span>,</span>
+<span>    sample_col <span class="op">=</span> <span class="st">"SAMPLE_ID"</span>,</span>
+<span>    x_col <span class="op">=</span> <span class="st">"Sample"</span>,</span>
+<span>    add_text <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="Deconvolution_Benchmark_DLPFC_files/figure-html/composition%20plots-2.png" width="700"></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co">## Each brain donor has up to 6 unique RNA library type and RNA extraction</span></span>
+<span><span class="co">## combinations </span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">prop_long</span><span class="op">$</span><span class="va">Sample</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">prop_long</span><span class="op">$</span><span class="va">cell_type</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Br2720_mid Br2720_post  Br2743_ant  Br3942_ant  Br3942_mid  Br6423_ant </span></span>
+<span><span class="co">#&gt;           5           6           5           6           6           6 </span></span>
+<span><span class="co">#&gt; Br6423_post  Br6432_ant  Br6432_mid  Br6471_ant  Br6471_mid  Br6522_mid </span></span>
+<span><span class="co">#&gt;           6           6           6           6           6           6 </span></span>
+<span><span class="co">#&gt; Br6522_post  Br8325_ant  Br8325_mid  Br8492_mid Br8492_post  Br8667_ant </span></span>
+<span><span class="co">#&gt;           6           6           5           5           6           6 </span></span>
+<span><span class="co">#&gt;  Br8667_mid </span></span>
+<span><span class="co">#&gt;           6</span></span>
+<span></span>
+<span><span class="co">## Here are the 6 "SAMPLE_ID" values for brain donor with ID "Br8667_mid"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">prop_long</span><span class="op">$</span><span class="va">SAMPLE_ID</span><span class="op">[</span><span class="va">prop_long</span><span class="op">$</span><span class="va">Sample</span> <span class="op">==</span> <span class="st">"Br8667_mid"</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "AN00000904_Br8667_Mid_Bulk" "AN00000904_Br8667_Mid_Cyto"</span></span>
+<span><span class="co">#&gt; [3] "AN00000904_Br8667_Mid_Nuc"  "AN00000906_Br8667_Mid_Bulk"</span></span>
+<span><span class="co">#&gt; [5] "AN00000906_Br8667_Mid_Cyto" "AN00000906_Br8667_Mid_Nuc"</span></span></code></pre></div>
+<p>This is a more complex scenario than the one from the <a href="https://research.libd.org/DeconvoBuddies/articles/DeconvoBuddies.html" class="external-link">introductory
+vignette</a> where we were using random data. The first plot shows each
+of the n=110 bulk RNA-seq samples we have. The second plot shows the
+composition using the average across the 6 RNA library types and RNA
+extractions for each brain donor.</p>
 </div>
 <div class="section level2">
-<h2 id="check-proportion-against-rnascope-estimated-proportions">6. Check proportion against RNAScope estimated proportions<a class="anchor" aria-label="anchor" href="#check-proportion-against-rnascope-estimated-proportions"></a>
+<h2 id="check-proportion-against-rnascopeif-estimated-proportions">6. Check proportion against RNAScope/IF estimated proportions<a class="anchor" aria-label="anchor" href="#check-proportion-against-rnascopeif-estimated-proportions"></a>
 </h2>
-<p>Note to compare the deconvolution results to the RNAScope
+<p>Note to compare the deconvolution results to the RNAScope/IF
 proportions, Oligo and OPC need to be added together.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">prop_long_opc</span> <span class="op">&lt;-</span> <span class="va">prop_long</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Combine Oligo and OPC into OligoOPC</span></span>
+<span><span class="va">prop_long_opc</span> <span class="op">&lt;-</span> <span class="va">prop_long</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>cell_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="st">"Oligo|OPC"</span>, <span class="st">"OligoOPC"</span>, <span class="va">cell_type</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">SAMPLE_ID</span>, <span class="va">Sample</span>, <span class="va">library_combo</span>, <span class="va">cell_type</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>prop <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">prop</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -647,51 +728,77 @@ proportions, Oligo and OPC need to be added together.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Micro       110</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> OligoOPC    110</span></span>
 <span></span>
-<span><span class="co">## Join RNAScope and Bisque Proportions</span></span>
+<span><span class="co">## Join RNAScope/IF and Bisque cell type proportions</span></span>
 <span><span class="va">prop_compare</span> <span class="op">&lt;-</span> <span class="va">prop_long_opc</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span></span>
 <span>        <span class="va">RNAScope_prop</span> <span class="op">|&gt;</span></span>
 <span>            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Sample</span>, <span class="va">cell_type</span>, prop_RNAScope <span class="op">=</span> <span class="va">prop</span>, <span class="va">prop_sn</span><span class="op">)</span>,</span>
 <span>        by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sample"</span>, <span class="st">"cell_type"</span><span class="op">)</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<p>Calculate the correlation plot a scatter plot of the proportions</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## compute correlation with RNAScope proportions</span></span>
+<p>We can now calculate the correlation plot a scatter plot of the
+proportions. Note that you can change the type of correlation algorithm
+used in the <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor()</a></code> function. The default method is
+<code>"pearson"</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## compute correlation with RNAScope/IF proportions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">prop_compare</span><span class="op">$</span><span class="va">prop</span>, <span class="va">prop_compare</span><span class="op">$</span><span class="va">prop_RNAScope</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.5357834</span></span>
 <span></span>
-<span><span class="co">## Scatter plot with RNAScope proportions</span></span>
+<span><span class="co">## Scatter plot with RNAScope/IF proportions</span></span>
 <span><span class="va">prop_compare</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop_RNAScope</span>, y <span class="op">=</span> <span class="va">prop</span>, color <span class="op">=</span> <span class="va">cell_type</span>, shape <span class="op">=</span> <span class="va">library_combo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_abline</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Deconvolution_Benchmark_DLPFC_files/figure-html/proportion%20scatter-1.png" width="700"></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="co">## correlation with snRNA-seq proportion</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="va">prop_compare</span><span class="op">$</span><span class="va">prop</span>, <span class="va">prop_compare</span><span class="op">$</span><span class="va">prop_sn</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.8397746</span></span>
 <span></span>
-<span><span class="co">## Scatter plot with RNAScope proportions</span></span>
+<span><span class="co">## Scatter plot with RNAScope/IF proportions</span></span>
 <span><span class="va">prop_compare</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop_sn</span>, y <span class="op">=</span> <span class="va">prop</span>, color <span class="op">=</span> <span class="va">cell_type</span>, shape <span class="op">=</span> <span class="va">library_combo</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_abline</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Deconvolution_Benchmark_DLPFC_files/figure-html/proportion%20scatter-2.png" width="700"></p>
+<p>In the first plot we can see how <code>Bisque</code> overestimates
+the proportion of excitatory neurons (<code>Excit</code>) when compared
+against RNAScope/IF as all <code>Excit</code> points are higher than the
+diagonal line shown in black.</p>
+<p>In the second plot we can see how <code>Bisque</code> proportions are
+closer to the snRNA-seq proportions. After all, given the <a href="https://doi.org/10.1186/s13059-023-03123-4" class="external-link">challenges in
+generating orthogonal cell type proportion data</a>, <code>Bisque</code>
+and other deconvolution methods were developed by comparing against
+simulated data, sometimes using pseudo-bulk sc/snRNA-seq data.</p>
 </div>
 <div class="section level2">
 <h2 id="how-to-run-deconvolution-with-hspe">7. How to run deconvolution with <code>hspe</code><a class="anchor" aria-label="anchor" href="#how-to-run-deconvolution-with-hspe"></a>
 </h2>
-<p><em>hspe</em> (formerly <em>dtangle</em>) is another R package for
-deconvolution. It was also a top performing method in our deconvolution
-benchmark.</p>
-<p><code>hspe</code> is <a href="https://gjhunt.github.io/hspe/" class="external-link">downloadable</a> as a tar.gz but
-can’t be shown on this vignettes</p>
-<p>Below we show some example code to prep input and run
+<p><em>hspe</em> (formerly called <em>dtangle</em>) is another R package
+for deconvolution. It was also a top performing method in our <a href="https://github.com/LieberInstitute/Human_DLPFC_Deconvolution" class="external-link">deconvolution
+benchmark</a>.</p>
+<p><code>hspe</code> is <a href="https://gjhunt.github.io/hspe/" class="external-link">downloadable</a> from GitHub but
+can’t be shown on this vignette as Bioconductor packages cannot use
+packages from GitHub.</p>
+<p>Below we show some example code to prepare input data and run
 <code>hspe</code> (not run here):</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="co">## Install hspe</span></span>
+<span>    <span class="co"># if (!requireNamespace("hspe", quietly = TRUE)) {</span></span>
+<span>    <span class="co">#     ## Install version 0.1 which is the one listed on the main documentation</span></span>
+<span>    <span class="co">#     ## at https://github.com/gjhunt/hspe/tree/main?tab=readme-ov-file#software</span></span>
+<span>    <span class="co">#     remotes::install_url("https://github.com/gjhunt/hspe/raw/main/hspe_0.1.tar.gz")</span></span>
+<span>    <span class="co">#     ## Alternatively, install from the latest version on GitHub with:</span></span>
+<span>    <span class="co">#     # remotes::install_github("gjhunt/hspe", subdir = "lib_hspe")</span></span>
+<span>    <span class="co">#     </span></span>
+<span>    <span class="co">#     ## As of 2024-08-23, it's been 3 years since files were last modified</span></span>
+<span>    <span class="co">#     ## at https://github.com/gjhunt/hspe/tree/main/lib_hspe. </span></span>
+<span>    <span class="co"># }</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"hspe"</span><span class="op">)</span></span>
+<span>    </span>
 <span>    <span class="co"># pseudobulk the sce data by sample + cell type</span></span>
 <span>    <span class="va">sce_pb</span> <span class="op">&lt;-</span> <span class="fu">spatialLIBD</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/spatialLIBD/man/registration_pseudobulk.html" class="external-link">registration_pseudobulk</a></span><span class="op">(</span><span class="va">sce</span>,</span>
 <span>        var_registration <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
@@ -727,7 +834,9 @@ can’t be shown on this vignettes</p>
 </h2>
 <p>In this vignette we have demonstrated some of the functions and data
 in the <code>DeconvoBuddies</code> package, and how to use them in a
-deconvolution workflow to predict cell type proportions.</p>
+deconvolution workflow to predict cell type proportions. We used real
+data from a study on <a href="https://github.com/LieberInstitute/Human_DLPFC_Deconvolution" class="external-link">human
+brain</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="reproducibility">Reproducibility<a class="anchor" aria-label="anchor" href="#reproducibility"></a>
@@ -759,7 +868,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 </ul>
 <p>This package was developed using <em><a href="https://bioconductor.org/packages/3.20/biocthis" class="external-link">biocthis</a></em>.</p>
 <p>Code for creating the vignette</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Create the vignette</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rstudio/rmarkdown" class="external-link">"rmarkdown"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"Deconvolution_Benchmark_DLPFC.Rmd"</span>, <span class="st">"BiocStyle::html_document"</span><span class="op">)</span><span class="op">)</span></span>
@@ -768,9 +877,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"Deconvolution_Benchmark_DLPFC.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-08-23 18:40:22 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-08-23 22:33:29 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 1.295 mins</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 1.259 mins</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
