@@ -5,7 +5,7 @@
 \alias{marker_test}
 \title{Markers stats from sce_DLPFC_example}
 \format{
-\code{tibble}. See \code{get_mean_ratio()} for more details on the column
+A \code{tibble::tibble()}. See \code{get_mean_ratio()} for more details on the column
 names.
 }
 \source{

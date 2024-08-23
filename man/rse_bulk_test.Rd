@@ -5,7 +5,7 @@
 \alias{rse_bulk_test}
 \title{Test bulk rse dataset}
 \format{
-A \code{SummarizedExperiment} object.
+A \link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment} object.
 }
 \source{
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/genotyped.R}

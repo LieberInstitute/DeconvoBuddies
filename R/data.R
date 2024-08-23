@@ -30,7 +30,7 @@
 #'
 #' 402.60 kB
 #'
-#' @format `tibble`. See `get_mean_ratio()` for more details on the column
+#' @format A `tibble::tibble()`. See `get_mean_ratio()` for more details on the column
 #' names.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/marker_test.R>
 "marker_test"
@@ -40,7 +40,7 @@
 #' A test `rse_gene` object with data for 1000 genes across 100 samples.
 #'
 #' 976.77 kB
-#' @format A `SummarizedExperiment` object.
+#' @format A [SummarizedExperiment][SummarizedExperiment::SummarizedExperiment-class] object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/genotyped.R>
 "rse_bulk_test"
 
@@ -51,7 +51,7 @@
 #' Generated with `DeconvoBuddies::make_test_sce()`
 #' 38.26 kB
 #'
-#' @format A `SingleCellExperiment` object.
+#' @format A [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment-class] object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce_ab.R>
 "sce_ab"
 
