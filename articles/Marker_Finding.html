@@ -244,7 +244,7 @@ resolution that contains seven cell types.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:06:18.213497 loading file /github/home/.cache/R/BiocFileCache/18451cfb44ba_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:40:40.82478 loading file /github/home/.cache/R/BiocFileCache/2603c67c65c_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span></span>
 <span><span class="co">## unzip and load the data</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -388,14 +388,14 @@ donor which is stored as <code>BrNum</code>.</p>
 <span>    mod <span class="op">=</span> <span class="st">"~BrNum"</span> <span class="co"># Control for donor stored in "BrNum" with mod</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Running 1vALL Testing for up-regulated genes</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:06:56.356275 - Find markers for: Inhib</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:08:30.971114 - Find markers for: Oligo</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:10:05.159704 - Find markers for: OPC</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:11:39.651713 - Find markers for: Excit</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:13:14.399741 - Find markers for: Astro</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:14:48.735098 - Find markers for: EndoMural</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:16:24.557293 - Find markers for: Micro</span></span>
-<span><span class="co">#&gt; 2024-08-23 17:17:59.140923 - Building Table</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:41:19.081349 - Find markers for: Inhib</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:42:53.5979 - Find markers for: Oligo</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:44:27.551538 - Find markers for: OPC</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:46:02.35467 - Find markers for: Excit</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:47:37.190313 - Find markers for: Astro</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:49:12.065215 - Find markers for: EndoMural</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:50:47.90177 - Find markers for: Micro</span></span>
+<span><span class="co">#&gt; 2024-08-23 18:52:21.377634 - Building Table</span></span>
 <span><span class="co">#&gt; ** Done! **</span></span></code></pre></div>
 <p>The function <code>findMarkers_1vALL()</code> returns a
 <code>tibble</code> with the following columns:</p>
@@ -681,9 +681,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"Marker_Finding.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2024-08-23 17:19:33 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2024-08-23 18:53:57 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 13.488 mins</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 13.486 mins</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>

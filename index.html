@@ -118,11 +118,12 @@
 <div class="section level3">
 <h3 id="access-datasets">Access Datasets<a class="anchor" aria-label="anchor" href="#access-datasets"></a>
 </h3>
-<p>DeconvoBuddies contains paired snRNA-seq, bulk RNA-seq, and cell type proportion data from the human DLPFC.</p>
+<p><code>DeconvoBuddies</code> contains paired snRNA-seq, bulk RNA-seq, and cell type proportion data from the human DLPFC from <a href="https://github.com/LieberInstitute/Human_DLPFC_Deconvolution" class="external-link">this study</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Access data with fetch_deconvo_data</span></span>
 <span><span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-08-13 11:52:39.970872 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span><span class="co">#&gt; adding rname 'https://www.dropbox.com/scl/fi/w9q71rh7rd36c2l50nyi2/sce_DLPFC_example.Rdata?rlkey=v3z4u8ru0d2y12zgdl1az07q9&amp;st=1dcfqc1i&amp;dl=1'</span></span>
+<span><span class="co">#&gt; 2024-08-23 12:22:34.719305 loading file /Users/leocollado/Library/Caches/org.R-project.R/R/BiocFileCache/25a42cff2ada_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
 <span></span>
 <span><span class="co">## explore the single cell experiment object</span></span>
 <span><span class="va">sce_DLPFC_example</span></span>
@@ -142,7 +143,7 @@
 <div class="section level3">
 <h3 id="find-marker-genes-and-visualize-expression">Find Marker Genes and Visualize Expression<a class="anchor" aria-label="anchor" href="#find-marker-genes-and-visualize-expression"></a>
 </h3>
-<p>DeconvBuddies has tools for finding marker genes ideal for deconvolution, and plotting functions to quickly visualize the expression of selected genes in a snRNA-seq data.</p>
+<p><code>DeconvoBuddies</code> has tools for finding marker genes ideal for deconvolution, and plotting functions to quickly visualize the expression of selected genes in a snRNA-seq data.</p>
 <p><img src="reference/figures/README-plot_gene_expression-1.png" width="100%"></p>
 </div>
 <div class="section level3">
