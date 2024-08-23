@@ -72,13 +72,14 @@
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
 #' @importFrom tibble rownames_to_column as_tibble add_column
-findMarkers_1vAll <- function(sce,
-    assay_name = "counts",
-    cellType_col = "cellType",
-    add_symbol = FALSE,
-    mod = NULL,
-    verbose = TRUE,
-    direction = "up") {
+findMarkers_1vAll <- function(
+        sce,
+        assay_name = "counts",
+        cellType_col = "cellType",
+        add_symbol = FALSE,
+        mod = NULL,
+        verbose = TRUE,
+        direction = "up") {
     # RCMD Fix
     gene <- rank_marker <- cellType.target <- std.logFC <- rowData <- Symbol <- NULL
 

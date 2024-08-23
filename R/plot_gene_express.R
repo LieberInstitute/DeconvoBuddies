@@ -45,15 +45,14 @@
 #'
 #' @family expression plotting functions
 #'
-plot_gene_express <- function(
-        sce,
-        genes,
-        assay_name = "logcounts",
-        category = "cellType",
-        color_pal = NULL,
-        title = NULL,
-        plot_points = FALSE,
-        ncol = 2) {
+plot_gene_express <- function(sce,
+    genes,
+    assay_name = "logcounts",
+    category = "cellType",
+    color_pal = NULL,
+    title = NULL,
+    plot_points = FALSE,
+    ncol = 2) {
     stopifnot(any(genes %in% rownames(sce)))
 
     if (!category %in% colnames(colData(sce))) {

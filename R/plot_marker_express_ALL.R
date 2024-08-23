@@ -31,16 +31,17 @@
 #' @importFrom ggplot2 ggplot geom_violin geom_text facet_wrap stat_summary
 #' @importFrom SummarizedExperiment colData
 #' @importFrom purrr map
-plot_marker_express_ALL <- function(sce,
-    stats,
-    pdf_fn = NULL,
-    n_genes = 10,
-    rank_col = "MeanRatio.rank",
-    anno_col = "MeanRatio.anno",
-    gene_col = "gene",
-    cellType_col = "cellType",
-    color_pal = NULL,
-    plot_points = FALSE) {
+plot_marker_express_ALL <- function(
+        sce,
+        stats,
+        pdf_fn = NULL,
+        n_genes = 10,
+        rank_col = "MeanRatio.rank",
+        anno_col = "MeanRatio.anno",
+        gene_col = "gene",
+        cellType_col = "cellType",
+        color_pal = NULL,
+        plot_points = FALSE) {
     stopifnot(cellType_col %in% colnames(colData(sce)))
 
     if (is.factor(sce[[cellType_col]])) {
