@@ -63,7 +63,7 @@
 #'
 #' 11.49 kB
 #'
-#' @details These are the columns of the `data.frame` object:
+#' These are the columns of the `data.frame` object:
 #' * `SAMPLE_ID` : DLPFC Tissue block + RNAScope combination.
 #' * `Sample` : DLFPC Tissue block (Donor BrNum + DLPFC position).
 #' * `Combo` : RNAScope probe combination, either "Circle" marking cell types Astro
