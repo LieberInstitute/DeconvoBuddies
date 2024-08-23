@@ -5,7 +5,7 @@
 \alias{est_prop}
 \title{Test Estimated Cell Type Proportions}
 \format{
-A data.frame object.
+A \code{data.frame} object.
 }
 \source{
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/est_prop.R}
@@ -18,5 +18,23 @@ A test dataset of estimated proportions for 5 cell types over 100 samples.
 }
 \details{
 11.62 kB
+
+These are the columns of the \code{data.frame} object:
+\itemize{
+\item cell_A: estimated proportions for cell type A
+\item cell_B: estimated proportions for cell type B
+\item cell_C: estimated proportions for cell type C
+\item cell_D: estimated proportions for cell type D
+\item cell_E: estimated proportions for cell type E
+}
+}
+\examples{
+## R Note that the `rowSums(est_prop)` is equal to 1,
+## with a small error tolerance.
+summary(rowSums(est_prop) - 1)
+
+## You can check this yourself with:
+testthat::expect_equal(rowSums(est_prop), rep(1, 100), ignore_attr = TRUE)
+
 }
 \keyword{datasets}

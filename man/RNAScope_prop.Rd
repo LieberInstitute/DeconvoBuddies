@@ -5,7 +5,7 @@
 \alias{RNAScope_prop}
 \title{Cell Type Proportions estimated from RNAScope}
 \format{
-A data.frame object.
+A \code{data.frame} object.
 }
 \source{
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/RNAScope.R}

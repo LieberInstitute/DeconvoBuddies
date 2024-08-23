@@ -4,7 +4,22 @@
 #'
 #' 11.62 kB
 #'
-#' @format A data.frame object.
+#' @details These are the columns of the `data.frame` object:
+#' * cell_A: estimated proportions for cell type A
+#' * cell_B: estimated proportions for cell type B
+#' * cell_C: estimated proportions for cell type C
+#' * cell_D: estimated proportions for cell type D
+#' * cell_E: estimated proportions for cell type E
+#'
+#' @examples
+#' ## R Note that the `rowSums(est_prop)` is equal to 1,
+#' ## with a small error tolerance.
+#' summary(rowSums(est_prop) - 1)
+#'
+#' ## You can check this yourself with:
+#' testthat::expect_equal(rowSums(est_prop), rep(1, 100), ignore_attr = TRUE)
+#'
+#' @format A `data.frame` object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/est_prop.R>
 "est_prop"
 
@@ -23,7 +38,7 @@
 #' A test rse_gene object, 1000 genes x 100 samples
 #'
 #' 976.77 kB
-#' @format A SummarizedExperiment object.
+#' @format A `SummarizedExperiment` object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/genotyped.R>
 "rse_bulk_test"
 
@@ -34,7 +49,7 @@
 #' Generated with DeconvoBuddies::make_test_sce()
 #' 38.26 kB
 #'
-#' @format A SingleCellExperiment object.
+#' @format A `SingleCellExperiment` object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce_ab.R>
 "sce_ab"
 
@@ -58,6 +73,6 @@
 #' * `n_cell_sn` : number of nuclei in the corresponding snRNA-seq data.
 #' * `prop_sn` : cell type proportion from the snRNA-seq data.
 #'
-#' @format A data.frame object.
+#' @format A `data.frame` object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/RNAScope.R>
 "RNAScope_prop"

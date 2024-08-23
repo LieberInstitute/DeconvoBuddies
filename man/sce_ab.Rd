@@ -5,7 +5,7 @@
 \alias{sce_ab}
 \title{Toy SCE object for testing}
 \format{
-A SingleCellExperiment object.
+A \code{SingleCellExperiment} object.
 }
 \source{
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce_ab.R}
