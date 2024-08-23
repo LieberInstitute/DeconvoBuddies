@@ -96,7 +96,7 @@ The blog post quoted above mentions some but we would like to highlight
 the [Bioconductor support site](https://support.bioconductor.org/) as
 the main resource for getting help: remember to use the `DeconvoBuddies`
 tag and check [the older
-posts](https://support.bioconductor.org/t/DeconvoBuddies/). Other
+posts](https://support.bioconductor.org/tag/DeconvoBuddies/). Other
 alternatives are available such as creating GitHub issues and tweeting.
 However, please note that if you want to receive help you should adhere
 to the [posting
