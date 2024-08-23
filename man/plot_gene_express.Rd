@@ -16,10 +16,12 @@ plot_gene_express(
 )
 }
 \arguments{
-\item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
+\item{sce}{A
+\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class}
+object or one inheriting it.}
 
-\item{genes}{A \code{list()} of \code{character(1)} specifying the genes to plot,
-this should match the format of \code{rownames(sce)}}
+\item{genes}{A \code{character()} vector specifying the genes to plot,
+this should match the format of \code{rownames(sce)}.}
 
 \item{assay_name}{A \code{character(1)} specifying the name of the
 \link[SummarizedExperiment:SummarizedExperiment-class]{assay()} in the
@@ -32,20 +34,22 @@ variable to group the cells or nuclei by. Defaults to \code{cellType}.}
 \item{color_pal}{A named \code{character(1)} vector that contains a color pallet
 matching the \code{category} values.}
 
-\item{title}{A \code{character(1)} to title the plot}
+\item{title}{A \code{character(1)} to title the plot.}
 
-\item{plot_points}{A logical indicating whether to plot points over the
-violin, defaults to \code{FALSE} as these often become over plotted and quite large
-(especially when saved as PDF)}
+\item{plot_points}{A \code{logical(1)} indicating whether to plot points over the
+violin, defaults to \code{FALSE} as these often become over plotted and quite
+large (especially when saved as PDF).}
 
-\item{ncol}{= Number of columns for the facet in the final plot. Defaults to 2.}
+\item{ncol}{An \code{integer(1)} specifying the number of columns for the facet in
+the final plot. Defaults to 2.}
 }
 \value{
-A \code{ggplot()} violin plot for selected genes
+A \code{ggplot()} violin plot for selected genes.
 }
 \description{
 This function plots the expression of one or more genes as a violin plot,
-over a user defined category, typically a cell type annotation.
+over a user defined category, typically a cell type annotation. The plots are
+made using \code{ggplot2}.
 }
 \examples{
 ## Using Symbol as rownames makes this more human readable
