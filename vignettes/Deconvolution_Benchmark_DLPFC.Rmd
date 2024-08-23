@@ -539,16 +539,16 @@ here):
 ```{r "prep and run hspe"}
 if (FALSE) {
     ## Install hspe
-    if (!requireNamespace("hspe", quietly = TRUE)) {
-        ## Install version 0.1 which is the one listed on the main documentation
-        ## at https://github.com/gjhunt/hspe/tree/main?tab=readme-ov-file#software
-        remotes::install_url("https://github.com/gjhunt/hspe/raw/main/hspe_0.1.tar.gz")
-        ## Alternatively, install from the latest version on GitHub with:
-        # remotes::install_github("gjhunt/hspe", subdir = "lib_hspe")
-        
-        ## As of 2024-08-23, it's been 3 years since files were last modified
-        ## at https://github.com/gjhunt/hspe/tree/main/lib_hspe. 
-    }
+    # if (!requireNamespace("hspe", quietly = TRUE)) {
+    #     ## Install version 0.1 which is the one listed on the main documentation
+    #     ## at https://github.com/gjhunt/hspe/tree/main?tab=readme-ov-file#software
+    #     remotes::install_url("https://github.com/gjhunt/hspe/raw/main/hspe_0.1.tar.gz")
+    #     ## Alternatively, install from the latest version on GitHub with:
+    #     # remotes::install_github("gjhunt/hspe", subdir = "lib_hspe")
+    #     
+    #     ## As of 2024-08-23, it's been 3 years since files were last modified
+    #     ## at https://github.com/gjhunt/hspe/tree/main/lib_hspe. 
+    # }
     library("hspe")
     
     # pseudobulk the sce data by sample + cell type
