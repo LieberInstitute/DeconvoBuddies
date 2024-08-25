@@ -549,7 +549,7 @@ if (FALSE) {
     #     ## As of 2024-08-23, it's been 3 years since files were last modified
     #     ## at https://github.com/gjhunt/hspe/tree/main/lib_hspe. 
     # }
-    library("hspe")
+    # library("hspe")
     
     # pseudobulk the sce data by sample + cell type
     sce_pb <- spatialLIBD::registration_pseudobulk(sce,
