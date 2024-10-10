@@ -5,7 +5,7 @@
 \alias{sce_ab}
 \title{Toy SCE object for testing}
 \format{
-A SingleCellExperiment object.
+A \link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment} object.
 }
 \source{
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce_ab.R}
@@ -14,10 +14,10 @@ A SingleCellExperiment object.
 sce_ab
 }
 \description{
-An example sce object for testing, with two cell types A and B.
+An example \code{sce} object for testing, with two cell types A and B.
 }
 \details{
-Generated with DeconvoBuddies::make_test_sce()
+Generated with \code{DeconvoBuddies::make_test_sce()}
 38.26 kB
 }
 \keyword{datasets}

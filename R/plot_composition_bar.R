@@ -1,22 +1,33 @@
 #' Create barplot of average cell type composition
 #'
-#' @param prop_long data.frame of cell type portions in long form
-#' @param sample_col name of column that identifies samples
-#' @param x_col category to divide samples by
-#' @param prop_col name of column containing proportion values
-#' @param ct_col name of column containing cell type names
-#' @param add_text Add rounded proportion value to bars
-#' @param min_prop_text Minimum proportion to display text
+#' Given a long formatted `data.frame`, this function creates a barplot for
+#' the average cell type composition among a set of samples (donors) using
+#' `ggplot2`.
 #'
-#' @return stacked barplot representing mean proportion of cell types for each group
+#' @param prop_long A `data.frame` of cell type portions in long form
+#' @param sample_col A `character(1)` specifying the name of column in
+#' `prop_long` that identifies samples.
+#' @param x_col A `character(1)` specifying the name of column in
+#' `prop_long` that specifies the category to divide samples by.
+#' @param prop_col A `character(1)` specifying the name of column in
+#' `prop_long` that contains proportion values.
+#' @param ct_col A `character(1)` specifying the name of column in
+#' `prop_long` containing cell type names.
+#' @param add_text A `logical(1)` determining whether to add the rounded
+#' proportion value to the bars.
+#' @param min_prop_text A `numeric(1)` specifying the minimum proportion to
+#' display text. Values greater than (>) `min_prop_text` will be displayed.
+#'
+#' @return A stacked barplot `ggplot2` object representing the mean proportion
+#' of cell types for each group.
 #' @export
 #'
 #' @examples
-#' # extract relvant colData from rse
+#' # extract relevant colData from the example RangedSummarizedExperiment object
 #' pd <- SummarizedExperiment::colData(rse_bulk_test) |>
 #'     as.data.frame()
 #'
-#' # combine with est prop in long style table
+#' # combine with the example estimated proportions in a long style table
 #' est_prop_long <- est_prop |>
 #'     tibble::rownames_to_column("RNum") |>
 #'     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
@@ -40,13 +51,14 @@
 #'
 #' @importFrom dplyr rename group_by summarise mutate arrange
 #' @importFrom ggplot2 ggplot geom_bar geom_text aes theme element_text
-plot_composition_bar <- function(prop_long,
-    sample_col = "RNum",
-    x_col = "ALL",
-    prop_col = "prop",
-    ct_col = "cell_type",
-    add_text = TRUE,
-    min_prop_text = 0) {
+plot_composition_bar <- function(
+        prop_long,
+        sample_col = "RNum",
+        x_col = "ALL",
+        prop_col = "prop",
+        ct_col = "cell_type",
+        add_text = TRUE,
+        min_prop_text = 0) {
     x_cat <- cell_type <- anno_y <- NULL
 
     # ct_col <- dplyr::enquo(ct_col)
@@ -81,11 +93,12 @@ plot_composition_bar <- function(prop_long,
 }
 
 
-.get_cat_prop <- function(prop_long,
-    sample_col = "RNum",
-    x_col = "ALL",
-    prop_col = "prop",
-    ct_col = "cell_type") {
+.get_cat_prop <- function(
+        prop_long,
+        sample_col = "RNum",
+        x_col = "ALL",
+        prop_col = "prop",
+        ct_col = "cell_type") {
     cell_type <- prop <- mean_prop <- x_cat <- anno_y <- sum_prop <- n <- NULL
 
     prop_long <- prop_long |>

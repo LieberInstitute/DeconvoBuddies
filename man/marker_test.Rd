@@ -5,7 +5,8 @@
 \alias{marker_test}
 \title{Markers stats from sce_DLPFC_example}
 \format{
-tibble.
+A \code{tibble::tibble()}. See \code{get_mean_ratio()} for more details on the column
+names.
 }
 \source{
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/marker_test.R}
@@ -14,7 +15,8 @@ tibble.
 marker_test
 }
 \description{
-A tibble containing the marker stats from \code{get_mean_ratio} for \code{sce_DLPFC_example}.
+A tibble containing the marker stats from \code{get_mean_ratio()} for
+\code{sce_DLPFC_example}.
 }
 \details{
 402.60 kB

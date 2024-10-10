@@ -1,26 +1,30 @@
 #' Plot the gene expression of a list of genes in a SCE object
 #'
 #' This function plots the expression of one or more genes as a violin plot,
-#' over a user defined category, typically a cell type annotation.
+#' over a user defined category, typically a cell type annotation. The plots are
+#' made using `ggplot2`.
 #'
-#' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class] object
-#' @param genes  A `list()` of `character(1)` specifying the genes to plot, 
-#' this should match the format of `rownames(sce)`
+#' @param sce A
+#' [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class]
+#' object or one inheriting it.
+#' @param genes  A `character()` vector specifying the genes to plot,
+#' this should match the format of `rownames(sce)`.
 #' @param assay_name A `character(1)` specifying the name of the
 #' [assay()][SummarizedExperiment::SummarizedExperiment-class] in the
 #' `sce` object to use to rank expression values. Defaults to `logcounts` since
 #' it typically contains the normalized expression values.
-#' @param category  A `character(1)` specifying the name of the categorical 
+#' @param category  A `character(1)` specifying the name of the categorical
 #' variable to group the cells or nuclei by. Defaults to `cellType`.
-#' @param color_pal  A named `character(1)` vector that contains a color pallet 
+#' @param color_pal  A named `character(1)` vector that contains a color pallet
 #' matching the `category` values.
-#' @param title A `character(1)` to title the plot
-#' @param plot_points A logical indicating whether to plot points over the 
-#' violin, defaults to `FALSE` as these often become over plotted and quite large 
-#' (especially when saved as PDF)
-#' @param ncol = Number of columns for the facet in the final plot. Defaults to 2.
+#' @param title A `character(1)` to title the plot.
+#' @param plot_points A `logical(1)` indicating whether to plot points over the
+#' violin, defaults to `FALSE` as these often become over plotted and quite
+#' large (especially when saved as PDF).
+#' @param ncol An `integer(1)` specifying the number of columns for the facet in
+#' the final plot. Defaults to 2.
 #'
-#' @return A `ggplot()` violin plot for selected genes
+#' @return A `ggplot()` violin plot for selected genes.
 #' @export
 #'
 #' @examples
@@ -29,7 +33,7 @@
 #'
 #' # Access example data
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#' 
+#'
 #' ## plot expression of two genes
 #' plot_gene_express(sce = sce_DLPFC_example, category = "cellType_broad_hc", genes = c("GAD2", "CD22"))
 #'
@@ -41,15 +45,14 @@
 #'
 #' @family expression plotting functions
 #'
-plot_gene_express <- function(
-        sce,
-        genes,
-        assay_name = "logcounts",
-        category = "cellType",
-        color_pal = NULL,
-        title = NULL,
-        plot_points = FALSE,
-        ncol = 2) {
+plot_gene_express <- function(sce,
+    genes,
+    assay_name = "logcounts",
+    category = "cellType",
+    color_pal = NULL,
+    title = NULL,
+    plot_points = FALSE,
+    ncol = 2) {
     stopifnot(any(genes %in% rownames(sce)))
 
     if (!category %in% colnames(colData(sce))) {

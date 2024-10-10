@@ -17,27 +17,32 @@ plot_marker_express_List(
 \arguments{
 \item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class} object}
 
-\item{gene_list}{A named list containing the names of genes to plot}
+\item{gene_list}{A named \code{list()} of \code{character()} vectors containing the
+names of genes to plot.}
 
 \item{pdf_fn}{A \code{character()} of the pdf filename to plot to, if \code{NULL} returns all plots}
 
-\item{cellType_col}{The \code{character()} name of \code{colData} column containing cell type for \code{sce} data}
+\item{cellType_col}{The \code{character(1)} name of \code{colData()} column containing
+cell type for \code{sce} data. It should match \code{cellType.target} in \code{stats}.}
 
-\item{gene_name_col}{The \code{character()} name of \code{rowData} matching the gene name from \code{gene_list}}
+\item{gene_name_col}{The \code{character(1)} name of \code{rowData()} matching the
+gene name from \code{gene_list}.}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet matching the values in \code{cellType_col}.}
+\item{color_pal}{A named \code{character(1)} vector that contains a color pallet
+matching the \code{cell_type} values.}
 
-\item{plot_points}{A logical indicating whether to plot points over the violin,
-defaults to \code{FALSE} as these often become over plotted and quite large (especially when saved as PDF)
-#' @inheritParams plot_marker_express_ALL}
+\item{plot_points}{A \code{logical(1)} indicating whether to plot points over the
+violin, defaults to \code{FALSE} as these often become over plotted and quite
+large (especially when saved as PDF).}
 }
 \value{
-A pdf with violin plots for the expression of top marker genes for all cell types
+A PDF file with violin plots for the expression of top marker genes
+for all cell types.
 }
 \description{
-This function plots a nested list of genes as a multi-page PDF, one for each sub list.
-A use case is plotting known marker genes for multiple cell types over cell type
-clusters with unknown identities.
+This function plots a nested list of genes as a multi-page PDF, one for each
+sub list. A use case is plotting known marker genes for multiple cell types
+over cell type clusters with unknown identities.
 }
 \examples{
 ## Fetch sce example data

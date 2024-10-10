@@ -55,14 +55,14 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 
 ### Access Datasets
 
-DeconvoBuddies contains paired snRNA-seq, bulk RNA-seq, and cell type
-proportion data from the human DLPFC.
+`DeconvoBuddies` contains paired snRNA-seq, bulk RNA-seq, and cell type
+proportion data from the human DLPFC from [this
+study](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
 
 ``` r
 ## Access data with fetch_deconvo_data
 sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> adding rname 'https://www.dropbox.com/scl/fi/w9q71rh7rd36c2l50nyi2/sce_DLPFC_example.Rdata?rlkey=v3z4u8ru0d2y12zgdl1az07q9&st=1dcfqc1i&dl=1'
-#> 2024-10-10 14:13:24.564594 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/fd1c5d42efb7_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2024-10-10 14:34:01.837653 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/fd1c5d42efb7_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 
 ## explore the single cell experiment object
 sce_DLPFC_example
@@ -82,7 +82,7 @@ sce_DLPFC_example
 
 ### Find Marker Genes and Visualize Expression
 
-DeconvBuddies has tools for finding marker genes ideal for
+`DeconvoBuddies` has tools for finding marker genes ideal for
 deconvolution, and plotting functions to quickly visualize the
 expression of selected genes in a snRNA-seq data.
 

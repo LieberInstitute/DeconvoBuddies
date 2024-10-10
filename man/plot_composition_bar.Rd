@@ -15,32 +15,41 @@ plot_composition_bar(
 )
 }
 \arguments{
-\item{prop_long}{data.frame of cell type portions in long form}
+\item{prop_long}{A \code{data.frame} of cell type portions in long form}
 
-\item{sample_col}{name of column that identifies samples}
+\item{sample_col}{A \code{character(1)} specifying the name of column in
+\code{prop_long} that identifies samples.}
 
-\item{x_col}{category to divide samples by}
+\item{x_col}{A \code{character(1)} specifying the name of column in
+\code{prop_long} that specifies the category to divide samples by.}
 
-\item{prop_col}{name of column containing proportion values}
+\item{prop_col}{A \code{character(1)} specifying the name of column in
+\code{prop_long} that contains proportion values.}
 
-\item{ct_col}{name of column containing cell type names}
+\item{ct_col}{A \code{character(1)} specifying the name of column in
+\code{prop_long} containing cell type names.}
 
-\item{add_text}{Add rounded proportion value to bars}
+\item{add_text}{A \code{logical(1)} determining whether to add the rounded
+proportion value to the bars.}
 
-\item{min_prop_text}{Minimum proportion to display text}
+\item{min_prop_text}{A \code{numeric(1)} specifying the minimum proportion to
+display text. Values greater than (>) \code{min_prop_text} will be displayed.}
 }
 \value{
-stacked barplot representing mean proportion of cell types for each group
+A stacked barplot \code{ggplot2} object representing the mean proportion
+of cell types for each group.
 }
 \description{
-Create barplot of average cell type composition
+Given a long formatted \code{data.frame}, this function creates a barplot for
+the average cell type composition among a set of samples (donors) using
+\code{ggplot2}.
 }
 \examples{
-# extract relvant colData from rse
+# extract relevant colData from the example RangedSummarizedExperiment object
 pd <- SummarizedExperiment::colData(rse_bulk_test) |>
     as.data.frame()
 
-# combine with est prop in long style table
+# combine with the example estimated proportions in a long style table
 est_prop_long <- est_prop |>
     tibble::rownames_to_column("RNum") |>
     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>

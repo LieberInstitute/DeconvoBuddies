@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_cell_colors.R
 \name{create_cell_colors}
 \alias{create_cell_colors}
-\title{Create a Cell Color Pallet for Plots}
+\title{Create a cell color pallet for plots}
 \usage{
 create_cell_colors(
   cell_types = c("Astro", "Micro", "Oligo", "OPC", "Inhib", "Excit"),
@@ -12,24 +12,43 @@ create_cell_colors(
 )
 }
 \arguments{
-\item{cell_types}{list of cell types}
+\item{cell_types}{A \code{character()} vector listing unique cell types.}
 
-\item{pallet}{Choice of base pallet "classic", "gg", or "tableau"}
+\item{pallet}{Choice of base pallet \code{"classic"}, \code{"gg"}, or \code{"tableau"}.}
 
-\item{split}{delineating character in cell names}
+\item{split}{delineating \code{character(1)} after which suffixes will be ignored.
+This is useful for cases when say \code{A.1} and \code{A.2} are both to be considered
+as cell type \code{A} (here \code{split = "\\\\."}).}
 
-\item{preview}{plot preview of colors}
+\item{preview}{A \code{logical(1)} indicating whether to make a plot to preview
+the colors.}
 }
 \value{
-named vector of hex color values compatable with \code{ggplot2:scale_color_manual()}
+A named \code{character()} vector of R and hex color values compatible
+with \code{ggplot2:scale_color_manual()}.
 }
 \description{
-Create a Cell Color Pallet for Plots
+This function returns a \code{character()} vector with valid R colors for a given
+input \code{character()} of unique cell types. These were colors that have been
+useful in our experience.
 }
 \examples{
 create_cell_colors(pallet = "classic")
 create_cell_colors(pallet = "classic", preview = TRUE)
 create_cell_colors(pallet = "tableau", preview = TRUE)
-create_cell_colors(cell_types = c("A.1", "A.2", "B.1", "C"), split = "\\\\.", pallet = "gg", preview = TRUE)
-create_cell_colors(cell_types = c("A.1", "A.2", "B.1", "C", "D"), pallet = "gg", preview = TRUE)
+
+## Consider A.1 and A.2 as two different cell types (default)
+create_cell_colors(
+    cell_types = c("A.1", "A.2", "B.1", "C", "D"),
+    pallet = "gg",
+    preview = TRUE
+)
+
+## Consider A.1 and A.2 as cell type A by using the "split" argument
+create_cell_colors(
+    cell_types = c("A.1", "A.2", "B.1", "C"),
+    split = "\\\\.",
+    pallet = "gg",
+    preview = TRUE
+)
 }

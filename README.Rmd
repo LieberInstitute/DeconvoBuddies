@@ -76,8 +76,8 @@ suppressMessages({
 
 ### Access Datasets
 
-DeconvoBuddies contains paired snRNA-seq, bulk RNA-seq, and cell type proportion
-data from the human DLPFC.
+`DeconvoBuddies` contains paired snRNA-seq, bulk RNA-seq, and cell type proportion
+data from the human DLPFC from [this study](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
 
 ```{r `access data}
 ## Access data with fetch_deconvo_data
@@ -89,7 +89,7 @@ sce_DLPFC_example
 
 ### Find Marker Genes and Visualize Expression
 
-DeconvBuddies has tools for finding marker genes ideal for deconvolution,
+`DeconvoBuddies` has tools for finding marker genes ideal for deconvolution,
 and plotting functions to quickly visualize the expression of selected genes in a 
 snRNA-seq data.
 

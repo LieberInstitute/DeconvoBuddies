@@ -1,5 +1,5 @@
 ---
-title: "Introduction to DeconvoBuddies"
+title: "1. Introduction to DeconvoBuddies"
 author: 
   - name: Louise Huuki-Myers
     affiliation:
@@ -15,7 +15,7 @@ output:
 date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
-  %\VignetteIndexEntry{Introduction to DeconvoBuddies}
+  %\VignetteIndexEntry{1. Introduction to DeconvoBuddies}
   %\VignetteEncoding{UTF-8}  
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -96,7 +96,7 @@ The blog post quoted above mentions some but we would like to highlight
 the [Bioconductor support site](https://support.bioconductor.org/) as
 the main resource for getting help: remember to use the `DeconvoBuddies`
 tag and check [the older
-posts](https://support.bioconductor.org/t/DeconvoBuddies/). Other
+posts](https://support.bioconductor.org/tag/DeconvoBuddies/). Other
 alternatives are available such as creating GitHub issues and tweeting.
 However, please note that if you want to receive help you should adhere
 to the [posting
@@ -132,8 +132,8 @@ suppressMessages({
 
 ## Access Data
 
-Use `fetch_deconvo_data` Download RNA sequencing data from the Human
-DLPFC `r Citep(bib[["DeconvoBuddiespaper"]])`.
+Use `fetch_deconvo_data` to download RNA sequencing data from the [Human
+DLPFC](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution) `r Citep(bib[["DeconvoBuddiespaper"]])`.
 
 -   `rse_gene`: 110 samples of bulk RNA-seq. [110 bulk RNA-seq samples x
     21k genes] (41 MB).
@@ -164,16 +164,20 @@ DLPFC](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark
 
 ## Marker Finding
 
-### Using MeanRatio to Find Cell Type Markers
+### Using *MeanRatio* to Find Cell Type Markers
 
 Accurate deconvolution requires highly specific marker genes for each
 cell type to be defined. To select genes specific for each cell type,
-you can evaluate the `MeanRatio` for each gene x each cell type, where
-`MeanRatio = mean(Expression  of target cell type)/mean(Expression of highest non-target cell type)`.
-These values can be calculated for a single cell RNA-seq dataset using
-`get_mean_ratio2()`.
+you can evaluate the *MeanRatio* for each gene x each cell type, where
+`MeanRatio = mean(Expression  of target cell type) / mean(Expression of highest non-target cell type)`.
 
-```{r `get_mean_ratio2 demo`}
+
+These values can be calculated for a single cell RNA-seq dataset using
+`get_mean_ratio()`. This can also work for spatially-resolved transcriptomics
+datasets. That is, `get_mean_ratio()` can also work with
+`SpatialExperiment::SpatialExperiment()` objects.
+
+```{r `get_mean_ratio demo`}
 ## find marker genes with get_mean_ratio
 marker_stats <- get_mean_ratio(sce_DLPFC_example,
     cellType_col = "cellType_broad_hc",
@@ -193,7 +197,7 @@ DeconvoBuddies.](https://research.libd.org/DeconvoBuddies/articles/Marker_Findin
 
 ### Creating A Cell Type Color Pallet
 
-As you work with single-cell data and deconovoltion outputs, it is very
+As you work with single-cell data and deconvolution outputs, it is very
 useful to establish a consistent color pallet to use across different
 plots. The function `create_cell_colors()` returns a named vector of hex
 values, corresponding to the names of cell types. This list is
@@ -201,7 +205,7 @@ compatible with functions like `ggplot2::scale_color_manual()`.
 
 There are three pallets to choose from to generate colors:
 
--   "classic" (default): Set1 from `RColorBrewer` - max 9 colors
+-   "classic" (default): `"Set1"` from `RColorBrewer` - max 9 colors
 
 -   "gg": Equi-distant hues, same process for selecting colors as
     `ggplot` - no maximum number
@@ -213,20 +217,35 @@ There are three pallets to choose from to generate colors:
 ```{r `create_cell_colors demo 1`}
 test_cell_types <- c("cell_A", "cell_B", "cell_C", "cell_D", "cell_E")
 
-test_cell_colors_classic <- create_cell_colors(cell_types = test_cell_types, pallet = "classic", preview = TRUE)
-test_cell_colors_gg <- create_cell_colors(cell_types = test_cell_types, pallet = "gg", preview = TRUE)
-test_cell_colors_tableau <- create_cell_colors(cell_types = test_cell_types, pallet = "tableau", preview = TRUE)
+## Preview "classic" colors
+test_cell_colors_classic <- create_cell_colors(cell_types = test_cell_types,
+    pallet = "classic",
+    preview = TRUE)
 
+## Preview "gg" colors
+test_cell_colors_gg <- create_cell_colors(cell_types = test_cell_types,
+    pallet = "gg",
+    preview = TRUE)
+
+## Preview "tableau" colors
+test_cell_colors_tableau <- create_cell_colors(cell_types = test_cell_types,
+    pallet = "tableau",
+    preview = TRUE)
+
+## Check the color hex codes for "tableau"
 test_cell_colors_tableau
 ```
 
 If there are sub-cell types with consistent delimiters, the `split`
 argument creates a scale of related colors. This helps expand on the
 maximum number of colors and makes your pallet flexible when considering
-different 'resolutions' of cell types.
+different 'resolutions' of cell types. This works by ignoring any prefixes after
+the `split` character. In this example below, `Excit_01` and `Excit_02` will
+just be considered as `Excit` since `split = "_"`.
 
 ```{r create_cell_colors demo 2`}
 my_cell_types <- levels(sce_DLPFC_example$cellType_hc)
+## Ignore any suffix after the "_" character by using the "split" argument
 my_cell_colors <- create_cell_colors(
     cell_types = my_cell_types,
     pallet = "classic",
@@ -255,8 +274,8 @@ plot_marker_express(
 ```
 
 The violin plots of gene expression confirm the cell type specificity of
-these marker genes, most of the nueli with high expression of these six
-genes are Astro.
+these marker genes, most of the nuclei with high expression of these six
+genes are astrocytes (Astro).
 
 ### Plot Composition Bar Plot
 
@@ -264,7 +283,8 @@ The output of deconvolution are cell type estimates that sum to 1. A
 good visulization for these predictions is a stacked bar plot. The
 function `plot_composition_bar()` creates a stacked bar plot showing the
 cell type proportion for each sample, or the average proportion for a
-group of samples.
+group of samples. In this example data, the `RNum` is a sample (donor)
+identifier and `Dx` is a group variable for the diagnosis status of the donors.
 
 ```{r `demo plot_composition_bar`}
 # access the colData of a test rse dataset
@@ -291,6 +311,17 @@ plot_composition_bar(est_prop_long,
 plot_composition_bar(est_prop_long, x_col = "Dx") +
     ggplot2::scale_fill_manual(values = test_cell_colors_classic)
 ```
+
+We can see that the mean proportions of cell types A through E are very similar 
+across the `Dx` groups (`Case` and `Control`). In this case, this is expected
+given that we are using simulated data. Although if you look across each donor
+with `RNum` we can see more variability across the simulated data.
+
+Since you are now familiar with the basic overview of `DeconvoBuddies`, you are
+now ready to dive deeper into:
+
+* the [selection of marker genes](https://research.libd.org/DeconvoBuddies/articles/Marker_Finding.html),
+* followed by the application of `DeconvoBuddies` to the [Human Brain (DLPFC) Deconvolution dataset](https://research.libd.org/DeconvoBuddies/articles/Deconvolution_Benchmark_DLPFC.html).
 
 # Reproducibility
 

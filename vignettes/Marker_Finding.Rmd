@@ -1,5 +1,5 @@
 ---
-title: "Finding Marker Genes with DeconvoBuddies"
+title: "2. Finding Marker Genes with DeconvoBuddies"
 author: 
   - name: Louise Huuki-Myers
     affiliation:
@@ -15,7 +15,7 @@ output:
 date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
-  %\VignetteIndexEntry{Finding Marker Genes with DeconvoBuddies}
+  %\VignetteIndexEntry{2. Finding Marker Genes with DeconvoBuddies}
   %\VignetteEncoding{UTF-8}  
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -78,16 +78,20 @@ cell types (such as Neuron sub-types), or when there is a smaller number
 of cells in the cell type and the signal is disguised within the other
 group.
 
-For example, in our snRNA-seq dataset from Human DLPFC selecting marker
+For example, in our [snRNA-seq dataset from Human DLPFC](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution)
+[@huuki-myers2024] selecting marker
 gene for the cell type Oligodendrocyte (Oligo), *MBP* has a high log
 fold change when testing by *1vALL* (see illustration below). But, when
 the expression of MBP is observed by individual cell types there is also
 expression in the related cell types Microglia (Micro) and
 Oligodendrocyte precursor cells (OPC).
 
-![*1vALL* Marker Gene differential expression vs. *MeanRatio* method for
+
+<p align="center">
+
+![Figure 1. *1vALL* Marker Gene differential expression vs. *MeanRatio* method for
 marker gene
-selection](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
+selection.](http://research.libd.org/DeconvoBuddies/reference/figures/get_mean_ratio.png)
 
 </p>
 
@@ -106,7 +110,7 @@ of the next highest non-target cell type**. Genes with the highest
 
 In the above example, **Oligo** is the target cell type. Micro has the
 highest mean expression out of the other non-target (not Oligo) cell
-types. The `MeanRatio = mean expression Oligo/mean expression Micro`,
+types. The `MeanRatio = (mean expression Oligo) / (mean expression Micro)`,
 for *MBP* `MeanRatio` = 2.68 for gene *FOLH1* `MeanRatio` is much higher
 21.6 showing FOLH1 is the better marker gene (in contrast to ranking by
 *1vALL* log FC). In the violin plots you can see that expression of
@@ -114,7 +118,7 @@ for *MBP* `MeanRatio` = 2.68 for gene *FOLH1* `MeanRatio` is much higher
 by `MeanRatio`.
 
 We have implemented the ***Mean Ratio*** method in this R package with
-the function `get_mean_ratio()` this Vignette will cover our process for
+the function `get_mean_ratio()`. This vignette will cover our process for
 marker gene selection.
 
 ## Goals of this Vignette
@@ -157,20 +161,27 @@ BiocManager::valid()
 
 ## Load Other Packages
 
+Let's load the packages will use in this vignette.
+
 ```{r "load_packages", message=FALSE, warning=FALSE}
-library("spatialLIBD")
-library("DeconvoBuddies")
+## Packages for different types of RNA-seq data structures in R
 library("SingleCellExperiment")
+
+## For downloading data
+library("spatialLIBD")
+
+## Other helper packages for this vignette
 library("dplyr")
-# library("tidyr")
-# library("tibble")
 library("ggplot2")
+
+## Our main package
+library("DeconvoBuddies")
 ```
 
 # 2. Download DLPFC snRNA-seq data.
 
 Here we will download single nucleus RNA-seq data from the Human DLPFC
-with 77k nuclei x 36k genes[@huuki-myers2024]. This data is stored in a
+with 77k nuclei x 36k genes [@huuki-myers2024]. This data is stored in a
 `SingleCellExperiment` object. The nuclei in this dataset are labeled by
 cell types at a few resolutions, we will focus on the "broad" resolution
 that contains seven cell types.
@@ -254,14 +265,14 @@ marker_stats_MeanRatio |>
 
 To further explore cell type marker genes it can be helpful to also
 calculate the 1vALL stats for the dataset. To help with this we have
-included the function `DeconvoBuddies::findMarkers_1vALL`, which is a
+included the function `DeconvoBuddies::findMarkers_1vALL()`, which is a
 wrapper for `scran::findMarkers()` that iterates through cell types and
 creates an table output in a compatible with the output
-`get_mean_ratio()`.
+`DeconvoBuddies::get_mean_ratio()`.
 
 Similarity to `get_mean_ratio` this function requires the `sce` object,
-`cellType_col` to define cell types, and `assay_name`.But
-`findMarkers_1vALL` also takes a model (`mod`) to use as design in
+`cellType_col` to define cell types, and `assay_name`. But
+`findMarkers_1vALL()` also takes a model (`mod`) to use as design in
 `scran::findMarkers()`, in this example we will control for donor which
 is stored as `BrNum`.
 
@@ -341,9 +352,11 @@ marker_stats |>
 
 Plotting the values of Mean Ratio vs. standard log fold change (from
 1vAll) we create what we call "hockey stick plots" 🏒. These plots help
-visualize the distribution of `MeanRatio` and `logFC` values.
+visualize the distribution of `MeanRatio` and standard `logFC` values.
 
-![Hockey Stick plots compare values of *1vALL* logFC vs. *MeanRatio* and
+<p align="center">
+
+![Figure 2. Hockey Stick plots compare values of *1vALL* logFC vs. *MeanRatio* and
 help select marker
 genes.](http://research.libd.org/DeconvoBuddies/reference/figures/hockey_plot_anno.png)
 
@@ -351,19 +364,19 @@ genes.](http://research.libd.org/DeconvoBuddies/reference/figures/hockey_plot_an
 
 Typically for a cell type see most genes have low Mean Ratio and low
 fold change, these genes are not marker genes (red box in illustration
-above).
+above on the bottom left side).
 
 Genes with higher fold change from 1vALL are better marker gene
-candidates, but most have low MeanRatio values indicating that one or
+candidates, but most have low *MeanRatio* values indicating that one or
 more non-target cell types have high expression for that gene, causing
-noise (orange box).
+noise (orange box on the top left side).
 
-Genes with high MeanRatio typically also have high 1vALL fold changes,
+Genes with high M*eanRatio* typically also have high *1vALL* standard fold changes,
 these are cell type specific marker genes we are selecting for (green
-box).
+box on the top right side).
 
 ```{r "hockey stick plots"}
-# create hockey stick plots to compare MeanRatio and logFC values.
+# create hockey stick plots to compare MeanRatio and standard logFC values.
 marker_stats |>
     ggplot(aes(MeanRatio, std.logFC)) +
     geom_point() +
@@ -394,7 +407,7 @@ plot_gene_express(
 
 `plot_marker_express()` plots the top n marker genes for a specified
 cell type based on the values from `marker_stats`. Annotations for the
-details of the MeanRatio value + calculation are added to each panel.
+details of the *MeanRatio* value + calculation are added to each panel.
 
 ```{r, "plot_marker_express MeanRatio"}
 # plot the top 10 MeanRatio genes for Excit
@@ -409,10 +422,10 @@ plot_marker_express(
 
 In these violin plots we can see these genes have high expression in the
 target cell type Excit , and mostly low expression nuclei in the other
-cell types.
+cell types, sometimes even no expression.
 
-This function defaults to selecting genes by the MeanRatio stats, but
-can also be used to plot the 1vAll genes.
+This function defaults to selecting genes by the *MeanRatio* stats, but
+can also be used to plot the *1vAll* genes.
 
 ```{r, "plot_marker_express logFC"}
 # plot the top 10 1vAll genes for Excit
@@ -427,7 +440,7 @@ plot_marker_express(
 )
 ```
 
-We can see in the top 1vALL genes there is some expression of these
+We can see in the top *1vALL* genes there is some expression of these
 genes in Inhib nuclei in addition to the target cell type Excit.
 
 `plot_marker_express_ALL()` plots the top marker genes for all cell
@@ -445,7 +458,7 @@ print(plot_marker_express_ALL(
 ))
 ```
 
-The violin plots can also be directly printed to a pdf using the built
+The violin plots can also be directly printed to a PDF file using the built
 in argument `plot_marker_express_ALL(pdf = "my_marker_genes.pdf")` for
 portability and easy sharing.
 

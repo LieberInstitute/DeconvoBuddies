@@ -1,13 +1,15 @@
 #' Get Mean Ratio for Each Gene x Cell Type
 #'
-#' Calculate the mean ratio value and rank for each gene for each cell type in the `sce`
-#' object, to identify effective marker genes for deconvolution.
+#' Calculate the Mean Ratio value and rank for each gene for each cell type in
+#' the `sce` object, to identify effective marker genes for deconvolution.
 #'
 #' Note if a cell type has < 10 cells the MeanRatio results may be unstable.
-#' See rational in OSCA: <https://bioconductor.org/books/3.19/OSCA.multisample/multi-sample-comparisons.html#performing-the-de-analysis>
+#' See rational in OSCA:
+#' <https://bioconductor.org/books/3.19/OSCA.multisample/multi-sample-comparisons.html#performing-the-de-analysis>.
 #'
 #' @param sce [SummarizedExperiment-class][SummarizedExperiment::SummarizedExperiment-class]
-#' (or any derivative class) object containing single cell/nucleus gene expression data
+#' (or any derivative class) object containing single cell/nucleus gene
+#' expression data.
 #' @param cellType_col A `character(1)` name of the column in the
 #' [colData()][SummarizedExperiment::SummarizedExperiment-class] of `sce` that
 #' denotes the cell type or group of interest.
@@ -20,7 +22,8 @@
 #' @param gene_name A `character(1)` specifying the `rowData(sce_pseudo)`
 #' column with the gene names (symbols).
 #'
-#' @return A `tibble` with the `MeanRatio` values for each gene x cell type.
+#' @return A `tibble::tibble()` with the `MeanRatio` values for each gene x cell
+#' type.
 #' * `gene` is the name of the gene (from rownames(`sce`)).
 #' * `cellType.target` is the cell type we're finding marker genes for.
 #' * `mean.target` is the mean expression of `gene` for `cellType.target`.
@@ -30,8 +33,8 @@
 #' * `MeanRatio.rank` is the rank of `MeanRatio` for the cell type.
 #' * `MeanRatio.anno` is an annotation of the `MeanRatio` calculation helpful
 #' for plotting.
-#' * `gene_ensembl` & `gene_name` optional cols from `rowData(sce)`specified by
-#'  the user to add gene information
+#' * `gene_ensembl` & `gene_name` optional columns from `rowData(sce)` specified
+#' by the user to add gene information.
 #'
 #' @export
 #'
@@ -48,7 +51,8 @@
 #' ## nuclei are classified in to cell types
 #' table(sce_DLPFC_example$cellType_broad_hc)
 #'
-#' ## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`
+#' ## Get the mean ratio for each gene for each cell type defined in
+#' ## `cellType_broad_hc`
 #' get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 #'
 #' # Option to specify gene_name as the "Symbol" column from rowData
@@ -67,11 +71,12 @@
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom matrixStats rowMedians
-get_mean_ratio <- function(sce,
-    cellType_col,
-    assay_name = "logcounts",
-    gene_ensembl = NULL,
-    gene_name = NULL) {
+get_mean_ratio <- function(
+        sce,
+        cellType_col,
+        assay_name = "logcounts",
+        gene_ensembl = NULL,
+        gene_name = NULL) {
     # RCMD fix
     cellType.target <- NULL
     cellType <- NULL

@@ -14,7 +14,8 @@ get_mean_ratio(
 }
 \arguments{
 \item{sce}{\link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment-class}
-(or any derivative class) object containing single cell/nucleus gene expression data}
+(or any derivative class) object containing single cell/nucleus gene
+expression data.}
 
 \item{cellType_col}{A \code{character(1)} name of the column in the
 \link[SummarizedExperiment:SummarizedExperiment-class]{colData()} of \code{sce} that
@@ -32,7 +33,8 @@ column with the ENSEMBL gene IDs. This will be used by \code{layer_stat_cor()}.}
 column with the gene names (symbols).}
 }
 \value{
-A \code{tibble} with the \code{MeanRatio} values for each gene x cell type.
+A \code{tibble::tibble()} with the \code{MeanRatio} values for each gene x cell
+type.
 \itemize{
 \item \code{gene} is the name of the gene (from rownames(\code{sce})).
 \item \code{cellType.target} is the cell type we're finding marker genes for.
@@ -43,17 +45,18 @@ A \code{tibble} with the \code{MeanRatio} values for each gene x cell type.
 \item \code{MeanRatio.rank} is the rank of \code{MeanRatio} for the cell type.
 \item \code{MeanRatio.anno} is an annotation of the \code{MeanRatio} calculation helpful
 for plotting.
-\item \code{gene_ensembl} & \code{gene_name} optional cols from \code{rowData(sce)}specified by
-the user to add gene information
+\item \code{gene_ensembl} & \code{gene_name} optional columns from \code{rowData(sce)} specified
+by the user to add gene information.
 }
 }
 \description{
-Calculate the mean ratio value and rank for each gene for each cell type in the \code{sce}
-object, to identify effective marker genes for deconvolution.
+Calculate the Mean Ratio value and rank for each gene for each cell type in
+the \code{sce} object, to identify effective marker genes for deconvolution.
 }
 \details{
 Note if a cell type has < 10 cells the MeanRatio results may be unstable.
-See rational in OSCA: \url{https://bioconductor.org/books/3.19/OSCA.multisample/multi-sample-comparisons.html#performing-the-de-analysis}
+See rational in OSCA:
+\url{https://bioconductor.org/books/3.19/OSCA.multisample/multi-sample-comparisons.html#performing-the-de-analysis}.
 }
 \examples{
 ## load example SingleCellExperiment
@@ -67,7 +70,8 @@ SummarizedExperiment::assays(sce_DLPFC_example)$logcounts[1:5, 1:5]
 ## nuclei are classified in to cell types
 table(sce_DLPFC_example$cellType_broad_hc)
 
-## Get the mean ratio for each gene for each cell type defined in `cellType_broad_hc`
+## Get the mean ratio for each gene for each cell type defined in
+## `cellType_broad_hc`
 get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 
 # Option to specify gene_name as the "Symbol" column from rowData
