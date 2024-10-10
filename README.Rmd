@@ -164,3 +164,5 @@ contributing to this project, you agree to abide by its terms.
 For more details, check the `dev` directory.
 
 This package was developed using `r BiocStyle::Biocpkg('biocthis')`.
+
+This package is submitted to [Bioconductor](https://github.com/Bioconductor/Contributions/issues/3503)

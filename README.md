@@ -61,7 +61,8 @@ proportion data from the human DLPFC.
 ``` r
 ## Access data with fetch_deconvo_data
 sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2024-08-13 11:52:39.970872 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/58f79a421ca_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> adding rname 'https://www.dropbox.com/scl/fi/w9q71rh7rd36c2l50nyi2/sce_DLPFC_example.Rdata?rlkey=v3z4u8ru0d2y12zgdl1az07q9&st=1dcfqc1i&dl=1'
+#> 2024-10-10 14:13:24.564594 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/fd1c5d42efb7_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 
 ## explore the single cell experiment object
 sce_DLPFC_example
@@ -180,3 +181,6 @@ For more details, check the `dev` directory.
 
 This package was developed using
 *[biocthis](https://bioconductor.org/packages/3.19/biocthis)*.
+
+This package is submitted to
+[Bioconductor](https://github.com/Bioconductor/Contributions/issues/3503)
