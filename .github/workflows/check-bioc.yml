@@ -202,7 +202,7 @@ jobs:
       - name: Install pkgdown
         if: github.ref == 'refs/heads/devel' && env.run_pkgdown == 'true' && runner.os == 'Linux'
         run: |
-          remotes::install_github("r-lib/pkgdown")
+          install.packages("pkgdown")
         shell: Rscript {0}
 
       - name: Session info
