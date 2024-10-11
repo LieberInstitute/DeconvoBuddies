@@ -1,8 +1,8 @@
-pandoc: '3.3'
-pkgdown: 2.1.0.9000
-pkgdown_sha: 020dc44c138193ad0a63a9778bb832ac7afed1f1
+pandoc: '3.4'
+pkgdown: 2.1.1
+pkgdown_sha: ~
 articles:
   DeconvoBuddies: DeconvoBuddies.html
   Deconvolution_Benchmark_DLPFC: Deconvolution_Benchmark_DLPFC.html
   Marker_Finding: Marker_Finding.html
-last_built: 2024-08-25T05:52Z
+last_built: 2024-10-11T18:21Z
