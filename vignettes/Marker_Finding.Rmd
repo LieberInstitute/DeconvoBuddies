@@ -290,7 +290,7 @@ marker_stats_1vAll <- findMarkers_1vAll(
 ```{r `load 1vALL data`, echo=FALSE}
 # save(marker_stats_1vAll, file = here::here("data", "marker_stats_1vAll.RData")) 
 
-load(system.file("data", "marker_stats_1vAll.RData", package = "DeconvoBuddies"))
+load(system.file("extdata", "marker_stats_1vAll.RData", package = "DeconvoBuddies"))
 
 ```
 
