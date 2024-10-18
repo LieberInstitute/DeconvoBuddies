@@ -278,7 +278,7 @@ is stored as `BrNum`.
 
 Note this function can take a bit of time to run.
 
-```{r `Run findMarkers_1vALL`}
+```{r `Run findMarkers_1vALL`, eval=FALSE}
 ## Run 1vALL DE to find markers for each cell type
 marker_stats_1vAll <- findMarkers_1vAll(
     sce = sce, # sce is the SingleCellExperiment with our data
@@ -287,6 +287,13 @@ marker_stats_1vAll <- findMarkers_1vAll(
     mod = "~BrNum" # Control for donor stored in "BrNum" with mod
 )
 ```
+```{r `load 1vALL data`, echo=FALSE}
+# save(marker_stats_1vAll, file = here::here("data", "marker_stats_1vAll.RData")) 
+
+load(system.file("data", "marker_stats_1vAll.RData", package = "DeconvoBuddies"))
+
+```
+
 
 The function `findMarkers_1vALL()` returns a `tibble` with the following
 columns:
