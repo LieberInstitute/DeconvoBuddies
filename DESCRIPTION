@@ -1,6 +1,6 @@
 Package: DeconvoBuddies
 Title: Helper Functions for LIBD Deconvolution
-Version: 0.99.2
+Version: 0.99.3
 Date: 2024-10-18
 Authors@R: 
     c(
