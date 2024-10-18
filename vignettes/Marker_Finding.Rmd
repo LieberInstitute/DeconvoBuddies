@@ -288,11 +288,9 @@ marker_stats_1vAll <- findMarkers_1vAll(
 )
 ```
 ```{r `load 1vALL data`, echo=FALSE}
-# save(marker_stats_1vAll, file = here::here("inst","extdata", "marker_stats_1vAll.RData"), version=2) 
-
+# save(marker_stats_1vAll, file = here::here("inst:,"extdata", "marker_stats_1vAll.RData"), version=2) 
+## load 1vALL data to fix timeout
 load(system.file("extdata", "marker_stats_1vAll.RData", package = "DeconvoBuddies"))
-load(system.file("data", "sce_ab.RData", package = "DeconvoBuddies"))
-
 ```
 
 
