@@ -19,7 +19,7 @@ made using ggplot2."><meta property="og:image" content="/logo.png"><!-- mathjax 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.8</span>
       </span>
     </div>
 
@@ -147,30 +147,37 @@ the final plot. Defaults to 2.</p></dd>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Using Symbol as rownames makes this more human readable</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">sce_ab</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_ab</span>, genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"G-D1_A"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_gene_express-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Access example data</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-10-25 16:21:57.731845 loading file /github/home/.cache/R/BiocFileCache/25811f60aac_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2024-10-31 13:27:11.655689 loading file /github/home/.cache/R/BiocFileCache/66141272054e_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## plot expression of two genes</span></span></span>
-<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span></span>
-<span class="r-in"><span>                  category <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span></span>
-<span class="r-in"><span>                  genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span></span>
+<span class="r-in"><span>    category <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span></span>
+<span class="r-in"><span>    genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_gene_express-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## plot points - note this creates large images and is easy to over plot</span></span></span>
-<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>, </span></span>
-<span class="r-in"><span>                  category <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, </span></span>
-<span class="r-in"><span>                  genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>, plot_points <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span></span>
+<span class="r-in"><span>    category <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span></span>
+<span class="r-in"><span>    genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>, plot_points <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_gene_express-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Add title</span></span></span>
-<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span>sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>, </span></span>
-<span class="r-in"><span>                  category <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>, </span></span>
-<span class="r-in"><span>                  genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                  title <span class="op">=</span> <span class="st">"My Genes"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span></span>
+<span class="r-in"><span>    category <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span></span>
+<span class="r-in"><span>    genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"My Genes"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_gene_express-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
