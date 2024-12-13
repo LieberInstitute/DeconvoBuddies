@@ -1,8 +1,8 @@
-pandoc: '3.4'
+pandoc: '3.5'
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   DeconvoBuddies: DeconvoBuddies.html
   Deconvolution_Benchmark_DLPFC: Deconvolution_Benchmark_DLPFC.html
   Marker_Finding: Marker_Finding.html
-last_built: 2024-10-31T13:26Z
+last_built: 2024-12-13T23:02Z
