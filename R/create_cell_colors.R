@@ -17,7 +17,7 @@
 #' provided, overrides pallet selection with pallet_name.
 #' @param split delineating `character(1)` after which suffixes will be ignored.
 #' This is useful for cases when say `A.1` and `A.2` are both to be considered
-#' as cell type `A` (here `split = "\\."`).
+#' subtypes of cell type `A` (here `split = "\\."`).
 #' @param preview A `logical(1)` indicating whether to make a plot to preview
 #' the colors.
 #'
@@ -159,12 +159,13 @@ create_cell_colors <- function(
   if (preview) {
     par(las = 2) # make label text perpendicular to axis
     par(mar = c(5, 8, 4, 2)) # increase y-axis margin.
-    barplot(rep(1, length(cell_colors)),
+    bp <- barplot(rep(1, length(cell_colors)),
             col = cell_colors,
             horiz = TRUE,
             axes = FALSE,
             names.arg = names(cell_colors)
     )
+    text(y = bp, x = rep(.5, length(cell_colors)), cell_colors)
   }
   
   return(cell_colors)
