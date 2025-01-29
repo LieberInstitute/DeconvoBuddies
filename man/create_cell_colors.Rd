@@ -29,7 +29,8 @@ provided, overrides pallet selection with pallet_name.}
 
 \item{split}{delineating \code{character(1)} after which suffixes will be ignored.
 This is useful for cases when say \code{A.1} and \code{A.2} are both to be considered
-as cell type \code{A} (here \code{split = "\\\\."}).}
+fine subtypes of broad cell type \code{A} (here \code{split = "\\\\."}). When used the
+function returns a nested list of borad and fine cell types.}
 
 \item{preview}{A \code{logical(1)} indicating whether to make a plot to preview
 the colors.}
@@ -61,15 +62,16 @@ create_cell_colors(cell_type = c("A", "B", "C"),
                    previe = TRUE)
 
 ## Options for subtype handling
-## Provide unique colors for cell subtypes (DEFAULT)
+## Provide unique colors for cell subtypes (DEFAULT) - returns one level list
 create_cell_colors(
     cell_types = c("A.1", "A.2", "B.1", "C", "D"),
     pallet_name = "classic",
-    preview = TRUE
+    preview = FALSE
 )
 
 ## Provide gradient colors for A.1 and A.2 by using the "split" argument
-## returns a base cell type color & subtype colors
+## returns a nested list with broad & fine cell type colors, fine cell types
+## are gradient with the top level matching the broad cell type
 create_cell_colors(
     cell_types = c("A.1", "A.2", "B.1", "C", "D"),
     split = "\\\\.",
