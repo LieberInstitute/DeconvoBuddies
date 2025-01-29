@@ -91,135 +91,7 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="deconvobuddies-">DeconvoBuddies <img src="reference/figures/logo.png" align="right" height="138"><a class="anchor" aria-label="anchor" href="#deconvobuddies-"></a>
-</h1></div>
-<!-- badges: start -->
-
-<!-- badges: end -->
-<p>The goal of <code>DeconvoBuddies</code> is to provide helper functions for the deconvolution process, as well as a paired dataset designed to test the performance of deconvolution arguments. The dataset is from Human DLPFC, and contains bulk RNA-seq, single nucleus RNA-seq, and estimated cell type proportions from RNAScope/IF.</p>
-<div class="section level2">
-<h2 id="installation-instructions">Installation instructions<a class="anchor" aria-label="anchor" href="#installation-instructions"></a>
-</h2>
-<p>Get the latest stable <code>R</code> release from <a href="http://cran.r-project.org/" class="external-link">CRAN</a>. Then install <code>DeconvoBuddies</code> using from <a href="http://bioconductor.org/" class="external-link">Bioconductor</a> the following code:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"DeconvoBuddies"</span><span class="op">)</span></span></code></pre></div>
-<p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"LieberInstitute/DeconvoBuddies"</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="application-of-deconvobuddies">Application of DeconvoBuddies<a class="anchor" aria-label="anchor" href="#application-of-deconvobuddies"></a>
-</h2>
-<div class="section level3">
-<h3 id="access-datasets">Access Datasets<a class="anchor" aria-label="anchor" href="#access-datasets"></a>
-</h3>
-<p><code>DeconvoBuddies</code> contains paired snRNA-seq, bulk RNA-seq, and cell type proportion data from the human DLPFC from <a href="https://github.com/LieberInstitute/Human_DLPFC_Deconvolution" class="external-link">this study</a>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Access data with fetch_deconvo_data</span></span>
-<span><span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2024-10-10 14:34:01.837653 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/fd1c5d42efb7_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
-<span></span>
-<span><span class="co">## explore the single cell experiment object</span></span>
-<span><span class="va">sce_DLPFC_example</span></span>
-<span><span class="co">#&gt; class: SingleCellExperiment </span></span>
-<span><span class="co">#&gt; dim: 557 10000 </span></span>
-<span><span class="co">#&gt; metadata(3): Samples cell_type_colors cell_type_colors_broad</span></span>
-<span><span class="co">#&gt; assays(1): logcounts</span></span>
-<span><span class="co">#&gt; rownames(557): GABRD PRDM16 ... AFF2 MAMLD1</span></span>
-<span><span class="co">#&gt; rowData names(7): source type ... gene_type binomial_deviance</span></span>
-<span><span class="co">#&gt; colnames(10000): 8_AGTGACTGTAGTTACC-1 17_GCAGCCAGTGAGTCAG-1 ...</span></span>
-<span><span class="co">#&gt;   12_GGACGTCTCTGACAGT-1 1_GGTTAACTCTCTCTAA-1</span></span>
-<span><span class="co">#&gt; colData names(32): Sample Barcode ... cellType_layer layer_annotation</span></span>
-<span><span class="co">#&gt; reducedDimNames(0):</span></span>
-<span><span class="co">#&gt; mainExpName: NULL</span></span>
-<span><span class="co">#&gt; altExpNames(0):</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="find-marker-genes-and-visualize-expression">Find Marker Genes and Visualize Expression<a class="anchor" aria-label="anchor" href="#find-marker-genes-and-visualize-expression"></a>
-</h3>
-<p><code>DeconvoBuddies</code> has tools for finding marker genes ideal for deconvolution, and plotting functions to quickly visualize the expression of selected genes in a snRNA-seq data.</p>
-<p><img src="reference/figures/README-plot_gene_expression-1.png" width="100%"></p>
-</div>
-<div class="section level3">
-<h3 id="plot-deconvoltion-cell-type-proportions">Plot Deconvoltion Cell Type Proportions<a class="anchor" aria-label="anchor" href="#plot-deconvoltion-cell-type-proportions"></a>
-</h3>
-<p>Create composition bar plots of predicted cell type proportions.</p>
-<p><img src="reference/figures/README-demo_plot_composition_bar-1.png" width="100%"></p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
-</h2>
-<p>Below is the citation output from using <code>citation('DeconvoBuddies')</code> in R. Please run this yourself to check for any updates on how to cite <strong>DeconvoBuddies</strong>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"DeconvoBuddies"</span><span class="op">)</span>, bibtex <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; To cite package 'DeconvoBuddies' in publications use:</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Huuki-Myers LA, Maynard KR, Hicks SC, Zandi P, Kleinman JE, Hyde TM,</span></span>
-<span><span class="co">#&gt;   Goes FS, Collado-Torres L (2024). _DeconvoBuddies: a R/Bioconductor</span></span>
-<span><span class="co">#&gt;   package with deconvolution helper functions_.</span></span>
-<span><span class="co">#&gt;   doi:10.18129/B9.bioc.DeconvoBuddies</span></span>
-<span><span class="co">#&gt;   &lt;https://doi.org/10.18129/B9.bioc.DeconvoBuddies&gt;,</span></span>
-<span><span class="co">#&gt;   https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R</span></span>
-<span><span class="co">#&gt;   package version 0.99.0,</span></span>
-<span><span class="co">#&gt;   &lt;http://www.bioconductor.org/packages/DeconvoBuddies&gt;.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   @Manual{,</span></span>
-<span><span class="co">#&gt;     title = {DeconvoBuddies: a R/Bioconductor package with deconvolution helper functions},</span></span>
-<span><span class="co">#&gt;     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Joel E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},</span></span>
-<span><span class="co">#&gt;     year = {2024},</span></span>
-<span><span class="co">#&gt;     url = {http://www.bioconductor.org/packages/DeconvoBuddies},</span></span>
-<span><span class="co">#&gt;     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.0},</span></span>
-<span><span class="co">#&gt;     doi = {10.18129/B9.bioc.DeconvoBuddies},</span></span>
-<span><span class="co">#&gt;   }</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Huuki-Myers LA, Montgomery KD, Kwon SH, Cinquemani S, Eagles NJ,</span></span>
-<span><span class="co">#&gt;   Gonzalez-Padilla D, Maden SK, Kleinman JE, Hyde TM, Hicks SC, Maynard</span></span>
-<span><span class="co">#&gt;   KR, Collado-Torres L (2024). "Benchmark of cellular deconvolution</span></span>
-<span><span class="co">#&gt;   methods using a multi-assay reference dataset from postmortem human</span></span>
-<span><span class="co">#&gt;   prefrontal cortex." _bioRxiv_. doi:10.1101/2024.02.09.579665</span></span>
-<span><span class="co">#&gt;   &lt;https://doi.org/10.1101/2024.02.09.579665&gt;,</span></span>
-<span><span class="co">#&gt;   &lt;https://doi.org/10.1101/2024.02.09.579665&gt;.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   @Article{,</span></span>
-<span><span class="co">#&gt;     title = {Benchmark of cellular deconvolution methods using a multi-assay reference dataset from postmortem human prefrontal cortex},</span></span>
-<span><span class="co">#&gt;     author = {Louise A. Huuki-Myers and Kelsey D. Montgomery and Sang Ho Kwon and Sophia Cinquemani and Nicholas J. Eagles and Daianna Gonzalez-Padilla and Sean K. Maden and Joel E. Kleinman and Thomas M. Hyde and Stephanie C. Hicks and Kristen R. Maynard and Leonardo Collado-Torres},</span></span>
-<span><span class="co">#&gt;     year = {2024},</span></span>
-<span><span class="co">#&gt;     journal = {bioRxiv},</span></span>
-<span><span class="co">#&gt;     doi = {10.1101/2024.02.09.579665},</span></span>
-<span><span class="co">#&gt;     url = {https://doi.org/10.1101/2024.02.09.579665},</span></span>
-<span><span class="co">#&gt;   }</span></span></code></pre></div>
-<p>Please note that the <code>DeconvoBuddies</code> was only made possible thanks to many other R and bioinformatics software authors, which are cited either in the vignettes and/or the paper(s) describing this package.</p>
-</div>
-<div class="section level2">
-<h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
-</h2>
-<p>Please note that the DeconvoBuddies project is released with a <a href="http://bioconductor.org/about/code-of-conduct/" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
-</div>
-<div class="section level2">
-<h2 id="development-tools">Development tools<a class="anchor" aria-label="anchor" href="#development-tools"></a>
-</h2>
-<ul>
-<li>Continuous code testing is possible thanks to <a href="https://www.tidyverse.org/blog/2020/04/usethis-1-6-0/" class="external-link">GitHub actions</a> through <em><a href="https://CRAN.R-project.org/package=usethis" class="external-link">usethis</a></em>, <em><a href="https://CRAN.R-project.org/package=remotes" class="external-link">remotes</a></em>, and <em><a href="https://CRAN.R-project.org/package=rcmdcheck" class="external-link">rcmdcheck</a></em> customized to use <a href="https://www.bioconductor.org/help/docker/" class="external-link">Bioconductor’s docker containers</a> and <em><a href="https://bioconductor.org/packages/3.19/BiocCheck" class="external-link">BiocCheck</a></em>.</li>
-<li>Code coverage assessment is possible thanks to <a href="https://codecov.io/gh" class="external-link">codecov</a> and <em><a href="https://CRAN.R-project.org/package=covr" class="external-link">covr</a></em>.</li>
-<li>The <a href="http://.github.io/DeconvoBuddies" class="external-link">documentation website</a> is automatically updated thanks to <em><a href="https://CRAN.R-project.org/package=pkgdown" class="external-link">pkgdown</a></em>.</li>
-<li>The code is styled automatically thanks to <em><a href="https://CRAN.R-project.org/package=styler" class="external-link">styler</a></em>.</li>
-<li>The documentation is formatted thanks to <em><a href="https://CRAN.R-project.org/package=devtools" class="external-link">devtools</a></em> and <em><a href="https://CRAN.R-project.org/package=roxygen2" class="external-link">roxygen2</a></em>.</li>
-</ul>
-<p>For more details, check the <code>dev</code> directory.</p>
-<p>This package was developed using <em><a href="https://bioconductor.org/packages/3.19/biocthis" class="external-link">biocthis</a></em>.</p>
-<p>This package is submitted to <a href="https://github.com/Bioconductor/Contributions/issues/3503" class="external-link">Bioconductor</a></p>
-</div>
-</div>
+Funtions helpful for LIBD deconvolution project. Includes tools for marker finding with mean ratio, expression plotting, and plotting deconvolution results. Working to include DLPFC datasets.
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -262,20 +134,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=main" class="external-link"><img src="https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml" class="external-link"><img src="https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml/badge.svg" alt="check-bioc"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
-<li><a href="https://bioconductor.org/checkResults/release/bioc-LATEST/DeconvoBuddies" class="external-link"><img src="http://www.bioconductor.org/shields/build/release/bioc/DeconvoBuddies.svg" alt="Bioc release status"></a></li>
-<li><a href="https://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies" class="external-link"><img src="http://www.bioconductor.org/shields/build/devel/bioc/DeconvoBuddies.svg" alt="Bioc devel status"></a></li>
-<li><a href="http://bioconductor.org/packages/stats/bioc/DeconvoBuddies/" class="external-link"><img src="https://bioconductor.org/shields/downloads/release/DeconvoBuddies.svg" alt="Bioc downloads rank"></a></li>
-<li><a href="https://support.bioconductor.org/tag/DeconvoBuddies" class="external-link"><img src="https://bioconductor.org/shields/posts/DeconvoBuddies.svg" alt="Bioc support"></a></li>
-<li><a href="https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html#since" class="external-link"><img src="https://bioconductor.org/shields/years-in-bioc/DeconvoBuddies.svg" alt="Bioc history"></a></li>
-<li><a href="http://bioconductor.org/checkResults/devel/bioc-LATEST/DeconvoBuddies/" class="external-link"><img src="https://bioconductor.org/shields/lastcommit/devel/bioc/DeconvoBuddies.svg" alt="Bioc last commit"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
