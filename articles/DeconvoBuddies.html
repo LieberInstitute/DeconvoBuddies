@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.10</span>
       </span>
     </div>
 
@@ -174,7 +174,7 @@ to cite the package and the overall approach. Thank you!</p>
 <span><span class="co">#&gt;   doi:10.18129/B9.bioc.DeconvoBuddies</span></span>
 <span><span class="co">#&gt;   &lt;https://doi.org/10.18129/B9.bioc.DeconvoBuddies&gt;,</span></span>
 <span><span class="co">#&gt;   https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R</span></span>
-<span><span class="co">#&gt;   package version 0.99.9,</span></span>
+<span><span class="co">#&gt;   package version 0.99.10,</span></span>
 <span><span class="co">#&gt;   &lt;http://www.bioconductor.org/packages/DeconvoBuddies&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Huuki-Myers LA, Montgomery KD, Kwon SH, Cinquemani S, Eagles NJ,</span></span>
@@ -221,7 +221,7 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Access and snRNA-seq example data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-01-29 17:12:19.780237 loading file /github/home/.cache/R/BiocFileCache/6bd412660f_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2025-01-29 20:45:24.032609 loading file /github/home/.cache/R/BiocFileCache/3ea18a5f990_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
 <span></span>
 <span><span class="co">## Explore snRNA-seq data in sce_DLPFC_example</span></span>
 <span><span class="va">sce_DLPFC_example</span></span>
@@ -240,7 +240,7 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 <span></span>
 <span><span class="co">## Access Bulk RNA-seq data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span><span class="op">)</span> <span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-01-29 17:12:21.832439 loading file /github/home/.cache/R/BiocFileCache/6bd417d057e1_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2025-01-29 20:45:25.641832 loading file /github/home/.cache/R/BiocFileCache/3ea213e9ea2_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
 <span></span>
 <span><span class="co">## Explore bulk data in rse_gene</span></span>
 <span><span class="va">rse_gene</span></span>
@@ -319,10 +319,11 @@ different plots. The function <code><a href="../reference/create_cell_colors.htm
 a named vector of hex values, corresponding to the names of cell types.
 This list is compatible with functions like
 <code><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">ggplot2::scale_color_manual()</a></code>.</p>
-<p>There are three pallets to choose from to generate colors:</p>
+<p>There are three pallets to choose from to generate colors or users
+can provide their own color pallet:</p>
 <ul>
-<li><p>“classic” (default): <code>"Set1"</code> from
-<code>RColorBrewer</code> - max 9 colors</p></li>
+<li><p>“classic” (default): classic set of 8 cell type colors from LIBD,
+checked for visability and color blind accessibility.</p></li>
 <li><p>“gg”: Equi-distant hues, same process for selecting colors as
 <code>ggplot</code> - no maximum number</p></li>
 <li><p>“tableau”: <a href="https://jrnold.github.io/ggthemes/reference/tableau_color_pal.html" class="external-link">tableau20</a>
@@ -334,34 +335,46 @@ color set - max 20 colors</p></li>
 <span><span class="co">## Preview "classic" colors</span></span>
 <span><span class="va">test_cell_colors_classic</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_cell_colors.html">create_cell_colors</a></span><span class="op">(</span></span>
 <span>    cell_types <span class="op">=</span> <span class="va">test_cell_types</span>,</span>
-<span>    pallet <span class="op">=</span> <span class="st">"classic"</span>,</span>
+<span>    pallet_name <span class="op">=</span> <span class="st">"classic"</span>,</span>
 <span>    preview <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Creating classic pallet for broad 5 cell types</span></span></code></pre></div>
 <p><img src="DeconvoBuddies_files/figure-html/%60create_cell_colors%20demo%201%60-1.png" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Preview "gg" colors</span></span>
 <span><span class="va">test_cell_colors_gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_cell_colors.html">create_cell_colors</a></span><span class="op">(</span></span>
 <span>    cell_types <span class="op">=</span> <span class="va">test_cell_types</span>,</span>
-<span>    pallet <span class="op">=</span> <span class="st">"gg"</span>,</span>
+<span>    pallet_name <span class="op">=</span> <span class="st">"gg"</span>,</span>
 <span>    preview <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Creating gg pallet for broad 5 cell types</span></span></code></pre></div>
 <p><img src="DeconvoBuddies_files/figure-html/%60create_cell_colors%20demo%201%60-2.png" width="700"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Preview "tableau" colors</span></span>
 <span><span class="va">test_cell_colors_tableau</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_cell_colors.html">create_cell_colors</a></span><span class="op">(</span></span>
 <span>    cell_types <span class="op">=</span> <span class="va">test_cell_types</span>,</span>
-<span>    pallet <span class="op">=</span> <span class="st">"tableau"</span>,</span>
+<span>    pallet_name <span class="op">=</span> <span class="st">"tableau"</span>,</span>
 <span>    preview <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Creating tableau pallet for broad 5 cell types</span></span></code></pre></div>
 <p><img src="DeconvoBuddies_files/figure-html/%60create_cell_colors%20demo%201%60-3.png" width="700"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Check the color hex codes for "tableau"</span></span>
 <span><span class="va">test_cell_colors_tableau</span></span>
 <span><span class="co">#&gt;    cell_A    cell_B    cell_C    cell_D    cell_E </span></span>
-<span><span class="co">#&gt; "#1F77B4" "#AEC7E8" "#FF7F0E" "#FFBB78" "#2CA02C"</span></span></code></pre></div>
+<span><span class="co">#&gt; "#1F77B4" "#AEC7E8" "#FF7F0E" "#FFBB78" "#2CA02C"</span></span>
+<span></span>
+<span><span class="co">## Provide a pallet from RColorBrewer</span></span>
+<span><span class="va">test_cell_colors_brew</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_cell_colors.html">create_cell_colors</a></span><span class="op">(</span></span>
+<span>    cell_types <span class="op">=</span> <span class="va">test_cell_types</span>,</span>
+<span>    pallet <span class="op">=</span> <span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">brewer.pal</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">test_cell_types</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span>,</span>
+<span>    preview <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Creating custom pallet for broad 5 cell types</span></span></code></pre></div>
+<p><img src="DeconvoBuddies_files/figure-html/%60create_cell_colors%20demo%201%60-4.png" width="700"></p>
 <p>If there are sub-cell types with consistent delimiters, the
 <code>split</code> argument creates a scale of related colors. This
 helps expand on the maximum number of colors and makes your pallet
@@ -375,10 +388,12 @@ will just be considered as <code>Excit</code> since
 <span><span class="co">## Ignore any suffix after the "_" character by using the "split" argument</span></span>
 <span><span class="va">my_cell_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/create_cell_colors.html">create_cell_colors</a></span><span class="op">(</span></span>
 <span>    cell_types <span class="op">=</span> <span class="va">my_cell_types</span>,</span>
-<span>    pallet <span class="op">=</span> <span class="st">"classic"</span>,</span>
+<span>    pallet_name <span class="op">=</span> <span class="st">"classic"</span>,</span>
 <span>    preview <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>    split <span class="op">=</span> <span class="st">"_"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Creating classic pallet for broad 8 cell types</span></span>
+<span><span class="co">#&gt; Creating fine cell type gradients for 4 cell types</span></span></code></pre></div>
 <p><img src="DeconvoBuddies_files/figure-html/create_cell_colors%20demo%202%60-1.png" width="700"></p>
 </div>
 <div class="section level4">
@@ -397,7 +412,11 @@ expression of the top 6 marker genes for Astrocytes.</p>
 <span>    n_genes <span class="op">=</span> <span class="fl">6</span>,</span>
 <span>    cellType_col <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span>
 <span>    color_pal <span class="op">=</span> <span class="va">my_cell_colors</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: No shared levels found between `names(values)` of the manual scale and the</span></span>
+<span><span class="co">#&gt; data's <span style="color: #00BB00;">fill</span> values.</span></span>
+<span><span class="co">#&gt; No shared levels found between `names(values)` of the manual scale and the</span></span>
+<span><span class="co">#&gt; data's <span style="color: #00BB00;">fill</span> values.</span></span></code></pre></div>
 <p><img src="DeconvoBuddies_files/figure-html/%60plot_marker_expression%20demo%60-1.png" width="700"></p>
 <p>The violin plots of gene expression confirm the cell type specificity
 of these marker genes, most of the nuclei with high expression of these
@@ -515,9 +534,9 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://yihui.org/knitr/" class="external-link">"knitr"</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knit</a></span><span class="op">(</span><span class="st">"DeconvoBuddies.Rmd"</span>, tangle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Date the vignette was generated.</p>
-<pre><code><span><span class="co">#&gt; [1] "2025-01-29 17:12:27 UTC"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; [1] "2025-01-29 20:45:30 UTC"</span></span></code></pre>
 <p>Wallclock time spent generating the vignette.</p>
-<pre><code><span><span class="co">#&gt; Time difference of 20.125 secs</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Time difference of 18.068 secs</span></span></code></pre>
 <p><code>R</code> session information.</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #00BBBB; font-weight: bold;">─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  <span style="color: #555555; font-style: italic;">setting </span> <span style="color: #555555; font-style: italic;">value</span></span></span>
@@ -574,7 +593,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  data.table             1.16.4    <span style="color: #555555;">2024-12-06</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  DBI                    1.2.3     <span style="color: #555555;">2024-06-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  dbplyr                 2.5.0     <span style="color: #555555;">2024-03-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.9    <span style="color: #555555;">2025-01-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
+<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.10   <span style="color: #555555;">2025-01-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  DelayedArray           0.32.0    <span style="color: #555555;">2024-10-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.2)</span></span></span>
 <span><span class="co">#&gt;  desc                   1.4.3     <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  digest                 0.6.37    <span style="color: #555555;">2024-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -728,7 +747,7 @@ for R</em>. R package version 2.29. 2024. URL:
 L. A. Huuki-Myers, K. R. Maynard, S. C. Hicks, et al.
 <em>DeconvoBuddies: a R/Bioconductor package with deconvolution helper
 functions</em>. <a href="https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies" class="external-link uri">https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies</a>
-- R package version 0.99.9. 2025. DOI:
+- R package version 0.99.10. 2025. DOI:
 <a href="https://doi.org/10.18129/B9.bioc.DeconvoBuddies" class="external-link">10.18129/B9.bioc.DeconvoBuddies</a>.
 URL:
 <a href="http://www.bioconductor.org/packages/DeconvoBuddies" class="external-link">http://www.bioconductor.org/packages/DeconvoBuddies</a>.</cite>
