@@ -32,9 +32,6 @@ knitr::opts_chunk$set(
 ```
 
 ```{r vignetteSetup, echo=FALSE, message=FALSE, warning = FALSE}
-## Track time spent on making the vignette
-startTime <- Sys.time()
-
 ## Bib setup
 library("RefManageR")
 
@@ -605,33 +602,6 @@ The `r Biocpkg("DeconvoBuddies")` package
 -   `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
 
 This package was developed using `r BiocStyle::Biocpkg("biocthis")`.
-
-Code for creating the vignette
-
-```{r createVignette, eval=FALSE}
-## Create the vignette
-library("rmarkdown")
-system.time(render("Deconvolution_Benchmark_DLPFC.Rmd", "BiocStyle::html_document"))
-
-## Extract the R code
-library("knitr")
-knit("Deconvolution_Benchmark_DLPFC.Rmd", tangle = TRUE)
-```
-
-Date the vignette was generated.
-
-```{r reproduce1, echo=FALSE}
-## Date the vignette was generated
-Sys.time()
-```
-
-Wallclock time spent generating the vignette.
-
-```{r reproduce2, echo=FALSE}
-## Processing time in seconds
-totalTime <- diff(c(startTime, Sys.time()))
-round(totalTime, digits = 3)
-```
 
 `R` session information.
 
