@@ -15,7 +15,7 @@ meta <- data.frame(
   ),
   Description = c(
     "RangedSummarizedExperiment with bulk gene RNA expression data of Human DLPFC, generated at the Lieber Institute for Brain Development (LIBD) and available through the DeconvoBuddies Bioconductor package."
-  ),BiocVersion = "3.19",
+  ),BiocVersion = "3.21",
   Genome = "GRCh38",
   SourceType = "GTF",
   SourceUrl = "https://github.com/LieberInstitute/DeconvoBuddies",
@@ -45,8 +45,9 @@ write.csv(
 
 ## Check
 if (FALSE) {
-  AnnotationHubData::makeAnnotationHubMetadata(here::here(), fileName = "metadata.csv")
+  ExperimentHubData::makeExperimentHubMetadata(here::here())
+  ## check valid csv
+  AnnotationHubData:::.readMetadataFromCsv(here::here())
 }
-# Error in .checkValidViews(.views) : 
-#   [1] Please add either ExperimentHubSoftware or AnnotationHubSoftware to biocViews list in DESCRIPTION.
+
 
