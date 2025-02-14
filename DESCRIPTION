@@ -1,6 +1,6 @@
 Package: DeconvoBuddies
 Title: Helper Functions for LIBD Deconvolution
-Version: 0.99.11
+Version: 0.99.12
 Date: 2025-02-14
 Authors@R: 
     c(
@@ -12,7 +12,7 @@ Authors@R:
 Description: Funtions helpful for LIBD deconvolution project. Includes tools for marker finding with mean ratio, expression plotting, and plotting deconvolution results. Working to include DLPFC datasets.
 License: Artistic-2.0
 URL: https://github.com/lahuuki/DeconvoBuddies
-BugReports: https://support.bioconductor.org/tag/DeconvoBuddies
+BugReports: https://github.com/LieberInstitute/DeconvoBuddies/issues
 biocViews: Software, SingleCell, RNASeq, GeneExpression, Transcriptomics, ExperimentHubSoftware
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
