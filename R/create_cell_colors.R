@@ -72,7 +72,7 @@
 #' @importFrom grDevices colorRampPalette
 #' @importFrom rafalib splitit
 #' @importFrom purrr map2
-#' @importFrom graphics barplot par
+#' @importFrom graphics barplot par text
 #' @importFrom grDevices hcl
 #' @importFrom utils head
 create_cell_colors <- function(
