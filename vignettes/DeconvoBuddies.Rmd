@@ -1,5 +1,5 @@
 ---
-title: "1. Introduction to DeconvoBuddies"
+title: "Get Started with DeconvoBuddies"
 author: 
   - name: Louise Huuki-Myers
     affiliation:
@@ -15,7 +15,7 @@ output:
 date: "`r doc_date()`"
 package: "`r pkg_ver('DeconvoBuddies')`"
 vignette: >
-  %\VignetteIndexEntry{1. Introduction to DeconvoBuddies}
+  %\VignetteIndexEntry{Get Started with DeconvoBuddies}
   %\VignetteEncoding{UTF-8}  
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -49,6 +49,19 @@ bib <- c(
     DeconvoBuddiespaper = citation("DeconvoBuddies")[2]
 )
 ```
+
+# Introduction
+
+`DeconvoBuddies` is an R package developed to assist in running bulk RNA-seq 
+deconvolution. This package provides functions to access a data set designed to 
+evaluate deconvolution method performance, find marker genes, and create plots
+useful in deconvolution. 
+
+This package is associated with "Benchmark of cellular deconvolution methods 
+using a multi-assay reference dataset from postmortem human prefrontal cortex" 
+from Huuki-Myers et al.
+(10.1101/2024.02.09.579665v2)[https://www.biorxiv.org/content/10.1101/2024.02.09.579665v2].
+
 
 # Basics
 
