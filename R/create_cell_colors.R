@@ -106,11 +106,11 @@ create_cell_colors <- function(
   } else if(!is.null(palette)){ ## use custom palette
     stopifnot(is.character(palette))
     cell_colors = palette
-    message(sprintf("Creating custom palette for broad %d cell types", nct))
+    message(sprintf("Creating custom palette for %d broad cell types", nct))
     
   } else { ## use user provided palette
     palette_name <- match.arg(palette_name)
-    message(sprintf("Creating %s palette for broad %d cell types", palette_name, nct))
+    message(sprintf("Creating %s palette for %d broad cell types", palette_name, nct))
     
     if (palette_name == "gg") {
       cell_colors <- gg_color_hue(nct)
