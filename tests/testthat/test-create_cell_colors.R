@@ -1,5 +1,13 @@
 my_colors <- c("darkorchid4", "deeppink4", "aquamarine3", "darkolivegreen1")
 
+test_that("Expected color pallet", {
+  expect_equal(
+      create_cell_colors(cell_type = c("A", "B", "C", "D"),
+                         palette = my_colors),
+    c(A = "darkorchid4",B= "deeppink4", C="aquamarine3", D="darkolivegreen1")
+  )
+})
+
 test_that("Error with no color input", {
   expect_error(create_cell_colors(cell_type = c("A", "B", "C", "D"),
                                   palette_name = NULL))
@@ -13,7 +21,8 @@ test_that("Error with bad palette_name put", {
 })
 
 test_that("Error with less color than ct", {
-  expect_error(create_cell_colors(cell_type = c("A", "B", "C", "D"),
-                                  palette = my_colors[1:3]))
-})
+  expect_error(
+      create_cell_colors(cell_type = c("A", "B", "C", "D"),
+                         palette = my_colors[1:3])
+    )})
 
