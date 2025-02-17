@@ -2,7 +2,7 @@
 
 setwd("..")
 BiocCheck::BiocCheck(
-    "DeconvoBuddies_0.99.0.tar.gz",
+    "DeconvoBuddies_0.99.22.tar.gz",
     `quit-with-status` = FALSE,
     `no-check-R-ver` = TRUE,
     `no-check-bioc-help` = TRUE
