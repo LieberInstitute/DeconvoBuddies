@@ -52,14 +52,18 @@ create_cell_colors(palette_name = "tableau", preview = TRUE)
 
 ## use custom colors
 my_colors <- c("darkorchid4", "deeppink4", "aquamarine3", "darkolivegreen1")
-create_cell_colors(cell_type = c("A", "B", "C", "D"), 
-                   palette = my_colors, 
-                   preview = TRUE)
-                   
+create_cell_colors(
+    cell_type = c("A", "B", "C", "D"),
+    palette = my_colors,
+    preview = TRUE
+)
+
 ## use Rcolor brewer
-create_cell_colors(cell_type = c("A", "B", "C"), 
-                   palette = RColorBrewer::brewer.pal(n = 3, name = "Set1"),
-                   previe = TRUE)
+create_cell_colors(
+    cell_type = c("A", "B", "C"),
+    palette = RColorBrewer::brewer.pal(n = 3, name = "Set1"),
+    previe = TRUE
+)
 
 ## Options for subtype handling
 ## Provide unique colors for cell subtypes (DEFAULT) - returns one level list

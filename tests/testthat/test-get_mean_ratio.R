@@ -14,6 +14,6 @@ test_that("Warn for <10 cells", {
 mean_ratio <- get_mean_ratio(sce_DLPFC_example, cellType_col = "cellType_broad_hc")
 
 test_that("MeanRatio stats returned for subset of genes", {
-  gene_count <- mean_ratio |> dplyr::count(cellType.target)
-  testthat::expect_true(all(gene_count$n < nrow(sce_DLPFC_example)))
+    gene_count <- mean_ratio |> dplyr::count(cellType.target)
+    testthat::expect_true(all(gene_count$n < nrow(sce_DLPFC_example)))
 })

@@ -32,7 +32,6 @@ knitr::opts_chunk$set(
 ```
 
 ```{r vignetteSetup, echo=FALSE, message=FALSE, warning = FALSE}
-
 ## Bib setup
 library("RefManageR")
 
@@ -285,10 +284,9 @@ test_cell_colors_tableau
 ## Provide a palette from RColorBrewer
 test_cell_colors_brew <- create_cell_colors(
     cell_types = test_cell_types,
-    palette = RColorBrewer::brewer.pal(n=length(test_cell_types), name = "Dark2"),
+    palette = RColorBrewer::brewer.pal(n = length(test_cell_types), name = "Dark2"),
     preview = TRUE
 )
-
 ```
 
 If there are sub-cell types with consistent delimiters, the `split`
