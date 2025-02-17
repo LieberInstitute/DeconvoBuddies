@@ -18,7 +18,7 @@ type (the "1") against all other cell types combined ("All").'><meta property="o
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.23</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.24</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@ sc/snRNA-seq data". The companion notes are available at
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## load example SingleCellExperiment</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:32.869769 loading file /github/home/.cache/R/BiocFileCache/462cb6a3ea_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:41.045039 loading file /github/home/.cache/R/BiocFileCache/4621d8f50c3_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span>
 <span class="r-in"><span><span class="co">## Explore properties of the sce object</span></span></span>
 <span class="r-in"><span><span class="va">sce_DLPFC_example</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> class: SingleCellExperiment </span>
@@ -203,14 +203,14 @@ sc/snRNA-seq data". The companion notes are available at
 <span class="r-in"><span>    mod <span class="op">=</span> <span class="st">"~BrNum"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Running 1vALL Testing for up-regulated genes</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:33.097914 - Find markers for: Oligo</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:33.504527 - Find markers for: Excit</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:34.570263 - Find markers for: Inhib</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:34.90611 - Find markers for: Micro</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:35.243551 - Find markers for: OPC</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:35.607445 - Find markers for: EndoMural</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:35.973906 - Find markers for: Astro</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:04:36.307665 - Building Table</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:41.27607 - Find markers for: Oligo</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:41.681427 - Find markers for: Excit</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:42.801582 - Find markers for: Inhib</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:43.137165 - Find markers for: Micro</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:43.473525 - Find markers for: OPC</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:43.850474 - Find markers for: EndoMural</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:44.207711 - Find markers for: Astro</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-02-17 16:11:44.543375 - Building Table</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ** Done! **</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## explore output, top markers have high logFC</span></span></span>
