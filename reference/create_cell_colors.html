@@ -19,7 +19,7 @@ useful in our experience."><meta property="og:image" content="/logo.png"><!-- ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.18</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.19</span>
       </span>
     </div>
 
@@ -126,16 +126,16 @@ with <code>ggplot2:scale_color_manual()</code>.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## create cell colors with included palettes</span></span></span>
 <span class="r-in"><span><span class="fu">create_cell_colors</span><span class="op">(</span>palette_name <span class="op">=</span> <span class="st">"classic"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating classic palette for broad 8 cell types</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating classic palette for 8 broad cell types</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Astro     Micro      Endo     Oligo       OPC     Excit     Inhib     Other </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "#3BB273" "#FF56AF" "#663894" "#F57A00" "#D2B037" "#247FBC" "#E83E38" "#4E586A" </span>
 <span class="r-in"><span><span class="fu">create_cell_colors</span><span class="op">(</span>palette_name <span class="op">=</span> <span class="st">"classic"</span>, preview <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating classic palette for broad 8 cell types</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating classic palette for 8 broad cell types</span>
 <span class="r-plt img"><img src="create_cell_colors-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Astro     Micro      Endo     Oligo       OPC     Excit     Inhib     Other </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "#3BB273" "#FF56AF" "#663894" "#F57A00" "#D2B037" "#247FBC" "#E83E38" "#4E586A" </span>
 <span class="r-in"><span><span class="fu">create_cell_colors</span><span class="op">(</span>palette_name <span class="op">=</span> <span class="st">"tableau"</span>, preview <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating tableau palette for broad 8 cell types</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating tableau palette for 8 broad cell types</span>
 <span class="r-plt img"><img src="create_cell_colors-2.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Astro     Micro      Endo     Oligo       OPC     Excit     Inhib     Other </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "#1F77B4" "#AEC7E8" "#FF7F0E" "#FFBB78" "#2CA02C" "#98DF8A" "#D62728" "#FF9896" </span>
@@ -145,7 +145,7 @@ with <code>ggplot2:scale_color_manual()</code>.</p>
 <span class="r-in"><span><span class="fu">create_cell_colors</span><span class="op">(</span>cell_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>                   palette <span class="op">=</span> <span class="va">my_colors</span>, </span></span>
 <span class="r-in"><span>                   preview <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating custom palette for broad 4 cell types</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating custom palette for 4 broad cell types</span>
 <span class="r-plt img"><img src="create_cell_colors-3.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 A                 B                 C                 D </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     "darkorchid4"       "deeppink4"     "aquamarine3" "darkolivegreen1" </span>
@@ -154,7 +154,7 @@ with <code>ggplot2:scale_color_manual()</code>.</p>
 <span class="r-in"><span><span class="fu">create_cell_colors</span><span class="op">(</span>cell_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>                   palette <span class="op">=</span> <span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html" class="external-link">brewer.pal</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span>, name <span class="op">=</span> <span class="st">"Set1"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                   previe <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating custom palette for broad 3 cell types</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating custom palette for 3 broad cell types</span>
 <span class="r-plt img"><img src="create_cell_colors-4.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         A         B         C </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "#E41A1C" "#377EB8" "#4DAF4A" </span>
@@ -166,7 +166,7 @@ with <code>ggplot2:scale_color_manual()</code>.</p>
 <span class="r-in"><span>    palette_name <span class="op">=</span> <span class="st">"classic"</span>,</span></span>
 <span class="r-in"><span>    preview <span class="op">=</span> <span class="cn">FALSE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating classic palette for broad 5 cell types</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating classic palette for 5 broad cell types</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       A.1       A.2       B.1         C         D </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> "#3BB273" "#FF56AF" "#663894" "#F57A00" "#D2B037" </span>
 <span class="r-in"><span></span></span>
@@ -179,7 +179,7 @@ with <code>ggplot2:scale_color_manual()</code>.</p>
 <span class="r-in"><span>    palette_name <span class="op">=</span> <span class="st">"classic"</span>,</span></span>
 <span class="r-in"><span>    preview <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating classic palette for broad 4 cell types</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating classic palette for 4 broad cell types</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Creating fine cell type gradients for 2 cell types</span>
 <span class="r-plt img"><img src="create_cell_colors-5.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $broad</span>
@@ -198,7 +198,7 @@ with <code>ggplot2:scale_color_manual()</code>.</p>
 <span class="r-in"><span>    palette <span class="op">=</span> <span class="va">my_colors</span>,</span></span>
 <span class="r-in"><span>    preview <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating custom palette for broad 4 cell types</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Creating custom palette for 4 broad cell types</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Creating fine cell type gradients for 2 cell types</span>
 <span class="r-plt img"><img src="create_cell_colors-6.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $broad</span>
