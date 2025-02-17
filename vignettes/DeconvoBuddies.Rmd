@@ -39,12 +39,39 @@ library("RefManageR")
 ## Write bibliography information
 bib <- c(
     R = citation(),
+    AnnotationHub = citation("AnnotationHub")[1],
+    BiocFileCache = citation("BiocFileCache")[1],
+    dplyr = citation("dplyr")[1],
+    ExperimentHub = citation("ExperimentHub")[1],
+    ggplot2 = citation("ggplot2")[1],
+    graphics = citation("graphics")[1],
+    grDevices = citation("grDevices")[1],
+    matrixStats = citation("matrixStats")[1],
+    methods = citation("methods")[1],
+    purrr = citation("purrr")[1],
+    rafalib = citation("rafalib")[1],
+    RColorBrewer = citation("RColorBrewer")[1],
+    reshape2 = citation("reshape2")[1],
+    S4Vectors = citation("S4Vectors")[1],
+    scran = citation("scran")[1],
+    SingleCellExperiment = citation("SingleCellExperiment")[1],
+    spatialLIBD = citation("spatialLIBD")[1],
+    stats = citation("stats")[1],
+    stringr = citation("stringr")[1],
+    SummarizedExperiment = citation("SummarizedExperiment")[1],
+    tibble = citation("tibble")[1],
+    Biobase = citation("Biobase")[1],
     BiocStyle = citation("BiocStyle")[1],
+    BisqueRNA = citation("BisqueRNA")[1],
+    covr = citation("covr")[1],
+    HDF5Array = citation("HDF5Array")[1],
     knitr = citation("knitr")[1],
     RefManageR = citation("RefManageR")[1],
     rmarkdown = citation("rmarkdown")[1],
     sessioninfo = citation("sessioninfo")[1],
     testthat = citation("testthat")[1],
+    tidyr = citation("tidyr")[1],
+    tidyverse = citation("tidyverse")[1],
     DeconvoBuddies = citation("DeconvoBuddies")[1],
     DeconvoBuddiespaper = citation("DeconvoBuddies")[2]
 )
@@ -380,6 +407,31 @@ session_info()
 ```
 
 # Bibliography
+
+The `r Biocpkg("DeconvoBuddies")` package `r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
+
+* R `r Citep(bib[["R"]])`
+* `r Biocpkg("AnnotationHub")` `r Citep(bib[["AnnotationHub"]])`
+* `r Biocpkg("BiocFileCache")` `r Citep(bib[["BiocFileCache"]])`
+* `r Biocpkg("dplyr")` `r Citep(bib[["dplyr"]])`
+* `r Biocpkg("ExperimentHub")` `r Citep(bib[["ExperimentHub"]])`
+* `r Biocpkg("ggplot2")` `r Citep(bib[["ggplot2"]])`
+* `r Biocpkg("graphics")` `r Citep(bib[["graphics"]])`
+* `r Biocpkg("grDevices")` `r Citep(bib[["grDevices"]])`
+* `r Biocpkg("matrixStats")` `r Citep(bib[["matrixStats"]])`
+* `r Biocpkg("methods")` `r Citep(bib[["methods"]])`
+* `r Biocpkg("purrr")` `r Citep(bib[["purrr"]])`
+* `r Biocpkg("rafalib")` `r Citep(bib[["rafalib"]])`
+* `r Biocpkg("reshape2")` `r Citep(bib[["reshape2"]])`
+* `r Biocpkg("S4Vectors")` `r Citep(bib[["S4Vectors"]])`
+* `r Biocpkg("scran")` `r Citep(bib[["scran"]])`
+* `r Biocpkg("SingleCellExperiment")` `r Citep(bib[["SingleCellExperiment"]])`
+* `r Biocpkg("spatialLIBD")` `r Citep(bib[["spatialLIBD"]])`
+* `r Biocpkg("stats")` `r Citep(bib[["stats"]])`
+* `r Biocpkg("stringr")` `r Citep(bib[["stringr"]])`
+* `r Biocpkg("SummarizedExperiment")` `r Citep(bib[["SummarizedExperiment"]])`
+* `r Biocpkg("tibble")` `r Citep(bib[["tibble"]])`
+* `r Biocpkg("utils")` `r Citep(bib[["utils"]])`
 
 This vignette was generated using `r Biocpkg("BiocStyle")`
 `r Citep(bib[["BiocStyle"]])` with `r CRANpkg("knitr")`
