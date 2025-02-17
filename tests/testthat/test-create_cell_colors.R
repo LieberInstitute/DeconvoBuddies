@@ -17,5 +17,3 @@ test_that("Error with less color than ct", {
                                   palette = my_colors[1:3]))
 })
 
-create_cell_colors(cell_type = c("A"),
-                   palette = my_colors[1:3])
