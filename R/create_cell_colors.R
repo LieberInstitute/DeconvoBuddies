@@ -1,20 +1,20 @@
-#' Create a cell color pallet for plots
+#' Create a cell color palette for plots
 #'
 #' This function returns a `character()` vector with valid R colors for a given
 #' input `character()` of unique cell types. These were colors that have been
 #' useful in our experience.
 #'
 #' @param cell_types A `character()` vector listing unique cell types.
-#' @param pallet_name A `character(1)` indicating choice of included pallets:
+#' @param palette_name A `character(1)` indicating choice of included palettes:
 #' 
 #' * `"classic"`: classic set of 8 cell type colors from LIBD, checked for 
-#' visability and color blind accessibility. Default pallet. 
+#' visability and color blind accessibility. Default palette. 
 #' * `"gg"` : mimic colors automatically picked by ggplot. 
-#' * `"tableau"` : 20 distinct colors from tableau color pallet, good for 
+#' * `"tableau"` : 20 distinct colors from tableau color palette, good for 
 #' large number of cell type. 
 #' 
-#' @param pallet A `character()` vector listing user provided color pallet. If 
-#' provided, overrides pallet selection with pallet_name.
+#' @param palette A `character()` vector listing user provided color palette. If 
+#' provided, overrides palette selection with palette_name.
 #' @param split delineating `character(1)` after which suffixes will be ignored.
 #' This is useful for cases when say `A.1` and `A.2` are both to be considered
 #' fine subtypes of broad cell type `A` (here `split = "\\."`). When used the 
@@ -27,27 +27,27 @@
 #' @export
 #'
 #' @examples
-#' ## create cell colors with included pallets
-#' create_cell_colors(pallet_name = "classic")
-#' create_cell_colors(pallet_name = "classic", preview = TRUE)
-#' create_cell_colors(pallet_name = "tableau", preview = TRUE)
+#' ## create cell colors with included palettes
+#' create_cell_colors(palette_name = "classic")
+#' create_cell_colors(palette_name = "classic", preview = TRUE)
+#' create_cell_colors(palette_name = "tableau", preview = TRUE)
 #' 
 #' ## use custom colors
 #' my_colors <- c("darkorchid4", "deeppink4", "aquamarine3", "darkolivegreen1")
 #' create_cell_colors(cell_type = c("A", "B", "C", "D"), 
-#'                    pallet = my_colors, 
+#'                    palette = my_colors, 
 #'                    preview = TRUE)
 #'                    
 #' ## use Rcolor brewer
 #' create_cell_colors(cell_type = c("A", "B", "C"), 
-#'                    pallet = RColorBrewer::brewer.pal(n = 3, name = "Set1"),
+#'                    palette = RColorBrewer::brewer.pal(n = 3, name = "Set1"),
 #'                    previe = TRUE)
 #' 
 #' ## Options for subtype handling
 #' ## Provide unique colors for cell subtypes (DEFAULT) - returns one level list
 #' create_cell_colors(
 #'     cell_types = c("A.1", "A.2", "B.1", "C", "D"),
-#'     pallet_name = "classic",
+#'     palette_name = "classic",
 #'     preview = FALSE
 #' )
 #'
@@ -57,7 +57,7 @@
 #' create_cell_colors(
 #'     cell_types = c("A.1", "A.2", "B.1", "C", "D"),
 #'     split = "\\.",
-#'     pallet_name = "classic",
+#'     palette_name = "classic",
 #'     preview = TRUE
 #' )
 #' 
@@ -65,7 +65,7 @@
 #' create_cell_colors(
 #'     cell_types = c("A.1", "A.2", "B.1", "C", "D"),
 #'     split = "\\.",
-#'     pallet = my_colors,
+#'     palette = my_colors,
 #'     preview = TRUE
 #' )
 #' 
@@ -84,10 +84,10 @@ create_cell_colors <- function(
                    "Excit", 
                    "Inhib", 
                    "Other"),
-    pallet_name = c("classic",
+    palette_name = c("classic",
                     "gg", 
                     "tableau"),
-    pallet = NULL,
+    palette = NULL,
     split = NA,
     preview = FALSE) {
   
@@ -99,24 +99,24 @@ create_cell_colors <- function(
   nct <- length(broad_cell_types)
   cell_colors <- list()
   
-  ## check pallet selection
-  if(is.null(pallet_name) & is.null(pallet)){
-    stop("must select a pallet_name or provide custom pallet")
+  ## check palette selection
+  if(is.null(palette_name) & is.null(palette)){
+    stop("must select a palette_name or provide custom palette")
     
-  } else if(!is.null(pallet)){ ## use custom pallet
-    stopifnot(is.character(pallet))
-    cell_colors = pallet
-    message(sprintf("Creating custom pallet for broad %d cell types", nct))
+  } else if(!is.null(palette)){ ## use custom palette
+    stopifnot(is.character(palette))
+    cell_colors = palette
+    message(sprintf("Creating custom palette for broad %d cell types", nct))
     
-  } else { ## use user provided pallet
-    pallet_name <- match.arg(pallet_name)
-    message(sprintf("Creating %s pallet for broad %d cell types", pallet_name, nct))
+  } else { ## use user provided palette
+    palette_name <- match.arg(palette_name)
+    message(sprintf("Creating %s palette for broad %d cell types", palette_name, nct))
     
-    if (pallet_name == "gg") {
+    if (palette_name == "gg") {
       cell_colors <- gg_color_hue(nct)
-    } else if (pallet_name == "tableau") {
+    } else if (palette_name == "tableau") {
       cell_colors <- tableau20[seq(nct)]
-    } else if (pallet_name == "classic"){
+    } else if (palette_name == "classic"){
       cell_colors = c("#3BB273",
                       "#FF56AF",
                       "#663894",
@@ -130,9 +130,9 @@ create_cell_colors <- function(
   
   #### match cell types and colors ####
   if(length(cell_colors) < nct){ ## error if not enough colors
-    stop(sprintf("more cell types (%d) than colors in pallet (%d)", nct, length(cell_colors)))
+    stop(sprintf("more cell types (%d) than colors in palette (%d)", nct, length(cell_colors)))
     
-  } else if(length(cell_colors) > nct) { ## subset large pallet
+  } else if(length(cell_colors) > nct) { ## subset large palette
     # message(sprintf("more colors (%d) than cell types (%d), using first (%d) colors", length(cell_colors), nct, nct))
     cell_colors <- cell_colors[seq(nct)]
   }

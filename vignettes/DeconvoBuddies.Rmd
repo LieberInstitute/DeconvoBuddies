@@ -194,16 +194,16 @@ DeconvoBuddies.](https://research.libd.org/DeconvoBuddies/articles/Marker_Findin
 
 ## Plotting Tools
 
-### Creating A Cell Type Color Pallet
+### Creating A Cell Type Color palette
 
 As you work with single-cell data and deconvolution outputs, it is very
-useful to establish a consistent color pallet to use across different
+useful to establish a consistent color palette to use across different
 plots. The function `create_cell_colors()` returns a named vector of hex
 values, corresponding to the names of cell types. This list is
 compatible with functions like `ggplot2::scale_color_manual()`.
 
-There are three pallets to choose from to generate colors or users can provide 
-their own color pallet:
+There are three palettes to choose from to generate colors or users can provide 
+their own color palette:
 
 -   "classic" (default): classic set of 8 cell type colors from LIBD, checked 
 for visability and color blind accessibility.
@@ -221,31 +221,31 @@ test_cell_types <- c("cell_A", "cell_B", "cell_C", "cell_D", "cell_E")
 ## Preview "classic" colors
 test_cell_colors_classic <- create_cell_colors(
     cell_types = test_cell_types,
-    pallet_name = "classic",
+    palette_name = "classic",
     preview = TRUE
 )
 
 ## Preview "gg" colors
 test_cell_colors_gg <- create_cell_colors(
     cell_types = test_cell_types,
-    pallet_name = "gg",
+    palette_name = "gg",
     preview = TRUE
 )
 
 ## Preview "tableau" colors
 test_cell_colors_tableau <- create_cell_colors(
     cell_types = test_cell_types,
-    pallet_name = "tableau",
+    palette_name = "tableau",
     preview = TRUE
 )
 
 ## Check the color hex codes for "tableau"
 test_cell_colors_tableau
 
-## Provide a pallet from RColorBrewer
+## Provide a palette from RColorBrewer
 test_cell_colors_brew <- create_cell_colors(
     cell_types = test_cell_types,
-    pallet = RColorBrewer::brewer.pal(n=length(test_cell_types), name = "Dark2"),
+    palette = RColorBrewer::brewer.pal(n=length(test_cell_types), name = "Dark2"),
     preview = TRUE
 )
 
@@ -253,7 +253,7 @@ test_cell_colors_brew <- create_cell_colors(
 
 If there are sub-cell types with consistent delimiters, the `split`
 argument creates a scale of related colors. This helps expand on the
-maximum number of colors and makes your pallet flexible when considering
+maximum number of colors and makes your palette flexible when considering
 different 'resolutions' of cell types. This works by ignoring any prefixes after
 the `split` character. In this example below, `Excit_01` and `Excit_02` will
 just be considered as `Excit` since `split = "_"`.
@@ -263,7 +263,7 @@ my_cell_types <- levels(sce_DLPFC_example$cellType_hc)
 ## Ignore any suffix after the "_" character by using the "split" argument
 my_cell_colors <- create_cell_colors(
     cell_types = my_cell_types,
-    pallet_name = "classic",
+    palette_name = "classic",
     preview = TRUE,
     split = "_"
 )

@@ -39,7 +39,7 @@ plot_marker_express_ALL(
 \item{cellType_col}{The \code{character(1)} name of \code{colData()} column containing
 cell type for \code{sce} data. It should match \code{cellType.target} in \code{stats}.}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet
+\item{color_pal}{A named \code{character(1)} vector that contains a color palette
 matching the \code{cell_type} values.}
 
 \item{plot_points}{A \code{logical(1)} indicating whether to plot points over the

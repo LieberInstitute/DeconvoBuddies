@@ -18,7 +18,7 @@
 #' `stats` should be the same syntax as `rownames(sce)`.
 #' @param cellType_col The `character(1)` name of `colData()` column containing
 #' cell type for `sce` data. It should match `cellType.target` in `stats`.
-#' @param color_pal A named `character(1)` vector that contains a color pallet
+#' @param color_pal A named `character(1)` vector that contains a color palette
 #' matching the `cell_type` values.
 #' @inheritParams plot_gene_express
 #'

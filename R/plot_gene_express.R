@@ -15,7 +15,7 @@
 #' it typically contains the normalized expression values.
 #' @param category  A `character(1)` specifying the name of the categorical
 #' variable to group the cells or nuclei by. Defaults to `cellType`.
-#' @param color_pal  A named `character(1)` vector that contains a color pallet
+#' @param color_pal  A named `character(1)` vector that contains a color palette
 #' matching the `category` values.
 #' @param title A `character(1)` to title the plot.
 #' @param plot_points A `logical(1)` indicating whether to plot points over the

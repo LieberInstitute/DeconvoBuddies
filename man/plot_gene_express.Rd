@@ -31,7 +31,7 @@ it typically contains the normalized expression values.}
 \item{category}{A \code{character(1)} specifying the name of the categorical
 variable to group the cells or nuclei by. Defaults to \code{cellType}.}
 
-\item{color_pal}{A named \code{character(1)} vector that contains a color pallet
+\item{color_pal}{A named \code{character(1)} vector that contains a color palette
 matching the \code{category} values.}
 
 \item{title}{A \code{character(1)} to title the plot.}
