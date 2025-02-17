@@ -382,31 +382,8 @@ now ready to dive deeper into:
 
 # Reproducibility
 
-The `r Biocpkg("DeconvoBuddies")` package
-`r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
-
--   R `r Citep(bib[["R"]])`
--   `r Biocpkg("BiocStyle")` `r Citep(bib[["BiocStyle"]])`
--   `r CRANpkg("knitr")` `r Citep(bib[["knitr"]])`
--   `r CRANpkg("RefManageR")` `r Citep(bib[["RefManageR"]])`
--   `r CRANpkg("rmarkdown")` `r Citep(bib[["rmarkdown"]])`
--   `r CRANpkg("sessioninfo")` `r Citep(bib[["sessioninfo"]])`
--   `r CRANpkg("testthat")` `r Citep(bib[["testthat"]])`
-
-This package was developed using `r BiocStyle::Biocpkg("biocthis")`.
-
-`R` session information.
-
-```{r reproduce3, echo=FALSE}
-## Session info
-library("sessioninfo")
-options(width = 120)
-session_info()
-```
-
-# Bibliography
-
-The `r Biocpkg("DeconvoBuddies")` package `r Citep(bib[["DeconvoBuddies"]])` was made possible thanks to:
+The `r Biocpkg("DeconvoBuddies")` package `r Citep(bib[["DeconvoBuddies"]])` was
+made possible thanks to:
 
 * R `r Citep(bib[["R"]])`
 * `r Biocpkg("AnnotationHub")` `r Citep(bib[["AnnotationHub"]])`
@@ -438,6 +415,19 @@ This vignette was generated using `r Biocpkg("BiocStyle")`
 
 Citations made with `r CRANpkg("RefManageR")`
 `r Citep(bib[["RefManageR"]])`.
+
+This package was developed using `r BiocStyle::Biocpkg("biocthis")`.
+
+`R` session information.
+
+```{r reproduce3, echo=FALSE}
+## Session info
+library("sessioninfo")
+options(width = 120)
+session_info()
+```
+
+# Bibliography
 
 ```{r vignetteBiblio, results = "asis", echo = FALSE, warning = FALSE, message = FALSE}
 ## Print bibliography
