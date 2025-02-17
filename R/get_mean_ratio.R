@@ -65,7 +65,9 @@
 #'     gene_name = "gene_name",
 #'     gene_ensembl = "gene_id"
 #' )
-#'
+#' 
+#' @family marker gene functions
+#' 
 #' @importFrom dplyr mutate
 #' @importFrom dplyr arrange
 #' @importFrom purrr map

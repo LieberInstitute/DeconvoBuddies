@@ -94,3 +94,8 @@ marker_stats_1vAll <- findMarkers_1vAll(
 head(marker_stats_1vAll)
 
 }
+\seealso{
+Other marker gene functions: 
+\code{\link{get_mean_ratio}()}
+}
+\concept{marker gene functions}

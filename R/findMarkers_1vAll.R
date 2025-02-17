@@ -67,7 +67,9 @@
 #'
 #' ## explore output, top markers have high logFC
 #' head(marker_stats_1vAll)
-#'
+#' 
+#' @family marker gene functions
+#' 
 #' @importFrom purrr map
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
