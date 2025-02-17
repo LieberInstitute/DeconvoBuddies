@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.20</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.21</span>
       </span>
     </div>
 
@@ -186,7 +186,7 @@ to cite the package and the overall approach. Thank you!</p>
 <span><span class="co">#&gt;   doi:10.18129/B9.bioc.DeconvoBuddies</span></span>
 <span><span class="co">#&gt;   &lt;https://doi.org/10.18129/B9.bioc.DeconvoBuddies&gt;,</span></span>
 <span><span class="co">#&gt;   https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R</span></span>
-<span><span class="co">#&gt;   package version 0.99.20,</span></span>
+<span><span class="co">#&gt;   package version 0.99.21,</span></span>
 <span><span class="co">#&gt;   &lt;http://www.bioconductor.org/packages/DeconvoBuddies&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Huuki-Myers LA, Montgomery KD, Kwon SH, Cinquemani S, Eagles NJ,</span></span>
@@ -233,7 +233,7 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Access and snRNA-seq example data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-02-17 12:40:45.578255 loading file /github/home/.cache/R/BiocFileCache/46254b15dfb_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2025-02-17 14:13:31.213982 loading file /github/home/.cache/R/BiocFileCache/4624f3a2fd0_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
 <span></span>
 <span><span class="co">## Explore snRNA-seq data in sce_DLPFC_example</span></span>
 <span><span class="va">sce_DLPFC_example</span></span>
@@ -252,7 +252,7 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 <span></span>
 <span><span class="co">## Access Bulk RNA-seq data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span><span class="op">)</span> <span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-02-17 12:40:47.250832 loading file /github/home/.cache/R/BiocFileCache/462263479f3_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2025-02-17 14:13:32.915965 loading file /github/home/.cache/R/BiocFileCache/4622ce9d6c_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
 <span></span>
 <span><span class="co">## Explore bulk data in rse_gene</span></span>
 <span><span class="va">rse_gene</span></span>
@@ -593,7 +593,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  data.table             1.16.4    <span style="color: #555555;">2024-12-06</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  DBI                    1.2.3     <span style="color: #555555;">2024-06-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  dbplyr                 2.5.0     <span style="color: #555555;">2024-03-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.20   <span style="color: #555555;">2025-02-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
+<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.21   <span style="color: #555555;">2025-02-17</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  DelayedArray           0.32.0    <span style="color: #555555;">2024-10-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.2)</span></span></span>
 <span><span class="co">#&gt;  desc                   1.4.3     <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  digest                 0.6.37    <span style="color: #555555;">2024-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -731,6 +731,76 @@ Cheng, Chang, and Iannone, 2024)</li>
 <div class="section level2">
 <h2 id="bibliography">Bibliography<a class="anchor" aria-label="anchor" href="#bibliography"></a>
 </h2>
+<p>The <em><a href="https://bioconductor.org/packages/3.20/DeconvoBuddies" class="external-link">DeconvoBuddies</a></em>
+package (Huuki-Myers, Maynard, Hicks et al., 2025) was made possible
+thanks to:</p>
+<ul>
+<li>R (R Core Team, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/AnnotationHub" class="external-link">AnnotationHub</a></em>
+(Morgan and Shepherd, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/BiocFileCache" class="external-link">BiocFileCache</a></em>
+(Shepherd and Morgan, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/dplyr" class="external-link">dplyr</a></em>
+(Wickham, François, Henry, Müller, and Vaughan, 2023)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/ExperimentHub" class="external-link">ExperimentHub</a></em>
+(Morgan and Shepherd, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/ggplot2" class="external-link">ggplot2</a></em>
+(Wickham, 2016)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/graphics" class="external-link">graphics</a></em>
+(R Core Team, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/grDevices" class="external-link">grDevices</a></em>
+(R Core Team, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/matrixStats" class="external-link">matrixStats</a></em>
+(Bengtsson, 2025)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/methods" class="external-link">methods</a></em>
+(R Core Team, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/purrr" class="external-link">purrr</a></em>
+(Wickham and Henry, 2025)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/rafalib" class="external-link">rafalib</a></em>
+(Irizarry and Love, 2015)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/reshape2" class="external-link">reshape2</a></em>
+(Wickham, 2007)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/S4Vectors" class="external-link">S4Vectors</a></em>
+(Pagès, Lawrence, and Aboyoun, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/scran" class="external-link">scran</a></em> (Lun,
+McCarthy, and Marioni, 2016)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/SingleCellExperiment" class="external-link">SingleCellExperiment</a></em>
+(Amezquita, Lun, Becht, Carey, Carpp, Geistlinger, Marini, Rue-Albrecht,
+Risso, Soneson, Waldron, Pages, Smith, Huber, Morgan, Gottardo, and
+Hicks, 2020)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/spatialLIBD" class="external-link">spatialLIBD</a></em>
+(Pardo, Spangler, Weber, Hicks, Jaffe, Martinowich, Maynard, and
+Collado-Torres, 2022)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/stats" class="external-link">stats</a></em> (R
+Core Team, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/stringr" class="external-link">stringr</a></em>
+(Wickham, 2023)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/SummarizedExperiment" class="external-link">SummarizedExperiment</a></em>
+(Morgan, Obenchain, Hester, and Pagès, 2024)</li>
+<li>
+<em><a href="https://bioconductor.org/packages/3.20/tibble" class="external-link">tibble</a></em>
+(Müller and Wickham, 2023)</li>
+<li><em><a href="https://bioconductor.org/packages/3.20/utils" class="external-link">utils</a></em></li>
+</ul>
 <p>This vignette was generated using <em><a href="https://bioconductor.org/packages/3.20/BiocStyle" class="external-link">BiocStyle</a></em>
 (Oleś, 2024) with <em><a href="https://CRAN.R-project.org/package=knitr" class="external-link">knitr</a></em> (Xie,
 2024) and <em><a href="https://CRAN.R-project.org/package=rmarkdown" class="external-link">rmarkdown</a></em>
@@ -744,17 +814,30 @@ for R</em>. R package version 2.29. 2024. URL:
 <a href="https://github.com/rstudio/rmarkdown" class="external-link">https://github.com/rstudio/rmarkdown</a>.</cite>
 </p>
 <p>
-<a id="bib-huukimyers2025deconvobuddies"></a><a href="#cite-huukimyers2025deconvobuddies">[2]</a><cite>
+<a id="bib-amezquita2020orchestrating"></a><a href="#cite-amezquita2020orchestrating">[2]</a><cite>
+R. Amezquita, A. Lun, E. Becht, et al. “Orchestrating single-cell
+analysis with Bioconductor”. In: <em>Nature Methods</em> 17 (2020),
+pp. 137–145. URL:
+<a href="https://www.nature.com/articles/s41592-019-0654-x" class="external-link">https://www.nature.com/articles/s41592-019-0654-x</a>.</cite>
+</p>
+<p>
+<a id="bib-bengtsson2025matrixstats"></a><a href="#cite-bengtsson2025matrixstats">[3]</a><cite>
+H. Bengtsson. <em>matrixStats: Functions that Apply to Rows and Columns
+of Matrices (and to Vectors)</em>. R package version 1.5.0. 2025. URL:
+<a href="https://github.com/HenrikBengtsson/matrixStats" class="external-link">https://github.com/HenrikBengtsson/matrixStats</a>.</cite>
+</p>
+<p>
+<a id="bib-huukimyers2025deconvobuddies"></a><a href="#cite-huukimyers2025deconvobuddies">[4]</a><cite>
 L. A. Huuki-Myers, K. R. Maynard, S. C. Hicks, et al.
 <em>DeconvoBuddies: a R/Bioconductor package with deconvolution helper
 functions</em>. <a href="https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies" class="external-link uri">https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies</a>
-- R package version 0.99.20. 2025. DOI:
+- R package version 0.99.21. 2025. DOI:
 <a href="https://doi.org/10.18129/B9.bioc.DeconvoBuddies" class="external-link">10.18129/B9.bioc.DeconvoBuddies</a>.
 URL:
 <a href="http://www.bioconductor.org/packages/DeconvoBuddies" class="external-link">http://www.bioconductor.org/packages/DeconvoBuddies</a>.</cite>
 </p>
 <p>
-<a id="bib-huukimyers2024benchmark"></a><a href="#cite-huukimyers2024benchmark">[3]</a><cite>
+<a id="bib-huukimyers2024benchmark"></a><a href="#cite-huukimyers2024benchmark">[5]</a><cite>
 L. A. Huuki-Myers, K. D. Montgomery, S. H. Kwon, et al. “Benchmark of
 cellular deconvolution methods using a multi-assay reference dataset
 from postmortem human prefrontal cortex”. In: <em>bioRxiv</em> (2024).
@@ -764,14 +847,57 @@ URL:
 <a href="https://doi.org/10.1101/2024.02.09.579665" class="external-link">https://doi.org/10.1101/2024.02.09.579665</a>.</cite>
 </p>
 <p>
-<a id="bib-mclean2017refmanager"></a><a href="#cite-mclean2017refmanager">[4]</a><cite>
+<a id="bib-irizarry2015rafalib"></a><a href="#cite-irizarry2015rafalib">[6]</a><cite>
+R. A. Irizarry and M. I. Love. <em>rafalib: Convenience Functions for
+Routine Data Exploration</em>. R package version 1.0.0. 2015.</cite>
+</p>
+<p>
+<a id="bib-lun2016step"></a><a href="#cite-lun2016step">[7]</a><cite> A.
+T. L. Lun, D. J. McCarthy, and J. C. Marioni. “A step-by-step workflow
+for low-level analysis of single-cell RNA-seq data with Bioconductor”.
+In: <em>F1000Res.</em> 5 (2016), p. 2122. DOI:
+<a href="https://doi.org/10.12688/f1000research.9501.2" class="external-link">10.12688/f1000research.9501.2</a>.</cite>
+</p>
+<p>
+<a id="bib-mclean2017refmanager"></a><a href="#cite-mclean2017refmanager">[8]</a><cite>
 M. W. McLean. “RefManageR: Import and Manage BibTeX and BibLaTeX
 References in R”. In: <em>The Journal of Open Source Software</em>
 (2017). DOI:
 <a href="https://doi.org/10.21105/joss.00338" class="external-link">10.21105/joss.00338</a>.</cite>
 </p>
 <p>
-<a id="bib-ole2024biocstyle"></a><a href="#cite-ole2024biocstyle">[5]</a><cite>
+<a id="bib-morgan2024summarizedexperiment"></a><a href="#cite-morgan2024summarizedexperiment">[9]</a><cite>
+M. Morgan, V. Obenchain, J. Hester, et al. <em>SummarizedExperiment: A
+container (S4 class) for matrix-like assays</em>. R package version
+1.36.0. 2024. DOI:
+<a href="https://doi.org/10.18129/B9.bioc.SummarizedExperiment" class="external-link">10.18129/B9.bioc.SummarizedExperiment</a>.
+URL:
+<a href="https://bioconductor.org/packages/SummarizedExperiment" class="external-link">https://bioconductor.org/packages/SummarizedExperiment</a>.</cite>
+</p>
+<p>
+<a id="bib-morgan2024annotationhub"></a><a href="#cite-morgan2024annotationhub">[10]</a><cite>
+M. Morgan and L. Shepherd. <em>AnnotationHub: Client to access
+AnnotationHub resources</em>. R package version 3.14.0. 2024. DOI:
+<a href="https://doi.org/10.18129/B9.bioc.AnnotationHub" class="external-link">10.18129/B9.bioc.AnnotationHub</a>.
+URL:
+<a href="https://bioconductor.org/packages/AnnotationHub" class="external-link">https://bioconductor.org/packages/AnnotationHub</a>.</cite>
+</p>
+<p>
+<a id="bib-morgan2024experimenthub"></a><a href="#cite-morgan2024experimenthub">[11]</a><cite>
+M. Morgan and L. Shepherd. <em>ExperimentHub: Client to access
+ExperimentHub resources</em>. R package version 2.14.0. 2024. DOI:
+<a href="https://doi.org/10.18129/B9.bioc.ExperimentHub" class="external-link">10.18129/B9.bioc.ExperimentHub</a>.
+URL:
+<a href="https://bioconductor.org/packages/ExperimentHub" class="external-link">https://bioconductor.org/packages/ExperimentHub</a>.</cite>
+</p>
+<p>
+<a id="bib-mller2023tibble"></a><a href="#cite-mller2023tibble">[12]</a><cite>
+K. Müller and H. Wickham. <em>tibble: Simple Data Frames</em>. R package
+version 3.2.1, <a href="https://github.com/tidyverse/tibble" class="external-link uri">https://github.com/tidyverse/tibble</a>. 2023. URL:
+<a href="https://tibble.tidyverse.org/" class="external-link">https://tibble.tidyverse.org/</a>.</cite>
+</p>
+<p>
+<a id="bib-ole2024biocstyle"></a><a href="#cite-ole2024biocstyle">[13]</a><cite>
 A. Oleś. <em>BiocStyle: Standard styles for vignettes and other
 Bioconductor documents</em>. R package version 2.34.0. 2024. DOI:
 <a href="https://doi.org/10.18129/B9.bioc.BiocStyle" class="external-link">10.18129/B9.bioc.BiocStyle</a>.
@@ -779,26 +905,82 @@ URL:
 <a href="https://bioconductor.org/packages/BiocStyle" class="external-link">https://bioconductor.org/packages/BiocStyle</a>.</cite>
 </p>
 <p>
-<a id="bib-2024language"></a><a href="#cite-2024language">[6]</a><cite>
+<a id="bib-pags2024s4vectors"></a><a href="#cite-pags2024s4vectors">[14]</a><cite>
+H. Pagès, M. Lawrence, and P. Aboyoun. <em>S4Vectors: Foundation of
+vector-like and list-like containers in Bioconductor</em>. R package
+version 0.44.0. 2024. DOI:
+<a href="https://doi.org/10.18129/B9.bioc.S4Vectors" class="external-link">10.18129/B9.bioc.S4Vectors</a>.
+URL:
+<a href="https://bioconductor.org/packages/S4Vectors" class="external-link">https://bioconductor.org/packages/S4Vectors</a>.</cite>
+</p>
+<p>
+<a id="bib-pardo2022spatiallibd"></a><a href="#cite-pardo2022spatiallibd">[15]</a><cite>
+B. Pardo, A. Spangler, L. M. Weber, et al. “spatialLIBD: an
+R/Bioconductor package to visualize spatially-resolved transcriptomics
+data”. In: <em>BMC Genomics</em> (2022). DOI:
+<a href="https://doi.org/10.1186/s12864-022-08601-w" class="external-link">10.1186/s12864-022-08601-w</a>.
+URL:
+<a href="https://doi.org/10.1186/s12864-022-08601-w" class="external-link">https://doi.org/10.1186/s12864-022-08601-w</a>.</cite>
+</p>
+<p>
+<a id="bib-2024language"></a><a href="#cite-2024language">[16]</a><cite>
 R Core Team. <em>R: A Language and Environment for Statistical
 Computing</em>. R Foundation for Statistical Computing. Vienna, Austria,
 2024. URL:
 <a href="https://www.R-project.org/" class="external-link">https://www.R-project.org/</a>.</cite>
 </p>
 <p>
-<a id="bib-wickham2011testthat"></a><a href="#cite-wickham2011testthat">[7]</a><cite>
+<a id="bib-shepherd2024biocfilecache"></a><a href="#cite-shepherd2024biocfilecache">[17]</a><cite>
+L. Shepherd and M. Morgan. <em>BiocFileCache: Manage Files Across
+Sessions</em>. R package version 2.14.0. 2024. DOI:
+<a href="https://doi.org/10.18129/B9.bioc.BiocFileCache" class="external-link">10.18129/B9.bioc.BiocFileCache</a>.
+URL:
+<a href="https://bioconductor.org/packages/BiocFileCache" class="external-link">https://bioconductor.org/packages/BiocFileCache</a>.</cite>
+</p>
+<p>
+<a id="bib-wickham2016ggplot2"></a><a href="#cite-wickham2016ggplot2">[18]</a><cite>
+H. Wickham. <em>ggplot2: Elegant Graphics for Data Analysis</em>.
+Springer-Verlag New York, 2016. ISBN: 978-3-319-24277-4. URL:
+<a href="https://ggplot2.tidyverse.org" class="external-link">https://ggplot2.tidyverse.org</a>.</cite>
+</p>
+<p>
+<a id="bib-wickham2007reshaping"></a><a href="#cite-wickham2007reshaping">[19]</a><cite>
+H. Wickham. “Reshaping Data with the reshape Package”. In: <em>Journal
+of Statistical Software</em> 21.12 (2007), pp. 1–20. URL:
+<a href="http://www.jstatsoft.org/v21/i12/" class="external-link">http://www.jstatsoft.org/v21/i12/</a>.</cite>
+</p>
+<p>
+<a id="bib-wickham2023stringr"></a><a href="#cite-wickham2023stringr">[20]</a><cite>
+H. Wickham. <em>stringr: Simple, Consistent Wrappers for Common String
+Operations</em>. R package version 1.5.1, <a href="https://github.com/tidyverse/stringr" class="external-link uri">https://github.com/tidyverse/stringr</a>. 2023. URL:
+<a href="https://stringr.tidyverse.org" class="external-link">https://stringr.tidyverse.org</a>.</cite>
+</p>
+<p>
+<a id="bib-wickham2011testthat"></a><a href="#cite-wickham2011testthat">[21]</a><cite>
 H. Wickham. “testthat: Get Started with Testing”. In: <em>The R
 Journal</em> 3 (2011), pp. 5–10. URL:
 <a href="https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf" class="external-link">https://journal.r-project.org/archive/2011-1/RJournal_2011-1_Wickham.pdf</a>.</cite>
 </p>
 <p>
-<a id="bib-wickham2025sessioninfo"></a><a href="#cite-wickham2025sessioninfo">[8]</a><cite>
+<a id="bib-wickham2025sessioninfo"></a><a href="#cite-wickham2025sessioninfo">[22]</a><cite>
 H. Wickham, W. Chang, R. Flight, et al. <em>sessioninfo: R Session
 Information</em>. R package version 1.2.3, <a href="https://sessioninfo.r-lib.org" class="external-link uri">https://sessioninfo.r-lib.org</a>. 2025. URL:
 <a href="https://github.com/r-lib/sessioninfo#readme" class="external-link">https://github.com/r-lib/sessioninfo#readme</a>.</cite>
 </p>
 <p>
-<a id="bib-xie2024knitr"></a><a href="#cite-xie2024knitr">[9]</a><cite>
+<a id="bib-wickham2023dplyr"></a><a href="#cite-wickham2023dplyr">[23]</a><cite>
+H. Wickham, R. François, L. Henry, et al. <em>dplyr: A Grammar of Data
+Manipulation</em>. R package version 1.1.4, <a href="https://github.com/tidyverse/dplyr" class="external-link uri">https://github.com/tidyverse/dplyr</a>. 2023. URL:
+<a href="https://dplyr.tidyverse.org" class="external-link">https://dplyr.tidyverse.org</a>.</cite>
+</p>
+<p>
+<a id="bib-wickham2025purrr"></a><a href="#cite-wickham2025purrr">[24]</a><cite>
+H. Wickham and L. Henry. <em>purrr: Functional Programming Tools</em>. R
+package version 1.0.4, <a href="https://github.com/tidyverse/purrr" class="external-link uri">https://github.com/tidyverse/purrr</a>. 2025. URL:
+<a href="https://purrr.tidyverse.org/" class="external-link">https://purrr.tidyverse.org/</a>.</cite>
+</p>
+<p>
+<a id="bib-xie2024knitr"></a><a href="#cite-xie2024knitr">[25]</a><cite>
 Y. Xie. <em>knitr: A General-Purpose Package for Dynamic Report
 Generation in R</em>. R package version 1.49. 2024. URL:
 <a href="https://yihui.org/knitr/" class="external-link">https://yihui.org/knitr/</a>.</cite>
