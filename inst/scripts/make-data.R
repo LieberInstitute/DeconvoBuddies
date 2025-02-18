@@ -30,7 +30,7 @@ table(sce$cellType_broad_hc)
 ## subset genes
 ## select 557 genes Mean Ratio > 2 
 ## https://github.com/LieberInstitute/Human_DLPFC_Deconvolution/blob/main/processed-data/08_bulk_deconvolution/markers_MeanRatio_over2.txt
-markers <- scan(here("data-raw", "markers_MeanRatio_over2.txt" ), what="", sep="\n")
+markers <- scan(here("inst","extdata", "data-raw", "markers_MeanRatio_over2.txt" ), what="", sep="\n")
 sce_DLPFC_example <- sce[rowData(sce)$gene_id %in% markers,]
 
 ## select 10k random nuc
