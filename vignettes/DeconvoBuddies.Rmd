@@ -59,6 +59,7 @@ bib <- c(
     stringr = citation("stringr")[1],
     SummarizedExperiment = citation("SummarizedExperiment")[1],
     tibble = citation("tibble")[1],
+    utils = citation("utils")[1],
     Biobase = citation("Biobase")[1],
     BiocStyle = citation("BiocStyle")[1],
     BisqueRNA = citation("BisqueRNA")[1],
