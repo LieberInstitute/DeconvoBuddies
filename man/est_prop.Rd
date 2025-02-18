@@ -8,7 +8,7 @@
 A \code{data.frame} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/est_prop.R}
+\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/est_prop.R}
 }
 \usage{
 est_prop
@@ -37,5 +37,7 @@ summary(rowSums(est_prop) - 1)
 ## You can check this yourself with:
 all(round(rowSums(est_prop), 3) == 1)
 
+# To view source
+system.file("extdata", "data-raw", "est_prop.R", package = "DeconvoBuddies")
 }
 \keyword{datasets}

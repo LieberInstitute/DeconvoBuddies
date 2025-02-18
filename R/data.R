@@ -20,8 +20,10 @@
 #' ## You can check this yourself with:
 #' all(round(rowSums(est_prop), 3) == 1)
 #'
+#' # To view source
+#' system.file("extdata", "data-raw", "est_prop.R", package = "DeconvoBuddies")
 #' @format A `data.frame` object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/est_prop.R>
+#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/est_prop.R>
 "est_prop"
 
 #' Markers stats from sce_DLPFC_example
@@ -31,9 +33,12 @@
 #'
 #' 402.60 kB
 #'
+#' @examples
+#' # To view source
+#' system.file("extdata", "data-raw", "marker_test.R", package = "DeconvoBuddies")
 #' @format A `tibble::tibble()`. See `get_mean_ratio()` for more details on the column
 #' names.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/marker_test.R>
+#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/marker_test.R>
 "marker_test"
 
 #' Test bulk rse dataset
@@ -41,8 +46,12 @@
 #' A test `rse_gene` object with data for 1000 genes across 100 samples.
 #'
 #' 976.77 kB
+#' 
+#' @examples
+#' # To view source
+#' system.file("extdata", "data-raw", "rse_bulk_test.R", package = "DeconvoBuddies")
 #' @format A [SummarizedExperiment][SummarizedExperiment::SummarizedExperiment-class] object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/genotyped.R>
+#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/rse_bulk_test.R>
 "rse_bulk_test"
 
 #' Toy SCE object for testing
@@ -52,8 +61,11 @@
 #' Generated with `DeconvoBuddies::make_test_sce()`
 #' 38.26 kB
 #'
+#' @examples
+#' # To view source
+#' system.file("extdata", "data-raw", "sce_ab.R", package = "DeconvoBuddies")
 #' @format A [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment-class] object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce_ab.R>
+#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/sce_ab.R>
 "sce_ab"
 
 #' Cell Type Proportions estimated from RNAScope
@@ -76,6 +88,9 @@
 #' * `n_cell_sn` : number of nuclei in the corresponding snRNA-seq data.
 #' * `prop_sn` : cell type proportion from the snRNA-seq data.
 #'
+#' @examples
+#' # To view source
+#' system.file("extdata", "data-raw", "RNAScope_prop.R", package = "DeconvoBuddies")
 #' @format A `data.frame` object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/RNAScope.R>
+#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R>
 "RNAScope_prop"

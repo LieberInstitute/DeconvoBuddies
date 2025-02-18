@@ -9,7 +9,7 @@ A \code{tibble::tibble()}. See \code{get_mean_ratio()} for more details on the c
 names.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/marker_test.R}
+\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/marker_test.R}
 }
 \usage{
 marker_test
@@ -20,5 +20,9 @@ A tibble containing the marker stats from \code{get_mean_ratio()} for
 }
 \details{
 402.60 kB
+}
+\examples{
+# To view source
+system.file("extdata", "data-raw", "marker_test.R", package = "DeconvoBuddies")
 }
 \keyword{datasets}

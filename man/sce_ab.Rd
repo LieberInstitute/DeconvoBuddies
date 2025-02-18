@@ -8,7 +8,7 @@
 A \link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/sce_ab.R}
+\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/sce_ab.R}
 }
 \usage{
 sce_ab
@@ -19,5 +19,9 @@ An example \code{sce} object for testing, with two cell types A and B.
 \details{
 Generated with \code{DeconvoBuddies::make_test_sce()}
 38.26 kB
+}
+\examples{
+# To view source
+system.file("extdata", "data-raw", "sce_ab.R", package = "DeconvoBuddies")
 }
 \keyword{datasets}

@@ -8,7 +8,7 @@
 A \link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/genotyped.R}
+\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/rse_bulk_test.R}
 }
 \usage{
 rse_bulk_test
@@ -18,5 +18,9 @@ A test \code{rse_gene} object with data for 1000 genes across 100 samples.
 }
 \details{
 976.77 kB
+}
+\examples{
+# To view source
+system.file("extdata", "data-raw", "rse_bulk_test.R", package = "DeconvoBuddies")
 }
 \keyword{datasets}

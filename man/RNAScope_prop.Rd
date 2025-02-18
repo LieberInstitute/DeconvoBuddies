@@ -8,7 +8,7 @@
 A \code{data.frame} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/data-raw/RNAScope.R}
+\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R}
 }
 \usage{
 RNAScope_prop
@@ -34,5 +34,9 @@ Endo, Inhib, or "Star" marking Excit, Micro, and OligoOPC.
 \item \code{n_cell_sn} : number of nuclei in the corresponding snRNA-seq data.
 \item \code{prop_sn} : cell type proportion from the snRNA-seq data.
 }
+}
+\examples{
+# To view source
+system.file("extdata", "data-raw", "RNAScope_prop.R", package = "DeconvoBuddies")
 }
 \keyword{datasets}
