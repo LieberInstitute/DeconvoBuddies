@@ -389,25 +389,25 @@ made possible thanks to:
 * R `r Citep(bib[["R"]])`
 * `r Biocpkg("AnnotationHub")` `r Citep(bib[["AnnotationHub"]])`
 * `r Biocpkg("BiocFileCache")` `r Citep(bib[["BiocFileCache"]])`
-* `r Biocpkg("dplyr")` `r Citep(bib[["dplyr"]])`
+* `r CRANpkg("dplyr")` `r Citep(bib[["dplyr"]])`
 * `r Biocpkg("ExperimentHub")` `r Citep(bib[["ExperimentHub"]])`
-* `r Biocpkg("ggplot2")` `r Citep(bib[["ggplot2"]])`
-* `r Biocpkg("graphics")` `r Citep(bib[["graphics"]])`
-* `r Biocpkg("grDevices")` `r Citep(bib[["grDevices"]])`
-* `r Biocpkg("matrixStats")` `r Citep(bib[["matrixStats"]])`
-* `r Biocpkg("methods")` `r Citep(bib[["methods"]])`
-* `r Biocpkg("purrr")` `r Citep(bib[["purrr"]])`
-* `r Biocpkg("rafalib")` `r Citep(bib[["rafalib"]])`
-* `r Biocpkg("reshape2")` `r Citep(bib[["reshape2"]])`
+* `r CRANpkg("ggplot2")` `r Citep(bib[["ggplot2"]])`
+* `r CRANpkg("graphics")` `r Citep(bib[["graphics"]])`
+* `r CRANpkg("grDevices")` `r Citep(bib[["grDevices"]])`
+* `r CRANpkg("matrixStats")` `r Citep(bib[["matrixStats"]])`
+* `r CRANpkg("methods")` `r Citep(bib[["methods"]])`
+* `r CRANpkg("purrr")` `r Citep(bib[["purrr"]])`
+* `r CRANpkg("rafalib")` `r Citep(bib[["rafalib"]])`
+* `r CRANpkg("reshape2")` `r Citep(bib[["reshape2"]])`
 * `r Biocpkg("S4Vectors")` `r Citep(bib[["S4Vectors"]])`
 * `r Biocpkg("scran")` `r Citep(bib[["scran"]])`
 * `r Biocpkg("SingleCellExperiment")` `r Citep(bib[["SingleCellExperiment"]])`
 * `r Biocpkg("spatialLIBD")` `r Citep(bib[["spatialLIBD"]])`
-* `r Biocpkg("stats")` `r Citep(bib[["stats"]])`
-* `r Biocpkg("stringr")` `r Citep(bib[["stringr"]])`
+* `r CRANpkg("stats")` `r Citep(bib[["stats"]])`
+* `r CRANpkg("stringr")` `r Citep(bib[["stringr"]])`
 * `r Biocpkg("SummarizedExperiment")` `r Citep(bib[["SummarizedExperiment"]])`
-* `r Biocpkg("tibble")` `r Citep(bib[["tibble"]])`
-* `r Biocpkg("utils")` `r Citep(bib[["utils"]])`
+* `r CRANpkg("tibble")` `r Citep(bib[["tibble"]])`
+* `r CRANpkg("utils")` `r Citep(bib[["utils"]])`
 
 This vignette was generated using `r Biocpkg("BiocStyle")`
 `r Citep(bib[["BiocStyle"]])` with `r CRANpkg("knitr")`
