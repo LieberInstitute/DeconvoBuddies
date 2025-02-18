@@ -451,7 +451,7 @@ types. This is a quick and easy way to look at the the top markers in
 your dataset, which is an important step and can help identify genes
 with multimodal distributions that may confound the MeanRatio method.
 
-```{r, plot_marker_express_ALL}
+```{r, plot_marker_express_ALL, eval = FALSE}
 # plot the top 10 1vAll genes for all cell types
 print(plot_marker_express_ALL(
     sce = sce,
