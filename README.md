@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Codecov test
-coverage](https://codecov.io/gh/lahuuki/DeconvoBuddies/branch/devel/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=devel)
+coverage](https://codecov.io/gh/LieberInstitute/DeconvoBuddies/branch/devel/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=devel)
 [![check-bioc](https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml/badge.svg)](https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
@@ -62,7 +62,7 @@ study](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
 ``` r
 ## Access data with fetch_deconvo_data
 sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2025-01-29 13:19:21.30937 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/fd1c5d42efb7_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2025-02-27 10:37:58.767148 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/fd1c5d42efb7_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
 
 ## explore the single cell experiment object
 sce_DLPFC_example
@@ -110,7 +110,7 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>   doi:10.18129/B9.bioc.DeconvoBuddies
 #>   <https://doi.org/10.18129/B9.bioc.DeconvoBuddies>,
 #>   https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R
-#>   package version 0.99.10,
+#>   package version 0.99.29,
 #>   <http://www.bioconductor.org/packages/DeconvoBuddies>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -120,7 +120,7 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Joel E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},
 #>     year = {2025},
 #>     url = {http://www.bioconductor.org/packages/DeconvoBuddies},
-#>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.10},
+#>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.29},
 #>     doi = {10.18129/B9.bioc.DeconvoBuddies},
 #>   }
 #> 

@@ -1,7 +1,7 @@
 Package: DeconvoBuddies
 Title: Helper Functions for LIBD Deconvolution
-Version: 0.99.29
-Date: 2025-02-19
+Version: 0.99.30
+Date: 2025-02-27
 Authors@R: 
     c(
     person(given = "Louise", family = "Huuki-Myers", role = c("aut", "cre"),
