@@ -85,7 +85,7 @@ fetch_deconvo_data <- function(
     stopifnot(methods::is(eh, "ExperimentHub"))
 
     if (type == "rse_gene") {
-        record = "EH9625"  
+        record <- "EH9625"  
         #local file
         file_name <-
             "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
@@ -93,7 +93,7 @@ fetch_deconvo_data <- function(
         url <-
             "https://www.dropbox.com/scl/fi/9eyg9e1r98t73wyzsuxhr/rse_gene.Rdata?rlkey=sw2djr71y954yw4o3xrmjv59b&dl=1"
     } else if (type == "sce_DLPFC_example") {
-        record = "EH9626"
+        record <- "EH9626"
         # local file
         file_name <-
             "Human_DLPFC_deconvolution_example_snRNAseq_DeconvoBuddies"
