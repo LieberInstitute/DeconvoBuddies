@@ -63,7 +63,7 @@
 #' ## check the logcounts
 #' SingleCellExperiment::logcounts(sce_DLPFC_example)[1:5, 1:5]
 #'
-#' \dontrun{
+#' \donttest{
 #' ## download the full sce experiment object
 #' sce_path_zip <- fetch_deconvo_data("sce")
 #' sce_path <- unzip(sce_path_zip, exdir = tempdir())
