@@ -85,23 +85,19 @@ fetch_deconvo_data <- function(
     stopifnot(methods::is(eh, "ExperimentHub"))
 
     if (type == "rse_gene") {
-        tag <- "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
-        hub_title <-
-            "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
-
-        ## While EH is not set-up
+        record = "EH9625"  
+        #local file
         file_name <-
             "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
+        ## EH backup 
         url <-
             "https://www.dropbox.com/scl/fi/9eyg9e1r98t73wyzsuxhr/rse_gene.Rdata?rlkey=sw2djr71y954yw4o3xrmjv59b&dl=1"
     } else if (type == "sce_DLPFC_example") {
-        tag <- "Human_DLPFC_deconvolution_snRNAseq_DeconvoBuddies"
-        hub_title <-
-            "Human_DLPFC_deconvolution_snRNAseq_DeconvoBuddies"
-
-        ## While EH is not set-up
+        record = "EH9626"
+        # local file
         file_name <-
             "Human_DLPFC_deconvolution_example_snRNAseq_DeconvoBuddies"
+        ## EH backup
         url <-
             "https://www.dropbox.com/scl/fi/w9q71rh7rd36c2l50nyi2/sce_DLPFC_example.Rdata?rlkey=v3z4u8ru0d2y12zgdl1az07q9&st=1dcfqc1i&dl=1"
     } else if (type == "sce") {
@@ -115,14 +111,13 @@ fetch_deconvo_data <- function(
 
     ## Use local data if present
     if (!file.exists(file_path)) {
-        q <-
-            AnnotationHub::query(eh,
-                pattern = c(tag, hub_title)
-            )
+        q <- query(eh, "DeconvoBuddies")
 
-        if (length(q) == 1) {
-            ## ExperimentHub has the data - will eventually upload
-            # return(res)
+        if (record %in% names(q)) {
+            ## ExperimentHub has the data 
+            message(Sys.time(), " Access ExperimentHub ", record)
+            return(eh[[record]])
+          
         } else {
             ## ExperimentHub backup: download from Dropbox
             file_path <- BiocFileCache::bfcrpath(bfc, url)
