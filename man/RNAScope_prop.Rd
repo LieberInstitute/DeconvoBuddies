@@ -34,6 +34,26 @@ Endo, Inhib, or "Star" marking Excit, Micro, and OligoOPC.
 \item \code{n_cell_sn} : number of nuclei in the corresponding snRNA-seq data.
 \item \code{prop_sn} : cell type proportion from the snRNA-seq data.
 }
+
+NOTE: For the RNAScope assay utilized here only 3 cell types could be measured
+at once. Two consecutive tissue slices were used from each brain block to
+measure one combination of three major cell types, then the other three
+(differentiated as circle and star). DAPI was used to mark the nuclei, in
+each tissue section, so the overall number of cells is recorded but only a
+fraction has a cell type label, unlabeled nuclei are classified "other".
+
+The two sections combined should get close to identifying the type of all the
+cells, but often the combined "non-other" fractions are around 0.7 and not 1.
+This could be due to a few reasons: the sections while as similar as
+possible are not the same tissue, error in the assay and/or image processing
+not labeling all cells possible, or presence of rare cell types not marked
+by the selected probes.
+
+With all of this considered, we still think the RNAScope estimates are good
+approximations of the cell type proportions in these samples.
+
+For more info check out \url{https://doi.org/10.1101/2024.02.09.579665} Figure 2,
+and Methods: RNAScope/Immunofluorescence Data Generation and HALO Analysis.
 }
 \examples{
 # To view source
