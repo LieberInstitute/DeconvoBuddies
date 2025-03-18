@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.33</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.34</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@ Huuki-Myers</h4>
 Campus<br><a class="author_email" href="mailto:#"></a><a href="mailto:lahuuki@gmail.com" class="email">lahuuki@gmail.com</a>
       </address>
                   
-            <h4 data-toc-skip class="date">12 March 2025</h4>
+            <h4 data-toc-skip class="date">18 March 2025</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/LieberInstitute/DeconvoBuddies/blob/devel/vignettes/Deconvolution_Benchmark_DLPFC.Rmd" class="external-link"><code>vignettes/Deconvolution_Benchmark_DLPFC.Rmd</code></a></small>
       <div class="hidden name"><code>Deconvolution_Benchmark_DLPFC.Rmd</code></div>
@@ -283,7 +283,7 @@ Total, Nuc). There are in total n=110 samples after quality control.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## use fetch deconvo data to load rse_gene</span></span>
 <span><span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-03-12 18:51:17.316483 loading file /github/home/.cache/R/BiocFileCache/49c26c3aa2a_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2025-03-18 21:49:22.846167 loading file /github/home/.cache/R/BiocFileCache/512c555945_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
 <span><span class="va">rse_gene</span></span>
 <span><span class="co">#&gt; class: RangedSummarizedExperiment </span></span>
 <span><span class="co">#&gt; dim: 21745 110 </span></span>
@@ -319,7 +319,7 @@ Total, Nuc). There are in total n=110 samples after quality control.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset used in this project</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-03-12 18:51:18.888515 loading file /github/home/.cache/R/BiocFileCache/49c6960cd00_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2025-03-18 21:49:24.320762 loading file /github/home/.cache/R/BiocFileCache/512820d13d_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span></span>
 <span><span class="co">## unzip and load the data</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -852,7 +852,7 @@ Collado-Torres, 2025) was made possible thanks to:</p>
 (Oleś, 2024)</li>
 <li>
 <em><a href="https://CRAN.R-project.org/package=knitr" class="external-link">knitr</a></em> (Xie,
-2024)</li>
+2025)</li>
 <li>
 <em><a href="https://CRAN.R-project.org/package=RefManageR" class="external-link">RefManageR</a></em>
 (McLean, 2017)</li>
@@ -879,7 +879,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  collate  en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  ctype    en_US.UTF-8</span></span>
 <span><span class="co">#&gt;  tz       UTC</span></span>
-<span><span class="co">#&gt;  date     2025-03-12</span></span>
+<span><span class="co">#&gt;  date     2025-03-18</span></span>
 <span><span class="co">#&gt;  pandoc   3.6 @ /usr/bin/ (via rmarkdown)</span></span>
 <span><span class="co">#&gt;  quarto   1.5.57 @ /usr/local/bin/quarto</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -916,7 +916,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  bslib                  0.9.0     <span style="color: #555555;">2025-01-30</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  cachem                 1.1.0     <span style="color: #555555;">2024-05-16</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  cli                    3.6.4     <span style="color: #555555;">2025-02-13</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  cluster                2.1.8     <span style="color: #555555;">2024-12-11</span> <span style="color: #555555;">[3]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
+<span><span class="co">#&gt;  cluster                2.1.8.1   <span style="color: #555555;">2025-03-12</span> <span style="color: #555555;">[3]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  codetools              0.2-20    <span style="color: #555555;">2024-03-31</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.4.2)</span></span></span>
 <span><span class="co">#&gt;  colorspace             2.1-1     <span style="color: #555555;">2024-07-26</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  config                 0.3.2     <span style="color: #555555;">2023-08-30</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -926,7 +926,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  data.table             1.17.0    <span style="color: #555555;">2025-02-22</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  DBI                    1.2.3     <span style="color: #555555;">2024-06-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  dbplyr                 2.5.0     <span style="color: #555555;">2024-03-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.33   <span style="color: #555555;">2025-03-12</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
+<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.34   <span style="color: #555555;">2025-03-18</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  DelayedArray           0.32.0    <span style="color: #555555;">2024-10-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.2)</span></span></span>
 <span><span class="co">#&gt;  desc                   1.4.3     <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  digest                 0.6.37    <span style="color: #555555;">2024-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -968,7 +968,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  jquerylib              0.1.4     <span style="color: #555555;">2021-04-26</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  jsonlite               1.9.1     <span style="color: #555555;">2025-03-03</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  KEGGREST               1.46.0    <span style="color: #555555;">2024-10-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.2)</span></span></span>
-<span><span class="co">#&gt;  knitr                  1.49      <span style="color: #555555;">2024-11-08</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
+<span><span class="co">#&gt;  knitr                  1.50      <span style="color: #555555;">2025-03-16</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  labeling               0.4.3     <span style="color: #555555;">2023-08-29</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  later                  1.4.1     <span style="color: #555555;">2024-11-27</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  lattice                0.22-6    <span style="color: #555555;">2024-03-20</span> <span style="color: #555555;">[3]</span> <span style="color: #555555;">CRAN (R 4.4.2)</span></span></span>
@@ -988,7 +988,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  matrixStats          * 1.5.0     <span style="color: #555555;">2025-01-07</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  memoise                2.0.1     <span style="color: #555555;">2021-11-26</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  metapod                1.14.0    <span style="color: #555555;">2024-10-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.2)</span></span></span>
-<span><span class="co">#&gt;  mime                   0.12      <span style="color: #555555;">2021-09-28</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
+<span><span class="co">#&gt;  mime                   0.13      <span style="color: #555555;">2025-03-17</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  munsell                0.5.1     <span style="color: #555555;">2024-04-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  paletteer              1.6.0     <span style="color: #555555;">2024-01-21</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  pillar                 1.10.1    <span style="color: #555555;">2025-01-07</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -1056,7 +1056,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 <span><span class="co">#&gt;  withr                  3.0.2     <span style="color: #555555;">2024-10-28</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  xfun                   0.51      <span style="color: #555555;">2025-02-19</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  XML                    3.99-0.18 <span style="color: #555555;">2025-01-01</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  xml2                   1.3.7     <span style="color: #555555;">2025-02-28</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
+<span><span class="co">#&gt;  xml2                   1.3.8     <span style="color: #555555;">2025-03-14</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  xtable                 1.8-4     <span style="color: #555555;">2019-04-21</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  XVector                0.46.0    <span style="color: #555555;">2024-10-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.2)</span></span></span>
 <span><span class="co">#&gt;  yaml                   2.3.10    <span style="color: #555555;">2024-07-26</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -1074,7 +1074,7 @@ Cheng, Chang, and Iannone, 2024)</li>
 </h2>
 <p>This vignette was generated using <em><a href="https://bioconductor.org/packages/3.20/BiocStyle" class="external-link">BiocStyle</a></em>
 (Oleś, 2024) with <em><a href="https://CRAN.R-project.org/package=knitr" class="external-link">knitr</a></em> (Xie,
-2024) and <em><a href="https://CRAN.R-project.org/package=rmarkdown" class="external-link">rmarkdown</a></em>
+2025) and <em><a href="https://CRAN.R-project.org/package=rmarkdown" class="external-link">rmarkdown</a></em>
 (Allaire, Xie, Dervieux et al., 2024) running behind the scenes.</p>
 <p>Citations made with <em><a href="https://CRAN.R-project.org/package=RefManageR" class="external-link">RefManageR</a></em>
 (McLean, 2017).</p>
@@ -1089,7 +1089,7 @@ for R</em>. R package version 2.29. 2024. URL:
 L. A. Huuki-Myers, K. R. Maynard, S. C. Hicks, et al.
 <em>DeconvoBuddies: a R/Bioconductor package with deconvolution helper
 functions</em>. <a href="https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies" class="external-link uri">https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies</a>
-- R package version 0.99.33. 2025. DOI:
+- R package version 0.99.34. 2025. DOI:
 <a href="https://doi.org/10.18129/B9.bioc.DeconvoBuddies" class="external-link">10.18129/B9.bioc.DeconvoBuddies</a>.
 URL:
 <a href="http://www.bioconductor.org/packages/DeconvoBuddies" class="external-link">http://www.bioconductor.org/packages/DeconvoBuddies</a>.</cite>
@@ -1129,9 +1129,9 @@ Information</em>. R package version 1.2.3, <a href="https://sessioninfo.r-lib.or
 <a href="https://github.com/r-lib/sessioninfo#readme" class="external-link">https://github.com/r-lib/sessioninfo#readme</a>.</cite>
 </p>
 <p>
-<a id="bib-xie2024knitr"></a><a href="#cite-xie2024knitr">[8]</a><cite>
+<a id="bib-xie2025knitr"></a><a href="#cite-xie2025knitr">[8]</a><cite>
 Y. Xie. <em>knitr: A General-Purpose Package for Dynamic Report
-Generation in R</em>. R package version 1.49. 2024. URL:
+Generation in R</em>. R package version 1.50. 2025. URL:
 <a href="https://yihui.org/knitr/" class="external-link">https://yihui.org/knitr/</a>.</cite>
 </p>
 </div>
