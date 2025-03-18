@@ -73,12 +73,11 @@
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom matrixStats rowMedians
-get_mean_ratio <- function(
-        sce,
-        cellType_col,
-        assay_name = "logcounts",
-        gene_ensembl = NULL,
-        gene_name = NULL) {
+get_mean_ratio <- function(sce,
+    cellType_col,
+    assay_name = "logcounts",
+    gene_ensembl = NULL,
+    gene_name = NULL) {
     # RCMD fix
     cellType.target <- NULL
     cellType <- NULL

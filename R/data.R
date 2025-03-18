@@ -46,7 +46,7 @@
 #' A test `rse_gene` object with data for 1000 genes across 100 samples.
 #'
 #' 976.77 kB
-#' 
+#'
 #' @examples
 #' # To view source
 #' system.file("extdata", "data-raw", "rse_bulk_test.R", package = "DeconvoBuddies")

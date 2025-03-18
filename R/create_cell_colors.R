@@ -79,25 +79,24 @@
 #' @importFrom graphics barplot par text
 #' @importFrom grDevices hcl
 #' @importFrom utils head
-create_cell_colors <- function(
-        cell_types = c(
-            "Astro",
-            "Micro",
-            "Endo",
-            "Oligo",
-            "OPC",
-            "Excit",
-            "Inhib",
-            "Other"
-        ),
-        palette_name = c(
-            "classic",
-            "gg",
-            "tableau"
-        ),
-        palette = NULL,
-        split = NA,
-        preview = FALSE) {
+create_cell_colors <- function(cell_types = c(
+        "Astro",
+        "Micro",
+        "Endo",
+        "Oligo",
+        "OPC",
+        "Excit",
+        "Inhib",
+        "Other"
+    ),
+    palette_name = c(
+        "classic",
+        "gg",
+        "tableau"
+    ),
+    palette = NULL,
+    split = NA,
+    preview = FALSE) {
     ## check number of cell types
     stopifnot(length(cell_types) > 0)
     stopifnot(is.character(cell_types))

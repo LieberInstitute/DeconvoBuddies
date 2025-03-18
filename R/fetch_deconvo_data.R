@@ -71,11 +71,10 @@
 #'     file.path(tempdir(), "sce_DLPFC_annotated")
 #' )
 #' }
-fetch_deconvo_data <- function(
-        type = c("rse_gene", "sce", "sce_DLPFC_example"),
-        destdir = tempdir(),
-        eh = ExperimentHub::ExperimentHub(),
-        bfc = BiocFileCache::BiocFileCache()) {
+fetch_deconvo_data <- function(type = c("rse_gene", "sce", "sce_DLPFC_example"),
+    destdir = tempdir(),
+    eh = ExperimentHub::ExperimentHub(),
+    bfc = BiocFileCache::BiocFileCache()) {
     rse_gene <- sce_DLPFC_example <- NULL
 
     ## Choose a type among the valid options
@@ -85,11 +84,11 @@ fetch_deconvo_data <- function(
     stopifnot(methods::is(eh, "ExperimentHub"))
 
     if (type == "rse_gene") {
-        record <- "EH9625"  
-        #local file
+        record <- "EH9625"
+        # local file
         file_name <-
             "Human_DLPFC_deconvolution_bulkRNAseq_DeconvoBuddies"
-        ## EH backup 
+        ## EH backup
         url <-
             "https://www.dropbox.com/scl/fi/9eyg9e1r98t73wyzsuxhr/rse_gene.Rdata?rlkey=sw2djr71y954yw4o3xrmjv59b&dl=1"
     } else if (type == "sce_DLPFC_example") {
@@ -114,10 +113,9 @@ fetch_deconvo_data <- function(
         q <- query(eh, "DeconvoBuddies")
 
         if (record %in% names(q)) {
-            ## ExperimentHub has the data 
+            ## ExperimentHub has the data
             message(Sys.time(), " Access ExperimentHub ", record)
             return(eh[[record]])
-          
         } else {
             ## ExperimentHub backup: download from Dropbox
             file_path <- BiocFileCache::bfcrpath(bfc, url)
