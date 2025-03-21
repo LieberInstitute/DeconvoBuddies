@@ -53,7 +53,7 @@ made using \code{ggplot2}.
 }
 \examples{
 ## Using Symbol as rownames makes this more human readable
-data(sce_ab)
+data("sce_ab")
 plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
 
 # Access example data
