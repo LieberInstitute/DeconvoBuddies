@@ -11,7 +11,7 @@ A \link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment} o
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/rse_bulk_test.R}
 }
 \usage{
-rse_bulk_test
+data("rse_bulk_test")
 }
 \description{
 A test \code{rse_gene} object with data for 1000 genes across 100 samples.

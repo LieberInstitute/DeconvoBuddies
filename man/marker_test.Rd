@@ -12,7 +12,7 @@ names.
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/marker_test.R}
 }
 \usage{
-marker_test
+data("marker_test")
 }
 \description{
 A tibble containing the marker stats from \code{get_mean_ratio()} for

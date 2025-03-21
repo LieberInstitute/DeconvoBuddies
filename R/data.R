@@ -24,6 +24,7 @@
 #' system.file("extdata", "data-raw", "est_prop.R", package = "DeconvoBuddies")
 #' @format A `data.frame` object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/est_prop.R>
+#' @usage data("est_prop")
 "est_prop"
 
 #' Markers stats from sce_DLPFC_example
@@ -39,6 +40,7 @@
 #' @format A `tibble::tibble()`. See `get_mean_ratio()` for more details on the column
 #' names.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/marker_test.R>
+#' @usage data("marker_test")
 "marker_test"
 
 #' Test bulk rse dataset
@@ -52,6 +54,7 @@
 #' system.file("extdata", "data-raw", "rse_bulk_test.R", package = "DeconvoBuddies")
 #' @format A [SummarizedExperiment][SummarizedExperiment::SummarizedExperiment-class] object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/rse_bulk_test.R>
+#' @usage data("rse_bulk_test")
 "rse_bulk_test"
 
 #' Toy SCE object for testing
@@ -66,6 +69,7 @@
 #' system.file("extdata", "data-raw", "sce_ab.R", package = "DeconvoBuddies")
 #' @format A [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment-class] object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/sce_ab.R>
+#' @usage data("sce_ab")
 "sce_ab"
 
 #' Cell Type Proportions estimated from RNAScope
@@ -113,4 +117,5 @@
 #' system.file("extdata", "data-raw", "RNAScope_prop.R", package = "DeconvoBuddies")
 #' @format A `data.frame` object.
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R>
+#' @usage data("RNAScope_prop")
 "RNAScope_prop"

@@ -11,7 +11,7 @@ A \code{data.frame} object.
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R}
 }
 \usage{
-RNAScope_prop
+data("RNAScope_prop")
 }
 \description{
 Cell type proportion estimates from high quality images from

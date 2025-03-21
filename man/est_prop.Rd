@@ -11,7 +11,7 @@ A \code{data.frame} object.
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/est_prop.R}
 }
 \usage{
-est_prop
+data("est_prop")
 }
 \description{
 A test dataset of estimated proportions for 5 cell types over 100 samples.

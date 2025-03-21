@@ -11,7 +11,7 @@ A \link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment} object.
 \url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/sce_ab.R}
 }
 \usage{
-sce_ab
+data("sce_ab")
 }
 \description{
 An example \code{sce} object for testing, with two cell types A and B.
