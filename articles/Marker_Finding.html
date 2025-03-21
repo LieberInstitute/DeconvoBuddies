@@ -254,7 +254,7 @@ resolution that contains seven cell types.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Use spatialLIBD to fetch the snRNA-seq dataset</span></span>
 <span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-03-21 15:26:48.140589 loading file /github/home/.cache/R/BiocFileCache/4e3f309f41_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
+<span><span class="co">#&gt; 2025-03-21 17:15:07.015701 loading file /github/home/.cache/R/BiocFileCache/4e325b0232a_sce_DLPFC_annotated.zip%3Fdl%3D1</span></span>
 <span></span>
 <span><span class="co">## unzip and load the data</span></span>
 <span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
