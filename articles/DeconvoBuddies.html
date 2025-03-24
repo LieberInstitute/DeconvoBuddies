@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.37</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.38</span>
       </span>
     </div>
 
@@ -186,7 +186,7 @@ to cite the package and the overall approach. Thank you!</p>
 <span><span class="co">#&gt;   doi:10.18129/B9.bioc.DeconvoBuddies</span></span>
 <span><span class="co">#&gt;   &lt;https://doi.org/10.18129/B9.bioc.DeconvoBuddies&gt;,</span></span>
 <span><span class="co">#&gt;   https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R</span></span>
-<span><span class="co">#&gt;   package version 0.99.37,</span></span>
+<span><span class="co">#&gt;   package version 0.99.38,</span></span>
 <span><span class="co">#&gt;   &lt;http://www.bioconductor.org/packages/DeconvoBuddies&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Huuki-Myers LA, Montgomery KD, Kwon SH, Cinquemani S, Eagles NJ,</span></span>
@@ -233,7 +233,7 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Access and snRNA-seq example data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-03-24 14:27:17.830294 loading file /github/home/.cache/R/BiocFileCache/50b5cf729b3_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2025-03-24 16:45:24.810648 loading file /github/home/.cache/R/BiocFileCache/50b4206f26f_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1</span></span>
 <span></span>
 <span><span class="co">## Explore snRNA-seq data in sce_DLPFC_example</span></span>
 <span><span class="va">sce_DLPFC_example</span></span>
@@ -252,7 +252,7 @@ useful for testing. [10k nuclei x 557 genes] (49 MB)</p></li>
 <span></span>
 <span><span class="co">## Access Bulk RNA-seq data</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span><span class="op">)</span> <span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; 2025-03-24 14:27:19.513394 loading file /github/home/.cache/R/BiocFileCache/50b69bae3f8_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
+<span><span class="co">#&gt; 2025-03-24 16:45:26.790938 loading file /github/home/.cache/R/BiocFileCache/50b43814d51_rse_gene.Rdata%3Frlkey%3Dsw2djr71y954yw4o3xrmjv59b%26dl%3D1</span></span>
 <span></span>
 <span><span class="co">## Explore bulk data in rse_gene</span></span>
 <span><span class="va">rse_gene</span></span>
@@ -647,7 +647,7 @@ Cheng, Chang, and Iannone, 2024) running behind the scenes.</p>
 <span><span class="co">#&gt;  data.table             1.17.0    <span style="color: #555555;">2025-02-22</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  DBI                    1.2.3     <span style="color: #555555;">2024-06-02</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  dbplyr                 2.5.0     <span style="color: #555555;">2024-03-19</span> <span style="color: #555555;">[1]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
-<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.37   <span style="color: #555555;">2025-03-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
+<span><span class="co">#&gt;  DeconvoBuddies       * 0.99.38   <span style="color: #555555;">2025-03-24</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor</span></span></span>
 <span><span class="co">#&gt;  DelayedArray           0.32.0    <span style="color: #555555;">2024-10-29</span> <span style="color: #555555;">[1]</span> <span style="color: #555555;">Bioconductor 3.20 (R 4.4.2)</span></span></span>
 <span><span class="co">#&gt;  desc                   1.4.3     <span style="color: #555555;">2023-12-10</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
 <span><span class="co">#&gt;  digest                 0.6.37    <span style="color: #555555;">2024-08-19</span> <span style="color: #555555;">[2]</span> <span style="color: #BB00BB; font-weight: bold;">RSPM (R 4.4.0)</span></span></span>
@@ -809,7 +809,7 @@ of Matrices (and to Vectors)</em>. R package version 1.5.0. 2025. URL:
 L. A. Huuki-Myers, K. R. Maynard, S. C. Hicks, et al.
 <em>DeconvoBuddies: a R/Bioconductor package with deconvolution helper
 functions</em>. <a href="https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies" class="external-link uri">https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies</a>
-- R package version 0.99.37. 2025. DOI:
+- R package version 0.99.38. 2025. DOI:
 <a href="https://doi.org/10.18129/B9.bioc.DeconvoBuddies" class="external-link">10.18129/B9.bioc.DeconvoBuddies</a>.
 URL:
 <a href="http://www.bioconductor.org/packages/DeconvoBuddies" class="external-link">http://www.bioconductor.org/packages/DeconvoBuddies</a>.</cite>
