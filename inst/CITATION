@@ -1,12 +1,17 @@
 pkgVer <- function(pkg) {
     if (!exists("meta") || is.null(meta)) meta <- packageDescription(pkg)
     ver <- meta$Version
-    paste0('https://github.com/LieberInstitute/DeconvoBuddies/', pkg, ' - R package version ', ver)
+    paste0(
+        'https://github.com/LieberInstitute/DeconvoBuddies/',
+        pkg,
+        ' - R package version ',
+        ver
+    )
 }
 
 c(
-
-    bibentry(bibtype="manual",
+    bibentry(
+        bibtype = "manual",
         title = "DeconvoBuddies: a R/Bioconductor package with deconvolution helper functions",
         author = personList(
             as.person("Louise A. Huuki-Myers"),
@@ -23,8 +28,9 @@ c(
         note = pkgVer('DeconvoBuddies'),
         doi = '10.18129/B9.bioc.DeconvoBuddies'
     ),
-    bibentry(bibtype="article",
-        title = "Benchmark of cellular deconvolution methods using a multi-assay reference dataset from postmortem human prefrontal cortex",
+    bibentry(
+        bibtype = "article",
+        title = "Benchmark of cellular deconvolution methods using a multi-assay dataset from postmortem human prefrontal cortex",
         author = personList(
             as.person("Louise A. Huuki-Myers"),
             as.person("Kelsey D. Montgomery"),
@@ -39,9 +45,9 @@ c(
             as.person("Kristen R. Maynard"),
             as.person("Leonardo Collado-Torres")
         ),
-        year = "2024",
-        journal = "bioRxiv",
-        doi = "10.1101/2024.02.09.579665",
-        url = "https://doi.org/10.1101/2024.02.09.579665"
+        year = "2025",
+        journal = "Genome Biol",
+        doi = "10.1186/s13059-025-03552-3",
+        url = "https://doi.org/10.1186/s13059-025-03552-3"
     )
 )

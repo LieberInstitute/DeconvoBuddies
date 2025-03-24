@@ -133,6 +133,10 @@ R. Please run this yourself to check for any updates on how to cite
 print(citation("DeconvoBuddies"), bibtex = TRUE)
 ```
 
+**DeconvoBuddies** is related to
+[*lute*](https://doi.org/10.1186/s12864-025-11508-x), with both manuscripts
+published with a bi-directional link between them.
+
 Please note that the `DeconvoBuddies` was only made possible thanks to
 many other R and bioinformatics software authors, which are cited either
 in the vignettes and/or the paper(s) describing this package.

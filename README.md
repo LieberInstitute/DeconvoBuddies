@@ -110,7 +110,7 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>   doi:10.18129/B9.bioc.DeconvoBuddies
 #>   <https://doi.org/10.18129/B9.bioc.DeconvoBuddies>,
 #>   https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R
-#>   package version 0.99.29,
+#>   package version 0.99.37,
 #>   <http://www.bioconductor.org/packages/DeconvoBuddies>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -120,29 +120,33 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Joel E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},
 #>     year = {2025},
 #>     url = {http://www.bioconductor.org/packages/DeconvoBuddies},
-#>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.29},
+#>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.37},
 #>     doi = {10.18129/B9.bioc.DeconvoBuddies},
 #>   }
 #> 
 #>   Huuki-Myers LA, Montgomery KD, Kwon SH, Cinquemani S, Eagles NJ,
 #>   Gonzalez-Padilla D, Maden SK, Kleinman JE, Hyde TM, Hicks SC, Maynard
-#>   KR, Collado-Torres L (2024). "Benchmark of cellular deconvolution
-#>   methods using a multi-assay reference dataset from postmortem human
-#>   prefrontal cortex." _bioRxiv_. doi:10.1101/2024.02.09.579665
-#>   <https://doi.org/10.1101/2024.02.09.579665>,
-#>   <https://doi.org/10.1101/2024.02.09.579665>.
+#>   KR, Collado-Torres L (2025). "Benchmark of cellular deconvolution
+#>   methods using a multi-assay dataset from postmortem human prefrontal
+#>   cortex." _Genome Biol_. doi:10.1186/s13059-025-03552-3
+#>   <https://doi.org/10.1186/s13059-025-03552-3>,
+#>   <https://doi.org/10.1186/s13059-025-03552-3>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Article{,
-#>     title = {Benchmark of cellular deconvolution methods using a multi-assay reference dataset from postmortem human prefrontal cortex},
+#>     title = {Benchmark of cellular deconvolution methods using a multi-assay dataset from postmortem human prefrontal cortex},
 #>     author = {Louise A. Huuki-Myers and Kelsey D. Montgomery and Sang Ho Kwon and Sophia Cinquemani and Nicholas J. Eagles and Daianna Gonzalez-Padilla and Sean K. Maden and Joel E. Kleinman and Thomas M. Hyde and Stephanie C. Hicks and Kristen R. Maynard and Leonardo Collado-Torres},
-#>     year = {2024},
-#>     journal = {bioRxiv},
-#>     doi = {10.1101/2024.02.09.579665},
-#>     url = {https://doi.org/10.1101/2024.02.09.579665},
+#>     year = {2025},
+#>     journal = {Genome Biol},
+#>     doi = {10.1186/s13059-025-03552-3},
+#>     url = {https://doi.org/10.1186/s13059-025-03552-3},
 #>   }
 ```
+
+**DeconvoBuddies** is related to
+[*lute*](https://doi.org/10.1186/s12864-025-11508-x), with both
+manuscripts published with a bi-directional link between them.
 
 Please note that the `DeconvoBuddies` was only made possible thanks to
 many other R and bioinformatics software authors, which are cited either
