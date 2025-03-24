@@ -273,7 +273,8 @@ Similarity to `get_mean_ratio` this function requires the `sce` object,
 `scran::findMarkers()`, in this example we will control for donor which
 is stored as `BrNum`.
 
-Note this function can take a bit of time to run.
+Note this function can take a bit of time to run. We have saved the output as 
+`data("marker_stats_1vAll")` to speed-up the runtime of this vignette. 
 
 ```{r `Run findMarkers_1vALL`, eval=FALSE}
 ## Run 1vALL DE to find markers for each cell type
@@ -287,7 +288,7 @@ marker_stats_1vAll <- findMarkers_1vAll(
 ```{r `load 1vALL data`, echo=FALSE}
 # save(marker_stats_1vAll, file = here::here("inst:,"extdata", "marker_stats_1vAll.RData"), version=2)
 ## load 1vALL data to fix timeout
-load(system.file("extdata", "marker_stats_1vAll.RData", package = "DeconvoBuddies"))
+data("marker_stats_1vAll")
 ```
 
 
