@@ -25,5 +25,7 @@ marker_stats_1vAll <- findMarkers_1vAll(
   mod = "~BrNum" # Control for donor stored in "BrNum" with mod
 )
 
+# lobstr::obj_size(marker_stats_1vAll)
+# 3.47 MB
 
 usethis::use_data(marker_stats_1vAll, overwrite = TRUE)

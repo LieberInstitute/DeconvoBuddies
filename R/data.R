@@ -119,3 +119,19 @@
 #' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R>
 #' @usage data("RNAScope_prop")
 "RNAScope_prop"
+
+#' 1vAll Marker Statistics example data
+#'
+#' A tibble contatinting the marker statistics calculated for 5k genes from 
+#' DLPFC snRNA-seq dataset by `findMarkers_1vAll`.
+#'
+#' 3.47 MB
+#'
+#' @examples
+#' # To view source
+#' system.file("extdata", "data-raw", "marker_stats_1vAll.R", package = "DeconvoBuddies")
+#' @format A `data.frame` object.
+#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R>
+#' @usage data("marker_stats_1vAll")
+"marker_stats_1vAll"
+
