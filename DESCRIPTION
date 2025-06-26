@@ -25,7 +25,7 @@ Imports:
     ggplot2,
     graphics,
     grDevices,
-    matrixStats,
+    MatrixGenerics,
     methods,
     purrr,
     rafalib,
