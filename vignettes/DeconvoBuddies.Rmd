@@ -46,6 +46,7 @@ bib <- c(
     graphics = citation("graphics")[1],
     grDevices = citation("grDevices")[1],
     MatrixGenerics = citation("MatrixGenerics")[1],
+    sparseMatrixStats = citation("sparseMatrixStats")[1],
     methods = citation("methods")[1],
     purrr = citation("purrr")[1],
     rafalib = citation("rafalib")[1],
@@ -402,6 +403,7 @@ made possible thanks to:
 * `r Biocpkg("S4Vectors")` `r Citep(bib[["S4Vectors"]])`
 * `r Biocpkg("scran")` `r Citep(bib[["scran"]])`
 * `r Biocpkg("SingleCellExperiment")` `r Citep(bib[["SingleCellExperiment"]])`
+* `r Biocpkg("sparseMatrixStats")` `r Citep(bib[["sparseMatrixStats"]])`
 * `r Biocpkg("spatialLIBD")` `r Citep(bib[["spatialLIBD"]])`
 * `r CRANpkg("stats")` `r Citep(bib[["stats"]])`
 * `r CRANpkg("stringr")` `r Citep(bib[["stringr"]])`
