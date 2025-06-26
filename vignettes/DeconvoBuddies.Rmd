@@ -45,7 +45,7 @@ bib <- c(
     ggplot2 = citation("ggplot2")[1],
     graphics = citation("graphics")[1],
     grDevices = citation("grDevices")[1],
-    matrixStats = citation("matrixStats")[1],
+    MatrixGenerics = citation("MatrixGenerics")[1],
     methods = citation("methods")[1],
     purrr = citation("purrr")[1],
     rafalib = citation("rafalib")[1],
@@ -394,7 +394,7 @@ made possible thanks to:
 * `r CRANpkg("ggplot2")` `r Citep(bib[["ggplot2"]])`
 * `r CRANpkg("graphics")` `r Citep(bib[["graphics"]])`
 * `r CRANpkg("grDevices")` `r Citep(bib[["grDevices"]])`
-* `r CRANpkg("matrixStats")` `r Citep(bib[["matrixStats"]])`
+* `r Biocpkg("MatrixGenerics")` `r Citep(bib[["MatrixGenerics"]])`
 * `r CRANpkg("methods")` `r Citep(bib[["methods"]])`
 * `r CRANpkg("purrr")` `r Citep(bib[["purrr"]])`
 * `r CRANpkg("rafalib")` `r Citep(bib[["rafalib"]])`
