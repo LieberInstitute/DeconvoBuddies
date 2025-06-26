@@ -73,7 +73,7 @@
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom MatrixGenerics rowMedians
-#' @importFrom sparseMatrixStats rowMedians
+#' @importFrom DelayedMatrixStats rowMedians
 #' @importFrom MatrixGenerics rowMeans
 get_mean_ratio <- function(sce,
     cellType_col,

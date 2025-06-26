@@ -20,6 +20,7 @@ RoxygenNote: 7.3.2
 Imports:
     AnnotationHub,
     BiocFileCache,
+    DelayedMatrixStats,
     dplyr,
     ExperimentHub,
     ggplot2,
@@ -33,7 +34,6 @@ Imports:
     S4Vectors,
     scran,
     SingleCellExperiment,
-    sparseMatrixStats,
     spatialLIBD,
     stats,
     stringr,
