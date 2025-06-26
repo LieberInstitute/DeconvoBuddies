@@ -33,6 +33,7 @@ Imports:
     S4Vectors,
     scran,
     SingleCellExperiment,
+    sparseMatrixStats,
     spatialLIBD,
     stats,
     stringr,
