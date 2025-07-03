@@ -18,7 +18,7 @@ type (the "1") against all other cell types combined ("All").'><meta property="o
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@ sc/snRNA-seq data". The companion notes are available at
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## load example SingleCellExperiment</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:17.15384 Access ExperimentHub EH9626</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:02.449832 Access ExperimentHub EH9626</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> see ?DeconvoBuddies and browseVignettes('DeconvoBuddies') for documentation</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> loading from cache</span>
 <span class="r-in"><span><span class="co">## Explore properties of the sce object</span></span></span>
@@ -205,14 +205,14 @@ sc/snRNA-seq data". The companion notes are available at
 <span class="r-in"><span>    mod <span class="op">=</span> <span class="st">"~BrNum"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Running 1vALL Testing for up-regulated genes</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:17.952484 - Find markers for: Oligo</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:18.49189 - Find markers for: Excit</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:19.707936 - Find markers for: Inhib</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:20.043019 - Find markers for: Micro</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:20.386041 - Find markers for: OPC</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:20.672909 - Find markers for: EndoMural</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:20.987436 - Find markers for: Astro</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-06-26 17:56:21.30414 - Building Table</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:03.513427 - Find markers for: Oligo</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:03.980927 - Find markers for: Excit</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:05.130059 - Find markers for: Inhib</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:05.400383 - Find markers for: Micro</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:05.671225 - Find markers for: OPC</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:05.952179 - Find markers for: EndoMural</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:06.263886 - Find markers for: Astro</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 14:59:06.581156 - Building Table</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ** Done! **</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## explore output, top markers have high logFC</span></span></span>
