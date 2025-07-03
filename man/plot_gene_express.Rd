@@ -12,7 +12,8 @@ plot_gene_express(
   color_pal = NULL,
   title = NULL,
   plot_points = FALSE,
-  ncol = 2
+  ncol = 2,
+  plot_type = c("violin", "boxplot")
 )
 }
 \arguments{
@@ -42,6 +43,9 @@ large (especially when saved as PDF).}
 
 \item{ncol}{An \code{integer(1)} specifying the number of columns for the facet in
 the final plot. Defaults to 2.}
+
+\item{plot_type}{A \code{character(1)} specifying whether to plot a 'violin'
+(default) or 'boxplot'.}
 }
 \value{
 A \code{ggplot()} violin plot for selected genes.
@@ -55,6 +59,7 @@ made using \code{ggplot2}.
 ## Using Symbol as rownames makes this more human readable
 data("sce_ab")
 plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
+plot_gene_express(sce = sce_ab, genes = c("G-D1_A"), plot_type = "boxplot")
 
 # Access example data
 if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
@@ -66,11 +71,29 @@ plot_gene_express(
     genes = c("GAD2", "CD22")
 )
 
+## plot as boxplot
+plot_gene_express(
+    sce = sce_DLPFC_example,
+    category = "cellType_broad_hc",
+    genes = c("GAD2", "CD22"),
+    plot_type = "boxplot"
+)
+
 ## plot points - note this creates large images and is easy to over plot
 plot_gene_express(
     sce = sce_DLPFC_example,
     category = "cellType_broad_hc",
-    genes = c("GAD2", "CD22"), plot_points = TRUE
+    genes = c("GAD2", "CD22"), 
+    plot_points = TRUE
+)
+
+## with boxplot
+plot_gene_express(
+    sce = sce_DLPFC_example,
+    category = "cellType_broad_hc",
+    genes = c("GAD2", "CD22"), 
+    plot_points = TRUE,
+    plot_type = "boxplot"
 )
 
 ## Add title
@@ -79,6 +102,18 @@ plot_gene_express(
     category = "cellType_broad_hc",
     genes = c("GAD2", "CD22"),
     title = "My Genes"
+)
+
+## Add color pallet
+my_cell_colors <- create_cell_colors(cell_types = levels(sce_DLPFC_example$cellType_broad_hc))
+
+plot_gene_express(
+    sce = sce_DLPFC_example,
+    category = "cellType_broad_hc",
+    genes = c("GAD2", "CD22"),
+    color_pal =  my_cell_colors,
+    plot_type = "boxplot",
+    plot_points = TRUE
 )
 
 }
