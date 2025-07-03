@@ -1,3 +1,10 @@
+# DeconvoBuddies 1.1.2
+
+NEW FEATURES
+
+* `plot_gene_express()` now has the option to change `plot_type` to 'violin' or
+'boxplot'
+
 # DeconvoBuddies 1.1.1
 
 BUG FIXES
