@@ -23,6 +23,8 @@
 #' large (especially when saved as PDF).
 #' @param ncol An `integer(1)` specifying the number of columns for the facet in
 #' the final plot. Defaults to 2.
+#' @param plot_type A `character(1)` specifying whether to plot a 'violin' 
+#' (default) or 'boxplot'.
 #'
 #' @return A `ggplot()` violin plot for selected genes.
 #' @export
@@ -31,6 +33,7 @@
 #' ## Using Symbol as rownames makes this more human readable
 #' data("sce_ab")
 #' plot_gene_express(sce = sce_ab, genes = c("G-D1_A"))
+#' plot_gene_express(sce = sce_ab, genes = c("G-D1_A"), plot_type = "boxplot")
 #'
 #' # Access example data
 #' if (!exists("sce_DLPFC_example")) sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
@@ -41,12 +44,30 @@
 #'     category = "cellType_broad_hc",
 #'     genes = c("GAD2", "CD22")
 #' )
+#' 
+#' ## plot as boxplot
+#' plot_gene_express(
+#'     sce = sce_DLPFC_example,
+#'     category = "cellType_broad_hc",
+#'     genes = c("GAD2", "CD22"),
+#'     plot_type = "boxplot"
+#' )
 #'
 #' ## plot points - note this creates large images and is easy to over plot
 #' plot_gene_express(
 #'     sce = sce_DLPFC_example,
 #'     category = "cellType_broad_hc",
-#'     genes = c("GAD2", "CD22"), plot_points = TRUE
+#'     genes = c("GAD2", "CD22"), 
+#'     plot_points = TRUE
+#' )
+#' 
+#' ## with boxplot
+#' plot_gene_express(
+#'     sce = sce_DLPFC_example,
+#'     category = "cellType_broad_hc",
+#'     genes = c("GAD2", "CD22"), 
+#'     plot_points = TRUE,
+#'     plot_type = "boxplot"
 #' )
 #'
 #' ## Add title
@@ -55,6 +76,18 @@
 #'     category = "cellType_broad_hc",
 #'     genes = c("GAD2", "CD22"),
 #'     title = "My Genes"
+#' )
+#'
+#'## Add color pallet
+#'my_cell_colors <- create_cell_colors(cell_types = levels(sce_DLPFC_example$cellType_broad_hc))
+#'
+#'plot_gene_express(
+#'     sce = sce_DLPFC_example,
+#'     category = "cellType_broad_hc",
+#'     genes = c("GAD2", "CD22"),
+#'     color_pal =  my_cell_colors,
+#'     plot_type = "boxplot",
+#'     plot_points = TRUE
 #' )
 #'
 #' @family expression plotting functions
@@ -67,8 +100,11 @@ plot_gene_express <- function(
         color_pal = NULL,
         title = NULL,
         plot_points = FALSE,
-        ncol = 2) {
-    stopifnot(any(genes %in% rownames(sce)))
+        ncol = 2,
+        plot_type = c("violin", "boxplot")) {
+  ##check inputs
+  stopifnot(any(genes %in% rownames(sce)))
+  plot_type <- match.arg(plot_type)
 
     if (!category %in% colnames(colData(sce))) {
         stop(
@@ -81,15 +117,16 @@ plot_gene_express <- function(
     stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
 
     value <- median <- NULL
-
+    
+    ## reformat data
     category_df <- as.data.frame(colData(sce))[, category, drop = FALSE]
     expression_long <- reshape2::melt(as.matrix(SummarizedExperiment::assays(sce)[[assay_name]][genes, , drop = FALSE]))
 
     category <- category_df[expression_long$Var2, ]
     expression_long <- cbind(expression_long, category)
 
-    expression_violin <- ggplot(data = expression_long, aes(x = category, y = value)) +
-        # ggplot2::geom_violin(aes(fill = category), scale = "width") +
+    ## create plot
+    expression_plot <- ggplot(data = expression_long, aes(x = category, y = value)) +
         ggplot2::facet_wrap(~Var1, ncol = ncol) +
         ggplot2::labs(
             y = paste0("Expression (", assay_name, ")"),
@@ -104,32 +141,52 @@ plot_gene_express <- function(
         )
 
     if (plot_points) {
-        expression_violin <- expression_violin +
-            ggplot2::geom_violin(aes(color = category), scale = "width") +
-            ggplot2::geom_jitter(aes(color = category),
-                position = ggplot2::position_jitter(seed = 1, width = 0.2), size = .5
-            ) +
-            ggplot2::stat_summary(
-                fun = mean,
-                geom = "crossbar",
-                width = 0.3
-            )
+      if(plot_type == "violin"){
+        
+        ##violin plot w/ points
+        expression_plot <- expression_plot +
+          ggplot2::geom_violin(aes(color = category), scale = "width") +
+          ggplot2::geom_jitter(aes(color = category),
+                               position = ggplot2::position_jitter(seed = 1, width = 0.2), 
+                               size = 0.5,
+                               alpha = 0.5
+          ) +
+          ggplot2::stat_summary(
+            fun = mean,
+            geom = "crossbar",
+            width = 0.3
+          )
+      } else if(plot_type == "boxplot"){
+        expression_plot <- expression_plot +
+          ggplot2::geom_boxplot(aes(color = category,), outlier.shape = NA) +
+          ggplot2::geom_jitter(aes(color = category),
+                               position = ggplot2::position_jitter(seed = 1, width = 0.2), 
+                               size = .5,
+                               alpha = 0.5)
+      }
+        
 
-        if (!is.null(color_pal)) expression_violin <- expression_violin + ggplot2::scale_color_manual(values = color_pal)
+        if (!is.null(color_pal)) expression_plot <- expression_plot + ggplot2::scale_color_manual(values = color_pal)
 
-        return(expression_violin)
+        return(expression_plot)
     }
-
-    expression_violin <- expression_violin +
+    
+    if(plot_type == "violin"){
+    ##violin plot w/o points
+    expression_plot <- expression_plot +
         ggplot2::geom_violin(aes(fill = category), scale = "width") +
         ggplot2::stat_summary(
             fun = mean,
             geom = "crossbar",
             width = 0.3
         )
+    } else if(plot_type == "boxplot"){
+      expression_plot <- expression_plot +
+        ggplot2::geom_boxplot(aes(fill = category)) 
+        
+    }
+    if (!is.null(color_pal)) expression_plot <- expression_plot + ggplot2::scale_fill_manual(values = color_pal)
 
-    if (!is.null(color_pal)) expression_violin <- expression_violin + ggplot2::scale_fill_manual(values = color_pal)
-
-    # expression_violin
-    return(expression_violin)
+    # expression_plot
+    return(expression_plot)
 }
