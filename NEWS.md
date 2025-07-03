@@ -1,3 +1,11 @@
+# DeconvoBuddies 1.1.1
+
+BUG FIXES
+
+* `get_mean_ratio()` was initially coercing sparse matrices into in memory
+matrices. We resolved this by using `MatrixGenerics::rowMeans()` and
+`MatrixGenerics::rowMedians()`. This issue was reported by @cyntsc.
+
 # DeconvoBuddies 0.99.0
 
 NEW FEATURES

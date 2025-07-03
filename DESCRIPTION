@@ -1,7 +1,7 @@
 Package: DeconvoBuddies
 Title: Helper Functions for LIBD Deconvolution
-Version: 0.99.39
-Date: 2025-03-24
+Version: 1.1.1
+Date: 2025-06-26
 Authors@R: 
     c(
     person(given = "Louise", family = "Huuki-Myers", role = c("aut", "cre"),
@@ -20,12 +20,13 @@ RoxygenNote: 7.3.2
 Imports:
     AnnotationHub,
     BiocFileCache,
+    DelayedMatrixStats,
     dplyr,
     ExperimentHub,
     ggplot2,
     graphics,
     grDevices,
-    matrixStats,
+    MatrixGenerics,
     methods,
     purrr,
     rafalib,

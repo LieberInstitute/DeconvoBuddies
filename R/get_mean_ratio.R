@@ -72,7 +72,9 @@
 #' @importFrom dplyr arrange
 #' @importFrom purrr map
 #' @importFrom purrr map2
-#' @importFrom matrixStats rowMedians
+#' @importFrom MatrixGenerics rowMedians
+#' @importFrom DelayedMatrixStats rowMedians
+#' @importFrom MatrixGenerics rowMeans
 get_mean_ratio <- function(sce,
     cellType_col,
     assay_name = "logcounts",
@@ -96,10 +98,10 @@ get_mean_ratio <- function(sce,
 
     if (any(ct_table < 10)) warning("One or more cell types has < 10 cells, this may result in unstable marker genes results. Check details of get_mean_ratio() for more info")
 
-    sce_assay <- as.matrix(SummarizedExperiment::assays(sce)[[assay_name]])
+    sce_assay <- SummarizedExperiment::assays(sce)[[assay_name]]
 
     ## Get mean expression for each gene for each cellType
-    cell_means <- map(cell_types, ~ as.data.frame(base::rowMeans(sce_assay[, sce[[cellType_col]] == .x])))
+    cell_means <- map(cell_types, ~ as.data.frame(MatrixGenerics::rowMeans(sce_assay[, sce[[cellType_col]] == .x])))
 
     cell_means <- do.call("rbind", cell_means)
     colnames(cell_means) <- "mean"
@@ -157,7 +159,7 @@ get_mean_ratio <- function(sce,
     cellType <- NULL
 
     # filter target median != 0
-    median_index <- matrixStats::rowMedians(sce_assay[, sce[[cellType_col]] == x]) != 0
+    median_index <- MatrixGenerics::rowMedians(sce_assay[, sce[[cellType_col]] == x]) != 0
     # message("Median == 0: ", sum(!median_index))
     # filter for target means
     target_mean <- cell_means[cell_means$cellType == x, ]
