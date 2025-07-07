@@ -25,6 +25,8 @@
 #' the final plot. Defaults to 2.
 #' @param plot_type A `character(1)` specifying whether to plot a 'violin' 
 #' (default) or 'boxplot'.
+#' @param free_y  `logical(1)` indicating whether to use "free" y-axis between 
+#' genes (relevant to `facet_wrap`).
 #'
 #' @return A `ggplot()` violin plot for selected genes.
 #' @export
@@ -101,10 +103,12 @@ plot_gene_express <- function(
         title = NULL,
         plot_points = FALSE,
         ncol = 2,
-        plot_type = c("violin", "boxplot")) {
+        plot_type = c("violin", "boxplot"),
+        free_y = FALSE) {
   ##check inputs
   stopifnot(any(genes %in% rownames(sce)))
   plot_type <- match.arg(plot_type)
+  facet_scales <- ifelse(free_y, "fixed", "free_y")
 
     if (!category %in% colnames(colData(sce))) {
         stop(
@@ -127,7 +131,7 @@ plot_gene_express <- function(
 
     ## create plot
     expression_plot <- ggplot(data = expression_long, aes(x = category, y = value)) +
-        ggplot2::facet_wrap(~Var1, ncol = ncol) +
+        ggplot2::facet_wrap(~Var1, ncol = ncol, scales = facet_scales) +
         ggplot2::labs(
             y = paste0("Expression (", assay_name, ")"),
             title = title
