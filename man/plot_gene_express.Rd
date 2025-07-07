@@ -13,7 +13,8 @@ plot_gene_express(
   title = NULL,
   plot_points = FALSE,
   ncol = 2,
-  plot_type = c("violin", "boxplot")
+  plot_type = c("violin", "boxplot"),
+  free_y = FALSE
 )
 }
 \arguments{
@@ -46,6 +47,9 @@ the final plot. Defaults to 2.}
 
 \item{plot_type}{A \code{character(1)} specifying whether to plot a 'violin'
 (default) or 'boxplot'.}
+
+\item{free_y`logical(1)`}{indicating whether to use "free" y-axis between
+genes (relevant to \code{facet_wrap}).}
 }
 \value{
 A \code{ggplot()} violin plot for selected genes.

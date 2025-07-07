@@ -25,7 +25,7 @@
 #' the final plot. Defaults to 2.
 #' @param plot_type A `character(1)` specifying whether to plot a 'violin' 
 #' (default) or 'boxplot'.
-#' @param free_y  `logical(1)` indicating whether to use "free" y-axis between 
+#' @param free_y`logical(1)` indicating whether to use "free" y-axis between 
 #' genes (relevant to `facet_wrap`).
 #'
 #' @return A `ggplot()` violin plot for selected genes.
