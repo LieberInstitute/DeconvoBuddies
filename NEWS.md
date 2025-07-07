@@ -1,3 +1,9 @@
+# DeconvoBuddies 1.1.3
+
+NEW FEATURES
+
+* `plot_gene_express()` now has the option to use "free_y" axis.
+
 # DeconvoBuddies 1.1.2
 
 NEW FEATURES
