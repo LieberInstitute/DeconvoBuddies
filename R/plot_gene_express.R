@@ -71,6 +71,16 @@
 #'     plot_points = TRUE,
 #'     plot_type = "boxplot"
 #' )
+#' 
+#' ## Use free y-axis between genes
+#' plot_gene_express(
+#'     sce = sce_DLPFC_example,
+#'     category = "cellType_broad_hc",
+#'     genes = c("GAD2", "CD22"), 
+#'     plot_points = TRUE,
+#'     plot_type = "boxplot",
+#'     free_y = FALSE
+#' )
 #'
 #' ## Add title
 #' plot_gene_express(
@@ -108,7 +118,7 @@ plot_gene_express <- function(
   ##check inputs
   stopifnot(any(genes %in% rownames(sce)))
   plot_type <- match.arg(plot_type)
-  facet_scales <- ifelse(free_y, "fixed", "free_y")
+  facet_scales <- ifelse(free_y, "free_y", "fixed")
 
     if (!category %in% colnames(colData(sce))) {
         stop(

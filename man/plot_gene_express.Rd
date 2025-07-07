@@ -100,6 +100,16 @@ plot_gene_express(
     plot_type = "boxplot"
 )
 
+## Use free y-axis between genes
+plot_gene_express(
+    sce = sce_DLPFC_example,
+    category = "cellType_broad_hc",
+    genes = c("GAD2", "CD22"), 
+    plot_points = TRUE,
+    plot_type = "boxplot",
+    free_y = FALSE
+)
+
 ## Add title
 plot_gene_express(
     sce = sce_DLPFC_example,
