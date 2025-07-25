@@ -23,7 +23,7 @@
 #' # To view source
 #' system.file("extdata", "data-raw", "est_prop.R", package = "DeconvoBuddies")
 #' @format A `data.frame` object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/est_prop.R>
+#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/est_prop.R>
 #' @usage data("est_prop")
 "est_prop"
 
@@ -39,7 +39,7 @@
 #' system.file("extdata", "data-raw", "marker_test.R", package = "DeconvoBuddies")
 #' @format A `tibble::tibble()`. See `get_mean_ratio()` for more details on the column
 #' names.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/marker_test.R>
+#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/marker_test.R>
 #' @usage data("marker_test")
 "marker_test"
 
@@ -53,7 +53,7 @@
 #' # To view source
 #' system.file("extdata", "data-raw", "rse_bulk_test.R", package = "DeconvoBuddies")
 #' @format A [SummarizedExperiment][SummarizedExperiment::SummarizedExperiment-class] object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/rse_bulk_test.R>
+#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/rse_bulk_test.R>
 #' @usage data("rse_bulk_test")
 "rse_bulk_test"
 
@@ -68,7 +68,7 @@
 #' # To view source
 #' system.file("extdata", "data-raw", "sce_ab.R", package = "DeconvoBuddies")
 #' @format A [SingleCellExperiment][SingleCellExperiment::SingleCellExperiment-class] object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/sce_ab.R>
+#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/sce_ab.R>
 #' @usage data("sce_ab")
 "sce_ab"
 
@@ -116,7 +116,7 @@
 #' # To view source
 #' system.file("extdata", "data-raw", "RNAScope_prop.R", package = "DeconvoBuddies")
 #' @format A `data.frame` object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R>
+#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/RNAScope_prop.R>
 #' @usage data("RNAScope_prop")
 "RNAScope_prop"
 
@@ -131,7 +131,7 @@
 #' # To view source
 #' system.file("extdata", "data-raw", "marker_stats_1vAll.R", package = "DeconvoBuddies")
 #' @format A `data.frame` object.
-#' @source <https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R>
+#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/RNAScope_prop.R>
 #' @usage data("marker_stats_1vAll")
 "marker_stats_1vAll"
 

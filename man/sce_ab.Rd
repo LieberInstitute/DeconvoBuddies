@@ -8,7 +8,7 @@
 A \link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/sce_ab.R}
+\url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/sce_ab.R}
 }
 \usage{
 data("sce_ab")

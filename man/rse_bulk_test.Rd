@@ -8,7 +8,7 @@
 A \link[SummarizedExperiment:SummarizedExperiment-class]{SummarizedExperiment} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/rse_bulk_test.R}
+\url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/rse_bulk_test.R}
 }
 \usage{
 data("rse_bulk_test")

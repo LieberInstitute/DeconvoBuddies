@@ -8,7 +8,7 @@
 A \code{data.frame} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/RNAScope_prop.R}
+\url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/RNAScope_prop.R}
 }
 \usage{
 data("marker_stats_1vAll")

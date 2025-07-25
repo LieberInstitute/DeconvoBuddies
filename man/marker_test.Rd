@@ -9,7 +9,7 @@ A \code{tibble::tibble()}. See \code{get_mean_ratio()} for more details on the c
 names.
 }
 \source{
-\url{https://github.com/LieberInstitute/brainstorm/blob/master/inst/extdata/data-raw/marker_test.R}
+\url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/marker_test.R}
 }
 \usage{
 data("marker_test")
