@@ -108,17 +108,17 @@ Create composition bar plots of predicted cell type proportions.
 ```{r demo_plot_composition_bar, echo=FALSE}
 set.seed(123)
 ## load example data
-data("est_prop")
+data("est_prop_test")
 
 ## pivot data to long format and join with test estimated proportion data
-est_prop_long <- est_prop |>
+est_prop_long <- est_prop_test |>
     tibble::rownames_to_column("RNum") |>
     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop")
 
 ## composition bar plot
 plot_composition_bar(
     est_prop_long |>
-        dplyr::filter(RNum %in% sample(rownames(est_prop), 10)),
+        dplyr::filter(RNum %in% sample(rownames(est_prop_test), 10)),
     x_col = "RNum"
 )
 ```
