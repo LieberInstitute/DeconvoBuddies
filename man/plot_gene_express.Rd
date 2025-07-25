@@ -48,7 +48,7 @@ the final plot. Defaults to 2.}
 \item{plot_type}{A \code{character(1)} specifying whether to plot a 'violin'
 (default) or 'boxplot'.}
 
-\item{free_y`logical(1)`}{indicating whether to use "free" y-axis between
+\item{free_y}{\code{logical(1)} indicating whether to use "free" y-axis between
 genes (relevant to \code{facet_wrap}).}
 }
 \value{
