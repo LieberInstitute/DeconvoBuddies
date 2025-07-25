@@ -344,7 +344,7 @@ identifier and `Dx` is a group variable for the diagnosis status of the donors.
 ```{r `demo plot_composition_bar`}
 # load example data
 data("rse_bulk_test")
-data("est_prop")
+data("est_prop_test")
 
 # access the colData of a test rse dataset
 pd <- colData(rse_bulk_test) |>
