@@ -43,7 +43,6 @@ Imports:
 Suggests: 
     Biobase,
     BiocStyle,
-    BisqueRNA,
     covr,
     HDF5Array,
     knitr,
