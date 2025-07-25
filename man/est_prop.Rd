@@ -3,41 +3,44 @@
 \docType{data}
 \name{est_prop}
 \alias{est_prop}
-\title{Estimated Cell Type Proportions}
+\title{Bisque Estimated Cell Type Proportions for DLPFC bulk RNA-seq data}
 \format{
 A \code{data.frame} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/est_prop_test.R}
+\url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/est_prop.R}
 }
 \usage{
-data("est_prop_test")
+data("est_prop")
 }
 \description{
-A test dataset of estimated proportions for 5 cell types over 100 samples.
+Cell type proportions estimated by Bisque for DLPFC bulk RNA-seq data set,
+utilizing DLPFC snRNA-seq data as the reference data.
 }
 \details{
-11.62 kB
+16.79 kB
 
 These are the columns of the \code{data.frame} object:
 \itemize{
-\item cell_A: estimated proportions for cell type A
-\item cell_B: estimated proportions for cell type B
-\item cell_C: estimated proportions for cell type C
-\item cell_D: estimated proportions for cell type D
-\item cell_E: estimated proportions for cell type E
+\item Astro: estimated proportions of Astrocyte cells
+\item EndoMural: estimated proportions of Endothelia + Mural cells
+\item Micro: estimated proportions of Microglia cells
+\item Oligo: estimated proportions of Oligodendrocyte Cells
+\item OPC: estimated proportions of Oligodendrocyte Precursor Cells
+\item Excit: estimated proportions for Excitatory Neurons
+\item Inhib: estimated proportions for Inhibitory Neurons
 }
 }
 \examples{
-## R Note that the `rowSums(est_prop_test)` is equal to 1,
+## R Note that the `rowSums(est_prop)` is equal to 1,
 ## with a small error tolerance.
-data("est_prop_test")
-summary(rowSums(est_prop_test) - 1)
+data("est_prop")
+summary(rowSums(est_prop) - 1)
 
 ## You can check this yourself with:
-all(round(rowSums(est_prop_test), 3) == 1)
+all(round(rowSums(est_prop), 3) == 1)
 
 # To view source
-system.file("extdata", "data-raw", "est_prop_test.R", package = "DeconvoBuddies")
+system.file("extdata", "data-raw", "est_prop.R", package = "DeconvoBuddies")
 }
 \keyword{datasets}
