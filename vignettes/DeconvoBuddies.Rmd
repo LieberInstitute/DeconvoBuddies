@@ -63,7 +63,6 @@ bib <- c(
     utils = citation("utils")[1],
     Biobase = citation("Biobase")[1],
     BiocStyle = citation("BiocStyle")[1],
-    BisqueRNA = citation("BisqueRNA")[1],
     covr = citation("covr")[1],
     HDF5Array = citation("HDF5Array")[1],
     knitr = citation("knitr")[1],
