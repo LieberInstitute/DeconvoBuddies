@@ -351,7 +351,7 @@ pd <- colData(rse_bulk_test) |>
     as.data.frame()
 
 ## pivot data to long format and join with test estimated proportion data
-est_prop_long <- est_prop |>
+est_prop_long <- est_prop_test |>
     rownames_to_column("RNum") |>
     pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
     left_join(pd)
