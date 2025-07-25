@@ -1,6 +1,6 @@
 # Load example data
 data("rse_bulk_test")
-data("est_prop")
+data("est_prop_test")
 
 pd <- SummarizedExperiment::colData(rse_bulk_test) |>
     as.data.frame()
