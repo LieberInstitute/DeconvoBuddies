@@ -1,3 +1,13 @@
+# DeconvoBuddies 1.1.4
+
+BUG FIXES
+
+Package `BisqueRNA` is no longer a suggested dependency (no longer available on 
+CRAN). 
+
+Vignette "Deconvolution Benchmark in Human DLPFC" now loads pre-computed 
+`est_prop` data instead of running Bisque deconvolution.
+
 # DeconvoBuddies 1.1.3
 
 NEW FEATURES
