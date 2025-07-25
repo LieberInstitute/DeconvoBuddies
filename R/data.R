@@ -27,6 +27,35 @@
 #' @usage data("est_prop_test")
 "est_prop_test"
 
+#' Estimated Cell Type Proportions
+#'
+#' A test dataset of estimated proportions for 5 cell types over 100 samples.
+#'
+#' 11.62 kB
+#'
+#' @details These are the columns of the `data.frame` object:
+#' * cell_A: estimated proportions for cell type A
+#' * cell_B: estimated proportions for cell type B
+#' * cell_C: estimated proportions for cell type C
+#' * cell_D: estimated proportions for cell type D
+#' * cell_E: estimated proportions for cell type E
+#'
+#' @examples
+#' ## R Note that the `rowSums(est_prop_test)` is equal to 1,
+#' ## with a small error tolerance.
+#' data("est_prop_test")
+#' summary(rowSums(est_prop_test) - 1)
+#'
+#' ## You can check this yourself with:
+#' all(round(rowSums(est_prop_test), 3) == 1)
+#'
+#' # To view source
+#' system.file("extdata", "data-raw", "est_prop_test.R", package = "DeconvoBuddies")
+#' @format A `data.frame` object.
+#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/est_prop_test.R>
+#' @usage data("est_prop_test")
+"est_prop"
+
 #' Markers stats from sce_DLPFC_example
 #'
 #' A tibble containing the marker stats from `get_mean_ratio()` for

@@ -3,15 +3,15 @@
 \docType{data}
 \name{est_prop}
 \alias{est_prop}
-\title{Test Estimated Cell Type Proportions}
+\title{Estimated Cell Type Proportions}
 \format{
 A \code{data.frame} object.
 }
 \source{
-\url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/est_prop.R}
+\url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/est_prop_test.R}
 }
 \usage{
-data("est_prop")
+data("est_prop_test")
 }
 \description{
 A test dataset of estimated proportions for 5 cell types over 100 samples.
@@ -29,15 +29,15 @@ These are the columns of the \code{data.frame} object:
 }
 }
 \examples{
-## R Note that the `rowSums(est_prop)` is equal to 1,
+## R Note that the `rowSums(est_prop_test)` is equal to 1,
 ## with a small error tolerance.
-data("est_prop")
-summary(rowSums(est_prop) - 1)
+data("est_prop_test")
+summary(rowSums(est_prop_test) - 1)
 
 ## You can check this yourself with:
-all(round(rowSums(est_prop), 3) == 1)
+all(round(rowSums(est_prop_test), 3) == 1)
 
 # To view source
-system.file("extdata", "data-raw", "est_prop.R", package = "DeconvoBuddies")
+system.file("extdata", "data-raw", "est_prop_test.R", package = "DeconvoBuddies")
 }
 \keyword{datasets}
