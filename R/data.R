@@ -12,20 +12,20 @@
 #' * cell_E: estimated proportions for cell type E
 #'
 #' @examples
-#' ## R Note that the `rowSums(est_prop)` is equal to 1,
+#' ## R Note that the `rowSums(est_prop_test)` is equal to 1,
 #' ## with a small error tolerance.
-#' data("est_prop")
-#' summary(rowSums(est_prop) - 1)
+#' data("est_prop_test")
+#' summary(rowSums(est_prop_test) - 1)
 #'
 #' ## You can check this yourself with:
-#' all(round(rowSums(est_prop), 3) == 1)
+#' all(round(rowSums(est_prop_test), 3) == 1)
 #'
 #' # To view source
-#' system.file("extdata", "data-raw", "est_prop.R", package = "DeconvoBuddies")
+#' system.file("extdata", "data-raw", "est_prop_test.R", package = "DeconvoBuddies")
 #' @format A `data.frame` object.
-#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/est_prop.R>
-#' @usage data("est_prop")
-"est_prop"
+#' @source <https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/est_prop_test.R>
+#' @usage data("est_prop_test")
+"est_prop_test"
 
 #' Markers stats from sce_DLPFC_example
 #'
