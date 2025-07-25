@@ -141,9 +141,6 @@ library("Biobase")
 ## For downloading data
 library("spatialLIBD")
 
-## For running deconvolution
-library("BisqueRNA")
-
 ## Other helper packages for this vignette
 library("dplyr")
 library("tidyr")
@@ -366,6 +363,9 @@ The snRNA-seq data must also be filtered for cells with no counts across
 marker genes.
 
 ```{r "prep data as ExpressionSet"}
+# NOT RUN - no longer running Bisque - see next section for details
+
+if(FALSE){
 ## convert bulk data to Expression set, sub-setting to marker genes
 ## include sample ID
 exp_set_bulk <- Biobase::ExpressionSet(
@@ -389,6 +389,8 @@ zero_cell_filter <- colSums(exprs(exp_set_sce)) != 0
 message("Exclude ", sum(!zero_cell_filter), " cells")
 
 exp_set_sce <- exp_set_sce[, zero_cell_filter]
+}
+
 ```
 
 ## Run Bisque
@@ -398,8 +400,21 @@ above, plus columns in the single cell data that specify the cell type
 annotation to use `cellType_broad_hc` and donor id (`BrNum` in this
 data).
 
+NOTE: Bisque is no longer available on CRAN (as of July 2025) so cannot be run in this vignette. 
+We'll use pre-computed estimates for this vignette instead. (loaded in the next section).
+
 ```{r, "run Bisque"}
+## NOT RUN - Bisque unavailable on CRAN
+
 ## Run Bisque with bulk and single cell ExpressionSet inputs
+## For running deconvolution
+
+# But the development version can be installed from github via:
+# devtools::install_github("cozygene/bisque")
+
+if(FALSE){
+library("BisqueRNA")
+
 est_prop <- ReferenceBasedDecomposition(
     bulk.eset = exp_set_bulk,
     sc.eset = exp_set_sce,
@@ -407,6 +422,12 @@ est_prop <- ReferenceBasedDecomposition(
     subject.names = "BrNum",
     use.overlap = FALSE
 )
+
+## Examine the output from Bisque, transpose to make it easier to work with
+est_prop <- t(est_prop$bulk.props)
+
+}
+
 ```
 
 ## Explore Output
@@ -415,11 +436,11 @@ est_prop <- ReferenceBasedDecomposition(
 for each sample in the bulk data.
 
 ```{r, "deconvo output"}
-## Examine the output from Bisque, transpose to make it easier to work with
-est_prop$bulk.props <- t(est_prop$bulk.props)
+## Load the pre-computed estimated proportions
+data("est_prop")
 
 ## sample x cell type matrix
-head(est_prop$bulk.props)
+head(est_prop)
 ```
 
 # 5. Explore deconvolution output and create composition plots with `DeconvoBuddies` tools
@@ -436,7 +457,7 @@ pd <- colData(rse_gene) |>
     select(SAMPLE_ID, Sample, library_combo)
 
 ## make proportion estimates long so they are ggplot2 friendly
-prop_long <- est_prop$bulk.props |>
+prop_long <- est_prop |>
     as.data.frame() |>
     tibble::rownames_to_column("SAMPLE_ID") |>
     tidyr::pivot_longer(!SAMPLE_ID, names_to = "cell_type", values_to = "prop") |>
