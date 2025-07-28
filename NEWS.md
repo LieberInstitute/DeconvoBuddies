@@ -1,3 +1,9 @@
+# DeconvoBuddies 1.1.5
+
+BUG FIXES
+
+Correct (est_prop/est_prop_test) data usage after changes in v1.1.4
+
 # DeconvoBuddies 1.1.4
 
 BUG FIXES
