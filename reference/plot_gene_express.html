@@ -19,7 +19,7 @@ made using ggplot2."><meta property="og:image" content="/logo.png"><!-- mathjax 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.4</span>
       </span>
     </div>
 
@@ -82,7 +82,8 @@ made using <code>ggplot2</code>.</p>
 <span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plot_points <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ncol <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>  plot_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"violin"</span>, <span class="st">"boxplot"</span><span class="op">)</span></span>
+<span>  plot_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"violin"</span>, <span class="st">"boxplot"</span><span class="op">)</span>,</span>
+<span>  free_y <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -137,6 +138,11 @@ the final plot. Defaults to 2.</p></dd>
 <dd><p>A <code>character(1)</code> specifying whether to plot a 'violin'
 (default) or 'boxplot'.</p></dd>
 
+
+<dt id="arg-free-y">free_y<a class="anchor" aria-label="anchor" href="#arg-free-y"></a></dt>
+<dd><p><code>logical(1)</code> indicating whether to use "free" y-axis between
+genes (relevant to <code>facet_wrap</code>).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -161,7 +167,7 @@ the final plot. Defaults to 2.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Access example data</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-03 15:02:45.330359 Access ExperimentHub EH9626</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-28 18:45:33.226985 Access ExperimentHub EH9626</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> see ?DeconvoBuddies and browseVignettes('DeconvoBuddies') for documentation</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> loading from cache</span>
 <span class="r-in"><span></span></span>
@@ -201,6 +207,17 @@ the final plot. Defaults to 2.</p></dd>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_gene_express-6.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Use free y-axis between genes</span></span></span>
+<span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span></span>
+<span class="r-in"><span>    category <span class="op">=</span> <span class="st">"cellType_broad_hc"</span>,</span></span>
+<span class="r-in"><span>    genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>    plot_points <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    plot_type <span class="op">=</span> <span class="st">"boxplot"</span>,</span></span>
+<span class="r-in"><span>    free_y <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="plot_gene_express-7.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Add title</span></span></span>
 <span class="r-in"><span><span class="fu">plot_gene_express</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    sce <span class="op">=</span> <span class="va">sce_DLPFC_example</span>,</span></span>
@@ -208,7 +225,7 @@ the final plot. Defaults to 2.</p></dd>
 <span class="r-in"><span>    genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GAD2"</span>, <span class="st">"CD22"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    title <span class="op">=</span> <span class="st">"My Genes"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot_gene_express-7.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="plot_gene_express-8.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Add color pallet</span></span></span>
 <span class="r-in"><span><span class="va">my_cell_colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_cell_colors.html">create_cell_colors</a></span><span class="op">(</span>cell_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">sce_DLPFC_example</span><span class="op">$</span><span class="va">cellType_broad_hc</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -222,7 +239,7 @@ the final plot. Defaults to 2.</p></dd>
 <span class="r-in"><span>    plot_type <span class="op">=</span> <span class="st">"boxplot"</span>,</span></span>
 <span class="r-in"><span>    plot_points <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="plot_gene_express-8.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="plot_gene_express-9.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
