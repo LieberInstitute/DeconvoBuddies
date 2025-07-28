@@ -413,7 +413,7 @@ We'll use pre-computed estimates for this vignette instead. (loaded in the next 
 # devtools::install_github("cozygene/bisque")
 
 if(FALSE){
-library("BisqueRNA")
+# library("BisqueRNA")
 
 est_prop <- ReferenceBasedDecomposition(
     bulk.eset = exp_set_bulk,
