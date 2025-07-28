@@ -5,7 +5,7 @@ data("est_prop_test")
 pd <- SummarizedExperiment::colData(rse_bulk_test) |>
     as.data.frame()
 
-est_prop_long <- est_prop |>
+est_prop_long <- est_prop_test |>
     tibble::rownames_to_column("RNum") |>
     tidyr::pivot_longer(!RNum, names_to = "cell_type", values_to = "prop") |>
     dplyr::inner_join(pd |> dplyr::select(RNum, Dx), by = dplyr::join_by(RNum))
