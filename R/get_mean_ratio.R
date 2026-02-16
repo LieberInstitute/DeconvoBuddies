@@ -21,6 +21,8 @@
 #' column with the ENSEMBL gene IDs. This will be used by `layer_stat_cor()`.
 #' @param gene_name A `character(1)` specifying the `rowData(sce_pseudo)`
 #' column with the gene names (symbols).
+#' @param BPPARAM A \linkS4class{BiocParallelParam} object specifying how to
+#' potentially parallelize key matrix operations.
 #'
 #' @return A `tibble::tibble()` with the `MeanRatio` values for each gene x cell
 #' type.
@@ -68,19 +70,21 @@
 #'
 #' @family marker gene functions
 #'
-#' @importFrom dplyr mutate
-#' @importFrom dplyr arrange
+#' @import dplyr
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom MatrixGenerics rowMedians
 #' @importFrom DelayedMatrixStats rowMedians
 #' @importFrom MatrixGenerics rowMeans
+#' @importFrom tibble tibble
+#' @importFrom BiocParallel bplapply SerialParam
 get_mean_ratio <- function(sce,
     cellType_col,
     assay_name = "logcounts",
     gene_ensembl = NULL,
-    gene_name = NULL) {
-    # RCMD fix
+    gene_name = NULL,
+    BPPARAM = BiocParallel::SerialParam()) {
+    # RCMD Fix
     cellType.target <- NULL
     cellType <- NULL
     ratio <- NULL
@@ -100,28 +104,42 @@ get_mean_ratio <- function(sce,
 
     sce_assay <- SummarizedExperiment::assays(sce)[[assay_name]]
 
-    ## Get mean expression for each gene for each cellType
-    cell_means <- map(cell_types, ~ as.data.frame(MatrixGenerics::rowMeans(sce_assay[, sce[[cellType_col]] == .x])))
+    ## Get mean and median expression for each gene for each cell type
+    result_list = BiocParallel::bplapply(
+        cell_types,
+        function(cell_type, sce_assay, cellType_col) {
+            result_list = list()
 
-    cell_means <- do.call("rbind", cell_means)
-    colnames(cell_means) <- "mean"
-    ## Define columns
-    cell_means$cellType <- rep(cell_types, each = nrow(sce))
-    cell_means$gene <- rep(rownames(sce), length(cell_types))
-    # print(head(cell_means))
+            assay_piece = sce_assay[, sce[[cellType_col]] == cell_type]
 
-    ## Filter and calculate ratio for each celltype
-    ratio_tables <- map(cell_types, ~ .get_ratio_table(
-        .x,
-        sce,
-        sce_assay,
-        cellType_col,
-        cell_means
-    ))
+            result_list[['cell_means']] = tibble::tibble(
+                mean = unname(MatrixGenerics::rowMeans(assay_piece)),
+                cellType = cell_type,
+                gene = rownames(assay_piece)
+            )
 
-    ratio_tables <- do.call("rbind", ratio_tables) |>
-        mutate(anno_ratio = paste0(cellType.target, "/", cellType, ": ", base::round(ratio, 3))) |>
-        rename(
+            result_list[['cell_medians']] = unname(MatrixGenerics::rowMedians(assay_piece)) != 0
+
+            return(result_list)
+        },
+        BPPARAM = BPPARAM,
+        sce_assay = sce_assay,
+        cellType_col = cellType_col
+    )
+
+    cell_means = dplyr::bind_rows(purrr::map(result_list, ~ .x[['cell_means']]))
+
+    ## Filter and calculate ratio for each celltype. This is not parallelized as the size of each
+    ## table is only dependent on the number of genes, which should make the tables small (and we
+    ## avoid overhead here)
+    ratio_tables <- purrr::map(
+        cell_types,
+        ~ .get_ratio_table(.x, cell_means, result_list[[as.character(.x)]][['cell_medians']])
+    )
+
+    ratio_tables <- dplyr::bind_rows(ratio_tables) |>
+        dplyr::mutate(anno_ratio = paste0(cellType.target, "/", cellType, ": ", base::round(ratio, 3))) |>
+        dplyr::rename(
             cellType.2nd = cellType,
             mean.2nd = mean,
             MeanRatio = ratio,
@@ -150,7 +168,7 @@ get_mean_ratio <- function(sce,
 }
 
 
-.get_ratio_table <- function(x, sce, sce_assay, cellType_col, cell_means) {
+.get_ratio_table <- function(x, cell_means, cell_medians) {
     # RCMD Fix
     mean.target <- NULL
     gene <- NULL
@@ -159,24 +177,22 @@ get_mean_ratio <- function(sce,
     cellType <- NULL
 
     # filter target median != 0
-    median_index <- MatrixGenerics::rowMedians(sce_assay[, sce[[cellType_col]] == x]) != 0
-    # message("Median == 0: ", sum(!median_index))
     # filter for target means
     target_mean <- cell_means[cell_means$cellType == x, ]
-    target_mean <- target_mean[median_index, ]
+    target_mean <- target_mean[cell_medians, ]
     colnames(target_mean) <- c("mean.target", "cellType.target", "gene")
 
     nontarget_mean <- cell_means[cell_means$cellType != x, ]
 
     ratio_table <- dplyr::left_join(target_mean, nontarget_mean, by = "gene") |>
-        mutate(ratio = mean.target / mean) |>
+        dplyr::mutate(ratio = mean.target / mean) |>
         dplyr::group_by(gene) |>
-        arrange(ratio) |>
+        dplyr::arrange(ratio) |>
         dplyr::slice(1) |>
         dplyr::select(gene, cellType.target, mean.target, cellType, mean, ratio) |>
-        arrange(-ratio) |>
+        dplyr::arrange(-ratio) |>
         dplyr::ungroup() |>
-        mutate(rank_ratio = dplyr::row_number())
+        dplyr::mutate(rank_ratio = dplyr::row_number())
 
     return(ratio_table)
 }
