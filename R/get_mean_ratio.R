@@ -103,6 +103,9 @@ get_mean_ratio <- function(sce,
     if (any(ct_table < 10)) warning("One or more cell types has < 10 cells, this may result in unstable marker genes results. Check details of get_mean_ratio() for more info")
 
     sce_assay <- SummarizedExperiment::assays(sce)[[assay_name]]
+    if (class(sce_assay)[1] == "DelayedMatrix") {
+        warning("Assay is a DelayedMatrix. For considerably faster marker finding, consider bringing in memory as a dgCMatrix.")
+    }
 
     ## Get mean and median expression for each gene for each cell type
     result_list = BiocParallel::bplapply(
