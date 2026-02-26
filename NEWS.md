@@ -1,3 +1,9 @@
+# DeconvoBuddies 1.1.6
+
+NEW FEATURES
+
+* `get_mean_ratio()` has a new `BPPARAM` parameter allowing parallelization. Run time without parallelization was also marginally improved.
+
 # DeconvoBuddies 1.1.5
 
 BUG FIXES

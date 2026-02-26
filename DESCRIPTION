@@ -1,13 +1,15 @@
 Package: DeconvoBuddies
 Title: Helper Functions for LIBD Deconvolution
-Version: 1.1.5
-Date: 2025-07-28
+Version: 1.1.6
+Date: 2026-02-26
 Authors@R: 
     c(
     person(given = "Louise", family = "Huuki-Myers", role = c("aut", "cre"),
     email = "lahuuki@gmail.com", comment = c(ORCID = "0000-0001-5148-3602")),
     person("Leonardo", "Collado-Torres", role = c("ctb"), 
-    email = "lcolladotor@gmail.com", comment = c(ORCID = "0000-0003-2140-308X"))
+    email = "lcolladotor@gmail.com", comment = c(ORCID = "0000-0003-2140-308X")),
+    person("Nicholas J.", "Eagles", email = "nickeagles77@gmail.com",
+    role = c("ctb"), comment = c(ORCID = "0000-0002-9808-5254"))
     )
 Description: Funtions helpful for LIBD deconvolution project. Includes tools for marker finding with mean ratio, expression plotting, and plotting deconvolution results. Working to include DLPFC datasets.
 License: Artistic-2.0
