@@ -30,11 +30,16 @@
 #' @param direction A `character(1)` for the choice of direction tested for
 #' gene cell type markers: `"up"` (default), `"any"`, or `"down"`. Impacts
 #' p-values: if `"up"` genes with logFC < 0 will have `p.value = 1`.
+#' @param BPPARAM A \linkS4class{BiocParallelParam} object specifying how to
+#' parallelize computation across cell types.
+#' @param raw_logFC A `logical(1)`: whether to also return non-standardized log
+#' fold change values in addition to the standardized values. Note that setting
+#' this to `TRUE` roughly doubles run time.
 #'
 #' @return A `tibble::tibble()` of 1 vs. ALL standard log fold change + p-values
 #' for each gene x cell type.
 #' -   `gene` is the name of the gene (from `rownames(sce)`).
-#' -   `logFC` the log fold change from the DE test
+#' -   `logFC` the log fold change from the DE test, only returned if `raw_logFC = TRUE`.
 #' -   `log.p.value` the log of the p-value of the DE test
 #' -   `log.FDR` the log of the False Discovery Rate adjusted p.value
 #' -   `std.logFC` the standard logFC.
@@ -74,13 +79,16 @@
 #' @importFrom dplyr mutate
 #' @importFrom scran findMarkers
 #' @importFrom tibble rownames_to_column as_tibble add_column
+#' @importFrom BiocParallel bplapply SerialParam
 findMarkers_1vAll <- function(sce,
     assay_name = "counts",
     cellType_col = "cellType",
     add_symbol = FALSE,
     mod = NULL,
     verbose = TRUE,
-    direction = "up") {
+    direction = "up",
+    BPPARAM = BiocParallel::SerialParam(),
+    raw_logFC = FALSE) {
     # RCMD Fix
     gene <- rank_marker <- cellType.target <- std.logFC <- rowData <- Symbol <- NULL
 
@@ -98,29 +106,44 @@ findMarkers_1vAll <- function(sce,
         mod <- mod[, -1, drop = FALSE] # intercept otherwise automatically dropped by `findMarkers()`
     }
 
-    markers.t.1vAll <- map(cell_types, function(x) {
-        if (verbose) message(Sys.time(), " - Find markers for: ", x)
+    markers.t.1vAll <- BiocParallel::bplapply(
+        cell_types,
+        function(x, sce, assay_name, mod, direction, verbose, raw_logFC) {
+            if (verbose) message(Sys.time(), " - Find markers for: ", x)
 
-        sce$contrast <- ifelse(sce[[cellType_col]] == x, 1, 0)
+            sce$contrast <- ifelse(sce[[cellType_col]] == x, 1, 0)
 
-        fm <- scran::findMarkers(sce,
-            groups = sce$contrast,
-            assay.type = assay_name, design = mod, test.type = "t",
-            direction = direction, pval.type = "all", full.stats = TRUE
-        )
-        fm <- fm[[2]]$stats.0
+            fm.std <- scran::findMarkers(sce,
+                groups = sce$contrast,
+                assay.type = assay_name, design = mod, test.type = "t",
+                std.lfc = TRUE,
+                direction = direction, pval.type = "all", full.stats = TRUE
+            )
+            fm.std <- fm.std[[2]]$stats.0
+            colnames(fm.std)[[1]] <- "std.logFC"
 
-        fm.std <- scran::findMarkers(sce,
-            groups = sce$contrast,
-            assay.type = assay_name, design = mod, test.type = "t",
-            std.lfc = TRUE,
-            direction = direction, pval.type = "all", full.stats = TRUE
-        )
-        fm.std <- fm.std[[2]]$stats.0
-        colnames(fm.std)[[1]] <- "std.logFC"
+            if (raw_logFC) {
+                fm <- scran::findMarkers(sce,
+                    groups = sce$contrast,
+                    assay.type = assay_name, design = mod, test.type = "t",
+                    direction = direction, pval.type = "all", full.stats = TRUE
+                )
+                fm <- fm[[2]]$stats.0
+                result <- cbind(fm.std, fm[, 1, drop = FALSE])
+            } else {
+                result <- fm.std
+            }
 
-        return(cbind(fm, fm.std[, 1, drop = FALSE]))
-    })
+            return(result)
+        },
+        BPPARAM = BPPARAM,
+        sce = sce,
+        assay_name = assay_name,
+        mod = mod,
+        direction = direction,
+        verbose = verbose,
+        raw_logFC = raw_logFC
+    )
 
     if (verbose) message(Sys.time(), " - Building Table")
     markers.t.1vAll.table <- do.call("rbind", markers.t.1vAll) |>

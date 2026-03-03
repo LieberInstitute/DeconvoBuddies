@@ -12,7 +12,9 @@ findMarkers_1vAll(
   add_symbol = FALSE,
   mod = NULL,
   verbose = TRUE,
-  direction = "up"
+  direction = "up",
+  BPPARAM = BiocParallel::SerialParam(),
+  raw_logFC = FALSE
 )
 }
 \arguments{
@@ -39,13 +41,20 @@ not.}
 \item{direction}{A \code{character(1)} for the choice of direction tested for
 gene cell type markers: \code{"up"} (default), \code{"any"}, or \code{"down"}. Impacts
 p-values: if \code{"up"} genes with logFC < 0 will have \code{p.value = 1}.}
+
+\item{BPPARAM}{A \linkS4class{BiocParallelParam} object specifying how to
+parallelize computation across cell types.}
+
+\item{raw_logFC}{A \code{logical(1)}: whether to also return non-standardized log
+fold change values in addition to the standardized values. Note that setting
+this to \code{TRUE} roughly doubles run time.}
 }
 \value{
 A \code{tibble::tibble()} of 1 vs. ALL standard log fold change + p-values
 for each gene x cell type.
 \itemize{
 \item \code{gene} is the name of the gene (from \code{rownames(sce)}).
-\item \code{logFC} the log fold change from the DE test
+\item \code{logFC} the log fold change from the DE test, only returned if \code{raw_logFC = TRUE}.
 \item \code{log.p.value} the log of the p-value of the DE test
 \item \code{log.FDR} the log of the False Discovery Rate adjusted p.value
 \item \code{std.logFC} the standard logFC.

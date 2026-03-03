@@ -39,6 +39,7 @@ library("RefManageR")
 ## Write bibliography information
 bib <- c(
     R = citation(),
+    BiocParallel = citation("BiocParallel")[1],
     BiocStyle = citation("BiocStyle")[1],
     knitr = citation("knitr")[1],
     RefManageR = citation("RefManageR")[1],
@@ -220,7 +221,9 @@ function `DeconvoBuddies::get_mean_ratio()`, this function takes a
 we'll use `cellType_broad_hc`), and optionally you can also supply
 additional column names from the `rowData(sce)` to add the `gene_name`
 and/or `gene_ensembl` information to the table output of
-`get_mean_ratio`.
+`get_mean_ratio`. While the speedup is notably worse than linear with the number
+of cores provided, computation can nevertheless be parallelized with a `BPPARAM`
+argument from `BiocParallel` to save some time.
 
 ```{r "Run get_mean_ratio"}
 # calculate the Mean Ratio of genes for each cell type in sce
@@ -273,8 +276,11 @@ Similarity to `get_mean_ratio` this function requires the `sce` object,
 `scran::findMarkers()`, in this example we will control for donor which
 is stored as `BrNum`.
 
-Note this function can take a bit of time to run. We have saved the output as 
-`data("marker_stats_1vAll")` to speed-up the runtime of this vignette. 
+Note this function can by default take a bit of time to run. However, the
+computation can be parallelized by cell type with a nearly linear speedup with
+the number of provided cores, by providing a `BPPARAM` argument as supported
+through `BiocParallel`. We have saved the output as `data("marker_stats_1vAll")`
+to speed-up the runtime of this vignette. 
 
 ```{r `Run findMarkers_1vALL`}
 ## Run 1vALL DE to find markers for each cell type - takes 5min+
@@ -284,6 +290,7 @@ Note this function can take a bit of time to run. We have saved the output as
 #     assay_name = "counts",
 #     cellType_col = "cellType_broad_hc", # column in colData with cell type info
 #     mod = "~BrNum" # Control for donor stored in "BrNum" with mod
+#     raw_logFC = TRUE # also retain raw logFC in addition to standardized
 # )
 
 ## load 1vAll data to save time, data is equivalent to the above code
@@ -295,10 +302,10 @@ The function `findMarkers_1vALL()` returns a `tibble` with the following
 columns:
 
 -   `gene` is the name of the gene (from rownames(`sce`)).
--   `logFC` the log fold change from the DE test
+-   `std.logFC` the standard logFC
 -   `log.p.value` the log of the p-value of the DE test
 -   `log.FDR` the log of the False Discovery Rate adjusted p.value
--   `std.logFC` the standard logFC
+-   `logFC` the log fold change from the DE test, added when `raw_logFC=TRUE`
 -   `cellType.target` the cell type we're finding marker genes for
 -   `std.logFC.rank` the rank of `std.logFC` for each cell type
 -   `std.logFC.anno` is an annotation of the `std.logFC` value helpful
