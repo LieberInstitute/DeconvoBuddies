@@ -9,7 +9,8 @@ get_mean_ratio(
   cellType_col,
   assay_name = "logcounts",
   gene_ensembl = NULL,
-  gene_name = NULL
+  gene_name = NULL,
+  BPPARAM = BiocParallel::SerialParam()
 )
 }
 \arguments{
@@ -31,6 +32,9 @@ column with the ENSEMBL gene IDs. This will be used by \code{layer_stat_cor()}.}
 
 \item{gene_name}{A \code{character(1)} specifying the \code{rowData(sce_pseudo)}
 column with the gene names (symbols).}
+
+\item{BPPARAM}{A \linkS4class{BiocParallelParam} object specifying how to
+potentially parallelize key matrix operations.}
 }
 \value{
 A \code{tibble::tibble()} with the \code{MeanRatio} values for each gene x cell
