@@ -18,7 +18,7 @@ the sce object, to identify effective marker genes for deconvolution."><meta pro
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.7</span>
       </span>
     </div>
 
@@ -76,7 +76,8 @@ the <code>sce</code> object, to identify effective marker genes for deconvolutio
 <span>  <span class="va">cellType_col</span>,</span>
 <span>  assay_name <span class="op">=</span> <span class="st">"logcounts"</span>,</span>
 <span>  gene_ensembl <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  gene_name <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  gene_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  BPPARAM <span class="op">=</span> <span class="fu">BiocParallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/SerialParam-class.html" class="external-link">SerialParam</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -112,6 +113,11 @@ column with the ENSEMBL gene IDs. This will be used by <code>layer_stat_cor()</c
 <dd><p>A <code>character(1)</code> specifying the <code>rowData(sce_pseudo)</code>
 column with the gene names (symbols).</p></dd>
 
+
+<dt id="arg-bpparam">BPPARAM<a class="anchor" aria-label="anchor" href="#arg-bpparam"></a></dt>
+<dd><p>A BiocParallelParam object specifying how to
+potentially parallelize key matrix operations.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -137,14 +143,14 @@ See rational in OSCA:
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p>Other marker gene functions:
-<code><a href="findMarkers_1vAll.html">findMarkers_1vAll</a>()</code></p></div>
+<code><a href="findMarkers_1vAll.html">findMarkers_1vAll()</a></code></p></div>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## load example SingleCellExperiment</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="fetch_deconvo_data.html">fetch_deconvo_data</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2025-07-28 19:53:59.512626 Access ExperimentHub EH9626</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2026-03-03 16:13:28.378669 Access ExperimentHub EH9626</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> see ?DeconvoBuddies and browseVignettes('DeconvoBuddies') for documentation</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> loading from cache</span>
 <span class="r-in"><span><span class="co">## Explore properties of the sce object</span></span></span>
@@ -270,7 +276,7 @@ See rational in OSCA:
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
