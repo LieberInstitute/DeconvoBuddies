@@ -62,7 +62,7 @@ study](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
 ``` r
 ## Access data with fetch_deconvo_data
 sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2026-03-05 10:45:37.394337 Access ExperimentHub EH9626
+#> 2026-03-05 10:50:16.526503 Access ExperimentHub EH9626
 #> see ?DeconvoBuddies and browseVignettes('DeconvoBuddies') for documentation
 #> loading from cache
 #> require("SingleCellExperiment")
@@ -175,8 +175,8 @@ contributing to this project, you agree to abide by its terms.
 - Code coverage assessment is possible thanks to
   [codecov](https://codecov.io/gh) and
   *[covr](https://CRAN.R-project.org/package=covr)*.
-- The [documentation website](http://.github.io/DeconvoBuddies) is
-  automatically updated thanks to
+- The [documentation website](https://research.libd.org/DeconvoBuddies/)
+  is automatically updated thanks to
   *[pkgdown](https://CRAN.R-project.org/package=pkgdown)*.
 - The code is styled automatically thanks to
   *[styler](https://CRAN.R-project.org/package=styler)*.
