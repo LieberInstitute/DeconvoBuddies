@@ -1,10 +1,11 @@
-# DeconvoBuddies 1.1.7
+# DeconvoBuddies 1.3.2
 
 NEW FEATURES
 
 * `findMarkers_1vAll()` now only returns standardized log fold-change values, which cuts default run time roughly in half. A new parameter `raw_logFC` has been added; when `TRUE`, it yields the old behavior of returning both versions of the log fold-change.
 * `findMarkers_1vAll()` can now be parallelized with near-linear speedup via a new `BPPARAM` parameter.
-# DeconvoBuddies 1.1.6
+
+# DeconvoBuddies 1.3.1
 
 NEW FEATURES
 
