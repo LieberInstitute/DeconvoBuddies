@@ -19,7 +19,7 @@ Internally, this function downloads the data from ExperimentHub."><meta property
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">DeconvoBuddies</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.2</span>
       </span>
     </div>
 
@@ -138,7 +138,7 @@ the preferred way to interact with the data.</p>
 <span class="r-in"><span><span class="co">## A RangedSummarizedExperiment (41.16 MB)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"rse-gene"</span><span class="op">)</span><span class="op">)</span> <span class="va">rse_gene</span> <span class="op">&lt;-</span> <span class="fu">fetch_deconvo_data</span><span class="op">(</span><span class="st">"rse_gene"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2026-03-05 16:22:32.534853 Access ExperimentHub EH9625</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2026-03-05 16:55:37.400113 Access ExperimentHub EH9625</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> see ?DeconvoBuddies and browseVignettes('DeconvoBuddies') for documentation</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> loading from cache</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> require(“SummarizedExperiment”)</span>
@@ -160,7 +160,7 @@ the preferred way to interact with the data.</p>
 <span class="r-in"><span><span class="co">## load example snRNA-seq data</span></span></span>
 <span class="r-in"><span><span class="co">## A SingleCellExperiment (4.79 MB)</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/exists.html" class="external-link">exists</a></span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span><span class="op">)</span> <span class="va">sce_DLPFC_example</span> <span class="op">&lt;-</span> <span class="fu">fetch_deconvo_data</span><span class="op">(</span><span class="st">"sce_DLPFC_example"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2026-03-05 16:22:35.029392 Access ExperimentHub EH9626</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2026-03-05 16:55:39.703879 Access ExperimentHub EH9626</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> see ?DeconvoBuddies and browseVignettes('DeconvoBuddies') for documentation</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> loading from cache</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> require(“SingleCellExperiment”)</span>
@@ -198,7 +198,7 @@ the preferred way to interact with the data.</p>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co">## download the full sce experiment object</span></span></span>
 <span class="r-in"><span><span class="va">sce_path_zip</span> <span class="op">&lt;-</span> <span class="fu">fetch_deconvo_data</span><span class="op">(</span><span class="st">"sce"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> 2026-03-05 16:22:37.559665 loading file /github/home/.cache/R/BiocFileCache/426528293fc_sce_DLPFC_annotated.zip%3Fdl%3D1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2026-03-05 16:55:42.215219 loading file /github/home/.cache/R/BiocFileCache/426105ec319_sce_DLPFC_annotated.zip%3Fdl%3D1</span>
 <span class="r-in"><span><span class="va">sce_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">sce_path_zip</span>, exdir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu">HDF5Array</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/HDF5Array/man/saveHDF5SummarizedExperiment.html" class="external-link">loadHDF5SummarizedExperiment</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"sce_DLPFC_annotated"</span><span class="op">)</span></span></span>
