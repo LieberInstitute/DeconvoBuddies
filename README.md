@@ -62,7 +62,10 @@ study](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
 ``` r
 ## Access data with fetch_deconvo_data
 sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2025-02-27 10:37:58.767148 loading file /Users/louise.huuki/Library/Caches/org.R-project.R/R/BiocFileCache/fd1c5d42efb7_sce_DLPFC_example.Rdata%3Frlkey%3Dv3z4u8ru0d2y12zgdl1az07q9%26st%3D1dcfqc1i%26dl%3D1
+#> 2026-03-05 10:45:37.394337 Access ExperimentHub EH9626
+#> see ?DeconvoBuddies and browseVignettes('DeconvoBuddies') for documentation
+#> loading from cache
+#> require("SingleCellExperiment")
 
 ## explore the single cell experiment object
 sce_DLPFC_example
@@ -86,13 +89,13 @@ sce_DLPFC_example
 deconvolution, and plotting functions to quickly visualize the
 expression of selected genes in a snRNA-seq data.
 
-<img src="man/figures/README-plot_gene_expression-1.png" width="100%" />
+<img src="man/figures/README-plot_gene_expression-1.png" alt="" width="100%" />
 
 ### Plot Deconvoltion Cell Type Proportions
 
 Create composition bar plots of predicted cell type proportions.
 
-<img src="man/figures/README-demo_plot_composition_bar-1.png" width="100%" />
+<img src="man/figures/README-demo_plot_composition_bar-1.png" alt="" width="100%" />
 
 ## Citation
 
@@ -105,12 +108,12 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #> To cite package 'DeconvoBuddies' in publications use:
 #> 
 #>   Huuki-Myers LA, Maynard KR, Hicks SC, Zandi P, Kleinman JE, Hyde TM,
-#>   Goes FS, Collado-Torres L (2025). _DeconvoBuddies: a R/Bioconductor
+#>   Goes FS, Collado-Torres L (2026). _DeconvoBuddies: a R/Bioconductor
 #>   package with deconvolution helper functions_.
 #>   doi:10.18129/B9.bioc.DeconvoBuddies
 #>   <https://doi.org/10.18129/B9.bioc.DeconvoBuddies>,
 #>   https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R
-#>   package version 0.99.37,
+#>   package version 1.1.7,
 #>   <http://www.bioconductor.org/packages/DeconvoBuddies>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -118,9 +121,9 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>   @Manual{,
 #>     title = {DeconvoBuddies: a R/Bioconductor package with deconvolution helper functions},
 #>     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Joel E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},
-#>     year = {2025},
+#>     year = {2026},
 #>     url = {http://www.bioconductor.org/packages/DeconvoBuddies},
-#>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 0.99.37},
+#>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 1.1.7},
 #>     doi = {10.18129/B9.bioc.DeconvoBuddies},
 #>   }
 #> 
@@ -168,7 +171,7 @@ contributing to this project, you agree to abide by its terms.
   *[rcmdcheck](https://CRAN.R-project.org/package=rcmdcheck)* customized
   to use [Bioconductor’s docker
   containers](https://www.bioconductor.org/help/docker/) and
-  *[BiocCheck](https://bioconductor.org/packages/3.20/BiocCheck)*.
+  *[BiocCheck](https://bioconductor.org/packages/3.22/BiocCheck)*.
 - Code coverage assessment is possible thanks to
   [codecov](https://codecov.io/gh) and
   *[covr](https://CRAN.R-project.org/package=covr)*.
@@ -184,7 +187,7 @@ contributing to this project, you agree to abide by its terms.
 For more details, check the `dev` directory.
 
 This package was developed using
-*[biocthis](https://bioconductor.org/packages/3.20/biocthis)*.
+*[biocthis](https://bioconductor.org/packages/3.22/biocthis)*.
 
-This package is submitted to
-[Bioconductor](https://github.com/Bioconductor/Contributions/issues/3503)
+This package is part of
+[Bioconductor](https://bioconductor.org/packages/release/bioc/html/DeconvoBuddies.html)
