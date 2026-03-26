@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Codecov test
-coverage](https://codecov.io/gh/LieberInstitute/DeconvoBuddies/branch/devel/graph/badge.svg)](https://codecov.io/gh/lahuuki/DeconvoBuddies?branch=devel)
+coverage](https://codecov.io/gh/LieberInstitute/DeconvoBuddies/branch/devel/graph/badge.svg)](https://codecov.io/gh/LieberInstitute/DeconvoBuddies?branch=devel)
 [![check-bioc](https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml/badge.svg)](https://github.com/LieberInstitute/DeconvoBuddies/actions/workflows/check-bioc.yml)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
