@@ -40,7 +40,7 @@ env:
   has_RUnit: 'false'
   cache-version: 'cache-v1'
   run_docker: 'false'
-  bioc_version: 'bioc-release'
+  bioc_version: 'bioc-devel'
   ## Valid options are:
   ##    "bioc-release"
   ##    "bioc-devel"
@@ -179,17 +179,6 @@ jobs:
           ## Required for tcltk
           brew install xquartz --cask
 
-          ## Latest curl
-          brew install curl pkg-config
-
-      - name: Install macOS curl from source
-        if: matrix.config.os == 'macOS-latest'
-        run: |
-          message(paste('****', Sys.time(), 'installing curl from source ****'))
-          Sys.setenv(PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig:/usr/local/opt/curl/lib/pkgconfig")
-          install.packages("curl", type = "source")
-        shell: Rscript {0}
-
       - name: Install Windows system dependencies
         if: runner.os == 'Windows'
         run: |
@@ -249,7 +238,7 @@ jobs:
       - name: Install pkgdown
         if: github.ref == 'refs/heads/devel' && env.run_pkgdown == 'true' && runner.os == 'Linux'
         run: |
-          remotes::install_cran("pkgdown")
+          remotes::install_github("r-lib/pkgdown")
         shell: Rscript {0}
 
       - name: Session info
