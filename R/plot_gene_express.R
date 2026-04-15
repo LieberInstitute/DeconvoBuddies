@@ -27,6 +27,8 @@
 #' (default) or 'boxplot'.
 #' @param free_y `logical(1)` indicating whether to use "free" y-axis between 
 #' genes (relevant to `facet_wrap`).
+#' @param label_points A `character(1)` specifying the name of the column
+#' used to label points, if NULL (default) no label is applied.
 #'
 #' @return A `ggplot()` violin plot for selected genes.
 #' @export
@@ -114,7 +116,8 @@ plot_gene_express <- function(
         plot_points = FALSE,
         ncol = 2,
         plot_type = c("violin", "boxplot"),
-        free_y = FALSE) {
+        free_y = FALSE,
+        label_points = NULL) {
   ##check inputs
   stopifnot(any(genes %in% rownames(sce)))
   plot_type <- match.arg(plot_type)
@@ -133,14 +136,15 @@ plot_gene_express <- function(
     value <- median <- NULL
     
     ## reformat data
-    category_df <- as.data.frame(colData(sce))[, category, drop = FALSE]
+    select_cols <- c(category, label_points)
+    category_df <- as.data.frame(colData(sce))[, select_cols, drop = FALSE]
     expression_long <- reshape2::melt(as.matrix(SummarizedExperiment::assays(sce)[[assay_name]][genes, , drop = FALSE]))
 
-    category <- category_df[expression_long$Var2, ]
-    expression_long <- cbind(expression_long, category)
+    category_df <- category_df[expression_long$Var2, , drop=FALSE]
+    expression_long <- cbind(expression_long, category_df)
 
     ## create plot
-    expression_plot <- ggplot(data = expression_long, aes(x = category, y = value)) +
+    expression_plot <- ggplot(data = expression_long, aes(x = !!sym(category), y = value)) +
         ggplot2::facet_wrap(~Var1, ncol = ncol, scales = facet_scales) +
         ggplot2::labs(
             y = paste0("Expression (", assay_name, ")"),
@@ -149,7 +153,7 @@ plot_gene_express <- function(
         ggplot2::theme_bw() +
         ggplot2::theme(
             legend.position = "None",
-            axis.title.x = ggplot2::element_blank(),
+            # axis.title.x = ggplot2::element_blank(),
             axis.text.x = ggplot2::element_text(angle = 90, hjust = 1),
             strip.text.x = ggplot2::element_text(face = "italic")
         )
@@ -159,8 +163,8 @@ plot_gene_express <- function(
         
         ##violin plot w/ points
         expression_plot <- expression_plot +
-          ggplot2::geom_violin(aes(color = category), scale = "width") +
-          ggplot2::geom_jitter(aes(color = category),
+          ggplot2::geom_violin(aes(color = !!sym(category)), scale = "width") +
+          ggplot2::geom_jitter(aes(color = !!sym(category)),
                                position = ggplot2::position_jitter(seed = 1, width = 0.2), 
                                size = 0.5,
                                alpha = 0.5
@@ -172,8 +176,8 @@ plot_gene_express <- function(
           )
       } else if(plot_type == "boxplot"){
         expression_plot <- expression_plot +
-          ggplot2::geom_boxplot(aes(color = category,), outlier.shape = NA) +
-          ggplot2::geom_jitter(aes(color = category),
+          ggplot2::geom_boxplot(aes(color = !!sym(category),), outlier.shape = NA) +
+          ggplot2::geom_jitter(aes(color = !!sym(category)),
                                position = ggplot2::position_jitter(seed = 1, width = 0.2), 
                                size = .5,
                                alpha = 0.5)
@@ -188,7 +192,7 @@ plot_gene_express <- function(
     if(plot_type == "violin"){
     ##violin plot w/o points
     expression_plot <- expression_plot +
-        ggplot2::geom_violin(aes(fill = category), scale = "width") +
+        ggplot2::geom_violin(aes(fill = !!sym(category)), scale = "width") +
         ggplot2::stat_summary(
             fun = mean,
             geom = "crossbar",
@@ -196,7 +200,7 @@ plot_gene_express <- function(
         )
     } else if(plot_type == "boxplot"){
       expression_plot <- expression_plot +
-        ggplot2::geom_boxplot(aes(fill = category)) 
+        ggplot2::geom_boxplot(aes(fill = !!sym(category))) 
         
     }
     if (!is.null(color_pal)) expression_plot <- expression_plot + ggplot2::scale_fill_manual(values = color_pal)
