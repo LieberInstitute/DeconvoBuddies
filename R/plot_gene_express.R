@@ -28,7 +28,9 @@
 #' @param free_y `logical(1)` indicating whether to use "free" y-axis between 
 #' genes (relevant to `facet_wrap`).
 #' @param label_points A `character(1)` specifying the name of the column
-#' used to label points, if NULL (default) no label is applied.
+#' used to label points, if NULL (default) no label is applied. `plot_points` 
+#' must be TRUE for lables to apply. Recommended for <50 points to avoid 
+#' overplotting.
 #'
 #' @return A `ggplot()` violin plot for selected genes.
 #' @export
@@ -106,6 +108,9 @@
 #' 
 #' #'my_cell_colors <- create_cell_colors(cell_types = levels(sce_DLPFC_example$cellType_broad_hc))
 #'
+#'## Add lables to points
+#' plot_gene_express(sce = sce_ab, genes = c("G-D1_A"), assay = 'counts' ,plot_points = TRUE, label_points = "donor")
+#'
 #'select_cells <- colnames(sce_DLPFC_example)[sce_DLPFC_example$cellType_broad_hc %in% c("Excit", "Inhib")]
 #'select_cells <- sample(select_cells, 10)
 #'
@@ -119,8 +124,6 @@
 #'     label_points = "Sample"
 #' )
 #' 
-#' plot_gene_express(sce = sce_ab, genes = c("G-D1_A"), assay = 'counts' ,plot_points = TRUE, label_points = "donor")
-#'
 #' @family expression plotting functions
 #'
 plot_gene_express <- function(
