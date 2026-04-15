@@ -27,6 +27,7 @@ Imports:
     dplyr,
     ExperimentHub,
     ggplot2,
+    ggrepel,
     graphics,
     grDevices,
     MatrixGenerics,
