@@ -1,3 +1,9 @@
+# DeconvoBuddies 1.3.3
+
+NEW FEATURE
+
+* `plot_gene_express()` now has option to add label points with parameter `label_points`.
+
 # DeconvoBuddies 1.3.2
 
 NEW FEATURES
