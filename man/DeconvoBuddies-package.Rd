@@ -8,12 +8,12 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Funtions helpful for LIBD deconvolution project. Includes tools for marker finding with mean ratio, expression plotting, and plotting deconvolution results. Working to include DLPFC datasets.
+Functions helpful for LIBD deconvolution project. Includes tools for marker finding with mean ratio, expression plotting, and plotting deconvolution results. Working to include DLPFC datasets.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/lahuuki/DeconvoBuddies}
+  \item \url{https://github.com/LieberInstitute/DeconvoBuddies}
   \item Report bugs at \url{https://github.com/LieberInstitute/DeconvoBuddies/issues}
 }
 
@@ -24,6 +24,7 @@ Useful links:
 Other contributors:
 \itemize{
   \item Leonardo Collado-Torres \email{lcolladotor@gmail.com} (\href{https://orcid.org/0000-0003-2140-308X}{ORCID}) [contributor]
+  \item Nicholas J. Eagles \email{nickeagles77@gmail.com} (\href{https://orcid.org/0000-0002-9808-5254}{ORCID}) [contributor]
 }
 
 }

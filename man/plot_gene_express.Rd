@@ -14,7 +14,8 @@ plot_gene_express(
   plot_points = FALSE,
   ncol = 2,
   plot_type = c("violin", "boxplot"),
-  free_y = FALSE
+  free_y = FALSE,
+  label_points = NULL
 )
 }
 \arguments{
@@ -50,6 +51,11 @@ the final plot. Defaults to 2.}
 
 \item{free_y}{\code{logical(1)} indicating whether to use "free" y-axis between
 genes (relevant to \code{facet_wrap}).}
+
+\item{label_points}{A \code{character(1)} specifying the name of the column
+used to label points, if NULL (default) no label is applied. \code{plot_points}
+must be TRUE for lables to apply. Recommended for <50 points to avoid
+overplotting.}
 }
 \value{
 A \code{ggplot()} violin plot for selected genes.
@@ -128,6 +134,24 @@ plot_gene_express(
     color_pal =  my_cell_colors,
     plot_type = "boxplot",
     plot_points = TRUE
+)
+
+#'my_cell_colors <- create_cell_colors(cell_types = levels(sce_DLPFC_example$cellType_broad_hc))
+
+## Add lables to points
+plot_gene_express(sce = sce_ab, genes = c("G-D1_A"), assay = 'counts' ,plot_points = TRUE, label_points = "donor")
+
+select_cells <- colnames(sce_DLPFC_example)[sce_DLPFC_example$cellType_broad_hc \%in\% c("Excit", "Inhib")]
+select_cells <- sample(select_cells, 10)
+
+plot_gene_express(
+    sce = sce_DLPFC_example[, select_cells],
+    category = "cellType_broad_hc",
+    genes = c("GAD2", "CD22"),
+    color_pal =  my_cell_colors,
+    plot_type = "boxplot",
+    plot_points = TRUE,
+    label_points = "Sample"
 )
 
 }
