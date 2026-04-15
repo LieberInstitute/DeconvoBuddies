@@ -103,6 +103,23 @@
 #'     plot_type = "boxplot",
 #'     plot_points = TRUE
 #' )
+#' 
+#' #'my_cell_colors <- create_cell_colors(cell_types = levels(sce_DLPFC_example$cellType_broad_hc))
+#'
+#'select_cells <- colnames(sce_DLPFC_example)[sce_DLPFC_example$cellType_broad_hc %in% c("Excit", "Inhib")]
+#'select_cells <- sample(select_cells, 10)
+#'
+#'plot_gene_express(
+#'     sce = sce_DLPFC_example[, select_cells],
+#'     category = "cellType_broad_hc",
+#'     genes = c("GAD2", "CD22"),
+#'     color_pal =  my_cell_colors,
+#'     plot_type = "boxplot",
+#'     plot_points = TRUE,
+#'     label_points = "Sample"
+#' )
+#' 
+#' plot_gene_express(sce = sce_ab, genes = c("G-D1_A"), assay = 'counts' ,plot_points = TRUE, label_points = "donor")
 #'
 #' @family expression plotting functions
 #'
@@ -130,6 +147,21 @@ plot_gene_express <- function(
             call. = FALSE
         )
     }
+  
+  if(!is.null(label_points)){
+    if (!label_points %in% colnames(colData(sce))) {
+      stop(
+        label_points,
+        "' is not a column name in colData(sce), check that `label_points` matches this sce",
+        call. = FALSE
+      )
+    } 
+    
+    if(!plot_points){
+      warning("`plot_points` Must be set to TRUE for to label points")
+    }
+  }
+  
 
     stopifnot(assay_name %in% SummarizedExperiment::assayNames(sce))
 
@@ -165,7 +197,7 @@ plot_gene_express <- function(
         expression_plot <- expression_plot +
           ggplot2::geom_violin(aes(color = !!sym(category)), scale = "width") +
           ggplot2::geom_jitter(aes(color = !!sym(category)),
-                               position = ggplot2::position_jitter(seed = 1, width = 0.2), 
+                               position = ggplot2::position_jitter(seed = 1, width = 0.2, height = 0), 
                                size = 0.5,
                                alpha = 0.5
           ) +
@@ -178,13 +210,20 @@ plot_gene_express <- function(
         expression_plot <- expression_plot +
           ggplot2::geom_boxplot(aes(color = !!sym(category),), outlier.shape = NA) +
           ggplot2::geom_jitter(aes(color = !!sym(category)),
-                               position = ggplot2::position_jitter(seed = 1, width = 0.2), 
+                               position = ggplot2::position_jitter(seed = 1, width = 0.2, height = 0), 
                                size = .5,
                                alpha = 0.5)
       }
         
 
         if (!is.null(color_pal)) expression_plot <- expression_plot + ggplot2::scale_color_manual(values = color_pal)
+        
+        if (!is.null(label_points)){ 
+          expression_plot <- expression_plot + 
+            ggrepel::geom_text_repel(aes(label = !!sym(label_points)), 
+                                     position = ggplot2::position_jitter(seed = 1, width = 0.2, height = 0),
+                                     size = 2)
+        }
 
         return(expression_plot)
     }
