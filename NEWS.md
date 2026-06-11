@@ -1,3 +1,9 @@
+# DeconvoBuddies 1.3.4
+
+NEW FEATURE
+
+Increased flexibility with `plot_marker_express_ALL`
+
 # DeconvoBuddies 1.3.3
 
 NEW FEATURE
