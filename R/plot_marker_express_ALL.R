@@ -56,6 +56,8 @@ plot_marker_express_ALL <- function(sce,
         missing <- cell_types[!cell_types %in% stats$cellType.target]
         warning("Stats is missing cell types, check you're using the correct marker stats data and cellType_col\nmissing:",
              paste(missing, collapse = ", "))
+        
+        cell_types <- cell_types[cell_types %in% stats$cellType.target]
     }
 
     marker_plots <- purrr::map(
