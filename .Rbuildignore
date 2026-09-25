@@ -11,3 +11,5 @@
 ^pkgdown$
 ^docs$
 ^LICENSE.md$
+^\.positai$
+^\.claude$
