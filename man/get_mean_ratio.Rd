@@ -91,7 +91,7 @@ get_mean_ratio(sce_DLPFC_example,
 
 }
 \seealso{
-Other marker gene functions: 
-\code{\link{findMarkers_1vAll}()}
+Other marker gene functions:
+\code{\link[=findMarkers_1vAll]{findMarkers_1vAll()}}
 }
 \concept{marker gene functions}

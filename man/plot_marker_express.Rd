@@ -78,9 +78,9 @@ plot_marker_express(
 )
 }
 \seealso{
-Other expression plotting functions: 
-\code{\link{plot_gene_express}()},
-\code{\link{plot_marker_express_ALL}()},
-\code{\link{plot_marker_express_List}()}
+Other expression plotting functions:
+\code{\link[=plot_gene_express]{plot_gene_express()}},
+\code{\link[=plot_marker_express_ALL]{plot_marker_express_ALL()}},
+\code{\link[=plot_marker_express_List]{plot_marker_express_List()}}
 }
 \concept{expression plotting functions}

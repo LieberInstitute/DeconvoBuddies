@@ -77,7 +77,7 @@ suppressMessages({
 ### Access Datasets
 
 `DeconvoBuddies` contains paired snRNA-seq, bulk RNA-seq, and cell type proportion
-data from the human DLPFC from [this study](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
+data from the human DLPFC from [Huuki-Myers et al., 2024](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
 
 ```{r `access data}
 ## Access data with fetch_deconvo_data

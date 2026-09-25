@@ -19,7 +19,7 @@ findMarkers_1vAll(
 }
 \arguments{
 \item{sce}{A
-\link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment}
+\link[SingleCellExperiment:SingleCellExperiment-class]{SingleCellExperiment}
 object.}
 
 \item{assay_name}{Name of the assay to use for calculation. See
@@ -104,7 +104,7 @@ head(marker_stats_1vAll)
 
 }
 \seealso{
-Other marker gene functions: 
-\code{\link{get_mean_ratio}()}
+Other marker gene functions:
+\code{\link[=get_mean_ratio]{get_mean_ratio()}}
 }
 \concept{marker gene functions}

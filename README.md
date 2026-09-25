@@ -56,13 +56,13 @@ BiocManager::install("LieberInstitute/DeconvoBuddies")
 ### Access Datasets
 
 `DeconvoBuddies` contains paired snRNA-seq, bulk RNA-seq, and cell type
-proportion data from the human DLPFC from [this
-study](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
+proportion data from the human DLPFC from [Huuki-Myers et al.,
+2024](https://github.com/LieberInstitute/Human_DLPFC_Deconvolution).
 
 ``` r
 ## Access data with fetch_deconvo_data
 sce_DLPFC_example <- fetch_deconvo_data("sce_DLPFC_example")
-#> 2026-03-05 10:50:16.526503 Access ExperimentHub EH9626
+#> 2026-09-25 09:15:27.518726 Access ExperimentHub EH9626
 #> see ?DeconvoBuddies and browseVignettes('DeconvoBuddies') for documentation
 #> loading from cache
 #> require("SingleCellExperiment")
@@ -113,7 +113,7 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>   doi:10.18129/B9.bioc.DeconvoBuddies
 #>   <https://doi.org/10.18129/B9.bioc.DeconvoBuddies>,
 #>   https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R
-#>   package version 1.1.7,
+#>   package version 1.3.4,
 #>   <http://www.bioconductor.org/packages/DeconvoBuddies>.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -123,7 +123,7 @@ print(citation("DeconvoBuddies"), bibtex = TRUE)
 #>     author = {Louise A. Huuki-Myers and Kristen R. Maynard and Stephanie C. Hicks and Peter Zandi and Joel E. Kleinman and Tom M. Hyde and Fernando S. Goes and Leonardo Collado-Torres},
 #>     year = {2026},
 #>     url = {http://www.bioconductor.org/packages/DeconvoBuddies},
-#>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 1.1.7},
+#>     note = {https://github.com/LieberInstitute/DeconvoBuddies/DeconvoBuddies - R package version 1.3.4},
 #>     doi = {10.18129/B9.bioc.DeconvoBuddies},
 #>   }
 #> 

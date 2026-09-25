@@ -21,6 +21,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Louise Huuki-Myers \email{lahuuki@gmail.com} (\href{https://orcid.org/0000-0001-5148-3602}{ORCID})
 
+Authors:
+\itemize{
+  \item Louise Huuki-Myers \email{lahuuki@gmail.com} (\href{https://orcid.org/0000-0001-5148-3602}{ORCID})
+}
+
 Other contributors:
 \itemize{
   \item Leonardo Collado-Torres \email{lcolladotor@gmail.com} (\href{https://orcid.org/0000-0003-2140-308X}{ORCID}) [contributor]

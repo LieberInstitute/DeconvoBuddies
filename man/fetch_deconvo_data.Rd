@@ -16,10 +16,10 @@ fetch_deconvo_data(
 \itemize{
 \item \code{rse_gene}: A \link[SummarizedExperiment:RangedSummarizedExperiment-class]{RangedSummarizedExperiment-class}
 with 110 bulk RNA-seq samples x 21k genes. (41 MB)
-\item \code{sce}: A \link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment}
+\item \code{sce}: A \link[SingleCellExperiment:SingleCellExperiment-class]{SingleCellExperiment}
 object with Human DLPFC snRNA-seq data. 77k nuclei x 36k genes (172 MB)
 \item \code{sce_DLPFC_example}: An example subset of \code{sec}
-\link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment}
+\link[SingleCellExperiment:SingleCellExperiment-class]{SingleCellExperiment}
 with 10k nuclei x 557 genes (49 MB)
 }}
 

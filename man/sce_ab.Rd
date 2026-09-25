@@ -5,7 +5,7 @@
 \alias{sce_ab}
 \title{Toy SCE object for testing}
 \format{
-A \link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment} object.
+A \link[SingleCellExperiment:SingleCellExperiment-class]{SingleCellExperiment} object.
 }
 \source{
 \url{https://github.com/LieberInstitute/DeconvoBuddies/blob/master/inst/extdata/data-raw/sce_ab.R}

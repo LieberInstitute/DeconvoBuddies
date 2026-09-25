@@ -3,7 +3,7 @@
 \name{make_test_sce}
 \alias{make_test_sce}
 \title{Simulate a
-\link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment} for
+\link[SingleCellExperiment:SingleCellExperiment-class]{SingleCellExperiment} for
 testing.}
 \usage{
 make_test_sce(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 2)
@@ -19,7 +19,7 @@ make_test_sce(n_cell = 100, n_gene = 100, n_cellType = 4, n_donor = 2)
 }
 \value{
 A
-\link[SingleCellExperiment:SingleCellExperiment]{SingleCellExperiment}
+\link[SingleCellExperiment:SingleCellExperiment-class]{SingleCellExperiment}
 object with randomly generated counts and \code{colData()}.
 }
 \description{
